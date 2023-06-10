@@ -26,8 +26,8 @@ public class Attendance {
     private Date date;
     private Date checkIn;
     private Date checkOut;
-    private Date lateTime;
-    private Date overTime;
+    private int lateTime;
+    private int overTime;
     private int status;
     private String note;
     private int userID;
@@ -38,7 +38,7 @@ public class Attendance {
     public Attendance() {
     }
 
-    public Attendance(int attendID, Date date, Date checkIn, Date checkOut, Date lateTime, Date overTime, int status, String note, int userID, String fullName, String confirm, String statusText) {
+    public Attendance(int attendID, Date date, Date checkIn, Date checkOut, int lateTime, int overTime, int status, String note, int userID, String fullName, String confirm, String statusText) {
         this.attendID = attendID;
         this.date = date;
         this.checkIn = checkIn;
@@ -85,19 +85,19 @@ public class Attendance {
         this.checkOut = checkOut;
     }
 
-    public Date getLateTime() {
+    public int getLateTime() {
         return lateTime;
     }
 
-    public void setLateTime(Date lateTime) {
+    public void setLateTime(int lateTime) {
         this.lateTime = lateTime;
     }
 
-    public Date getOverTime() {
+    public int getOverTime() {
         return overTime;
     }
 
-    public void setOverTime(Date overTime) {
+    public void setOverTime(int overTime) {
         this.overTime = overTime;
     }
 
@@ -148,6 +148,6 @@ public class Attendance {
     public void setStatusText(String statusText) {
         this.statusText = statusText;
     }
-
+    
    
 }

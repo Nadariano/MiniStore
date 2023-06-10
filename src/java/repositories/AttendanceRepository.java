@@ -40,8 +40,8 @@ public class AttendanceRepository {
             attendance.setDate(rs.getDate("date"));
             attendance.setCheckIn(rs.getTime("checkIn"));
             attendance.setCheckOut(rs.getTime("checkOut"));
-            attendance.setLateTime(rs.getTime("lateTime"));
-            attendance.setOverTime(rs.getTime("overTime"));
+            attendance.setLateTime(rs.getInt("lateTime"));
+            attendance.setOverTime(rs.getInt("overTime"));
             attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
             attendance.setStatus(rs.getInt("status"));
             attendance.setNote(rs.getString("note"));
@@ -72,8 +72,8 @@ public class AttendanceRepository {
             attendance.setDate(rs.getDate("date"));
             attendance.setCheckIn(rs.getTime("checkIn"));
             attendance.setCheckOut(rs.getTime("checkOut"));
-            attendance.setLateTime(rs.getTime("lateTime"));
-            attendance.setOverTime(rs.getTime("overTime"));
+            attendance.setLateTime(rs.getInt("lateTime"));
+            attendance.setOverTime(rs.getInt("overTime"));
             attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
             attendance.setStatus(rs.getInt("status"));
             attendance.setNote(rs.getString("note"));
@@ -94,8 +94,8 @@ public class AttendanceRepository {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         stm.setString(2, sdf.format(attendance.getCheckIn()));
         stm.setString(3, sdf.format(attendance.getCheckOut()));
-        stm.setString(4, sdf.format(attendance.getLateTime()));
-        stm.setString(5, sdf.format(attendance.getOverTime()));
+       stm.setInt(4, attendance.getLateTime());
+        stm.setInt(5, attendance.getOverTime());
         stm.setInt(6, attendance.getStatus());
         stm.setString(7, attendance.getNote());
         stm.setInt(8, attendance.getUserID());
@@ -120,8 +120,8 @@ public class AttendanceRepository {
             attendance.setDate(rs.getDate("date"));
             attendance.setCheckIn(rs.getTime("checkIn"));
             attendance.setCheckOut(rs.getTime("checkOut"));
-            attendance.setLateTime(rs.getTime("lateTime"));
-            attendance.setOverTime(rs.getTime("overTime"));
+            attendance.setLateTime(rs.getInt("lateTime"));
+            attendance.setOverTime(rs.getInt("overTime"));
             attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
             attendance.setStatus(rs.getInt("status"));
             attendance.setNote(rs.getString("note"));
@@ -144,8 +144,8 @@ public class AttendanceRepository {
         SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm");
         stm.setString(2, sdf1.format(attendance.getCheckIn()));
         stm.setString(3, sdf1.format(attendance.getCheckOut()));
-        stm.setString(4, sdf1.format(attendance.getLateTime()));
-        stm.setString(5, sdf1.format(attendance.getOverTime()));
+        stm.setInt(4, attendance.getLateTime());
+        stm.setInt(5, attendance.getOverTime());
         stm.setInt(6, attendance.getStatus());
         stm.setString(7, attendance.getNote());
         stm.setInt(8, attendance.getUserID());

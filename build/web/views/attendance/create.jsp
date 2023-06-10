@@ -1,44 +1,103 @@
-<%-- 
-    Document   : create
-    Created on : Jun 3, 2023, 1:31:44 PM
-    Author     : User
---%>
+<!DOCTYPE html>
+<html lang="en">
+    <%@page contentType="text/html" pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>ATTENDANCE CREATION</title>
+    </head>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<h2>ATTENDANCE CREATION</h2>
-<hr/>
-<div class="row">
-    <div class="col">
-        <form action="<c:url value="/attendance/create_handler.do"/>">
-            <div class="mb-3">
-                <label for="date" class="form-label">Date:</label>
-                <input type="date" class="form-control" id="date" placeholder="Date(Example: 2023-03-23)"name="date" value="${attendance.date}">
+    <body>
+        <!-- Preloader -->
+        <div class="preloader">
+            <div class="cssload-speeding-wheel"></div>
+        </div>
+        <!-- Page Content -->
+
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">ATTENDANCE CREATION</h4>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="userID" class="form-label">User ID:</label>
-                <input type="number" class="form-control" id="userID" placeholder="User ID" name="userID" value="${Account.userID}">           
+            <!-- /.row -->
+            <!-- .row -->
+            <div class="row">
+                <div class="col-md-2 col-12"></div>
+                <div class="col-md-8 col-xs-12">
+                    <div class="white-box">
+
+
+
+                        <form action="<c:url value="/attendance/create_handler.do"/>" class="form-horizontal form-material">
+
+                            <div class="form-group">
+                                <label class="col-md-12">Date:</label>
+                                <div class="col-md-12">
+                                    <input type="date" id="date" placeholder="Date" name="date" value="${attendance.date}" class="form-control form-control-line" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-12">User ID:</label>
+                                <div class="col-md-12">
+                                    <input type="number" id="userID" placeholder="User ID" name="userID" name="userID"  value="${attendance.userID}"
+                                           class="form-control form-control-line" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-12">Check In:</label>
+                                <div class="col-md-12">
+                                    <input type="time" id="checkIn" placeholder="Check In" name="checkIn" value="${attendance.checkIn}"
+                                           class="form-control form-control-line" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-12">Check Out:</label>
+                                <div class="col-md-12">
+                                    <input type="time" id="checkOut" placeholder="Check Out" name="checkOut" value="${attendance.checkOut}"
+                                           class="form-control form-control-line" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-12">Late Time: </label>
+                                <div class="col-md-12">
+                                    <input type="number" id="lateTime" placeholder="Late Time" name="lateTime" value="${attendance.lateTime}"
+                                           class="form-control form-control-line" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-12">Over Time: </label>
+                                <div class="col-md-12">
+                                    <input type="number"id="lateTime" placeholder="Over Time" name="overTime" value="${attendance.overTime}"
+                                           class="form-control form-control-line" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <!--                                    <button type="submit" class="btn btn-success">Add Role</button>-->
+                                    <button type="submit" class="btn btn-success" name="op" value="create">Create<i class="bi bi-check-square"></i></button>
+                                    <button type="submit" class="btn btn-outline-danger" name="op" value="cancel">Cancel<i class="bi bi-x-square"></i></button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+                <div class="col-md-2 col-12"></div>
             </div>
-            <div class="mb-3">
-                <label for="checkIn" class="form-label">Check In:</label>
-                <input type="time" class="form-control" id="checkIn" placeholder="Check In(Example: 06:30:15_Hour:Minute:Second)"name="checkIn" value="${attendance.checkIn}">
-            </div>
-             <div class="mb-3">
-                <label for="checkOut" class="form-label">Check Out:</label>
-                <input type="time" class="form-control" id="checkOut" placeholder="Check Out(Example: 06:30:15_Hour:Minute:Second)"name="checkOut" value="${attendance.checkOut}">
-            </div>
-             <div class="mb-3">
-                <label for="lateTime" class="form-label">Late Time:</label>
-                <input type="time" class="form-control" id="lateTime" placeholder="Late Time(Example: 06:30:15_Hour:Minute:Second)"name="lateTime" value="${attendance.lateTime}">
-            </div>
-             <div class="mb-3">
-                <label for="overTime" class="form-label">Over Time:</label>
-                <input type="time" class="form-control" id="overTime" placeholder="Over Time(Example: 06:30:15_Hour:Minute:Second)"name="overTime" value="${attendance.overTime}">
-            </div>
-            <button type="submit" class="btn btn-outline-success" name="op" value="create">Create <i class="bi bi-check-square"></i></button>
-            <button type="submit" class="btn btn-outline-danger" name="op" value="cancel">Cancel <i class="bi bi-x-square"></i></button>
-        </form>
-    </div>
-    <div class="col">
-        <img src="<c:url value="/images/hit.gif"/>" alt="">
-    </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- /#page-wrapper -->
+
+    </body>
+
+</html>
