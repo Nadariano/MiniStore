@@ -175,8 +175,8 @@ public class AttendanceController extends HttpServlet {
                     String fullName = request.getParameter("fullName");
                     Time checkIn = Time.valueOf(request.getParameter("checkIn"));
                     Time checkOut = Time.valueOf(request.getParameter("checkOut"));
-                    Time lateTime = Time.valueOf(request.getParameter("lateTime"));
-                    Time overTime = Time.valueOf(request.getParameter("overTime"));
+                    int lateTime = Integer.parseInt(request.getParameter("lateTime"));
+                    int overTime = Integer.parseInt(request.getParameter("overTime"));
                     int userID = Integer.parseInt(request.getParameter("userID"));
                     String note = request.getParameter("note");
                     String statusText = "Unknown";
@@ -242,8 +242,8 @@ public class AttendanceController extends HttpServlet {
                     String fullName = request.getParameter("fullName");
                     Time checkIn = Time.valueOf(request.getParameter("checkIn"));
                     Time checkOut = Time.valueOf(request.getParameter("checkOut"));
-                    Time lateTime = Time.valueOf(request.getParameter("lateTime"));
-                    Time overTime = Time.valueOf(request.getParameter("overTime"));
+                    int lateTime = Integer.parseInt(request.getParameter("lateTime"));
+                    int overTime = Integer.parseInt(request.getParameter("overTime"));
                     int userID = Integer.parseInt(request.getParameter("userID"));
                     String note = request.getParameter("note");
                     String statusText = request.getParameter("statusText");
@@ -302,8 +302,8 @@ public class AttendanceController extends HttpServlet {
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                     Date checkIn = sdf.parse(request.getParameter("checkIn"));
                     Date checkOut = sdf.parse(request.getParameter("checkOut"));
-                    Date lateTime = sdf.parse(request.getParameter("lateTime"));
-                    Date overTime = sdf.parse(request.getParameter("overTime"));
+                    int lateTime = Integer.parseInt(request.getParameter("lateTime"));
+                    int overTime = Integer.parseInt(request.getParameter("overTime"));
                     int status = 0;
                     String statusText = "Not Available";
                     String confirm = "Denied";
