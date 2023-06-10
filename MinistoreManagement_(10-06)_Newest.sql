@@ -62,8 +62,8 @@ create table Attendance(
 	date date,
 	checkIn datetime,
 	checkOut datetime,
-	lateTime datetime,
-	overTime datetime,
+	lateTime int,
+	overTime int,
 	status int,
 	note nvarchar(MAX),
 	primary key(attendID)
@@ -93,6 +93,7 @@ create table CheckOut(
 go
 create table Bonus(
 	bonusID int identity(1,1),
+	bonus float,
 	description nvarchar(MAX),
 	status int,
 	note nvarchar(MAX),
@@ -101,7 +102,7 @@ create table Bonus(
 go 
 create table Minus(
 	minusID int identity(1,1),
-	lateTime time,
+	lateTime int,
 	reduction float,
 	fine float,
 	description nvarchar(MAX),
@@ -113,6 +114,8 @@ go
 create table PaySlip(
 	paySlipID int identity(1,1),
 	salary float,
+	bonus float,
+	minus float,
 	status int,
 	note nvarchar(MAX),
 	primary key(paySlipID)
@@ -147,15 +150,24 @@ add userID int foreign key references Users(userID)
 alter table CheckOut
 add userID int foreign key references Users(userID)
 
+/*Tạo foreign key cho bảng Bonus*/
+alter table Bonus
+add userID int foreign key references Users(userID)
+
+/*Tạo foreign key cho bảng Minus*/
+alter table Minus
+add userID int foreign key references Users(userID)
+
 /*Tạo foreign key cho bảng PaySlip*/
 alter table PaySlip
 add userID int foreign key references Users(userID)
-
+/*
 alter table PaySlip
 add bonusID int foreign key references Bonus(bonusID)
 
 alter table PaySlip
 add minusID int foreign key references Minus(minusID)
+*/
 
 /*PHẦN INSERT DỮ LIỆU CHO BẢNG*/
 
@@ -185,20 +197,16 @@ insert into UserShift values ('2','1','2023-05-11', 0, '',0)
 insert into UserShift values ('2','1','2023-10-10', 0, '', 0)
 
 --Insert cho Attendance
-insert into Attendance values ('2023-06-01', '2023-06-01 06:00:00', '2023-06-01 18:00:00', '2023-06-01 00:00:00', '2023-06-01 00:00:00', 0 ,'', 3);
-insert into Attendance values ('2023-06-02', '2023-06-02 06:00:00', '2023-06-02 12:30:00', '2023-06-02 00:00:00', '2023-06-02 00:30:00', 0 ,'', 2);
-insert into Attendance values ('2023-06-02', '2023-06-02 07:00:00', '2023-06-02 18:00:00', '2023-06-02 01:00:00', '2023-06-02 00:00:00', 0 ,'', 3);
-insert into Attendance values ('2023-06-01', '2023-06-01 06:00:00', '2023-06-01 12:00:00', '2023-06-01 00:00:00', '2023-06-01 00:00:00', 0 ,'', 2);
+insert into Attendance values ('2023-06-01', '2023-06-01 06:00:00', '2023-06-01 18:00:00', 0, 0, 0 ,'', 3);
+insert into Attendance values ('2023-06-02', '2023-06-02 06:00:00', '2023-06-02 12:30:00', 0, 30, 0 ,'', 2);
+insert into Attendance values ('2023-06-02', '2023-06-02 07:00:00', '2023-06-02 18:00:00', 60, 0, 0 ,'', 3);
+insert into Attendance values ('2023-06-01', '2023-06-01 06:00:00', '2023-06-01 12:00:00', 0, 0, 0 ,'', 2);
 
---Insert cho DayOff
-insert into DayOff values('2023-04-30',1,'National Independent Day',1,'')
-insert into DayOff values('2023-05-01',1,'International Labor Day',1,'')
-
-use MiniStore
 select * from Users
 select * from Roles
 select * from Report
 select * from ShiftTime
 select * from UserShift
-select* from DayOff
+select * from Attendance
+
 update Users set status = 0 where userID = 2
