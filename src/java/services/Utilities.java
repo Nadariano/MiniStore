@@ -19,6 +19,11 @@ import java.util.Date;
  * @author Pc
  */
 public class Utilities {
+
+    public static final SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
+    public static final SimpleDateFormat sdfDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     public static String hash(String password) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");//ten thuat bam
         byte[] hashedPassword = digest.digest(password.getBytes(StandardCharsets.UTF_8));
