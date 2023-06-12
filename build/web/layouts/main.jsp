@@ -158,12 +158,12 @@
                                 <a href="<c:url value="/dayOff/index.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
                                                                                                     aria-hidden="true"></i><span class="hide-menu">Day Off</span></a>
                             </li>
-                            
+
                             <c:choose>
                                 <c:when test="${Account.roleName.equals('Manager')}">
                                     <li>
                                         <a href="<c:url value="/paySlip/listOf.do"/>" class="waves-effect"><i class="fa fa-modx fa-fw"
-                                                                                                               aria-hidden="true"></i><span class="hide-menu">Pay Slip management</span></a>
+                                                                                                              aria-hidden="true"></i><span class="hide-menu">Pay Slip management</span></a>
                                     </li>
 
                                 </c:when>  
@@ -171,12 +171,23 @@
                                 <c:otherwise>
                                     <li>
                                         <a href="<c:url value="/paySlip/myPaySlip.do?userID=${Account.userID}"/>" class="waves-effect"><i class="fa fa-modx fa-fw"
-                                                                                                                                               aria-hidden="true"></i><span class="hide-menu">My Pay Slip</span></a>
+                                                                                                                                          aria-hidden="true"></i><span class="hide-menu">My Pay Slip</span></a>
                                     </li>                                                                            
                                 </c:otherwise>      
 
                             </c:choose>
-                                    
+                            <c:if test="${Account.roleName.equals('Manager')}">
+                                <li>
+                                    <a href="<c:url value="/checkIn/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
+                                                                                                          aria-hidden="true"></i><span class="hide-menu">Check In</span></a>
+                                </li>
+                            </c:if>
+                            <c:if test="${Account.roleName.equals('Manager')}">
+                                <li>
+                                    <a href="<c:url value="/checkOut/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
+                                                                                                           aria-hidden="true"></i><span class="hide-menu">Check Out</span></a>
+                                </li>
+                            </c:if>                                    
                             <li>
                                 <a href="<c:url value="/salary/salary.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
                                                                                                      aria-hidden="true"></i><span class="hide-menu">Salary</span></a>
