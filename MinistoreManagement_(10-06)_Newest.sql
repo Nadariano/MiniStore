@@ -24,6 +24,11 @@ create table Roles(
 	primary key (roleID)
 )
 go 
+create table ReportType(
+	typeID int identity(1,1),
+	typeName varchar(50),
+	primary key(typeID)
+)
 create table Report(
 	reportID int identity(1,1),
     reportTitle nvarchar(MAX),
@@ -168,6 +173,9 @@ add bonusID int foreign key references Bonus(bonusID)
 alter table PaySlip
 add minusID int foreign key references Minus(minusID)
 */
+/*Tao foreign key cho Report*/
+alter table Report 
+add typeID int foreign key references ReportType(typeID)
 
 /*PHẦN INSERT DỮ LIỆU CHO BẢNG*/
 
@@ -184,8 +192,12 @@ insert into Users values('D','4B227777D4DD1FC61C6F884F48641D02B4D121D3FD328CB08B
 
 
 /*Insert cho Report*/
-insert into Report values('Report1','2022-10-10','',1,'',1)
-insert into Report values('Report2','2023-05-11','',1,'',2)
+insert into Report values('Report1','2022-10-10','',1,'',1,1)
+insert into Report values('Report2','2023-05-11','',1,'',2,2)
+
+/*Insert cho ReportType*/
+insert into ReportType values('Application')
+insert into ReportType values('Report')
 
 /*Insert cho ShiftTime*/
 insert into ShiftTime values('06:00:00', '12:00:00', 1, 0.5, 20, 0, '')
@@ -196,6 +208,10 @@ insert into ShiftTime values('18:00:00', '06:00:00', 1.5, 0.5, 20, 0, '')
 insert into UserShift values ('2','1','2023-05-11', 0, '',0)
 insert into UserShift values ('2','1','2023-10-10', 0, '', 0)
 
+--Insert cho DayOff
+insert into DayOff values('2023-04-30',1,'National Independent Day',1,'')
+insert into DayOff values('2023-05-01',1,'International Labor Day',1,'')
+
 --Insert cho Attendance
 insert into Attendance values ('2023-06-01', '2023-06-01 06:00:00', '2023-06-01 18:00:00', 0, 0, 0 ,'', 3);
 insert into Attendance values ('2023-06-02', '2023-06-02 06:00:00', '2023-06-02 12:30:00', 0, 30, 0 ,'', 2);
@@ -205,6 +221,7 @@ insert into Attendance values ('2023-06-01', '2023-06-01 06:00:00', '2023-06-01 
 select * from Users
 select * from Roles
 select * from Report
+select * from ReportType
 select * from ShiftTime
 select * from UserShift
 select * from Attendance
