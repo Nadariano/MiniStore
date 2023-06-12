@@ -16,7 +16,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
+import static services.Utilities.sdfDate;
 /**
  *
  * @author Pc
@@ -91,8 +91,7 @@ public class DayOffRepository {
         Connection con = DBContext.getConnection();
         //Tạo đối tượng PreparedStatement
         PreparedStatement stm = con.prepareStatement("insert DayOff values( ?, ?, ?, ?, ?)");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        stm.setString(1, sdf.format(dayOff.getDate()));
+        stm.setString(1, sdfDate.format(dayOff.getDate()));
         stm.setFloat(2, dayOff.getCoefficient());
         stm.setString(3, dayOff.getDescription());
         stm.setInt(4, dayOff.getStatus());
@@ -108,8 +107,7 @@ public class DayOffRepository {
         Connection con = DBContext.getConnection();
         //Tạo đối tượng PreparedStatement
         PreparedStatement stm = con.prepareStatement("update DayOff set date = ?,coefficient=? , description = ?,status= ?,note=? where dayOffID = ?");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        stm.setString(1, sdf.format(dayOff.getDate()));
+        stm.setString(1, sdfDate.format(dayOff.getDate()));
         stm.setFloat(2, dayOff.getCoefficient());
         stm.setString(3, dayOff.getDescription());
         stm.setInt(4, dayOff.getStatus());

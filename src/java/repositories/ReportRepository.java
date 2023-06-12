@@ -16,8 +16,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import models.Report;
+import static services.Utilities.sdfDate;
 
 /**
  *
@@ -32,9 +34,9 @@ public class ReportRepository {
         //Tạo đối tượng statement
         Statement stm = con.createStatement();
         //Thực thi lệnh SELECT
-        ResultSet rs = stm.executeQuery("select reportID, reportTitle, createDate, description, report.status, report.note, "
-                + "report.userID, fullName "
-                + "from report join users on report.userID = users.userID ");
+        ResultSet rs = stm.executeQuery("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, fullName, reportType.typeName\n"
+                + "from report join users on report.userID = users.userID \n"
+                + "			join reportType on report.typeID = reportType.typeID");
         list = new ArrayList<>();
         while (rs.next()) {
             Report report = new Report();
@@ -42,22 +44,27 @@ public class ReportRepository {
             report.setReportTitle(rs.getString("reportTitle"));
             report.setCreateDate(rs.getDate("createDate"));
             report.setDescription(rs.getString("description"));
+            report.setPlannedDate(rs.getDate("plannedDate"));
             report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
             report.setNote(rs.getString("note"));
             report.setUserID(rs.getInt("userID"));
             report.setFullName(rs.getString("fullName"));
+            report.setTypeName(rs.getString("typeName"));
             list.add(report);
         }
         con.close();
         return list;
     }
 
-     public List<Report> selectUserReport(int userID) throws SQLException {
+    public List<Report> selectUserReport(int userID) throws SQLException {
         List<Report> list = null;
         //Tạo connection để kết nối vào DBMS
         Connection con = DBContext.getConnection();
         //Tạo đối tượng statement
-        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, report.status, report.note, report.userID, fullName from report join users on report.userID = users.userID where report.userID = ?");
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, fullName, reportType.typeName\n"
+                + "from report join users on report.userID = users.userID \n"
+                + "			join reportType on report.typeID = reportType.typeID\n"
+                + "			where report.userID = ?");
         stm.setInt(1, userID);
         //Thực thi lệnh sql
         ResultSet rs = stm.executeQuery();
@@ -68,28 +75,33 @@ public class ReportRepository {
             report.setReportTitle(rs.getString("reportTitle"));
             report.setCreateDate(rs.getDate("createDate"));
             report.setDescription(rs.getString("description"));
+            report.setPlannedDate(rs.getDate("plannedDate"));
             report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
             report.setNote(rs.getString("note"));
             report.setUserID(rs.getInt("userID"));
             report.setFullName(rs.getString("fullName"));
+            report.setTypeName(rs.getString("typeName"));
             list.add(report);
         }
         con.close();
         return list;
     }
-    public void create(String reportTitle, String description, int status, String note, int userID) throws SQLException {
+
+    public void create(String reportTitle, String description, String plannedDate, int status, String note, int userID, int typeID) throws SQLException {
         LocalDate curDate = LocalDate.now();
-        String date= curDate.toString();
+        String date = curDate.toString();
         //Tạo connection để kết nối vào DBMS
         Connection con = DBContext.getConnection();
         //Tạo đối tượng PreparedStatement
-        PreparedStatement stm = con.prepareStatement("insert into report values(?, ?, ?, ?, ?, ?)");
+        PreparedStatement stm = con.prepareStatement("insert into report values(?, ?, ?, ?, ?, ?, ?, ?)");
         stm.setString(1, reportTitle);
         stm.setString(2, date);
         stm.setString(3, description);
-        stm.setInt(4, status);
-        stm.setString(5, note);
-        stm.setInt(6, userID);
+        stm.setString(4, plannedDate);
+        stm.setInt(5, status);
+        stm.setString(6, note);
+        stm.setInt(7, userID);
+        stm.setInt(8, typeID);
         //Thực thi lệnh sql
         int count = stm.executeUpdate();
         //Đóng kết nối
@@ -101,8 +113,10 @@ public class ReportRepository {
         //Tạo connection để kết nối vào DBMS
         Connection con = DBContext.getConnection();
         //Tạo đối tượng PreparedStatement
-        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, report.status, "
-                + "report.note, report.userID, fullName from report join users on report.userID = users.userID where reportID = ?");
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, fullName, reportType.typeName\n"
+                + "from report join users on report.userID = users.userID \n"
+                + "			join reportType on report.typeID = reportType.typeID "
+                + "where reportID = ?");
         stm.setInt(1, reportID);
         //Thực thi lệnh sql
         ResultSet rs = stm.executeQuery();
@@ -113,32 +127,33 @@ public class ReportRepository {
             report.setReportTitle(rs.getString("reportTitle"));
             report.setCreateDate(rs.getDate("createDate"));
             report.setDescription(rs.getString("description"));
+            report.setPlannedDate(rs.getDate("plannedDate"));
             report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
             report.setNote(rs.getString("note"));
             report.setUserID(rs.getInt("userID"));
             report.setFullName(rs.getString("fullName"));
+            report.setTypeName(rs.getString("typeName"));
         }
         //Đóng kết nối
         con.close();
         return report;
     }
 
-   
-
     public void update(Report report) throws SQLException {
         //Tạo connection để kết nối vào DBMS
         Connection con = DBContext.getConnection();
         //Tạo đối tượng PreparedStatement
-        PreparedStatement stm = con.prepareStatement("update report set reportTitle = ?, createDate = ?, description = ?, status = ?, "
-                + "note = ?, userID = ? from report join users on report.userID = users.userID   where reportID = ?");
-        stm.setString(1, report.getReportTitle());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        stm.setString(2, sdf.format(report.getCreateDate()));
-        stm.setString(3, report.getDescription());
-        stm.setInt(4, report.getStatus());
-        stm.setString(5, report.getNote());
-        stm.setInt(6, report.getUserID());
-        stm.setInt(7, report.getReportID());
+//        PreparedStatement stm = con.prepareStatement("update report set reportTitle = ?, createDate = ?, description = ?, status = ?, "
+//                + "note = ?, userID = ? from report join users on report.userID = users.userID   where reportID = ?");
+        PreparedStatement stm = con.prepareStatement("update report set status = ?, "
+                + "note = ? from report where reportID = ?");
+//        stm.setString(1, report.getReportTitle());
+//        stm.setString(2, sdfDate.format(report.getCreateDate()));
+//        stm.setString(3, report.getDescription());
+        stm.setInt(1, report.getStatus());
+        stm.setString(2, report.getNote());
+//        stm.setInt(6, report.getUserID());
+        stm.setInt(3, report.getReportID());
 
         //Thực thi lệnh sql
         int count = stm.executeUpdate();

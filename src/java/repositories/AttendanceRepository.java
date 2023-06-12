@@ -17,6 +17,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import models.Attendance;
+import static services.Utilities.sdfTime;
+import static services.Utilities.sdfDate;
 
 /**
  *
@@ -89,11 +91,9 @@ public class AttendanceRepository {
     public void create(Attendance attendance) throws SQLException {
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("insert into Attendance values(?, ?, ?, ?, ?, ?, ?, ?)");
-         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-        stm.setString(1, sdf1.format(attendance.getDate()));
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        stm.setString(2, sdf.format(attendance.getCheckIn()));
-        stm.setString(3, sdf.format(attendance.getCheckOut()));
+        stm.setString(1, sdfDate.format(attendance.getDate()));
+        stm.setString(2, sdfTime.format(attendance.getCheckIn()));
+        stm.setString(3, sdfTime.format(attendance.getCheckOut()));
        stm.setInt(4, attendance.getLateTime());
         stm.setInt(5, attendance.getOverTime());
         stm.setInt(6, attendance.getStatus());
@@ -139,11 +139,9 @@ public class AttendanceRepository {
         Connection con = DBContext.getConnection();
         //Tạo đối tượng PreparedStatement
         PreparedStatement stm = con.prepareStatement("update attendance set date = ?, checkIn = ?, checkOut = ?, lateTime = ?, overTime = ?, status = ?, note = ?, userID = ? from attendance join users on attendance.userID = users.userID where attendID = ?");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        stm.setString(1, sdf.format(attendance.getDate()));
-        SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm");
-        stm.setString(2, sdf1.format(attendance.getCheckIn()));
-        stm.setString(3, sdf1.format(attendance.getCheckOut()));
+        stm.setString(1, sdfDate.format(attendance.getDate()));
+        stm.setString(2, sdfTime.format(attendance.getCheckIn()));
+        stm.setString(3, sdfTime.format(attendance.getCheckOut()));
         stm.setInt(4, attendance.getLateTime());
         stm.setInt(5, attendance.getOverTime());
         stm.setInt(6, attendance.getStatus());

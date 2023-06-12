@@ -40,6 +40,16 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-md-12">Type:</label>
+                                <div class="col-md-12">
+                                    <select name="typeID" class="form-control">
+                                        <option value="1">Application</option>
+                                        <option value="2">Report</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-md-12">User ID:</label>
                                 <div class="col-md-12">
                                     <input disabled type="number" id="userID" placeholder="User ID" value="${Account.userID}"
@@ -63,6 +73,15 @@
                                     <textarea style="resize: both" placeholder="Write here"  id="description" name="description" value="${report.description}"></textarea>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label class="col-md-12">Planned Date:</label>
+                                <div class="col-md-12">
+                                    <input type="date" placeholder="Select Date" name="plannedDate"   value="<fmt:formatDate value="${report.plannedDate}" pattern="yyyy-MM-dd"/>"
+                                           class="form-control form-control-line" />
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <!--                                    <button type="submit" class="btn btn-success">Add Role</button>-->
