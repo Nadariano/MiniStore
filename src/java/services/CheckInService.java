@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +34,7 @@ public class CheckInService {
 //    public static int s = 0;
     public static List<CheckIn> readExcel1() throws FileNotFoundException, IOException, ParseException, SQLException {
 
-        String EXCEL_FILE_PATH = "D:\\FPT\\1.xlsx";
+        String EXCEL_FILE_PATH = "C:\\Users\\Pc\\Downloads\\1.xlsx";
         FileInputStream file = new FileInputStream(new File(EXCEL_FILE_PATH));
 
         List<CheckIn> list = new ArrayList<>();
@@ -76,7 +75,7 @@ public class CheckInService {
     }
 
     public static void readExcel() throws FileNotFoundException, IOException, ParseException, SQLException {
-        String EXCEL_FILE_PATH = "D:\\FPT\\1.xlsx";
+        String EXCEL_FILE_PATH = "C:\\Users\\Pc\\Downloads\\1.xlsx";
         FileInputStream file = new FileInputStream(new File(EXCEL_FILE_PATH));
         CheckInRepository cir = new CheckInRepository();
         Date time = null;
