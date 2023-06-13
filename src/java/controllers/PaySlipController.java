@@ -46,20 +46,24 @@ public class PaySlipController extends HttpServlet {
                 case "myPaySlip":
                     myPaySlip(request, response);
                     break;
-                case "updateMyPaySlip":
-                    updateMyPaySlip(request, response);
-                    break;
-
-                case "update_delete":
-                    update_delete(request, response);
-                    break;
-
                 case "create":
                     create(request, response);
                     break;
                 case "create_handler":
                     create_handler(request, response);
                     break;
+                case "updateMyPaySlip":
+                    updateMyPaySlip(request, response);
+                    break;
+                case "update":
+                    update(request, response);
+                    break;
+                case "update_handler":
+                    update_handler(request, response);
+                    break;
+                case "delete":
+                    break;
+
             }
         }
     }
@@ -92,6 +96,52 @@ public class PaySlipController extends HttpServlet {
             ex.printStackTrace();
             request.setAttribute("message", ex.getMessage());
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+        }
+    }
+
+    protected void create(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        PaySlipRepository psd = new PaySlipRepository();
+        try {
+            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            request.setAttribute("message", ex.getMessage());
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "error");
+            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+        }
+    }
+
+    protected void create_handler(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        PaySlipRepository psd = new PaySlipRepository();
+        String op = request.getParameter("op");
+        switch (op) {
+            case "create":
+                try {
+//                    int paySlipID = Integer.parseInt(request.getParameter("paySlipID"));
+                    int userID = Integer.parseInt(request.getParameter("userID"));
+//                    String fullName = request.getParameter("fullName");
+                    float salary = Float.parseFloat(request.getParameter("salary"));
+                    float bonus = Float.parseFloat(request.getParameter("bonus"));
+                    float minus = Float.parseFloat(request.getParameter("minus"));
+                    int status = Integer.parseInt(request.getParameter("status"));
+//                    String statusText3 = request.getParameter("statusText3");
+                    String note = request.getParameter("note");
+                    PaySlip paySlip = new PaySlip(userID, salary, bonus, minus, status, note);
+                    request.setAttribute("paySlip", paySlip);
+                    psd.create(paySlip);
+                    response.sendRedirect(request.getContextPath() + "/paySlip/listOf.do");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    request.setAttribute("message", ex.getMessage());
+                    request.setAttribute("action", "create");
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+                break;
+            case "cancel":
+                response.sendRedirect(request.getContextPath() + "/paySlip/listOf.do");
         }
     }
 
@@ -145,50 +195,14 @@ public class PaySlipController extends HttpServlet {
         }
     }
 
-    protected void update_delete(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        PaySlipRepository psd = new PaySlipRepository();
-        String op = request.getParameter("op");
-        switch (op) {
-            case "update":
-                try {
-                    int paySlipID = Integer.parseInt(request.getParameter("paySlipID"));
-                    int userID = Integer.parseInt(request.getParameter("userID"));
-                    String fullName = request.getParameter("fullName");
-                    float salary = Float.parseFloat(request.getParameter("salary"));
-                    float bonus = Float.parseFloat(request.getParameter("bonus"));
-                    float minus = Float.parseFloat(request.getParameter("minus"));
-                    int status = Integer.parseInt(request.getParameter("status"));
-                    String statusText3 = request.getParameter("statusText3");
-                    String note = request.getParameter("note");
-                    PaySlip paySlip = new PaySlip(paySlipID, userID, fullName, salary, bonus, minus, status, statusText3, note);
-                    psd.update(paySlip);
-                    response.sendRedirect(request.getContextPath() + "/paySlip/listOf.do");
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    request.setAttribute("message", ex.getMessage());
-                    request.setAttribute("controller", "error");
-                    request.setAttribute("action", "error");
-                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-                }
-                break;
-            case "delete":
-                try {
-                    int paySlipID = Integer.parseInt(request.getParameter("paySlipID"));
-                    psd.delete(paySlipID);
-                    response.sendRedirect(request.getContextPath() + "/paySlip/listOf.do");
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    request.setAttribute("message", ex.getMessage());
-                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-                }
-        }
-    }
-
-    protected void create(HttpServletRequest request, HttpServletResponse response)
+    protected void update(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PaySlipRepository psd = new PaySlipRepository();
         try {
+            int paySlipID = Integer.parseInt(request.getParameter("paySlipID"));
+            int userID = Integer.parseInt(request.getParameter("userID"));
+            PaySlip paySlip = psd.read(userID, paySlipID);
+            request.setAttribute("paySlip", paySlip);
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -199,14 +213,14 @@ public class PaySlipController extends HttpServlet {
         }
     }
 
-    protected void create_handler(HttpServletRequest request, HttpServletResponse response)
+    protected void update_handler(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PaySlipRepository psd = new PaySlipRepository();
         String op = request.getParameter("op");
         switch (op) {
-            case "create":
+            case "update":
                 try {
-//                    int paySlipID = Integer.parseInt(request.getParameter("paySlipID"));
+                    int paySlipID = Integer.parseInt(request.getParameter("paySlipID"));
                     int userID = Integer.parseInt(request.getParameter("userID"));
 //                    String fullName = request.getParameter("fullName");
                     float salary = Float.parseFloat(request.getParameter("salary"));
@@ -215,19 +229,34 @@ public class PaySlipController extends HttpServlet {
                     int status = Integer.parseInt(request.getParameter("status"));
 //                    String statusText3 = request.getParameter("statusText3");
                     String note = request.getParameter("note");
-                    PaySlip paySlip = new PaySlip(userID, salary, bonus, minus, status, note);
-                    request.setAttribute("paySlip", paySlip);
-                    psd.create(paySlip);
+//                    PaySlip paySlip = new PaySlip(paySlipID, userID, fullName, salary, bonus, minus, status, statusText3, note);
+                    PaySlip paySlip = new PaySlip(paySlipID, userID, salary, bonus, minus, status, note);
+                    psd.update(paySlip);
                     response.sendRedirect(request.getContextPath() + "/paySlip/listOf.do");
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     request.setAttribute("message", ex.getMessage());
-                    request.setAttribute("action", "create");
+                    request.setAttribute("controller", "error");
+                    request.setAttribute("action", "error");
                     request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
                 }
                 break;
             case "cancel":
                 response.sendRedirect(request.getContextPath() + "/paySlip/listOf.do");
+        }
+    }
+
+    protected void delete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        PaySlipRepository psd = new PaySlipRepository();
+        try {
+            int paySlipID = Integer.parseInt(request.getParameter("paySlipID"));
+            psd.delete(paySlipID);
+            response.sendRedirect(request.getContextPath() + "/paySlip/listOf.do");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            request.setAttribute("message", ex.getMessage());
+            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         }
     }
 

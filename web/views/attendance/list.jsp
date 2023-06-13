@@ -65,6 +65,7 @@
                                                     <td>${attendance.confirm}</td>
                                                     <td>
                                                         <a href="<c:url value="/attendance/update.do?attendID=${attendance.attendID}"  />" class="btn btn-sm btn-primary">Update</a>
+                                                        <p></p>
                                                         <a href="<c:url value="/attendance/delete.do?attendID=${attendance.attendID}" /> " onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-danger">Delete</a>
                                                     </td>
                                                 </tr>

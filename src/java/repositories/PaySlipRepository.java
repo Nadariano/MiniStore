@@ -21,7 +21,7 @@ import models.PaySlip;
  * @author Dell
  */
 public class PaySlipRepository {
-
+    
     public static List<PaySlip> select() throws SQLException {
         List<PaySlip> list = null;
         Connection con = DBContext.getConnection();
@@ -45,7 +45,7 @@ public class PaySlipRepository {
         con.close();
         return list;
     }
-
+    
     public PaySlip myPaySlip(int userID) throws SQLException {
         PaySlip paySlip = null;
         Connection con = DBContext.getConnection();
@@ -69,11 +69,11 @@ public class PaySlipRepository {
         con.close();
         return paySlip;
     }
-
+    
     public List<PaySlip> select1(int userID) throws SQLException {
         List<PaySlip> list = null;
         Connection con = DBContext.getConnection();
-       PreparedStatement stm = con.prepareStatement("select p.paySlipID, p.userID, u.fullName, p.salary, p.bonus, p.minus, p.status, p.note \n"
+        PreparedStatement stm = con.prepareStatement("select p.paySlipID, p.userID, u.fullName, p.salary, p.bonus, p.minus, p.status, p.note \n"
                 + "from PaySlip as p left join  Users as u on p.userID = u.userID\n"
                 + "where p.userID = ?");
         stm.setInt(1, userID);
@@ -95,28 +95,30 @@ public class PaySlipRepository {
         con.close();
         return list;
     }
-    public PaySlip read(int paySlipID) throws SQLException {
+
+    public PaySlip read(int userID, int paySlipID) throws SQLException {
         PaySlip paySlip = null;
         Connection con = DBContext.getConnection();
-        PreparedStatement stm = con.prepareStatement("select * from PaySlip where paySlipID = ?");
+        PreparedStatement stm = con.prepareStatement("select * from PaySlip where paySlipID = ? and userID = ?");
         stm.setInt(1, paySlipID);
+        stm.setInt(2, userID);
         ResultSet rs = stm.executeQuery();
         if (rs.next()) {
             paySlip = new PaySlip();
             paySlip.setPaySlipID(rs.getInt("paySlipID"));
             paySlip.setUserID(rs.getInt("userID"));
-            paySlip.setFullName(rs.getString("fullName"));
+//            paySlip.setFullName(rs.getString("fullName"));
             paySlip.setSalary(rs.getFloat("salary"));
             paySlip.setBonus(rs.getFloat("bonus"));
             paySlip.setMinus(rs.getFloat("minus"));
             paySlip.setStatus(rs.getInt("status"));
-            paySlip.setStatusText3(Utilities.getStatusText3(Utilities.getInt(rs, "status")));
+//            paySlip.setStatusText3(Utilities.getStatusText3(Utilities.getInt(rs, "status")));
             paySlip.setNote(rs.getString("note"));
         }
         con.close();
         return paySlip;
     }
-
+    
     public void create(PaySlip paySlip) throws SQLException {
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("insert into PaySlip values(?, ?, ?, ?, ?, ?)");
@@ -129,7 +131,7 @@ public class PaySlipRepository {
         stm.executeUpdate();
         con.close();
     }
-
+    
     public void update(PaySlip paySlip) throws SQLException {
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("update PaySlip set salary=?, bonus=?, minus=?,  status = ?, note = ?\n"
@@ -146,7 +148,7 @@ public class PaySlipRepository {
         stm.executeUpdate();
         con.close();
     }
-
+    
     public void delete(int paySlipID) throws SQLException {
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("delete from PaySlip where paySlipID = ? ");
@@ -154,5 +156,5 @@ public class PaySlipRepository {
         int count = stm.executeUpdate();
         con.close();
     }
-
+    
 }

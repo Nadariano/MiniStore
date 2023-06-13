@@ -140,10 +140,12 @@
                                 </c:otherwise>      
 
                             </c:choose>
-                            <li>
-                                <a href="<c:url value="/shiftTime/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
-                                                                                                        aria-hidden="true"></i><span class="hide-menu">Shift Time</span></a>
-                            </li>
+                            <c:if test="${Account.roleName.equals('Manager')}">
+                                <li>
+                                    <a href="<c:url value="/shiftTime/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
+                                                                                                            aria-hidden="true"></i><span class="hide-menu">Shift Time</span></a>
+                                </li>
+                            </c:if>
                             <c:if test="${Account.roleName.equals('Manager')}">
                                 <li>
                                     <a href="<c:url value="/userShift/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
@@ -178,20 +180,16 @@
                             </c:choose>
                             <c:if test="${Account.roleName.equals('Manager')}">
                                 <li>
-                                    <a href="<c:url value="/checkIn/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
-                                                                                                          aria-hidden="true"></i><span class="hide-menu">Check In</span></a>
+                                    <a href="<c:url value="/bonus/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
+                                                                                                        aria-hidden="true"></i><span class="hide-menu">Bonus List </span></a>
                                 </li>
                             </c:if>
                             <c:if test="${Account.roleName.equals('Manager')}">
                                 <li>
-                                    <a href="<c:url value="/checkOut/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
-                                                                                                           aria-hidden="true"></i><span class="hide-menu">Check Out</span></a>
+                                    <a href="<c:url value="/minus/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
+                                                                                                        aria-hidden="true"></i><span class="hide-menu">Minus List </span></a>
                                 </li>
-                            </c:if>                                    
-                            <li>
-                                <a href="<c:url value="/salary/salary.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
-                                                                                                     aria-hidden="true"></i><span class="hide-menu">Salary</span></a>
-                            </li>
+                            </c:if>
                             <li>
                                 <a href="<c:url value="/blank.do"/>" class="waves-effect"><i class="fa fa-columns fa-fw"
                                                                                              aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>
@@ -209,7 +207,7 @@
                     <jsp:include page="/views/${controller}/${action}.jsp" />
                     <!-- /.container-fluid -->
                 </div>
-                <footer class="footer text-center"> 2018 &copy; myclass.com </footer>
+                <footer class="footer text-center"> 2023 &copy; Ministore.com </footer>
             </div>
         </c:if>
         <!-- /#page-wrapper -->
