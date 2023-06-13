@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import static services.Utilities.sdfDate;
 
 /**
  *
@@ -75,8 +76,7 @@ public class DayOffContoller extends HttpServlet {
                             //Đọc dữ liệu từ client gửi lên
 //                            int dayOffID = Integer.parseInt(request.getParameter("dayOffID"));
 
-                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                            Date date = sdf.parse(request.getParameter("date"));
+                            Date date = sdfDate.parse(request.getParameter("date"));
                             float coefficient = Float.parseFloat(request.getParameter("coefficient"));
                             String description = request.getParameter("description");
                             int status = Integer.parseInt(request.getParameter("status"));
@@ -140,8 +140,7 @@ public class DayOffContoller extends HttpServlet {
 
                             int dayOffID = Integer.parseInt(request.getParameter("dayOffID"));
 
-                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                            Date date = sdf.parse(request.getParameter("date"));
+                            Date date = sdfDate.parse(request.getParameter("date"));
                             float coefficient = Float.parseFloat(request.getParameter("coefficient"));
                             String description = request.getParameter("description");
                             int status = Integer.parseInt(request.getParameter("status"));

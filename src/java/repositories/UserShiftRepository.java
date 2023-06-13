@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 import models.UserShift;
-
+import static services.Utilities.sdfDate;
 /**
  *
  * @author Dell
@@ -74,8 +74,7 @@ public class UserShiftRepository {
         PreparedStatement stm = con.prepareStatement("insert into UserShift values(?, ?, ?, ?, ?, ?)");
         stm.setInt(1, userShift.getUserID());
         stm.setInt(2, userShift.getShiftID());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        stm.setString(3, sdf.format(userShift.getDate()));
+        stm.setString(3, sdfDate.format(userShift.getDate()));
         stm.setInt(4, userShift.getStatus());
         stm.setString(5, userShift.getNote());
         stm.setBoolean(6, userShift.isIsOT());
@@ -86,8 +85,7 @@ public class UserShiftRepository {
     public void update(UserShift userShift) throws SQLException {
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("update UserShift set date =?, status = ?, note = ?, isOT = ? where userID = ? and shiftID = ?");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        stm.setString(1, sdf.format(userShift.getDate()));
+        stm.setString(1, sdfDate.format(userShift.getDate()));
         stm.setInt(2, userShift.getStatus());
         stm.setString(3, userShift.getNote());
         stm.setBoolean(4, userShift.isIsOT());
@@ -102,8 +100,7 @@ public class UserShiftRepository {
         PreparedStatement stm = con.prepareStatement("delete from UserShift where userID = ? and shiftID = ? and date = ?");
         stm.setInt(1, userID);
         stm.setInt(2, shiftID);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        stm.setString(3, sdf.format(date));
+        stm.setString(3, sdfDate.format(date));
         int count = stm.executeUpdate();
         con.close();
     }

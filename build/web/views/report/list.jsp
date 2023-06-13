@@ -34,10 +34,12 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>Report Title</th>
+                                                <th>Type</th>
                                                 <th>Create Date</th>
                                                 <th>User ID</th>
                                                 <th>Author</th>
                                                 <th>Description</th>
+                                                <th>Planned Date</th>
                                                 <th>Status</th>
                                                 <th>Note</th>
                                                 <th>Operations</th>
@@ -48,10 +50,12 @@
                                                 <tr>
                                                     <td>${loop.count}</td>
                                                     <td>${report.reportTitle}</td>
+                                                    <th>${report.typeName}</th>
                                                     <td>${report.createDate}</td>
                                                     <td>${report.userID}</td>
                                                     <td>${report.fullName}</td>
                                                     <td>${report.description}</td>
+                                                    <td>${report.plannedDate}</td>
                                                     <c:if test="${report.statusText=='Rejected'}">
                                                         <td style="background-color:  #ac2925; color: whitesmoke " >${report.statusText}</td>
                                                     </c:if>

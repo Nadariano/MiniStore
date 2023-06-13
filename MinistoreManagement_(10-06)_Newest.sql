@@ -1,4 +1,7 @@
-﻿create database Ministore
+﻿drop database Ministore
+go
+
+create database Ministore
 go
 use Ministore
 go
@@ -34,6 +37,7 @@ create table Report(
     reportTitle nvarchar(MAX),
 	createDate DATE,
 	description nvarchar(MAX),
+	plannedDate date,
 	status int,
 	note nvarchar(MAX),
 	primary key (reportID)
@@ -190,14 +194,13 @@ insert into Users values('B','D4735E3A265E16EEE03F59718B9B5D03019C07D8B6C51F90DA
 insert into Users values('C','4E07408562BEDB8B60CE05C1DECFE3AD16B72230967DE01F640B7E4729B49FCE','Nguyen Van C', 'https://cdn.vox-cdn.com/thumbor/WR9hE8wvdM4hfHysXitls9_bCZI=/0x0:1192x795/1400x1400/filters:focal(596x398:597x399)/cdn.vox-cdn.com/uploads/chorus_asset/file/22312759/rickroll_4k.jpg','Vung Tau', '0945076589', 'C@gmail.com', 1, '', 3)
 insert into Users values('D','4B227777D4DD1FC61C6F884F48641D02B4D121D3FD328CB08B5531FCACDABF8A','Nguyen Thi D', 'https://cdn.shopify.com/s/files/1/0150/0643/3380/products/SB-Standees-Spong-1_800x.jpg?v=1603744567','Vinh Long', '0945076590', 'D@gmail.com', 1, '', 2)
 
-
-/*Insert cho Report*/
-insert into Report values('Report1','2022-10-10','',1,'',1,1)
-insert into Report values('Report2','2023-05-11','',1,'',2,2)
-
 /*Insert cho ReportType*/
 insert into ReportType values('Application')
 insert into ReportType values('Report')
+
+/*Insert cho Report*/
+insert into Report values('Report1','2023-06-12','I want to change shift..','2023-06-21',1,'',3,1)
+insert into Report values('Report2','2023-05-11','I want to report something..',null,1,'',2,2)
 
 /*Insert cho ShiftTime*/
 insert into ShiftTime values('06:00:00', '12:00:00', 1, 0.5, 20, 0, '')

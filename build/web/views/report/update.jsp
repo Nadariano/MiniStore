@@ -49,6 +49,14 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-md-12">Type:</label>
+                                <div class="col-md-12">
+                                    <input disabled type="text" id="Type" placeholder="Report Title" value="${report.typeName}" class="form-control form-control-line" />
+                                    <input type="hidden" name="typeName" value="${report.typeName}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-md-12">Create Date:</label>
                                 <div class="col-md-12">
                                     <input disabled type="date" id="createDate" placeholder="Create Date" value="${report.createDate}" class="form-control form-control-line" />
@@ -81,6 +89,14 @@
                                     <input disabled type="text" id="description" placeholder="Description" value="${report.description}"
                                            class="form-control form-control-line" />
                                     <input type="hidden" name="description" value="${report.description}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-12">Planned Date:</label>
+                                <div class="col-md-12">
+                                    <input disabled type="date" id="plannedDate" placeholder="Planned Date" value="${report.plannedDate}" class="form-control form-control-line" />
+                                    <input type="hidden" name="plannedDate" value="${report.plannedDate}">
                                 </div>
                             </div>
 
