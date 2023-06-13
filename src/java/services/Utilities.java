@@ -27,6 +27,7 @@ public class Utilities {
     public static final SimpleDateFormat sdfTime = new SimpleDateFormat(fTime);
     public static final SimpleDateFormat sdfDateTime = new SimpleDateFormat(fDateTime);
 
+
     public static String hash(String password) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");//ten thuat bam
         byte[] hashedPassword = digest.digest(password.getBytes(StandardCharsets.UTF_8));
