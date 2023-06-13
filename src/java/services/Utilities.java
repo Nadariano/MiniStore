@@ -215,10 +215,10 @@ public class Utilities {
 
         switch (status) {
             case 0:
-                statusText = "Done";
+                statusText = "Not Done";
                 break;
             case 1:
-                statusText = "Not Done";
+                statusText = "Done";
                 break;
             default:
                 statusText = "Unknown";
