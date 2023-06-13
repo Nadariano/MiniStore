@@ -180,6 +180,18 @@
                             </c:choose>
                             <c:if test="${Account.roleName.equals('Manager')}">
                                 <li>
+                                    <a href="<c:url value="/checkIn/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
+                                                                                                          aria-hidden="true"></i><span class="hide-menu">Check In</span></a>
+                                </li>
+                            </c:if>
+                            <c:if test="${Account.roleName.equals('Manager')}">
+                                <li>
+                                    <a href="<c:url value="/checkOut/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
+                                                                                                           aria-hidden="true"></i><span class="hide-menu">Check Out</span></a>
+                                </li>
+                            </c:if>
+                            <c:if test="${Account.roleName.equals('Manager')}">
+                                <li>
                                     <a href="<c:url value="/bonus/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
                                                                                                         aria-hidden="true"></i><span class="hide-menu">Bonus List </span></a>
                                 </li>
