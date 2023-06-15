@@ -34,7 +34,7 @@ public class CheckInService {
 //    public static int s = 0;
     public static List<CheckIn> readExcel1() throws FileNotFoundException, IOException, ParseException, SQLException {
 
-        String EXCEL_FILE_PATH = "C:\\Users\\acer\\Downloads\\1.xlsx";
+        String EXCEL_FILE_PATH = "D:\\SUMMER 2023\\SWP391\\1.xlsx";
         FileInputStream file = new FileInputStream(new File(EXCEL_FILE_PATH));
 
         List<CheckIn> list = new ArrayList<>();
@@ -75,7 +75,7 @@ public class CheckInService {
     }
 
     public static void readExcel() throws FileNotFoundException, IOException, ParseException, SQLException {
-        String EXCEL_FILE_PATH = "C:\\Users\\acer\\Downloads\\1.xlsx";
+        String EXCEL_FILE_PATH = "D:\\SUMMER 2023\\SWP391\\1.xlsx";
         FileInputStream file = new FileInputStream(new File(EXCEL_FILE_PATH));
         CheckInRepository cir = new CheckInRepository();
         Date time = null;

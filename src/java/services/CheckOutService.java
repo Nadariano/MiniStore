@@ -31,7 +31,7 @@ import static services.Utilities.sdfDateTime;
 public class CheckOutService {
 
     public static void readExcel() throws FileNotFoundException, IOException, ParseException, SQLException {
-        String EXCEL_FILE_PATH = "C:\\Users\\acer\\Downloads\\1.xlsx";
+        String EXCEL_FILE_PATH = "D:\\SUMMER 2023\\SWP391\\1.xlsx";
         FileInputStream file = new FileInputStream(new File(EXCEL_FILE_PATH));
         CheckOutRepository cor = new CheckOutRepository();
         Date time = null;

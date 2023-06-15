@@ -80,6 +80,29 @@ public class ReportController extends HttpServlet {
                     request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
                 }
                 break;
+
+            case "searchByDate":
+                try {
+                    searchByDate(request, response);
+                } catch (Exception ex) {
+                    //Hien trang thong bao loi
+                    ex.printStackTrace();//In thông báo chi tiết cho developer
+                    request.setAttribute("message", ex.getMessage());
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+                break;
+
+            case "searchByName":
+                try {
+                    searchByName(request, response);
+                } catch (Exception ex) {
+                    //Hien trang thong bao loi
+                    ex.printStackTrace();//In thông báo chi tiết cho developer
+                    request.setAttribute("message", ex.getMessage());
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+                break;
+
             case "delete":
                 try {
                     delete(request, response);
@@ -238,6 +261,91 @@ public class ReportController extends HttpServlet {
                 break;
             case "cancel":
                 response.sendRedirect(request.getContextPath() + "/report/listUserReport.do");
+        }
+    }
+
+    private void searchByDate(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException {
+        String op = request.getParameter("op");
+        switch (op) {
+            case "search":
+                try {
+                    String day = request.getParameter("day");
+                    String month = request.getParameter("month");
+                    String year = request.getParameter("year");
+                    String createDate = year + "-" + month + "-" + day;
+                    ReportRepository rf = new ReportRepository();
+                    if (!"".equals(day) && !"".equals(month) && !"".equals(year)) {
+                        List<Report> list = rf.search(createDate);
+                        request.setAttribute("list", list);
+
+                    }
+                    if ("".equals(year)) {
+                        List<Report> list = rf.searchByDayAndMonth(day, month);
+                        request.setAttribute("list", list);
+
+                    }
+                    if ("".equals(month)) {
+                        List<Report> list = rf.searchByDayAndYear(day, year);
+                        request.setAttribute("list", list);
+
+                    }
+                    if ("".equals(day)) {
+                        List<Report> list = rf.searchByMonthAndYear(month, year);
+                        request.setAttribute("list", list);
+
+                    }
+                    if ("".equals(month) && "".equals(year)) {
+                        List<Report> list = rf.searchByDay(day);
+                        request.setAttribute("list", list);
+
+                    }
+                    if ("".equals(day) && "".equals(year)) {
+                        List<Report> list = rf.searchByMonth(month);
+                        request.setAttribute("list", list);
+
+                    }
+                    if ("".equals(day) && "".equals(month)) {
+                        List<Report> list = rf.searchByYear(year);
+                        request.setAttribute("list", list);
+                    }
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+
+//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                } catch (SQLException ex) {
+                    //Hien trang thong bao loi
+                    ex.printStackTrace();//In thông báo chi tiết cho developer
+                    request.setAttribute("message", ex.getMessage());
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void searchByName(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException {
+        String op = request.getParameter("op");
+        switch (op) {
+            case "search":
+                try {
+                    String fullName = request.getParameter("fullName");
+                    ReportRepository rf = new ReportRepository();
+                    List<Report> list = rf.searchByName(fullName);
+                    request.setAttribute("list", list);
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+
+//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                } catch (SQLException ex) {
+                    //Hien trang thong bao loi
+                    ex.printStackTrace();//In thông báo chi tiết cho developer
+                    request.setAttribute("message", ex.getMessage());
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+                break;
+            default:
+                break;
         }
     }
 
