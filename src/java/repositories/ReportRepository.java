@@ -172,4 +172,224 @@ public class ReportRepository {
         con.close();
     }
 
+    public List<Report> search(String createDate) throws SQLException, ClassNotFoundException {
+        List<Report> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, "
+                + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
+                + "where createDate = ?");
+        stm.setString(1, createDate);
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Report report = new Report();
+            report.setReportID(rs.getInt("reportID"));
+            report.setReportTitle(rs.getString("reportTitle"));
+            report.setCreateDate(rs.getDate("createDate"));
+            report.setDescription(rs.getString("description"));
+            report.setPlannedDate(rs.getDate("plannedDate"));
+            report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
+            report.setNote(rs.getString("note"));
+            report.setUserID(rs.getInt("userID"));
+            report.setFullName(rs.getString("fullName"));
+            report.setTypeName(rs.getString("typeName"));
+            list.add(report);
+        }
+        con.close();
+        return list;
+    }
+
+    public List<Report> searchByDayAndMonth(String day, String month) throws SQLException, ClassNotFoundException {
+        List<Report> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, "
+                + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
+                + "where DAY(createDate) = ? and MONTH(createDate) = ?");
+        stm.setString(1, day);
+        stm.setString(2, month);
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Report report = new Report();
+            report.setReportID(rs.getInt("reportID"));
+            report.setReportTitle(rs.getString("reportTitle"));
+            report.setCreateDate(rs.getDate("createDate"));
+            report.setDescription(rs.getString("description"));
+            report.setPlannedDate(rs.getDate("plannedDate"));
+            report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
+            report.setNote(rs.getString("note"));
+            report.setUserID(rs.getInt("userID"));
+            report.setFullName(rs.getString("fullName"));
+            report.setTypeName(rs.getString("typeName"));
+            list.add(report);
+        }
+        con.close();
+        return list;
+    }
+
+    public List<Report> searchByDayAndYear(String day, String year) throws SQLException, ClassNotFoundException {
+        List<Report> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, "
+                + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
+                + "where DAY(createDate) = ? and YEAR(createDate) = ?");
+        stm.setString(1, day);
+        stm.setString(2, year);
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Report report = new Report();
+            report.setReportID(rs.getInt("reportID"));
+            report.setReportTitle(rs.getString("reportTitle"));
+            report.setCreateDate(rs.getDate("createDate"));
+            report.setDescription(rs.getString("description"));
+            report.setPlannedDate(rs.getDate("plannedDate"));
+            report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
+            report.setNote(rs.getString("note"));
+            report.setUserID(rs.getInt("userID"));
+            report.setFullName(rs.getString("fullName"));
+            report.setTypeName(rs.getString("typeName"));
+            list.add(report);
+        }
+        con.close();
+        return list;
+    }
+
+    public List<Report> searchByMonthAndYear(String month, String year) throws SQLException, ClassNotFoundException {
+        List<Report> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, "
+                + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
+                + "where MONTH(createDate) = ? and YEAR(createDate) = ?");
+        stm.setString(1, month);
+        stm.setString(2, year);
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Report report = new Report();
+            report.setReportID(rs.getInt("reportID"));
+            report.setReportTitle(rs.getString("reportTitle"));
+            report.setCreateDate(rs.getDate("createDate"));
+            report.setDescription(rs.getString("description"));
+            report.setPlannedDate(rs.getDate("plannedDate"));
+            report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
+            report.setNote(rs.getString("note"));
+            report.setUserID(rs.getInt("userID"));
+            report.setFullName(rs.getString("fullName"));
+            report.setTypeName(rs.getString("typeName"));
+            list.add(report);
+        }
+        con.close();
+        return list;
+    }
+
+    public List<Report> searchByDay(String day) throws SQLException, ClassNotFoundException {
+        List<Report> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, "
+                + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
+                + "where DAY(createDate) = ? ");
+        stm.setString(1, day);
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Report report = new Report();
+            report.setReportID(rs.getInt("reportID"));
+            report.setReportTitle(rs.getString("reportTitle"));
+            report.setCreateDate(rs.getDate("createDate"));
+            report.setDescription(rs.getString("description"));
+            report.setPlannedDate(rs.getDate("plannedDate"));
+            report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
+            report.setNote(rs.getString("note"));
+            report.setUserID(rs.getInt("userID"));
+            report.setFullName(rs.getString("fullName"));
+            report.setTypeName(rs.getString("typeName"));
+            list.add(report);
+        }
+        con.close();
+        return list;
+    }
+    
+    public List<Report> searchByMonth(String month) throws SQLException, ClassNotFoundException {
+        List<Report> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, "
+                + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
+                + "where MONTH(createDate) = ?");
+        stm.setString(1, month);
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Report report = new Report();
+            report.setReportID(rs.getInt("reportID"));
+            report.setReportTitle(rs.getString("reportTitle"));
+            report.setCreateDate(rs.getDate("createDate"));
+            report.setDescription(rs.getString("description"));
+            report.setPlannedDate(rs.getDate("plannedDate"));
+            report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
+            report.setNote(rs.getString("note"));
+            report.setUserID(rs.getInt("userID"));
+            report.setFullName(rs.getString("fullName"));
+            report.setTypeName(rs.getString("typeName"));
+            list.add(report);
+        }
+        con.close();
+        return list;
+    }
+    
+     public List<Report> searchByYear(String month) throws SQLException, ClassNotFoundException {
+        List<Report> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, "
+                + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
+                + "where YEAR(createDate) = ?");
+        stm.setString(1, month);
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Report report = new Report();
+            report.setReportID(rs.getInt("reportID"));
+            report.setReportTitle(rs.getString("reportTitle"));
+            report.setCreateDate(rs.getDate("createDate"));
+            report.setDescription(rs.getString("description"));
+            report.setPlannedDate(rs.getDate("plannedDate"));
+            report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
+            report.setNote(rs.getString("note"));
+            report.setUserID(rs.getInt("userID"));
+            report.setFullName(rs.getString("fullName"));
+            report.setTypeName(rs.getString("typeName"));
+            list.add(report);
+        }
+        con.close();
+        return list;
+    }
+     
+      public List<Report> searchByName (String fullName) throws SQLException, ClassNotFoundException {
+        List<Report> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, "
+                + "report.userID, fullName, reportType.typeName "
+                + "from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
+                + "where fullName like ?");
+        stm.setString(1, "%"+fullName+"%");
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+           Report report = new Report();
+            report.setReportID(rs.getInt("reportID"));
+            report.setReportTitle(rs.getString("reportTitle"));
+            report.setCreateDate(rs.getDate("createDate"));
+            report.setDescription(rs.getString("description"));
+            report.setPlannedDate(rs.getDate("plannedDate"));
+            report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
+            report.setNote(rs.getString("note"));
+            report.setUserID(rs.getInt("userID"));
+            report.setFullName(rs.getString("fullName"));
+            report.setTypeName(rs.getString("typeName"));
+            list.add(report);
+        }
+        con.close();
+        return list;
+    }
+
 }
