@@ -141,7 +141,7 @@
 
 /* Avatar section */
 .avatar-section {
-    width: 270px;
+    width: auto;
     display: flex;
     justify-content: center;
 }
@@ -149,11 +149,11 @@
 .avatar-section img {
     width: 100%;
     height: auto;
-    max-width: 250px;
-    max-height: 250px;
+    max-width: 500px;
+    max-height: 500px;
 }
 
 /* Info section */
 .info-section {
-    width: calc(100% - 270px);
+   
 }
