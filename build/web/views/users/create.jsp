@@ -8,14 +8,14 @@
     </head>
 
     <body>
-        <c:choose>
-            <c:when test="${Account.roleName.equals('Manager')}">
-                <!-- Preloader -->
-                <div class="preloader">
-                    <div class="cssload-speeding-wheel"></div>
-                </div>
-                <!-- Page Content -->
 
+        <!-- Preloader -->
+        <div class="preloader">
+            <div class="cssload-speeding-wheel"></div>
+        </div>
+        <!-- Page Content -->
+        <c:choose>
+            <c:when test="${Account.roleName.equals('ADMIN')}">
                 <div class="container-fluid">
                     <div class="row bg-title">
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -118,7 +118,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                           
+
                                             <button type="submit" class="btn btn-success" name="op" value="create">Create<i class="bi bi-check-square"></i></button>
                                             <button type="submit" class="btn btn-outline-danger" name="op" value="cancel">Back <i class="bi bi-x-square"></i></button>
                                         </div>

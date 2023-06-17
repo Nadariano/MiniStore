@@ -98,7 +98,7 @@
                                 <a href="<c:url value="/home/index.do"/>" class="waves-effect"><i class="fa fa-clock-o fa-fw"
                                                                                                   aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
                             </li>
-                            <c:if test="${Account.roleName.equals('Manager')}">
+                            <c:if test="${Account.roleName.equals('MANAGER')||Account.roleName.equals('ADMIN')}">
                                 <li>
                                     <a href="<c:url value="/users/listOf.do"/>" class="waves-effect"><i class="fa fa-user fa-fw"
                                                                                                         aria-hidden="true"></i><span class="hide-menu">Employee list</span></a>
@@ -107,46 +107,46 @@
 
                             <li>
                                 <c:choose>
-                                    <c:when test="${Account.roleName.equals('Manager')}">
+                                    <c:when test="${Account.roleName.equals('MANAGER')}">
                                         <a href="<c:url value="/report/list.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
                                                                                                            aria-hidden="true"></i><span class="hide-menu">Reports</span></a>
                                             </c:when>
-                                            <c:otherwise>
-                                        <a href="<c:url value="/report/listUserReport.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
-                                                                                                                     aria-hidden="true"></i><span class="hide-menu">My Report</span></a>  
-                                            </c:otherwise>
-                                        </c:choose>
+
+                                    <c:when test="${!Account.roleName.equals('ADMIN')}">
+                                        <a href="<c:url value="/report/listUserReport.do"/>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><span class="hide-menu">My Report</span></a>  
+                                            </c:when> 
+
+                                </c:choose>
                             </li>
-                            <c:if test="${Account.roleName.equals('Manager')}">
+                            <c:if test="${Account.roleName.equals('ADMIN')}">
                                 <li>
                                     <a href="<c:url value="/role/index.do"/>" class="waves-effect"><i class="fa fa-modx fa-fw"
                                                                                                       aria-hidden="true"></i><span class="hide-menu">Role</span></a>
                                 </li>
                             </c:if>
                             <c:choose>
-                                <c:when test="${Account.roleName.equals('Manager')}">
+                                <c:when test="${Account.roleName.equals('MANAGER')}">
                                     <li>
                                         <a href="<c:url value="/attendance/list.do"/>" class="waves-effect"><i class="fa fa-modx fa-fw"
                                                                                                                aria-hidden="true"></i><span class="hide-menu">Attendance</span></a>
                                     </li>
 
-                                </c:when>  
+                                </c:when>
 
-                                <c:otherwise>
+                                <c:when test="${!Account.roleName.equals('ADMIN')}">
                                     <li>
                                         <a href="<c:url value="/attendance/listOfUsers.do?userID=${Account.userID}"/>" class="waves-effect"><i class="fa fa-modx fa-fw"
                                                                                                                                                aria-hidden="true"></i><span class="hide-menu">Attendance</span></a>
-                                    </li>                                                                            
-                                </c:otherwise>      
-
+                                    </li> 
+                                </c:when>  
                             </c:choose>
-                            <c:if test="${Account.roleName.equals('Manager')}">
+                            <c:if test="${Account.roleName.equals('MANAGER')}">
                                 <li>
                                     <a href="<c:url value="/shiftTime/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
                                                                                                             aria-hidden="true"></i><span class="hide-menu">Shift Time</span></a>
                                 </li>
                             </c:if>
-                            <c:if test="${Account.roleName.equals('Manager')}">
+                            <c:if test="${Account.roleName.equals('MANAGER')}">
                                 <li>
                                     <a href="<c:url value="/userShift/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
                                                                                                             aria-hidden="true"></i><span class="hide-menu">Users' Shift </span></a>
@@ -156,47 +156,48 @@
                                 <a href="<c:url value="/schedule/schedule.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
                                                                                                          aria-hidden="true"></i><span class="hide-menu">Work schedule</span></a>
                             </li>
+
                             <li>
                                 <a href="<c:url value="/dayOff/index.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
                                                                                                     aria-hidden="true"></i><span class="hide-menu">Day Off</span></a>
                             </li>
 
                             <c:choose>
-                                <c:when test="${Account.roleName.equals('Manager')}">
+                                <c:when test="${Account.roleName.equals('MANAGER')}">
                                     <li>
                                         <a href="<c:url value="/paySlip/listOf.do"/>" class="waves-effect"><i class="fa fa-modx fa-fw"
                                                                                                               aria-hidden="true"></i><span class="hide-menu">Pay Slip management</span></a>
                                     </li>
 
                                 </c:when>  
-
-                                <c:otherwise>
+                                <c:when test="${!Account.roleName.equals('ADMIN')}">
                                     <li>
                                         <a href="<c:url value="/paySlip/myPaySlip.do?userID=${Account.userID}"/>" class="waves-effect"><i class="fa fa-modx fa-fw"
                                                                                                                                           aria-hidden="true"></i><span class="hide-menu">My Pay Slip</span></a>
-                                    </li>                                                                            
-                                </c:otherwise>      
+                                    </li> 
+                                </c:when>
+
 
                             </c:choose>
-                            <c:if test="${Account.roleName.equals('Manager')}">
+                            <c:if test="${Account.roleName.equals('MANAGER')}">
                                 <li>
                                     <a href="<c:url value="/checkIn/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
                                                                                                           aria-hidden="true"></i><span class="hide-menu">Check In</span></a>
                                 </li>
                             </c:if>
-                            <c:if test="${Account.roleName.equals('Manager')}">
+                            <c:if test="${Account.roleName.equals('MANAGER')}">
                                 <li>
                                     <a href="<c:url value="/checkOut/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
                                                                                                            aria-hidden="true"></i><span class="hide-menu">Check Out</span></a>
                                 </li>
                             </c:if>
-                            <c:if test="${Account.roleName.equals('Manager')}">
+                            <c:if test="${Account.roleName.equals('MANAGER')}">
                                 <li>
                                     <a href="<c:url value="/bonus/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
                                                                                                         aria-hidden="true"></i><span class="hide-menu">Bonus List </span></a>
                                 </li>
                             </c:if>
-                            <c:if test="${Account.roleName.equals('Manager')}">
+                            <c:if test="${Account.roleName.equals('MANAGER')}">
                                 <li>
                                     <a href="<c:url value="/minus/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
                                                                                                         aria-hidden="true"></i><span class="hide-menu">Minus List </span></a>

@@ -8,12 +8,13 @@
     </head>
 
     <body>
-                <!-- Preloader -->
-                <div class="preloader">
-                    <div class="cssload-speeding-wheel"></div>
-                </div>
-                <!-- Page Content -->
-
+        <!-- Preloader -->
+        <div class="preloader">
+            <div class="cssload-speeding-wheel"></div>
+        </div>
+        <!-- Page Content -->
+        <c:choose>
+            <c:when test="${!Account.roleName.equals('ADMIN')}">
                 <div class="container-fluid">
                     <div class="row bg-title">
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -134,6 +135,11 @@
                 <!-- /.container-fluid -->
 
                 <!-- /#page-wrapper -->
-    </body>
+                  </c:when>
+            <c:otherwise>
+                <jsp:forward page="/error/error.do" />
+            </c:otherwise>
+        </c:choose>
+            </body>
 
-</html>
+        </html>

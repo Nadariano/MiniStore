@@ -8,14 +8,14 @@
     </head>
 
     <body>
-        <c:choose>
-            <c:when test="${Account.roleName.equals('Manager')}">
-                <!-- Preloader -->
-                <div class="preloader">
-                    <div class="cssload-speeding-wheel"></div>
-                </div>
-                <!-- Page Content -->
 
+        <!-- Preloader -->
+        <div class="preloader">
+            <div class="cssload-speeding-wheel"></div>
+        </div>
+        <!-- Page Content -->
+        <c:choose>
+            <c:when test="${Account.roleName.equals('MANAGER')}">
                 <div class="container-fluid">
                     <div class="row bg-title">
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -23,7 +23,7 @@
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
-                    
+
                     <form action="<c:url value="/report/searchByDate.do"/>">
                         <div style="display: flex; align-items: center; justify-content: center;">
                             <select name="day" style="margin-right: 8px;">

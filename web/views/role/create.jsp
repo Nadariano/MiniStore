@@ -9,7 +9,7 @@
 
     <body>
         <c:choose>
-            <c:when test="${Account.roleName.equals('Manager')}">
+            <c:when test="${Account.roleName.equals('ADMIN')}">
                 <!-- Preloader -->
                 <div class="preloader">
                     <div class="cssload-speeding-wheel"></div>

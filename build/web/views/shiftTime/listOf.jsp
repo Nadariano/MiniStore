@@ -14,7 +14,7 @@
 
     <body>
         <c:choose>
-            <c:when test="${Account.roleName.equals('Manager')}">
+            <c:when test="${Account.roleName.equals('MANAGER')}">
                 <!-- Preloader -->
                 <div class="preloader">
                     <div class="cssload-speeding-wheel"></div>
@@ -49,7 +49,7 @@
                                                 <th>Wage</th>
                                                 <th>Status</th>
                                                 <th>Note</th>
-                                                    <c:if test="${Account.roleName.equals('Manager')}">
+                                                    <c:if test="${Account.roleName.equals('MANAGER')}">
                                                     <th>Operations</th>
                                                     </c:if>
                                             </tr>
@@ -67,7 +67,7 @@
                                                     <td>${shiftTime.statusText}</td>
                                                     <td>${shiftTime.note}</td>
                                                     <td>
-                                                        <c:if test="${!role.roleName.equals('Manager')}">
+                                                        <c:if test="${!role.roleName.equals('MANAGER')}">
                                                             <a href="<c:url value="/shiftTime/update.do?shiftID=${shiftTime.shiftID}" />" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i>Update</a>
                                                             <a href="<c:url value="/shiftTime/delete.do?shiftID=${shiftTime.shiftID}" />" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-warning"><i class="bi bi-trash3"></i>Delete</a>
                                                         </c:if>

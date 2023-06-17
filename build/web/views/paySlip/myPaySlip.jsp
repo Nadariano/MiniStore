@@ -14,7 +14,7 @@
 
     <body>
         <c:choose>
-            <c:when test="${Account.roleName.equals('Sale')|| Account.roleName.equals('Guard')}">
+            <c:when test="${Account.roleName.equals('SALE')|| Account.roleName.equals('GUARD')}">
             <!-- Preloader -->
             <div class="preloader">
                 <div class="cssload-speeding-wheel"></div>
