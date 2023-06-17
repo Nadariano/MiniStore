@@ -7,8 +7,6 @@ package models;
 
 import java.util.Date;
 
-
-
 /**
  *
  * @author User
@@ -20,29 +18,42 @@ public class Report {
 //	description nvarchar(MAX),
 //	status int,
 //	note nvarchar(MAX),
+
     private int reportID;
     private String reportTitle;
     private Date createDate;
     private String description;
+    private Date plannedDate;
     private int status;
     private String statusText;
     private String note;
     private int userID;
     private String fullName;
+    private int typeID;
+    private String typeName;
 
     public Report() {
     }
 
-    public Report(int reportID, String reportTitle, Date createDate, String description, int status, String statusText, String note, int userID, String fullName) {
+    public Report(int reportID, String reportTitle, Date createDate, String description, Date plannedDate, int status, String statusText, String note, int userID, String fullName, int typeID, String typeName) {
         this.reportID = reportID;
         this.reportTitle = reportTitle;
         this.createDate = createDate;
         this.description = description;
+        this.plannedDate = plannedDate;
         this.status = status;
         this.statusText = statusText;
         this.note = note;
         this.userID = userID;
         this.fullName = fullName;
+        this.typeID = typeID;
+        this.typeName = typeName;
+    }
+
+    public Report(int reportID, int status, String note) {
+        this.reportID = reportID;
+        this.status = status;
+        this.note = note;
     }
 
     public int getReportID() {
@@ -75,6 +86,14 @@ public class Report {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Date getPlannedDate() {
+        return plannedDate;
+    }
+
+    public void setPlannedDate(Date plannedDate) {
+        this.plannedDate = plannedDate;
     }
 
     public int getStatus() {
@@ -117,5 +136,20 @@ public class Report {
         this.fullName = fullName;
     }
 
-   
+    public int getTypeID() {
+        return typeID;
+    }
+
+    public void setTypeID(int typeID) {
+        this.typeID = typeID;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
 }

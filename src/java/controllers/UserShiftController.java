@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static services.Utilities.sdfDate;
 
 /**
  *
@@ -99,8 +100,7 @@ public class UserShiftController extends HttpServlet {
                 try {
                     int userID = Integer.parseInt(request.getParameter("userID"));
                     int shiftID = Integer.parseInt(request.getParameter("shiftID"));
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
-                    Date date = sdf.parse(request.getParameter("date"));
+                    Date date = sdfDate.parse(request.getParameter("date"));
                     int status = Integer.parseInt(request.getParameter("status"));
                     String note = request.getParameter("note");
                     boolean isOT = Boolean.parseBoolean(request.getParameter("isOT"));
@@ -146,8 +146,7 @@ public class UserShiftController extends HttpServlet {
                 try {
                     int userID = Integer.parseInt(request.getParameter("userID"));
                     int shiftID = Integer.parseInt(request.getParameter("shiftID"));
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
-                    Date date = sdf.parse(request.getParameter("date"));
+                    Date date = sdfDate.parse(request.getParameter("date"));
                     int status = Integer.parseInt(request.getParameter("status"));
                     String note = request.getParameter("note");
                     boolean isOT = Boolean.parseBoolean(request.getParameter("isOT"));
@@ -176,8 +175,7 @@ public class UserShiftController extends HttpServlet {
         try {
             int userID = Integer.parseInt(request.getParameter("userID"));
             int shiftID = Integer.parseInt(request.getParameter("shiftID"));
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
-            Date date = sdf.parse(request.getParameter("date"));
+            Date date = sdfDate.parse(request.getParameter("date"));
             usr.delete(userID, shiftID, date);
 //            usd.delete1(userID);
             //Chuyen den trang /toy?op=list

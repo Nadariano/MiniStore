@@ -19,10 +19,14 @@ import java.util.Date;
  * @author Pc
  */
 public class Utilities {
+    private static final String fDate="yyyy-MM-dd";
+    private static final String fTime="HH:mm:ss";
+     private static final String fDateTime="yyyy-MM-dd HH:mm:ss";
+   
+    public static final SimpleDateFormat sdfDate = new SimpleDateFormat(fDate);
+    public static final SimpleDateFormat sdfTime = new SimpleDateFormat(fTime);
+    public static final SimpleDateFormat sdfDateTime = new SimpleDateFormat(fDateTime);
 
-    public static final SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-    public static final SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
-    public static final SimpleDateFormat sdfDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public static String hash(String password) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");//ten thuat bam
@@ -211,10 +215,10 @@ public class Utilities {
 
         switch (status) {
             case 0:
-                statusText = "Done";
+                statusText = "Not Done";
                 break;
             case 1:
-                statusText = "Not Done";
+                statusText = "Done";
                 break;
             default:
                 statusText = "Unknown";

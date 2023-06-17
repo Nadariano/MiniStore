@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static services.Utilities.sdfTime;
 
 /**
  *
@@ -105,9 +106,8 @@ public class ShiftTimeController extends HttpServlet {
             case "create":
                 try {
 //                                int shiftID = Integer.parseInt(request.getParameter("shiftID"));
-                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                    Date timeStart = sdf.parse(request.getParameter("timeStart"));
-                    Date timeEnd = sdf.parse(request.getParameter("timeEnd"));
+                    Date timeStart = sdfTime.parse(request.getParameter("timeStart"));
+                    Date timeEnd = sdfTime.parse(request.getParameter("timeEnd"));
                     float coeShift = Float.parseFloat(request.getParameter("coeShift"));
                     float coeOT = Float.parseFloat(request.getParameter("coeOT"));
                     float wage = Float.parseFloat(request.getParameter("wage"));
@@ -155,9 +155,8 @@ public class ShiftTimeController extends HttpServlet {
             case "update":
                 try {
                     int shiftID = Integer.parseInt(request.getParameter("shiftID"));
-                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                    Date timeStart = sdf.parse(request.getParameter("timeStart"));
-                    Date timeEnd = sdf.parse(request.getParameter("timeEnd"));
+                    Date timeStart = sdfTime.parse(request.getParameter("timeStart"));
+                    Date timeEnd = sdfTime.parse(request.getParameter("timeEnd"));
                     float coeShift = Float.parseFloat(request.getParameter("coeShift"));
                     float coeOT = Float.parseFloat(request.getParameter("coeOT"));
                     float wage = Float.parseFloat(request.getParameter("wage"));

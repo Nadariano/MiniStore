@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import models.ShiftTime;
-
+import static services.Utilities.sdfTime;
 /**
  *
  * @author Dell
@@ -70,9 +70,8 @@ public class ShiftTimeRepository {
     public void create(ShiftTime shiftTime) throws SQLException {
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("insert into ShiftTime values(?, ?, ?, ?, ?, ?, ?)");
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        stm.setString(1, sdf.format(shiftTime.getTimeStart()));
-        stm.setString(2, sdf.format(shiftTime.getTimeEnd()));
+        stm.setString(1, sdfTime.format(shiftTime.getTimeStart()));
+        stm.setString(2, sdfTime.format(shiftTime.getTimeEnd()));
 //        stm.setTime(1, shiftTime.getTimeStart());
 //        stm.setTime(2, shiftTime.getTimeEnd());
         stm.setFloat(3, shiftTime.getCoeShift());
@@ -87,9 +86,8 @@ public class ShiftTimeRepository {
     public void update(ShiftTime shiftTime) throws SQLException {
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("update ShiftTime set timeStart=?, timeEnd=?, coeShift=?, coeOT=?, wage=?, status = ?, note = ? where shiftID = ?");
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        stm.setString(1, sdf.format(shiftTime.getTimeStart()));
-        stm.setString(2, sdf.format(shiftTime.getTimeEnd()));
+        stm.setString(1, sdfTime.format(shiftTime.getTimeStart()));
+        stm.setString(2, sdfTime.format(shiftTime.getTimeEnd()));
 //        stm.setTime(1, shiftTime.getTimeStart());
 //        stm.setTime(2, shiftTime.getTimeEnd());
         stm.setFloat(3, shiftTime.getCoeShift());

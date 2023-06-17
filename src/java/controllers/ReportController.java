@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import models.Account;
+import static services.Utilities.sdfDate;
 
 /**
  *
@@ -60,8 +61,8 @@ public class ReportController extends HttpServlet {
                 update_handler(request, response);
                 break;
             case "create":
-               try {
-                    create (request, response);
+                try {
+                    create(request, response);
                 } catch (SQLException ex) {
                     //Hien trang thong bao loi
                     ex.printStackTrace();//In thông báo chi tiết cho developer
@@ -71,7 +72,7 @@ public class ReportController extends HttpServlet {
                 break;
             case "create_handler":
                 try {
-                    create_handler (request, response);
+                    create_handler(request, response);
                 } catch (SQLException ex) {
                     //Hien trang thong bao loi
                     ex.printStackTrace();//In thông báo chi tiết cho developer
@@ -79,8 +80,31 @@ public class ReportController extends HttpServlet {
                     request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
                 }
                 break;
-                case "delete":
-                    try {
+
+            case "searchByDate":
+                try {
+                    searchByDate(request, response);
+                } catch (Exception ex) {
+                    //Hien trang thong bao loi
+                    ex.printStackTrace();//In thông báo chi tiết cho developer
+                    request.setAttribute("message", ex.getMessage());
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+                break;
+
+            case "searchByName":
+                try {
+                    searchByName(request, response);
+                } catch (Exception ex) {
+                    //Hien trang thong bao loi
+                    ex.printStackTrace();//In thông báo chi tiết cho developer
+                    request.setAttribute("message", ex.getMessage());
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+                break;
+
+            case "delete":
+                try {
                     delete(request, response);
                 } catch (SQLException ex) {
                     //Hien trang thong bao loi
@@ -138,12 +162,13 @@ public class ReportController extends HttpServlet {
                 try {
                     ReportRepository rf = new ReportRepository();
                     int reportID = Integer.parseInt(request.getParameter("reportID"));
-                    String reportTitle = request.getParameter("reportTitle");
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    Date createDate = sdf.parse(request.getParameter("createDate"));
-                    String fullName = request.getParameter("fullName");
-                    String description = request.getParameter("description");
-                    int userID = Integer.parseInt(request.getParameter("userID"));
+//                    String reportTitle = request.getParameter("reportTitle");
+//                    String typeName = request.getParameter("typeName");
+//                    Date createDate = sdfDate.parse(request.getParameter("createDate"));
+//                    String fullName = request.getParameter("fullName");
+//                    String description = request.getParameter("description");
+//                    Date plannedDate = sdfDate.parse(request.getParameter("plannedDate"));
+//                    int userID = Integer.parseInt(request.getParameter("userID"));
                     String note = request.getParameter("note");
                     String statusText = request.getParameter("statusText");
                     int status = 1;
@@ -159,7 +184,7 @@ public class ReportController extends HttpServlet {
                             break;
                     }
 
-                    Report report = new Report(reportID, reportTitle, createDate, description, status, statusText, note, userID, fullName);
+                    Report report = new Report(reportID, status, note);
                     rf.update(report);
                     response.sendRedirect(request.getContextPath() + "/report/list.do");
                 } catch (Exception ex) {
@@ -182,10 +207,10 @@ public class ReportController extends HttpServlet {
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("Account");
             int userID = acc.getUserID();
-                ReportRepository rf = new ReportRepository();
-                List<Report> list = rf.selectUserReport(userID);
-                request.setAttribute("list", list);
-                request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+            ReportRepository rf = new ReportRepository();
+            List<Report> list = rf.selectUserReport(userID);
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (SQLException ex) {
             //Hien trang thong bao loi
             ex.printStackTrace();//In thông báo chi tiết cho developer
@@ -207,7 +232,7 @@ public class ReportController extends HttpServlet {
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         }
     }
-    
+
     protected void create_handler(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         String op = request.getParameter("op");
@@ -216,11 +241,14 @@ public class ReportController extends HttpServlet {
                 try {
                     ReportRepository rf = new ReportRepository();
                     String reportTitle = request.getParameter("reportTitle");
+                    int typeID = Integer.parseInt(request.getParameter("typeID"));
                     String description = request.getParameter("description");
+                    String plannedDate = request.getParameter("plannedDate");
                     int userID = Integer.parseInt(request.getParameter("userID"));
                     String note = "";
                     int status = 1;
-                    rf.create(reportTitle, description, status, note, userID);
+//                    rf.create(reportTitle, description, status, note, userID);
+                    rf.create(reportTitle, description, plannedDate, status, note, userID, typeID);
                     response.sendRedirect(request.getContextPath() + "/report/listUserReport.do");
                 } catch (Exception ex) {
                     //Hiện trang thông báo lỗi
@@ -235,7 +263,92 @@ public class ReportController extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/report/listUserReport.do");
         }
     }
-    
+
+    private void searchByDate(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException {
+        String op = request.getParameter("op");
+        switch (op) {
+            case "search":
+                try {
+                    String day = request.getParameter("day");
+                    String month = request.getParameter("month");
+                    String year = request.getParameter("year");
+                    String createDate = year + "-" + month + "-" + day;
+                    ReportRepository rf = new ReportRepository();
+                    if (!"".equals(day) && !"".equals(month) && !"".equals(year)) {
+                        List<Report> list = rf.search(createDate);
+                        request.setAttribute("list", list);
+
+                    }
+                    if ("".equals(year)) {
+                        List<Report> list = rf.searchByDayAndMonth(day, month);
+                        request.setAttribute("list", list);
+
+                    }
+                    if ("".equals(month)) {
+                        List<Report> list = rf.searchByDayAndYear(day, year);
+                        request.setAttribute("list", list);
+
+                    }
+                    if ("".equals(day)) {
+                        List<Report> list = rf.searchByMonthAndYear(month, year);
+                        request.setAttribute("list", list);
+
+                    }
+                    if ("".equals(month) && "".equals(year)) {
+                        List<Report> list = rf.searchByDay(day);
+                        request.setAttribute("list", list);
+
+                    }
+                    if ("".equals(day) && "".equals(year)) {
+                        List<Report> list = rf.searchByMonth(month);
+                        request.setAttribute("list", list);
+
+                    }
+                    if ("".equals(day) && "".equals(month)) {
+                        List<Report> list = rf.searchByYear(year);
+                        request.setAttribute("list", list);
+                    }
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+
+//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                } catch (SQLException ex) {
+                    //Hien trang thong bao loi
+                    ex.printStackTrace();//In thông báo chi tiết cho developer
+                    request.setAttribute("message", ex.getMessage());
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void searchByName(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException {
+        String op = request.getParameter("op");
+        switch (op) {
+            case "search":
+                try {
+                    String fullName = request.getParameter("fullName");
+                    ReportRepository rf = new ReportRepository();
+                    List<Report> list = rf.searchByName(fullName);
+                    request.setAttribute("list", list);
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+
+//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                } catch (SQLException ex) {
+                    //Hien trang thong bao loi
+                    ex.printStackTrace();//In thông báo chi tiết cho developer
+                    request.setAttribute("message", ex.getMessage());
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     protected void delete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         ReportRepository rf = new ReportRepository();

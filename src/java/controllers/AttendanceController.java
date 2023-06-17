@@ -23,6 +23,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import static services.Utilities.sdfDate;
+import static services.Utilities.sdfTime;
 
 /**
  *
@@ -170,8 +172,7 @@ public class AttendanceController extends HttpServlet {
                 try {
                     AttendanceRepository af = new AttendanceRepository();
                     int attendID = Integer.parseInt(request.getParameter("attendID"));
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    Date date = sdf.parse(request.getParameter("date"));
+                    Date date = sdfDate.parse(request.getParameter("date"));
                     String fullName = request.getParameter("fullName");
                     Time checkIn = Time.valueOf(request.getParameter("checkIn"));
                     Time checkOut = Time.valueOf(request.getParameter("checkOut"));
@@ -237,8 +238,7 @@ public class AttendanceController extends HttpServlet {
                 try {
                     AttendanceRepository ar = new AttendanceRepository();
                     int attendID = Integer.parseInt(request.getParameter("attendID"));
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    Date date = sdf.parse(request.getParameter("date"));
+                    Date date = sdfDate.parse(request.getParameter("date"));
                     String fullName = request.getParameter("fullName");
                     Time checkIn = Time.valueOf(request.getParameter("checkIn"));
                     Time checkOut = Time.valueOf(request.getParameter("checkOut"));
@@ -296,12 +296,10 @@ public class AttendanceController extends HttpServlet {
                 try {
                     AttendanceRepository af = new AttendanceRepository();
                     int userID = Integer.parseInt(request.getParameter("userID"));
-                    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-                    Date date = sdf1.parse(request.getParameter("date"));
+                    Date date = sdfDate.parse(request.getParameter("date"));
                     String fullName = request.getParameter("fullName");
-                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                    Date checkIn = sdf.parse(request.getParameter("checkIn"));
-                    Date checkOut = sdf.parse(request.getParameter("checkOut"));
+                    Date checkIn = sdfTime.parse(request.getParameter("checkIn"));
+                    Date checkOut = sdfTime.parse(request.getParameter("checkOut"));
                     int lateTime = Integer.parseInt(request.getParameter("lateTime"));
                     int overTime = Integer.parseInt(request.getParameter("overTime"));
                     int status = 0;

@@ -24,12 +24,12 @@
 
             <div class="white-box">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="avatar-section">
                             <img src="<c:url value="${Account.avatar}"/>" alt="avatar" class="profile-img img-fluid img-thumbnail">
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <div class="info-section">
                             <h2>${Account.fullName}</h2>
                             <h3>${Account.roleName}</h3>
