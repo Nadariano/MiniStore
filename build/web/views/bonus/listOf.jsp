@@ -16,7 +16,7 @@
 
     <body>
         <c:choose>
-            <c:when test="${Account.roleName.equals('Manager')}">
+            <c:when test="${Account.roleName.equals('MANAGER')}">
                 <!-- Preloader -->
                 <div class="preloader">
                     <div class="cssload-speeding-wheel"></div>
@@ -60,7 +60,7 @@
                                                     <td>${bonus1.status}</td>
                                                     <td>${bonus1.note}</td>
                                                     <td>
-                                                        <c:if test="${!role.roleName.equals('Manager')}">
+                                                        <c:if test="${!role.roleName.equals('MANAGER')}">
                                                             <a href="<c:url value="/bonus/update.do?bonusID=${bonus1.bonusID}" />" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i>Update</a> <br/>
                                                             <p> </p>
                                                             <a href="<c:url value="/bonus/delete.do?bonusID=${bonus1.bonusID}" />" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-warning"><i class="bi bi-trash3"></i>Delete</a>

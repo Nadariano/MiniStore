@@ -18,40 +18,41 @@
             <div class="cssload-speeding-wheel"></div>
         </div>
         <!-- Page Content -->
+        <c:choose>
+            <c:when test="${Account.roleName.equals('MANAGER')}">
+                <div class="container-fluid">
+                    <div class="row bg-title">
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                            <h4 class="page-title">Update bonus</h4>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <!-- .row -->
+                    <div class="row">
+                        <div class="col-md-2 col-12"></div>
+                        <div class="col-md-8 col-xs-12">
+                            <div class="white-box">
 
-        <div class="container-fluid">
-            <div class="row bg-title">
-                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Update bonus</h4>
-                </div>
-            </div>
-            <!-- /.row -->
-            <!-- .row -->
-            <div class="row">
-                <div class="col-md-2 col-12"></div>
-                <div class="col-md-8 col-xs-12">
-                    <div class="white-box">
 
 
+                                <form action="<c:url value="/bonus/update_handler.do"/>" class="form-horizontal form-material">
 
-                        <form action="<c:url value="/bonus/update_handler.do"/>" class="form-horizontal form-material">
-
-                            <div class="form-group">
-                                <label class="col-md-12">Bonus ID</label>
-                                <div class="col-md-12">
-                                    <input disabled type="number" placeholder="Bonus ID" value="${bonus1.bonusID}"
-                                           class="form-control form-control-line" />
-                                    <input type="hidden" name="bonusID" value="${bonus1.bonusID}">
-                                </div>
-                            </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">User ID</label>
-                                    <div class="col-md-12">
-                                        <input disabled type="number" placeholder="User ID" value="${bonus1.userID}"
-                                               class="form-control form-control-line" />
-                                        <input type="hidden" name="userID" value="${bonus1.userID}">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Bonus ID</label>
+                                        <div class="col-md-12">
+                                            <input disabled type="number" placeholder="Bonus ID" value="${bonus1.bonusID}"
+                                                   class="form-control form-control-line" />
+                                            <input type="hidden" name="bonusID" value="${bonus1.bonusID}">
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">User ID</label>
+                                        <div class="col-md-12">
+                                            <input disabled type="number" placeholder="User ID" value="${bonus1.userID}"
+                                                   class="form-control form-control-line" />
+                                            <input type="hidden" name="userID" value="${bonus1.userID}">
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label class="col-md-12">Bonus Money</label>
                                         <div class="col-md-12">
@@ -90,18 +91,22 @@
 
                                         </div>
                                     </div>
-                                    </form>
+                                </form>
 
-                                </div>
                             </div>
-                            <div class="col-md-2 col-12"></div>
+                        </div>
+                        <div class="col-md-2 col-12"></div>
                     </div>
                     <!-- /.row -->
                 </div>
                 <!-- /.container-fluid -->
 
                 <!-- /#page-wrapper -->
+            </c:when>
+            <c:otherwise>
+                <jsp:forward page="/error/error.do" />
+            </c:otherwise>
+        </c:choose>
+    </body>
 
-                </body>
-
-                </html>
+</html>

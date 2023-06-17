@@ -184,9 +184,10 @@ add typeID int foreign key references ReportType(typeID)
 /*PHẦN INSERT DỮ LIỆU CHO BẢNG*/
 
 /*Insert cho Roles*/
-insert into Roles values('Manager',1,'')
-insert into Roles values('Sale',1,'')
-insert into Roles values('Guard',1,'')
+insert into Roles values('ADMIN',0,'')
+insert into Roles values('MANAGER',0,'')
+insert into Roles values('SALE',0,'')
+insert into Roles values('GUARD',0,'')
 
 /*Insert cho Users*/
 insert into Users values('A','6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B','Nguyen Thi A', 'https://toigingiuvedep.vn/wp-content/uploads/2021/01/anh-avatar-cho-con-gai-cuc-dep.jpg','Thanh pho Ho Chi Minh', '0945076586', 'A@gmail.com', 1,'', 1)
