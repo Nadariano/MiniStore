@@ -76,7 +76,7 @@
                                                         <td>${users.statusText1}</td>
                                                         <td>${users.note}</td>
                                                         <td>
-                                                            <c:if test="${!users.roleName.equals('MANAGER')||Account.roleName.equals('ADMIN')}">
+                                                            <c:if test="${!users.roleName.equals('ADMIN')&&(!users.roleName.equals('MANAGER')||Account.roleName.equals('ADMIN'))}">
                                                                 <a href="<c:url value="/users/update.do?userID=${users.userID}" />" class="btn btn-sm btn-primary">Update</a>
                                                             </c:if>
                                                         </td>
