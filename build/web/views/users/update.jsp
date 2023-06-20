@@ -118,9 +118,10 @@
                                         <label class="col-md-12">Role</label>
                                         <div class="col-md-12">
                                             <select name="roleID"class="form-control form-control-line">
-                                                <option value="1">Manager</option>
-                                                <option value="2">Sale</option>
-                                                <option value="3">Guard</option>
+                                                <option value="1">Admin</option>
+                                                <option value="2">Manager</option>
+                                                <option value="3">Sale</option>
+                                                <option value="4">Guard</option>
                                             </select>
                                         </div>
                                     </div>

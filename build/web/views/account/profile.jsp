@@ -46,8 +46,8 @@
                             <label for="address">Email:</label>
                             <h3>${Account.email}</h3>
                             <hr>
-                            <div class="buttons">
-                                <a href="<c:url value="/account/updateProfile.do"/>" class="btn btn-sm btn-primary">Edit Information</a>
+                            <div class="">
+                                <a href="<c:url value="/account/updateProfile.do"/>" class="btn btn-sm btn-success">Edit Information</a>
                                 <a href="<c:url value="/account/changePassword.do"/>" class="btn btn-sm btn-primary">Change Password</a>
                             </div>
                         </div>

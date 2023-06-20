@@ -117,15 +117,15 @@
     font-family: sans-serif;
     color: whitesmoke;
 }*/
-.buttons a{
+/*.buttons a{
     margin: 10%;
     padding: 2%;
     font-size: 150%;
-}
-.buttons a:hover{
+}*/
+/*.buttons a:hover{
     background-color: greenyellow;
     color: black;
-}
+}*/
 @media (min-width: 768px) {
     .profile-content {
         width: 100%;
