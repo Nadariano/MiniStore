@@ -26,6 +26,7 @@
         <!-- color CSS -->
         <link href="<c:url value="/css/colors/blue-dark.css"/>" id="theme" rel="stylesheet">
         <link rel="stylesheet" href="<c:url value="/css/custom.css"/>">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -153,8 +154,8 @@
                                 </li>
                             </c:if>
                             <li>
-                                <a href="<c:url value="/schedule/schedule.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
-                                                                                                         aria-hidden="true"></i><span class="hide-menu">Work schedule</span></a>
+                                <a href="<c:url value="/schedule/listAll.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
+                                                                                                        aria-hidden="true"></i><span class="hide-menu">Work schedule</span></a>
                             </li>
 
                             <li>
