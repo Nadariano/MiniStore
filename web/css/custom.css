@@ -59,6 +59,11 @@
     padding: 5%;
     border: solid black 5px;
 }
+.welcome-title{
+    text-align: center;
+    font-family: fantasy;
+    font-size: 250%;
+}
 .profile-content{
     display: flex;
     justify-content: center;
@@ -155,5 +160,42 @@
 
 /* Info section */
 .info-section {
-   
+
 }
+/*Schedule*/
+.schedule {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 20px auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.schedule th,
+.schedule td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    width: 100px;
+}
+.shift{
+    height: 150px;
+}
+.table-col{
+    display: flex;
+}
+.schedule th {
+    /*background-color: #4CAF50;*/
+    background-color: #81C2E6;
+    color: white;
+}
+
+.shift:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.shift td:first-of-type {
+    font-weight: bold;
+    background-color: #CBE3EF;
+}
+
