@@ -5,16 +5,8 @@
  */
 package controllers;
 
-import models.Report;
-import repositories.ReportRepository;
-import models.Users;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,10 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import models.Account;
-import static services.Utilities.sdfDate;
+import models.Report;
+import repositories.ReportRepository;
 
 /**
  *
@@ -264,6 +255,16 @@ public class ReportController extends HttpServlet {
         }
     }
 
+    private int countParams(String... params) {
+        int count = 0;
+        for (String param : params) {
+            if (param != null && !param.isEmpty()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     private void searchByDate(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         String op = request.getParameter("op");
@@ -273,42 +274,38 @@ public class ReportController extends HttpServlet {
                     String day = request.getParameter("day");
                     String month = request.getParameter("month");
                     String year = request.getParameter("year");
-                    String createDate = year + "-" + month + "-" + day;
                     ReportRepository rf = new ReportRepository();
-                    if (!"".equals(day) && !"".equals(month) && !"".equals(year)) {
-                        List<Report> list = rf.search(createDate);
-                        request.setAttribute("list", list);
+                    List<Report> list = null;
 
+                    switch (countParams(day, month, year)) {
+                        case 3:
+                            String createDate = year + "-" + month + "-" + day;
+                            list = rf.search(createDate);
+                            break;
+                        case 2:
+                            if ("".equals(year)) {
+                                list = rf.searchByDayAndMonth(day, month);
+                            } else if ("".equals(month)) {
+                                list = rf.searchByDayAndYear(day, year);
+                            } else {
+                                list = rf.searchByMonthAndYear(month, year);
+                            }
+                            break;
+                        case 1:
+                            if (!"".equals(day)) {
+                                list = rf.searchByDay(day);
+                            } else if (!"".equals(month)) {
+                                list = rf.searchByMonth(month);
+                            } else {
+                                list = rf.searchByYear(year);
+                            }
+                            break;
+                        default:
+                            // Handle invalid input
+                            break;
                     }
-                    if ("".equals(year)) {
-                        List<Report> list = rf.searchByDayAndMonth(day, month);
-                        request.setAttribute("list", list);
 
-                    }
-                    if ("".equals(month)) {
-                        List<Report> list = rf.searchByDayAndYear(day, year);
-                        request.setAttribute("list", list);
-
-                    }
-                    if ("".equals(day)) {
-                        List<Report> list = rf.searchByMonthAndYear(month, year);
-                        request.setAttribute("list", list);
-
-                    }
-                    if ("".equals(month) && "".equals(year)) {
-                        List<Report> list = rf.searchByDay(day);
-                        request.setAttribute("list", list);
-
-                    }
-                    if ("".equals(day) && "".equals(year)) {
-                        List<Report> list = rf.searchByMonth(month);
-                        request.setAttribute("list", list);
-
-                    }
-                    if ("".equals(day) && "".equals(month)) {
-                        List<Report> list = rf.searchByYear(year);
-                        request.setAttribute("list", list);
-                    }
+                    request.setAttribute("list", list);
                     request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
 
 //                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);

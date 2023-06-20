@@ -24,40 +24,103 @@
                         <!-- /.col-lg-12 -->
                     </div>
 
-                    <form action="<c:url value="/report/searchByDate.do"/>">
-                        <div style="display: flex; align-items: center; justify-content: center;">
-                            <select name="day" style="margin-right: 8px;">
-                                <option value="">Day</option>
-                                <% for (int i = 1; i <= 31; i++) {%>
-                                <option value="<%= i%>"><%= i%></option>
-                                <% } %>
-                            </select>
+                   <style>
+  .search-form {
+    display: none;
+  }
 
-                            <select name="month" style="margin-right: 8px;">
-                                <option value="">Month</option>
-                                <% for (int i = 1; i <= 12; i++) {%>
-                                <option value="<%= i%>"><%= i%></option>
-                                <% } %>
-                            </select>
+  .search-form.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
-                            <select name="year" style="margin-right: 8px;">
-                                <option value="">Year</option>
-                                <% for (int i = 1900; i <= 2023; i++) {%>
-                                <option value="<%= i%>"><%= i%></option>
-                                <% }%>
-                            </select>
+  .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
 
-                            <button type="submit" class="btn btn-primary" name="op" value="search" style="margin-right: 8px;">Search By Date</button>
-                        </div>
-                    </form>
+  .form-group label {
+    margin-right: 8px;
+  }
 
-                    <form action="<c:url value="/report/searchByName.do"/>">
-                        <div style="display: flex; align-items: center; justify-content: center;">
-                            <label for="fullName" style="margin-right: 8px;">Name:</label>
-                            <input type="text" id="fullName" name="fullName" style="margin-right: 8px;">
-                            <button type="submit" class="btn btn-primary" name="op" value="search" style="margin-right: 8px;">Search By Name</button>
-                        </div>
-                    </form>
+  .form-group input[type="text"],
+  .form-group select {
+    margin-right: 8px;
+  }
+  
+  .dropdown-menu {
+    right: auto !important;
+    left: 0 !important;
+  }
+</style>
+
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="searchMethodDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Search By Date
+  </button>
+  <div class="dropdown-menu" aria-labelledby="searchMethodDropdown">
+    <a class="dropdown-item" href="#" onclick="showSearchForm('searchByDateForm')">Search By Date</a>
+    <a class="dropdown-item" href="#" onclick="showSearchForm('searchByNameForm')">Search By Name</a>
+  </div>
+</div>
+
+<form action="<c:url value="/report/searchByDate.do"/>" class="search-form active" id="searchByDateForm">
+  <div class="form-group">
+    <label for="day">Day:</label>
+    <select name="day">
+      <option value="">Day</option>
+      <% for (int i = 1; i <= 31; i++) {%>
+      <option value="<%= i%>"><%= i%></option>
+      <% } %>
+    </select>
+
+    <label for="month">Month:</label>
+    <select name="month">
+      <option value="">Month</option>
+      <% for (int i = 1; i <= 12; i++) {%>
+      <option value="<%= i%>"><%= i%></option>
+      <% } %>
+    </select>
+
+    <label for="year">Year:</label>
+    <select name="year">
+      <option value="">Year</option>
+      <% for (int i = 1900; i <= 2023; i++) {%>
+      <option value="<%= i%>"><%= i%></option>
+      <% }%>
+    </select>
+
+    <button type="submit" class="btn btn-primary" name="op" value="search">Search</button>
+  </div>
+</form>
+
+<form action="<c:url value="/report/searchByName.do"/>" class="search-form" id="searchByNameForm">
+  <div class="form-group">
+    <label for="fullName">Name:</label>
+    <input type="text" id="fullName" name="fullName">
+
+    <button type="submit" class="btn btn-primary" name="op" value="search">Search</button>
+  </div>
+</form>
+
+<script>
+  function showSearchForm(formId) {
+    const forms = document.querySelectorAll('.search-form');
+    forms.forEach(form => {
+      if (form.id === formId) {
+        form.classList.add('active');
+      } else {
+        form.classList.remove('active');
+      }
+    });
+    const dropdownToggle = document.querySelector('#searchMethodDropdown');
+    const dropdownLabel = document.querySelector(`[onclick="showSearchForm('${formId}')"]`).textContent;
+    dropdownToggle.textContent = dropdownLabel;
+  }
+</script>
                     <!-- /row -->
                     <div class="row">
                         <div class="col-sm-12">
