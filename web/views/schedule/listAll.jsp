@@ -29,9 +29,15 @@
                     <th>
                         <form action="<c:url value="/schedule/selectWeek.do"/>">
                             <!--<input class="form-control form-control-line" type="number" name="week" value="${weekNo}" placeholder="Select i">-->
+                            <!--                            <select class="form-control form-control-line" name="week">
+                            <c:forEach var="i" begin="0" end="10" step="1">
+                                <option type="number" value="${weekNo=i}">${i}</option>
+                            </c:forEach>
+                        </select>-->
+
                             <select class="form-control form-control-line" name="week">
-                                <c:forEach var="i" begin="0" end="10" step="1">
-                                    <option type="number" value="${weekNo=i}">${i}</option>
+                                <c:forEach var="listItem" items="${weeks}" varStatus="loop">
+                                    <option type="text" value="${selectedWeek=listItem}">${listItem}</option>
                                 </c:forEach>
                             </select>
                             <button type="submit" class="btn btn-success" name="op" value="filter">Filter <i class="bi bi-check-square"></i></button>
@@ -58,13 +64,24 @@
                             </p>
                         </td>
                         <c:forEach var="i" begin="0" end="${fn:length(listDays) - 1}" step="1" >
-                                <td> 
-                            <c:forEach var="userShift" items="${usersShiftList}" varStatus="loop">
-                                <c:if test="${userShift.shiftID==shift.shiftID}">
-                                    <p>Emp ${userShift.userID}<p>
-                                </c:if>
-                            </c:forEach>
-                                </td>    
+                            <td> 
+
+                                <c:forEach var="userShift" items="${usersShiftList}" varStatus="loop">
+                                    <c:if test="${userShift.shiftID == shift.shiftID}">
+
+                                        <c:set var="userShiftt" value="${usersShiftList[i]}">
+                                        </c:set>
+                                        <c:if test="${userShiftt.date == "2023-06-21"}">
+                                        <p>Emp ${userShiftt.userID} -- ${userShiftt.date} -- ${userShiftt.shiftID}<p>
+                                            </c:if>
+                                        </c:if>
+                                    </c:forEach>
+
+                                <p>
+                                    ${listDates[i]} - ${shift.shiftID}
+
+                                </p>
+                            </td>    
                         </c:forEach>
                     </tr>
                 </c:forEach>

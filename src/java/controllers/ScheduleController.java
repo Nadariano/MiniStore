@@ -73,16 +73,20 @@ public class ScheduleController extends HttpServlet {
         ScheduleRepository sdr = new ScheduleRepository();
         UserShiftRepository usr = new UserShiftRepository();
         try {
-            Object weekNo = session.getAttribute("weekNo");
-            int week = 0;
-            if (weekNo != null) {
-                week = (int) weekNo;
-            } 
+            Object selectedWeek = session.getAttribute("selectedWeek");
+            String week = sdr.listStartEndDates().get(0);
+            if (selectedWeek != null) {
+                week = (String) selectedWeek;
+            }
+            String stringStartDate = week.substring(0, 10);
+            LocalDate startDate= Utilities.dateString(stringStartDate);
+            List<String> weeks = sdr.listStartEndDates();
             List<String> listDays = Utilities.listDaysInWeek();
-            List<LocalDate> listDates = Utilities.listDatesInWeek(week);
-            List<LocalDate> startEndDates = sdr.startEndDates(week);
+            List<LocalDate> listDates = Utilities.listDatesInWeek(startDate);
+            List<LocalDate> startEndDates = sdr.startEndDates(startDate);
             List<ShiftTime> shifts = ShiftTimeRepository.select();
             List<UserShift> usersShiftList = UserShiftRepository.select();
+            request.setAttribute("weeks", weeks);
             request.setAttribute("usersShiftList", usersShiftList);
             request.setAttribute("listDays", listDays);
             request.setAttribute("listDates", listDates);
@@ -104,8 +108,9 @@ public class ScheduleController extends HttpServlet {
         switch (op) {
             case "filter": {
                 try {
-                    int weekNo = Integer.parseInt(request.getParameter("week"));
-                    session.setAttribute("weekNo", weekNo);
+//                    int weekNo = Integer.parseInt(request.getParameter("week"));
+                    String selectedWeek = request.getParameter("week");
+                    session.setAttribute("selectedWeek", selectedWeek);
 //                    request.setAttribute("week", week);
                     response.sendRedirect(request.getContextPath() + "/schedule/listAll.do");
                 } catch (Exception ex) {

@@ -14,7 +14,7 @@ import java.util.Map;
  * @author acer
  */
 public class StartEndDatesMap {
-    private Map<Integer, StartEndDate> map;
+    private Map<Integer, StartDate> map;
 
     public StartEndDatesMap(){
         map = new HashMap<>();
@@ -23,7 +23,7 @@ public class StartEndDatesMap {
 //    public void add(int i){
 //        LocalDate startDate= startEndDate.getStartDate();
 //        if(map.containsKey(startDate)){
-//            StartEndDate oldItem = map.get(startDate);
+//            StartDate oldItem = map.get(startDate);
 //            oldItem.setQuantity(oldItem.getQuantity()+ item.getQuantity());
 //        } else{
 //            map.put(id, item);
