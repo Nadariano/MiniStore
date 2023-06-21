@@ -48,7 +48,7 @@
                     <c:forEach var="i" begin="0" end="${fn:length(listDays) - 1}" step="1" >
                         <th>
                             <h2>${listDays[i]}</h2>
-                            <p>${listDates[i]}</p>
+                            <p>${listLocalDates[i]}</p>
                         </th>
                     </c:forEach>
                 </tr>
@@ -67,20 +67,18 @@
                             <td> 
 
                                 <c:forEach var="userShift" items="${usersShiftList}" varStatus="loop">
+                                    
                                     <c:if test="${userShift.shiftID == shift.shiftID}">
 
-                                        <c:set var="userShiftt" value="${usersShiftList[i]}">
-                                        </c:set>
-                                        <c:if test="${userShiftt.date == "2023-06-21"}">
-                                        <p>Emp ${userShiftt.userID} -- ${userShiftt.date} -- ${userShiftt.shiftID}<p>
+                                        <c:set var="userShiftt" value="${usersShiftList[loop.index]}"/>
+                                        <c:set var="date" value="${listDates[i]}"/>
+                                        <c:if test="${userShiftt.date == date}">
+                                            <p>Emp ${userShiftt.userID} -- ${userShiftt.date} -- ${userShiftt.shiftID}<p>
                                             </c:if>
                                         </c:if>
                                     </c:forEach>
 
-                                <p>
-                                    ${listDates[i]} - ${shift.shiftID}
-
-                                </p>
+                               
                             </td>    
                         </c:forEach>
                     </tr>
