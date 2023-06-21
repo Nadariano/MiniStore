@@ -12,22 +12,35 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import static java.time.temporal.TemporalQueries.localDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import static java.util.stream.Collectors.toList;
 
 /**
  *
  * @author Pc
  */
 public class Utilities {
-    private static final String fDate="yyyy-MM-dd";
-    private static final String fTime="HH:mm:ss";
-     private static final String fDateTime="yyyy-MM-dd HH:mm:ss";
-   
+
+    private static final String fDate = "yyyy-MM-dd";
+    private static final String fTime = "HH:mm:ss";
+    private static final String fDateTime = "yyyy-MM-dd HH:mm:ss";
+    
+    //Convert Date into String
     public static final SimpleDateFormat sdfDate = new SimpleDateFormat(fDate);
     public static final SimpleDateFormat sdfTime = new SimpleDateFormat(fTime);
     public static final SimpleDateFormat sdfDateTime = new SimpleDateFormat(fDateTime);
 
-
+    //Convert String into Date
+    public static final DateTimeFormatter stringToDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    
     public static String hash(String password) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");//ten thuat bam
         byte[] hashedPassword = digest.digest(password.getBytes(StandardCharsets.UTF_8));
@@ -269,5 +282,36 @@ public class Utilities {
         }
 
         return confirm;
+    }
+    //Convert String into Date
+    public static LocalDate dateString(String stringDate){
+        LocalDate convertedString = LocalDate.parse(stringDate, stringToDate);
+        return convertedString;
+    }
+    
+    public static List<String> listDaysInWeek() {
+        List<String> listDays = new ArrayList<>();
+        listDays.add("Mon");
+        listDays.add("Tue");
+        listDays.add("Wed");
+        listDays.add("Thu");
+        listDays.add("Fri");
+        listDays.add("Sat");
+        listDays.add("Sun");
+        return listDays;
+    }
+
+    public static List<LocalDate> listDatesInWeek(LocalDate selectedStartDate) {
+//        LocalDate now = LocalDate.now();
+//        LocalDate selectedDate= now.plusDays(i*7);
+        List<LocalDate> collect = Arrays.asList(DayOfWeek.values()).stream().map(selectedStartDate::with).collect(toList());
+        return collect;
+    }
+
+    public static Date localDateIntoDate(LocalDate lc){
+        Date date = Date.from(lc.atStartOfDay()
+                .atZone(ZoneId.systemDefault())
+                .toInstant());
+        return date;
     }
 }
