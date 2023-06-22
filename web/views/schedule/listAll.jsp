@@ -28,12 +28,6 @@
                 <tr>
                     <th>
                         <form action="<c:url value="/schedule/selectWeek.do"/>">
-                            <!--<input class="form-control form-control-line" type="number" name="week" value="${weekNo}" placeholder="Select i">-->
-                            <!--                            <select class="form-control form-control-line" name="week">
-                            <c:forEach var="i" begin="0" end="10" step="1">
-                                <option type="number" value="${weekNo=i}">${i}</option>
-                            </c:forEach>
-                        </select>-->
 
                             <select class="form-control form-control-line" name="week">
                                 <c:forEach var="listItem" items="${weeks}" varStatus="loop">
@@ -67,18 +61,26 @@
                             <td> 
 
                                 <c:forEach var="userShift" items="${usersShiftList}" varStatus="loop">
-                                    
+
                                     <c:if test="${userShift.shiftID == shift.shiftID}">
 
                                         <c:set var="userShiftt" value="${usersShiftList[loop.index]}"/>
                                         <c:set var="date" value="${listDates[i]}"/>
                                         <c:if test="${userShiftt.date == date}">
-                                            <p>Emp ${userShiftt.userID} -- ${userShiftt.date} -- ${userShiftt.shiftID}<p>
+                                            <!--<p>Emp ${userShiftt.userID} - ${userShiftt.date} - ${userShiftt.shiftID}<p>-->
+                                                <p class="tooltipp">
+                                                    <a href="#">Emp ${userShift.fullName}</a>
+                                                    <span class="tooltiptext">
+                                                        UserID: ${userShiftt.userID} -
+                                                        Date: ${userShiftt.date} -
+                                                        ShiftID:${userShiftt.shiftID}</span>
+                                                </p>
+
                                             </c:if>
                                         </c:if>
                                     </c:forEach>
 
-                               
+
                             </td>    
                         </c:forEach>
                     </tr>

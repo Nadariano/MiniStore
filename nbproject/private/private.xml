@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone/MiniStore/web/views/report/list.jsp</file>
-            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone/MiniStore/web/views/users/listOf.jsp</file>
-            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone/MiniStore/web/views/report/searchByDate.jsp</file>
-            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone/MiniStore/web/views/account/profile.jsp</file>
-            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone/MiniStore/web/css/custom.css</file>
-            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone/MiniStore/src/java/controllers/ReportController.java</file>
-            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone/MiniStore/web/views/report/create.jsp</file>
-            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone/MiniStore/web/views/report/searchByName.jsp</file>
+            <file>file:/C:/Users/acer/Desktop/MS_Clone_Schedulev1.1.2.5/MiniStore/web/views/report/list.jsp</file>
+            <file>file:/C:/Users/acer/Desktop/MS_Clone_Schedulev1.1.2.5/MiniStore/src/java/controllers/ReportController.java</file>
+            <file>file:/C:/Users/acer/Desktop/MS_Clone_Schedulev1.1.2.5/MiniStore/web/views/schedule/listAll.jsp</file>
+            <file>file:/C:/Users/acer/Desktop/MS_Clone_Schedulev1.1.2.5/MiniStore/web/css/custom.css</file>
+            <file>file:/C:/Users/acer/Desktop/MS_Clone_Schedulev1.1.2.5/MiniStore/src/java/repositories/ScheduleRepository.java</file>
         </group>
     </open-files>
 </project-private>
