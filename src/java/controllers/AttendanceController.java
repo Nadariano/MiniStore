@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.UserAttendance;
 import static services.Utilities.sdfDate;
 import static services.Utilities.sdfTime;
 
@@ -88,6 +90,7 @@ public class AttendanceController extends HttpServlet {
                     request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
                 }
                 break;
+
             case "updateOfUsers":
                 try {
                     updateOfUsers(request, response);
@@ -148,13 +151,45 @@ public class AttendanceController extends HttpServlet {
         }
     }
 
+//    private void listOfUsers(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException, SQLException {
+//        try {
+//            int userID = Integer.parseInt(request.getParameter("userID"));
+//            AttendanceRepository af = new AttendanceRepository();
+//            List<Attendance> list = af.selectUserAttendance(userID);
+//            request.setAttribute("list", list);
+//            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//        } catch (SQLException ex) {
+//            //Hien trang thong bao loi
+//            ex.printStackTrace();//In thông báo chi tiết cho developer
+//            request.setAttribute("message", ex.getMessage());
+//            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//        }
+//    }
     private void listOfUsers(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
+//        try {
+//            int userID = Integer.parseInt(request.getParameter("userID"));
+//            AttendanceRepository af = new AttendanceRepository();
+//            HashMap<Integer, Attendance> map = af.selectUserAttendance(userID);
+//            request.setAttribute("map", map);
+//            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//        } catch (SQLException ex) {
+//            //Hien trang thong bao loi
+//            ex.printStackTrace();//In thông báo chi tiết cho developer
+//            request.setAttribute("message", ex.getMessage());
+//            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//        }
+        HttpSession session = request.getSession();
         try {
             int userID = Integer.parseInt(request.getParameter("userID"));
-            AttendanceRepository af = new AttendanceRepository();
-            List<Attendance> list = af.selectUserAttendance(userID);
-            request.setAttribute("list", list);
+            UserAttendance userAttendance = (UserAttendance) session.getAttribute("userAttendance");
+            if (userAttendance == null) {
+                //Nếu chưa có giỏ hàng thì tạo giỏ hàng mới
+                userAttendance = new UserAttendance();
+                session.setAttribute("userAttendance", userAttendance);
+            }
+            userAttendance.add(userID);
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (SQLException ex) {
             //Hien trang thong bao loi
@@ -162,6 +197,7 @@ public class AttendanceController extends HttpServlet {
             request.setAttribute("message", ex.getMessage());
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         }
+
     }
 
     private void updateOfUsers(HttpServletRequest request, HttpServletResponse response)
@@ -193,7 +229,7 @@ public class AttendanceController extends HttpServlet {
 
                     Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
                     af.update(attendance);
-                    response.sendRedirect(request.getContextPath() + "/attendance/listOfUsers.do?userID="+ userID);
+                    response.sendRedirect(request.getContextPath() + "/attendance/listOfUsers.do?userID=" + userID);
 
                 } catch (Exception ex) {
                     //Hiện trang thông báo lỗi
@@ -277,7 +313,7 @@ public class AttendanceController extends HttpServlet {
 
     protected void create(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-         try {
+        try {
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (Exception ex) {
             ex.printStackTrace();

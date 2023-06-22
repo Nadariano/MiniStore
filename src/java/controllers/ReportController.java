@@ -275,41 +275,42 @@ public class ReportController extends HttpServlet {
                     String year = request.getParameter("year");
                     String createDate = year + "-" + month + "-" + day;
                     ReportRepository rf = new ReportRepository();
+                    List<Report> list = null;
                     if (!"".equals(day) && !"".equals(month) && !"".equals(year)) {
-                        List<Report> list = rf.search(createDate);
-                        request.setAttribute("list", list);
+                        list = rf.search(createDate);
 
                     }
                     if ("".equals(year)) {
-                        List<Report> list = rf.searchByDayAndMonth(day, month);
-                        request.setAttribute("list", list);
+                        list = rf.searchByDayAndMonth(day, month);
 
                     }
                     if ("".equals(month)) {
-                        List<Report> list = rf.searchByDayAndYear(day, year);
-                        request.setAttribute("list", list);
+                        list = rf.searchByDayAndYear(day, year);
 
                     }
                     if ("".equals(day)) {
-                        List<Report> list = rf.searchByMonthAndYear(month, year);
-                        request.setAttribute("list", list);
+                        list = rf.searchByMonthAndYear(month, year);
 
                     }
                     if ("".equals(month) && "".equals(year)) {
-                        List<Report> list = rf.searchByDay(day);
-                        request.setAttribute("list", list);
+                        list = rf.searchByDay(day);
 
                     }
                     if ("".equals(day) && "".equals(year)) {
-                        List<Report> list = rf.searchByMonth(month);
-                        request.setAttribute("list", list);
+                        list = rf.searchByMonth(month);
 
                     }
                     if ("".equals(day) && "".equals(month)) {
-                        List<Report> list = rf.searchByYear(year);
-                        request.setAttribute("list", list);
+                        list = rf.searchByYear(year);
+
                     }
-                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                    if (list != null){
+                        request.setAttribute("list", list);
+                        request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                    }else {
+                        request.setAttribute("message", "NOT FOUND !!!");
+                        request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                    }
 
 //                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
                 } catch (SQLException ex) {

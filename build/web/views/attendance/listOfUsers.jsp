@@ -45,59 +45,59 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach var="attendance" items="${list}" varStatus="loop">
+                                            <c:forEach var="item" items="${sessionScope.userAttendance.item}" varStatus="loop">
                                             <form action="<c:url value="/attendance/updateOfUsers.do"/>">
                                                 <tr>
                                                     <td>${loop.count}</td>
-                                                <input type="hidden" name="attendID" id="attendID"  placeholder="Attend ID" value="${attendance.attendID}">
-                                                <input type="hidden" name="status" id="status"  placeholder="status" value="${attendance.status}">
+                                                <input type="hidden" name="attendID" id="attendID"  placeholder="Attend ID" value="${item.attendance.attendID}">
+                                                <input type="hidden" name="status" id="status"  placeholder="status" value="${item.attendance.status}">
 
                                                 <td>
-                                                    <input disabled type="date" id="date" placeholder="Date" value="${attendance.date}">
-                                                    <input type="hidden" name="date" value="${attendance.date}">
+                                                    <input disabled type="date" id="date" placeholder="Date" value="${item.attendance.date}">
+                                                    <input type="hidden" name="date" value="${item.attendance.date}">
                                                 </td>
 
                                                 <td>
-                                                    <input disabled type="number" id="userID" placeholder="User ID" value="${attendance.userID}">
-                                                    <input type="hidden" name="userID" value="${attendance.userID}">
+                                                    <input disabled type="number" id="userID" placeholder="User ID" value="${item.attendance.userID}">
+                                                    <input type="hidden" name="userID" value="${item.attendance.userID}">
                                                 </td>
 
                                                 <td>
-                                                    <input disabled type="text" id="fullName" placeholder="Full Name" value="${attendance.fullName}">
-                                                    <input type="hidden" name="fullName" value="${attendance.fullName}">
+                                                    <input disabled type="text" id="fullName" placeholder="Full Name" value="${item.attendance.fullName}">
+                                                    <input type="hidden" name="fullName" value="${item.attendance.fullName}">
                                                 </td>
 
                                                 <td>
-                                                    <input disabled type="text" id="checkIn" placeholder="Check In" value="${attendance.checkIn}">
-                                                    <input type="hidden" name="checkIn" value="${attendance.checkIn}">
+                                                    <input disabled type="text" id="checkIn" placeholder="Check In" value="${item.attendance.checkIn}">
+                                                    <input type="hidden" name="checkIn" value="${item.attendance.checkIn}">
                                                 </td>
 
                                                 <td>
-                                                    <input disabled type="text" id="checkOut" placeholder="Check Out" value="${attendance.checkOut}">
-                                                    <input type="hidden" name="checkOut" value="${attendance.checkOut}">
+                                                    <input disabled type="text" id="checkOut" placeholder="Check Out" value="${item.attendance.checkOut}">
+                                                    <input type="hidden" name="checkOut" value="${item.attendance.checkOut}">
                                                 </td>
 
                                                 <td>
-                                                    <input disabled type="text" id="lateTime" placeholder="Late Time" value="${attendance.lateTime}">
-                                                    <input type="hidden" name="lateTime" value="${attendance.lateTime}">
+                                                    <input disabled type="text" id="lateTime" placeholder="Late Time" value="${item.attendance.lateTime}">
+                                                    <input type="hidden" name="lateTime" value="${item.attendance.lateTime}">
                                                 </td>
 
                                                 <td>
-                                                    <input disabled type="text" id="overTime" placeholder="Over Time" value="${attendance.overTime}">
-                                                    <input type="hidden" name="overTime" value="${attendance.overTime}">
+                                                    <input disabled type="text" id="overTime" placeholder="Over Time" value="${attendance.value.overTime}">
+                                                    <input type="hidden" name="overTime" value="${attendance.value.overTime}">
                                                 </td>
 
                                                 <td>
-                                                    <input disabled type="text" id="statusText" placeholder="Status Text" value="${attendance.statusText}">
-                                                    <input type="hidden" name="statusText" value="${attendance.statusText}">
+                                                    <input disabled type="text" id="statusText" placeholder="Status Text" value="${item.attendance.statusText}">
+                                                    <input type="hidden" name="statusText" value="${item.attendance.statusText}">
                                                 </td>
 
                                                 <td>
-                                                    <input name="note" style="width: 100px; height: 100px;" placeholder="Note" id="note" size="100" type="text" value="${attendance.note}"/>
+                                                    <input name="note" style="width: 100px; height: 100px;" placeholder="Note" id="note" size="100" type="text" value="${attendance.value.note}"/>
                                                 </td>
 
                                                 <td>
-                                                    <c:if test="${attendance.confirm.equals('Accepted')}">
+                                                    <c:if test="${item.attendance.confirm.equals('Accepted')}">
                                                         <input type="radio" name="confirm" id="confirm" value="Accepted" checked> 
                                                         <label for="confirm">Accepted</label> 
 
@@ -105,7 +105,7 @@
                                                         <label for="confirm">Denied</label>
                                                     </c:if>
 
-                                                    <c:if test="${attendance.confirm.equals('Denied')}">
+                                                    <c:if test="${item.attendance.confirm.equals('Denied')}">
                                                         <input type="radio" name="confirm" id="confirm" value="Accepted"> 
                                                         <label for="confirm">Accepted</label> 
 
@@ -113,18 +113,25 @@
                                                         <label for="confirm">Denied</label>
                                                     </c:if>
                                                 </td>
-                                                <td>
-                                                    <c:if test ="${attendance.statusText.equals('Not Available')}">
+<!--                                                <td>
+                                                    <c:if test ="${item.attendance.statusText.equals('Not Available')}">
                                                         <button type="submit" class="btn btn-outline-success" name="op" value="update">Send<i class="bi bi-check-square"></i></button>
                                                         </c:if>
 
-                                                </td>
+                                                </td>-->
 
                                                 </tr>
+                                                
+                                                
                                             </form>
+                                                
                                         </c:forEach>
+                                        
+                                        
                                         </tbody>
+                                        
                                     </table>
+                                    <button style="float: right" type="submit" class="btn btn-outline-success" name="op" value="update">Send<i class="bi bi-check-square"></i></button>
                                 </div>
                             </div>
                         </div>

@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import models.Attendance;
 import static services.Utilities.sdfTime;
@@ -56,37 +57,68 @@ public class AttendanceRepository {
         return list;
     }
 
-    public List<Attendance> selectUserAttendance(int userID) throws SQLException {
-        List<Attendance> list = null;
-        //Tạo connection để kết nối vào DBMS
-        Connection con = DBContext.getConnection();
-        //Tạo đối tượng statement
-        PreparedStatement stm = con.prepareStatement("select attendID, date, checkIn, checkOut, lateTime, overTime, attendance.status, "
-                + "attendance.note, attendance.userID, fullName from attendance join users on attendance.userID = users.userID "
-                + "where attendance.userID = ?");
-        stm.setInt(1, userID);
-        //Thực thi lệnh sql
-        ResultSet rs = stm.executeQuery();
-        list = new ArrayList<>();
-        while (rs.next()) {
-            Attendance attendance = new Attendance();
-            attendance.setAttendID(rs.getInt("attendID"));
-            attendance.setDate(rs.getDate("date"));
-            attendance.setCheckIn(rs.getTime("checkIn"));
-            attendance.setCheckOut(rs.getTime("checkOut"));
-            attendance.setLateTime(rs.getInt("lateTime"));
-            attendance.setOverTime(rs.getInt("overTime"));
-            attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
-            attendance.setStatus(rs.getInt("status"));
-            attendance.setNote(rs.getString("note"));
-            attendance.setUserID(rs.getInt("userID"));
-            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
-            attendance.setFullName(rs.getString("fullName"));
-            list.add(attendance);
-        }
-        con.close();
-        return list;
+//    public List<Attendance> selectUserAttendance(int userID) throws SQLException {
+//        List<Attendance> list = null;
+//        //Tạo connection để kết nối vào DBMS
+//        Connection con = DBContext.getConnection();
+//        //Tạo đối tượng statement
+//        PreparedStatement stm = con.prepareStatement("select attendID, date, checkIn, checkOut, lateTime, overTime, attendance.status, "
+//                + "attendance.note, attendance.userID, fullName from attendance join users on attendance.userID = users.userID "
+//                + "where attendance.userID = ?");
+//        stm.setInt(1, userID);
+//        //Thực thi lệnh sql
+//        ResultSet rs = stm.executeQuery();
+//        list = new ArrayList<>();
+//        while (rs.next()) {
+//            Attendance attendance = new Attendance();
+//            attendance.setAttendID(rs.getInt("attendID"));
+//            attendance.setDate(rs.getDate("date"));
+//            attendance.setCheckIn(rs.getTime("checkIn"));
+//            attendance.setCheckOut(rs.getTime("checkOut"));
+//            attendance.setLateTime(rs.getInt("lateTime"));
+//            attendance.setOverTime(rs.getInt("overTime"));
+//            attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
+//            attendance.setStatus(rs.getInt("status"));
+//            attendance.setNote(rs.getString("note"));
+//            attendance.setUserID(rs.getInt("userID"));
+//            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+//            attendance.setFullName(rs.getString("fullName"));
+//            list.add(attendance);
+//        }
+//        con.close();
+//        return list;
+//    }
+    
+    public HashMap<Integer, Attendance> selectUserAttendance(int userID) throws SQLException {
+    HashMap<Integer, Attendance> map = new HashMap<>();
+    //Tạo connection để kết nối vào DBMS
+    Connection con = DBContext.getConnection();
+    //Tạo đối tượng statement
+    PreparedStatement stm = con.prepareStatement("select attendID, date, checkIn, checkOut, lateTime, overTime, attendance.status, "
+            + "attendance.note, attendance.userID, fullName from attendance join users on attendance.userID = users.userID "
+            + "where attendance.userID = ?");
+    stm.setInt(1, userID);
+    //Thực thi lệnh sql
+    ResultSet rs = stm.executeQuery();
+    while (rs.next()) {
+        Attendance attendance = new Attendance();
+        attendance.setAttendID(rs.getInt("attendID"));
+        attendance.setDate(rs.getDate("date"));
+        attendance.setCheckIn(rs.getTime("checkIn"));
+        attendance.setCheckOut(rs.getTime("checkOut"));
+        attendance.setLateTime(rs.getInt("lateTime"));
+        attendance.setOverTime(rs.getInt("overTime"));
+        attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
+        attendance.setStatus(rs.getInt("status"));
+        attendance.setNote(rs.getString("note"));
+        attendance.setUserID(rs.getInt("userID"));
+        attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+        attendance.setFullName(rs.getString("fullName"));
+        map.put(attendance.getAttendID(), attendance);
     }
+    con.close();
+    return map;
+}
 
     public void create(Attendance attendance) throws SQLException {
         Connection con = DBContext.getConnection();
