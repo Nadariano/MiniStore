@@ -84,7 +84,7 @@
     max-height: 100%;
 }
 .profile-img{
-    margin-top: 10%;
+    /*margin-top: 10%;*/
     width: 40%;
     background-color: whitesmoke;
 }
@@ -199,3 +199,31 @@
     background-color: #CBE3EF;
 }
 
+/*Hover for schedule view*/
+.tooltipp {
+    position: relative;
+    display: inline-block;
+    padding: 2%;
+    background-color: greenyellow;
+    border-radius: 25px 25px;
+}
+.tooltipp .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 105%;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltipp:hover .tooltiptext {
+    visibility: visible;
+}

@@ -6,9 +6,9 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,6 +42,7 @@ public class ScheduleController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         String controller = (String) request.getAttribute("controller");
         String action = (String) request.getAttribute("action");
 
@@ -73,18 +74,25 @@ public class ScheduleController extends HttpServlet {
         ScheduleRepository sdr = new ScheduleRepository();
         UserShiftRepository usr = new UserShiftRepository();
         try {
-            Object weekNo = session.getAttribute("weekNo");
-            int week = 0;
-            if (weekNo != null) {
-                week = (int) weekNo;
-            } 
+            Object selectedWeek = session.getAttribute("selectedWeek");
+            String week = sdr.listStartEndDates().get(0);
+            if (selectedWeek != null) {
+                week = (String) selectedWeek;
+            }
+            String stringStartDate = week.substring(0, 10);
+            LocalDate startDate = Utilities.dateString(stringStartDate);
+
+            List<String> weeks = sdr.listStartEndDates();
             List<String> listDays = Utilities.listDaysInWeek();
-            List<LocalDate> listDates = Utilities.listDatesInWeek(week);
-            List<LocalDate> startEndDates = sdr.startEndDates(week);
+            List<LocalDate> listLocalDates = Utilities.listDatesInWeek(startDate);
+            List<LocalDate> startEndDates = sdr.startEndDates(startDate);
             List<ShiftTime> shifts = ShiftTimeRepository.select();
             List<UserShift> usersShiftList = UserShiftRepository.select();
+            List<Date> listDates = Utilities.listDate(listLocalDates);
+            request.setAttribute("weeks", weeks);
             request.setAttribute("usersShiftList", usersShiftList);
             request.setAttribute("listDays", listDays);
+            request.setAttribute("listLocalDates", listLocalDates);
             request.setAttribute("listDates", listDates);
             request.setAttribute("startEndDates", startEndDates);
             request.setAttribute("shifts", shifts);
@@ -104,8 +112,9 @@ public class ScheduleController extends HttpServlet {
         switch (op) {
             case "filter": {
                 try {
-                    int weekNo = Integer.parseInt(request.getParameter("week"));
-                    session.setAttribute("weekNo", weekNo);
+//                    int weekNo = Integer.parseInt(request.getParameter("week"));
+                    String selectedWeek = request.getParameter("week");
+                    session.setAttribute("selectedWeek", selectedWeek);
 //                    request.setAttribute("week", week);
                     response.sendRedirect(request.getContextPath() + "/schedule/listAll.do");
                 } catch (Exception ex) {

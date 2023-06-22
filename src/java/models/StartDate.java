@@ -11,16 +11,14 @@ import java.time.LocalDate;
  *
  * @author acer
  */
-public class StartEndDate {
+public class StartDate {
     private LocalDate startDate;
-    private LocalDate endDate;
 
-    public StartEndDate() {
+    public StartDate() {
     }
 
-    public StartEndDate(LocalDate startDate, LocalDate endDate) {
+    public StartDate(LocalDate startDate) {
         this.startDate = startDate;
-        this.endDate = endDate;
     }
 
     public LocalDate getStartDate() {
@@ -31,13 +29,7 @@ public class StartEndDate {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
+    
 
     
 }

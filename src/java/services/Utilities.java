@@ -14,6 +14,8 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -30,9 +32,13 @@ public class Utilities {
     private static final String fTime = "HH:mm:ss";
     private static final String fDateTime = "yyyy-MM-dd HH:mm:ss";
 
+    //Convert Date into String
     public static final SimpleDateFormat sdfDate = new SimpleDateFormat(fDate);
     public static final SimpleDateFormat sdfTime = new SimpleDateFormat(fTime);
     public static final SimpleDateFormat sdfDateTime = new SimpleDateFormat(fDateTime);
+
+    //Convert String into Date
+    public static final DateTimeFormatter stringToDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public static String hash(String password) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");//ten thuat bam
@@ -277,6 +283,12 @@ public class Utilities {
         return confirm;
     }
 
+    //Convert String into Date
+    public static LocalDate dateString(String stringDate) {
+        LocalDate convertedString = LocalDate.parse(stringDate, stringToDate);
+        return convertedString;
+    }
+
     public static List<String> listDaysInWeek() {
         List<String> listDays = new ArrayList<>();
         listDays.add("Mon");
@@ -289,11 +301,26 @@ public class Utilities {
         return listDays;
     }
 
-    public static List<LocalDate> listDatesInWeek(int i) {
-        LocalDate now = LocalDate.now();
-        LocalDate selectedDate= now.plusDays(i*7);
-        List<LocalDate> collect = Arrays.asList(DayOfWeek.values()).stream().map(selectedDate::with).collect(toList());
+    public static List<LocalDate> listDatesInWeek(LocalDate selectedStartDate) {
+//        LocalDate now = LocalDate.now();
+//        LocalDate selectedDate= now.plusDays(i*7);
+        List<LocalDate> collect = Arrays.asList(DayOfWeek.values()).stream().map(selectedStartDate::with).collect(toList());
         return collect;
     }
 
+    public static Date localDateIntoDate(LocalDate lc) {
+        Date date = Date.from(lc.atStartOfDay()
+                .atZone(ZoneId.systemDefault())
+                .toInstant());
+        return date;
+    }
+
+    public static List<Date> listDate(List<LocalDate> localDatexs) {
+        List<Date> datexs = new ArrayList<>();
+        for (int i = 0; i < 7; i++) {
+            Date date = localDateIntoDate(localDatexs.get(i));
+            datexs.add(date);
+        }
+        return datexs;
+    }
 }
