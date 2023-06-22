@@ -58,6 +58,7 @@
                             <button type="submit" class="btn btn-primary" name="op" value="search" style="margin-right: 8px;">Search By Name</button>
                         </div>
                     </form>
+                        
                     <!-- /row -->
                     <div class="row">
                         <div class="col-sm-12">
