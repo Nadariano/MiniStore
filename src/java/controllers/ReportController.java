@@ -72,20 +72,30 @@ public class ReportController extends HttpServlet {
                 }
                 break;
 
-            case "searchByDate":
+//            case "searchByDate":
+//                try {
+//                    searchByDate(request, response);
+//                } catch (Exception ex) {
+//                    //Hien trang thong bao loi
+//                    ex.printStackTrace();//In thông báo chi tiết cho developer
+//                    request.setAttribute("message", ex.getMessage());
+//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//                }
+//                break;
+//
+//            case "searchByName":
+//                try {
+//                    searchByName(request, response);
+//                } catch (Exception ex) {
+//                    //Hien trang thong bao loi
+//                    ex.printStackTrace();//In thông báo chi tiết cho developer
+//                    request.setAttribute("message", ex.getMessage());
+//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//                }
+//                break;
+            case "search":
                 try {
-                    searchByDate(request, response);
-                } catch (Exception ex) {
-                    //Hien trang thong bao loi
-                    ex.printStackTrace();//In thông báo chi tiết cho developer
-                    request.setAttribute("message", ex.getMessage());
-                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-                }
-                break;
-
-            case "searchByName":
-                try {
-                    searchByName(request, response);
+                    search(request, response);
                 } catch (Exception ex) {
                     //Hien trang thong bao loi
                     ex.printStackTrace();//In thông báo chi tiết cho developer
@@ -112,9 +122,17 @@ public class ReportController extends HttpServlet {
     private void list(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+
             ReportRepository rf = new ReportRepository();
             List<Report> list = rf.select();
+            HttpSession session = request.getSession();
+            List<Report> listSearch = (List<Report>) session.getAttribute("listSearch");
+
+            if (listSearch != null) {
+                list = listSearch;
+            }
             request.setAttribute("list", list);
+
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (SQLException ex) {
             //Hien trang thong bao loi
@@ -255,6 +273,97 @@ public class ReportController extends HttpServlet {
         }
     }
 
+//    private int countParams(String... params) {
+//        int count = 0;
+//        for (String param : params) {
+//            if (param != null && !param.isEmpty()) {
+//                count++;
+//            }
+//        }
+//        return count;
+//    }
+//
+//    private void searchByDate(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException, ClassNotFoundException {
+//        String op = request.getParameter("op");
+//        switch (op) {
+//            case "search":
+//                try {
+//                    String day = request.getParameter("day");
+//                    String month = request.getParameter("month");
+//                    String year = request.getParameter("year");
+//                    ReportRepository rf = new ReportRepository();
+//                    List<Report> list = null;
+//
+//                    switch (countParams(day, month, year)) {
+//                        case 3:
+//                            String createDate = year + "-" + month + "-" + day;
+//                            list = rf.search(createDate);
+//                            break;
+//                        case 2:
+//                            if ("".equals(year)) {
+//                                list = rf.searchByDayAndMonth(day, month);
+//                            } else if ("".equals(month)) {
+//                                list = rf.searchByDayAndYear(day, year);
+//                            } else {
+//                                list = rf.searchByMonthAndYear(month, year);
+//                            }
+//                            break;
+//                        case 1:
+//                            if (!"".equals(day)) {
+//                                list = rf.searchByDay(day);
+//                            } else if (!"".equals(month)) {
+//                                list = rf.searchByMonth(month);
+//                            } else {
+//                                list = rf.searchByYear(year);
+//                            }
+//                            break;
+//                        default:
+//                            // Handle invalid input
+//                            break;
+//                    }
+//
+//                    request.setAttribute("list", list);
+//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//
+////                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//                } catch (SQLException ex) {
+//                    //Hien trang thong bao loi
+//                    ex.printStackTrace();//In thông báo chi tiết cho developer
+//                    request.setAttribute("message", ex.getMessage());
+//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//                }
+//                break;
+//            default:
+//                break;
+//        }
+//    }
+//
+//    private void searchByName(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException, ClassNotFoundException {
+//        String op = request.getParameter("op");
+//        switch (op) {
+//            case "search":
+//                try {
+//                    String fullName = request.getParameter("fullName");
+//                    ReportRepository rf = new ReportRepository();
+//                    List<Report> list = rf.searchByName(fullName);
+//                    request.setAttribute("list", list);
+//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//
+////                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//                } catch (SQLException ex) {
+//                    //Hien trang thong bao loi
+//                    ex.printStackTrace();//In thông báo chi tiết cho developer
+//                    request.setAttribute("message", ex.getMessage());
+//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//                }
+//                break;
+//            default:
+//                break;
+//        }
+//    }
+//
     private int countParams(String... params) {
         int count = 0;
         for (String param : params) {
@@ -265,19 +374,23 @@ public class ReportController extends HttpServlet {
         return count;
     }
 
-    private void searchByDate(HttpServletRequest request, HttpServletResponse response)
+    private void search(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
+        HttpSession session = request.getSession();
         String op = request.getParameter("op");
+
         switch (op) {
             case "search":
                 try {
                     String day = request.getParameter("day");
                     String month = request.getParameter("month");
                     String year = request.getParameter("year");
+                    String fullName = request.getParameter("fullName");
                     ReportRepository rf = new ReportRepository();
                     List<Report> list = null;
 
-                    switch (countParams(day, month, year)) {
+                    switch (countParams(day, month, year, fullName)) {
+
                         case 3:
                             String createDate = year + "-" + month + "-" + day;
                             list = rf.search(createDate);
@@ -296,8 +409,10 @@ public class ReportController extends HttpServlet {
                                 list = rf.searchByDay(day);
                             } else if (!"".equals(month)) {
                                 list = rf.searchByMonth(month);
-                            } else {
+                            } else if (!"".equals(year)) {
                                 list = rf.searchByYear(year);
+                            } else {
+                                list = rf.searchByName(fullName);
                             }
                             break;
                         default:
@@ -305,33 +420,9 @@ public class ReportController extends HttpServlet {
                             break;
                     }
 
-                    request.setAttribute("list", list);
-                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-
+                    session.setAttribute("listSearch", list);
 //                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-                } catch (SQLException ex) {
-                    //Hien trang thong bao loi
-                    ex.printStackTrace();//In thông báo chi tiết cho developer
-                    request.setAttribute("message", ex.getMessage());
-                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void searchByName(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException {
-        String op = request.getParameter("op");
-        switch (op) {
-            case "search":
-                try {
-                    String fullName = request.getParameter("fullName");
-                    ReportRepository rf = new ReportRepository();
-                    List<Report> list = rf.searchByName(fullName);
-                    request.setAttribute("list", list);
-                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                    response.sendRedirect(request.getContextPath() + "/report/list.do");
 
 //                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
                 } catch (SQLException ex) {
