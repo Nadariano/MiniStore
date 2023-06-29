@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="java.util.Date"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,8 +14,9 @@
 
     <body>
         <%
-            Date now = new Date();
+            LocalDate now = LocalDate.now();
         %>
+        <c:set var="now" value="<%=now%>"/>
         <div class="preloader">
             <div class="cssload-speeding-wheel"></div>
         </div>
@@ -24,25 +26,25 @@
                     <h4 class="page-title">Schedule view of your employees</h4>
                 </div>
             </div>
-            <table class="schedule">
+            <table class="table-striped schedule">
                 <tr>
                     <th>
-                        <form action="<c:url value="/schedule/selectWeek.do"/>">
-
-                            <select class="form-control form-control-line" name="week">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" name="subOp" type="button" data-toggle="dropdown">Select week:
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
                                 <c:forEach var="listItem" items="${weeks}" varStatus="loop">
-                                    <option type="text" value="${selectedWeek=listItem}">${listItem}</option>
-                                </c:forEach>
-                            </select>
-                            <button type="submit" class="btn btn-success" name="op" value="filter">Filter <i class="bi bi-check-square"></i></button>
-                        </form>
+                                    <li class="col-sm-12"><a href="<c:url value="/schedule/selectWeek.do?op=filter&week=${selectedWeek=listItem}"/>">${listItem}</a></li>
+                                    </c:forEach>
+                            </ul>
+                        </div>     
 
                         <p>${startEndDates[0]} - ${startEndDates[1]}</p>
                     </th>
                     <c:forEach var="i" begin="0" end="${fn:length(listDays) - 1}" step="1" >
-                        <th>
+                        <th class="<c:if test='${listLocalDates[i]==now}'>today</c:if>">
                             <h2>${listDays[i]}</h2>
-                            <p>${listLocalDates[i]}</p>
+                            <p>${listLocalDates[i]}</p>  
                         </th>
                     </c:forEach>
                 </tr>
@@ -68,17 +70,17 @@
                                         <c:set var="date" value="${listDates[i]}"/>
                                         <c:if test="${userShiftt.date == date}">
                                             <!--<p>Emp ${userShiftt.userID} - ${userShiftt.date} - ${userShiftt.shiftID}<p>-->
-                                                <p class="tooltipp">
-                                                    <a href="#">Emp ${userShift.fullName}</a>
-                                                    <span class="tooltiptext">
-                                                        UserID: ${userShiftt.userID} -
-                                                        Date: ${userShiftt.date} -
-                                                        ShiftID:${userShiftt.shiftID}</span>
-                                                </p>
+                                            <p class="tooltipp">
+                                                <a href="#">Emp ${userShift.fullName}</a>
+                                                <span class="tooltiptext">
+                                                    UserID: ${userShiftt.userID} -
+                                                    Date: ${userShiftt.date} -
+                                                    ShiftID:${userShiftt.shiftID}</span>
+                                            </p>
 
-                                            </c:if>
                                         </c:if>
-                                    </c:forEach>
+                                    </c:if>
+                                </c:forEach>
 
 
                             </td>    

@@ -35,9 +35,11 @@ create table ReportType(
 create table Report(
 	reportID int identity(1,1),
     reportTitle nvarchar(MAX),
-	createDate DATE,
+	createDate date,
 	description nvarchar(MAX),
 	plannedDate date,
+	requestSoonTime datetime,
+	requestLateTime datetime,
 	status int,
 	note nvarchar(MAX),
 	primary key (reportID)
@@ -46,10 +48,12 @@ go
 
 create table ShiftTime(
 	 shiftID int identity(1,1),
+	 shiftName nvarchar(50) not null,
 	 timeStart datetime,
 	 timeEnd datetime,
 	 coeShift float,
 	 coeOT float,
+	 coeDayOff float,
 	 wage float,
 	 status int,
 	 note nvarchar(MAX),
@@ -57,13 +61,14 @@ create table ShiftTime(
 )
 go
 create table UserShift(
-	userID int, 
+	userID int,
 	shiftID int,
 	date date,
 	status int,
 	note nvarchar(MAX),
 	isOT bit,
 	primary key(userID, shiftID, date)
+
 )
 go
 create table Attendance(
@@ -71,8 +76,9 @@ create table Attendance(
 	date date,
 	checkIn datetime,
 	checkOut datetime,
-	lateTime int,
-	overTime int,
+	soonTime datetime,
+	lateTime datetime,
+	duration datetime,
 	status int,
 	note nvarchar(MAX),
 	primary key(attendID)
@@ -122,6 +128,7 @@ create table Minus(
 go
 create table PaySlip(
 	paySlipID int identity(1,1),
+	createDate datetime,
 	salary float,
 	bonus float,
 	minus float,
@@ -130,6 +137,16 @@ create table PaySlip(
 	primary key(paySlipID)
 )
 go 
+
+create table Record (
+	recordID int identity(1,1),
+	date datetime,
+	userID int,
+    shiftID int,
+	checkIn datetime,
+	checkOut datetime,
+	primary key(recordID)
+)
 
 /*PHẦN TẠO FOREIGN KEY CHO BẢNG*/
 /*Tạo foreign key cho bảng Users => các fk mới tạo sẽ ở cuối bảng*/
@@ -142,14 +159,16 @@ add userID int foreign key references Users(userID)
 
 /*Tạo foreign key cho bảng UserShift*/
 alter table UserShift
-add foreign key (userID) references Users(userID)
+add foreign key(userID) references Users(userID)
 
 alter table UserShift
-add foreign key (shiftID) references ShiftTime(shiftID)
+add foreign key(shiftID) references ShiftTime(shiftID)
+
 
 /*Tạo foreign key cho bảng Attendance*/
 alter table Attendance
 add userID int foreign key references Users(userID)
+
 
 /*Tạo foreign key cho bảng CheckIn*/
 alter table CheckIn
@@ -181,6 +200,8 @@ add minusID int foreign key references Minus(minusID)
 alter table Report 
 add typeID int foreign key references ReportType(typeID)
 
+
+
 /*PHẦN INSERT DỮ LIỆU CHO BẢNG*/
 
 /*Insert cho Roles*/
@@ -200,13 +221,13 @@ insert into ReportType values('Application')
 insert into ReportType values('Report')
 
 /*Insert cho Report*/
-insert into Report values('Report1','2023-06-12','I want to change shift..','2023-06-21',1,'',3,1)
-insert into Report values('Report2','2023-05-11','I want to report something..',null,1,'',2,2)
+insert into Report values('Report1','2023-06-12','I want to change shift..','2023-06-21','00:30:00','00:00:00',1,'',2,1)
+insert into Report values('Report2','2023-05-11','I want to report something..',null,null,null,1,'',3,2)
 
 /*Insert cho ShiftTime*/
-insert into ShiftTime values('06:00:00', '12:00:00', 1, 0.5, 20, 0, '')
-insert into ShiftTime values('12:00:00', '18:00:00', 1, 0.5, 20, 0, '')
-insert into ShiftTime values('18:00:00', '06:00:00', 1.5, 0.5, 20, 0, '')
+insert into ShiftTime values('Day Shift','06:00:00', '12:00:00', 1, 0.5, 20, 2, 0, '')
+insert into ShiftTime values('Day Shift','12:00:00', '18:00:00', 1, 0.5, 20, 2, 0, '')
+insert into ShiftTime values('Night Shift','18:00:00', '06:00:00', 1.5, 0.5, 20, 2, 0, '')
 
 /*Insert cho UserShift*/
 insert into UserShift values ('2','1','2023-05-11', 0, '',0)
@@ -217,10 +238,30 @@ insert into DayOff values('2023-04-30',1,'National Independent Day',1,'')
 insert into DayOff values('2023-05-01',1,'International Labor Day',1,'')
 
 --Insert cho Attendance
-insert into Attendance values ('2023-06-01', '2023-06-01 06:00:00', '2023-06-01 18:00:00', 0, 0, 0 ,'', 3);
-insert into Attendance values ('2023-06-02', '2023-06-02 06:00:00', '2023-06-02 12:30:00', 0, 30, 0 ,'', 2);
-insert into Attendance values ('2023-06-02', '2023-06-02 07:00:00', '2023-06-02 18:00:00', 60, 0, 0 ,'', 3);
-insert into Attendance values ('2023-06-01', '2023-06-01 06:00:00', '2023-06-01 12:00:00', 0, 0, 0 ,'', 2);
+insert into Attendance values ('2023-06-01', '06:00:00', '11:30:00', '00:30:00', '00:00:00','05:30:00', 1, '', 2);
+insert into Attendance values ('2023-06-02', '06:00:00', '12:00:00', '00:00:00', '00:00:00', '06:00:00', 1, '', 3);
+insert into Attendance values ('2023-06-02', '13:00:00', '18:00:00', '00:00:00', '01:00:00', '05:00:00', 1, '', 3);
+
+/*Insert cho Bonus*/
+insert into Bonus values(22, '', 0, '', 1)
+insert into Bonus values(20, '', 1, '', 2)
+
+/*Insert cho Minus*/
+insert into Minus values (5, 10, 0, '', 0, '', 1 )
+insert into Minus values (5, 10, 100, '', 0, '', 2)
+
+/*Insert cho PaySlip*/
+insert into PaySlip values('2023-07-01', 10000, 22, 50, 0, '', 3 )
+insert into PaySlip values('2023-07-01', 5000, 20, 150, 1, '', 4 )
+
+/*Insert cho CheckIn*/
+insert into CheckIn values('2023-05-11 06:00:00', 1)
+ insert into CheckIn values('2023-10-10 06:02:00', 2)
+ insert into CheckIn values('2023-03-27 12:30:00', 1)
+ 
+ /*Insert cho CheckOut*/
+ insert into CheckOut values('12:00:00', 2)
+ insert into CheckOut values('12:30:00', 1)
 
 select * from Users
 select * from Roles
@@ -229,5 +270,14 @@ select * from ReportType
 select * from ShiftTime
 select * from UserShift
 select * from Attendance
+select * from Bonus
+select * from Minus
+select * from PaySlip
+select * from CheckIn
+select * from CheckOut 
+select * from Record
 
 update Users set status = 0 where userID = 2
+
+drop table UserShift
+drop table Record
