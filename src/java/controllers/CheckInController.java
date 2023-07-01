@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -63,6 +64,7 @@ public class CheckInController extends HttpServlet {
                 case "delete":
                     delete(request, response);
                     break;
+
             }
         }
     }
@@ -148,68 +150,83 @@ public class CheckInController extends HttpServlet {
 //        CheckInRepository cir = new CheckInRepository();
         CheckInService cis = new CheckInService();
         CheckInRepository cir = new CheckInRepository();
+        String op = request.getParameter("op");
+        switch (op) {
+            case "readExcel":
+                try {
 
-        try {
-            List<CheckIn> list = cis.readExcel1();
-            for (CheckIn c : list) {
-                CheckIn ci = new CheckIn(c.getCheckInTime(), c.getUserID());
-                System.out.println(c.getCheckInID() + "-" + c.getCheckInTime());
-                cir.create(ci);
-            }
-            response.sendRedirect(request.getContextPath() + "/checkIn/listOf.do");
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("message", e.getMessage());
-            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                    String fileName = request.getParameter("fileName");
+                    if (!fileName.equals("")) {
+                        File file = new File(request.getServletContext().getAttribute("FILES_DIR") + File.separator + fileName);
+                        String EXCEL_FILE_PATH = file.getAbsolutePath();
+                        List<CheckIn> list = cis.readExcel1(EXCEL_FILE_PATH);
+                        for (CheckIn c : list) {
+                            CheckIn ci = new CheckIn(c.getCheckInTime(), c.getUserID());
+                            System.out.println(c.getCheckInID() + "-" + c.getCheckInTime());
+                            cir.create(ci);
+                        }
+                        response.sendRedirect(request.getContextPath() + "/checkIn/listOf.do");
+                    } else {
+                        request.setAttribute("message", "Please choose your file!!!");
+                        request.getRequestDispatcher("/checkIn/listOf.do").forward(request, response);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    request.setAttribute("message", e.getMessage());
+                    request.setAttribute("controller", "error");
+                    request.setAttribute("action", "error");
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+                break;
+            default:
+                break;
         }
+
     }
 
     protected void readExcel(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
-        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-        /**
-         * Handles the HTTP <code>GET</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doGet
-        (HttpServletRequest request, HttpServletResponse response)
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            processRequest(request, response);
-        }
+        processRequest(request, response);
+    }
 
-        /**
-         * Handles the HTTP <code>POST</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doPost
-        (HttpServletRequest request, HttpServletResponse response)
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            processRequest(request, response);
-        }
+        processRequest(request, response);
+    }
 
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
-        }// </editor-fold>
+    }// </editor-fold>
 
-    }
+}
