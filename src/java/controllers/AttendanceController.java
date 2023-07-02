@@ -191,8 +191,8 @@ public class AttendanceController extends HttpServlet {
                         status = 0;
                     }
 
-                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
-                    af.update(attendance);
+//                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
+//                    af.update(attendance);
                     response.sendRedirect(request.getContextPath() + "/attendance/listOfUsers.do?userID="+ userID);
 
                 } catch (Exception ex) {
@@ -256,8 +256,8 @@ public class AttendanceController extends HttpServlet {
                         status = 0;
                     }
 
-                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
-                    ar.update(attendance);
+//                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
+//                    ar.update(attendance);
                     response.sendRedirect(request.getContextPath() + "/attendance/list.do");
 
                 } catch (Exception ex) {
@@ -306,8 +306,8 @@ public class AttendanceController extends HttpServlet {
                     String statusText = "Not Available";
                     String confirm = "Denied";
                     String note = "";
-                    Attendance attendance = new Attendance(userID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
-                    af.create(attendance);
+//                    Attendance attendance = new Attendance(userID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
+//                    af.create(attendance);
                     response.sendRedirect(request.getContextPath() + "/attendance/list.do");
                 } catch (Exception ex) {
                     //Hiện trang thông báo lỗi

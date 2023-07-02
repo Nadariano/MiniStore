@@ -26,32 +26,75 @@ public class Attendance {
     private Date date;
     private Date checkIn;
     private Date checkOut;
-    private int lateTime;
-    private int overTime;
+    private Date lateTime;
+    private Date soonTime;
+    private Date duration;
     private int status;
     private String note;
     private int userID;
+    private int shiftID;
     private String fullName;
     private String confirm;
     private String statusText;
+    
 
     public Attendance() {
     }
 
-    public Attendance(int attendID, Date date, Date checkIn, Date checkOut, int lateTime, int overTime, int status, String note, int userID, String fullName, String confirm, String statusText) {
+    public Attendance(int attendID, Date date, Date checkIn, Date checkOut, Date lateTime, Date soonTime, Date duration, int status, String note, int userID, int shiftID, String fullName, String confirm, String statusText) {
         this.attendID = attendID;
         this.date = date;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.lateTime = lateTime;
-        this.overTime = overTime;
+        this.soonTime = soonTime;
+        this.duration = duration;
         this.status = status;
         this.note = note;
         this.userID = userID;
+        this.shiftID = shiftID;
         this.fullName = fullName;
         this.confirm = confirm;
         this.statusText = statusText;
     }
+
+    public Attendance(Date date, Date checkIn, Date checkOut, Date lateTime, Date soonTime, int userID) {
+        this.date = date;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.lateTime = lateTime;
+        this.soonTime = soonTime;
+        this.userID = userID;
+    }
+
+    public Attendance(int attendID, Date date, Date checkIn, Date checkOut, Date lateTime, Date soonTime, Date duration, int status, String note, int userID, int shiftID) {
+        this.attendID = attendID;
+        this.date = date;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.lateTime = lateTime;
+        this.soonTime = soonTime;
+        this.duration = duration;
+        this.status = status;
+        this.note = note;
+        this.userID = userID;
+        this.shiftID = shiftID;
+    }
+
+    public Attendance(Date date, Date checkIn, Date checkOut, Date lateTime, Date soonTime, Date duration, int status, String note, int userID, int shiftID) {
+        this.date = date;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.lateTime = lateTime;
+        this.soonTime = soonTime;
+        this.duration = duration;
+        this.status = status;
+        this.note = note;
+        this.userID = userID;
+        this.shiftID = shiftID;
+    }
+    
+    
 
     public int getAttendID() {
         return attendID;
@@ -85,22 +128,22 @@ public class Attendance {
         this.checkOut = checkOut;
     }
 
-    public int getLateTime() {
+    public Date getLateTime() {
         return lateTime;
     }
 
-    public void setLateTime(int lateTime) {
+    public void setLateTime(Date lateTime) {
         this.lateTime = lateTime;
     }
 
-    public int getOverTime() {
-        return overTime;
+    public Date getSoonTime() {
+        return soonTime;
     }
 
-    public void setOverTime(int overTime) {
-        this.overTime = overTime;
+    public void setSoonTime(Date soonTime) {
+        this.soonTime = soonTime;
     }
-
+    
     public int getStatus() {
         return status;
     }
@@ -125,6 +168,14 @@ public class Attendance {
         this.userID = userID;
     }
 
+    public int getShiftID() {
+        return shiftID;
+    }
+
+    public void setShiftID(int shiftID) {
+        this.shiftID = shiftID;
+    }
+
     public String getFullName() {
         return fullName;
     }
@@ -147,6 +198,20 @@ public class Attendance {
 
     public void setStatusText(String statusText) {
         this.statusText = statusText;
+    }
+
+    public Date getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Date duration) {
+        this.duration = duration;
+    }
+    
+
+    @Override
+    public String toString() {
+        return "Attendance{" + "attendID=" + attendID + ", date=" + date + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", lateTime=" + lateTime + ", soonTime=" + soonTime + ", duration=" + duration + ", status=" + status + ", note=" + note + ", userID=" + userID + ", fullName=" + fullName + ", confirm=" + confirm + ", statusText=" + statusText + '}';
     }
     
    

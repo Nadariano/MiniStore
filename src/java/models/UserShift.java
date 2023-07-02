@@ -143,6 +143,11 @@ public class UserShift {
         this.otText = otText;
     }
 
+    @Override
+    public String toString() {
+        return "UserShift{" + "userID=" + userID + ", shiftID=" + shiftID + ", date=" + date + ", statusText2=" + statusText2 + ", status=" + status + ", note=" + note + ", isOT=" + isOT + ", otText=" + otText + ", fullName=" + fullName + '}';
+    }
+
     
     
 }
