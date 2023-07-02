@@ -11,6 +11,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -21,6 +22,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import static java.util.stream.Collectors.toList;
+import models.Report;
+import repositories.ReportRepository;
 
 /**
  *
@@ -36,6 +39,40 @@ public class Utilities {
     public static final SimpleDateFormat sdfDate = new SimpleDateFormat(fDate);
     public static final SimpleDateFormat sdfTime = new SimpleDateFormat(fTime);
     public static final SimpleDateFormat sdfDateTime = new SimpleDateFormat(fDateTime);
+
+    public static final Date correctTime() throws ParseException {
+        Date correctTime = sdfTime.parse("00:00:00");
+        return correctTime;
+    }
+
+    public static final long limit5m() throws ParseException {
+        long limit5m = Utilities.sdfTime.parse("00:05:00").getTime() - correctTime().getTime();
+        return limit5m;
+    }
+
+    public static final long limit30m() throws ParseException {
+        long limit30m = Utilities.sdfTime.parse("00:30:00").getTime() - correctTime().getTime();
+        return limit30m;
+    }
+
+    public static final long limit1h() throws ParseException {
+        long limit1h = Utilities.sdfTime.parse("01:00:00").getTime() - correctTime().getTime();
+        return limit1h;
+    }
+
+    public static final long limit24h() throws ParseException {
+        long nextDay = Utilities.sdfTime.parse("23:59:59").getTime() - correctTime().getTime();
+        return nextDay;
+    }
+
+    public static Report requestTime(Date date, int userID) throws SQLException {
+        ReportRepository rr = new ReportRepository();
+        Report report = null;
+        if (rr.readDate(date, userID) != null) {
+            report = rr.readDate(date, userID);
+        }
+        return report;
+    }
 
     //Convert String into Date
     public static final DateTimeFormatter stringToDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");

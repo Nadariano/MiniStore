@@ -5,27 +5,27 @@
  */
 package controllers;
 
-import java.io.File;
+import models.ShiftTime;
+import repositories.ShiftTimeRepository;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.Date;
+import java.text.SimpleDateFormat;
+
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.CheckIn;
-import repositories.CheckInRepository;
-import services.CheckInService;
-import static services.Utilities.sdfDateTime;
 
 /**
  *
  * @author Dell
  */
-@WebServlet(name = "CheckInController", urlPatterns = {"/checkIn"})
-public class CheckInController extends HttpServlet {
+@WebServlet(name = "ShiftTimeController", urlPatterns = {"/shiftTime"})
+public class ShiftTimeController1 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,7 +42,7 @@ public class CheckInController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String controller = (String) request.getAttribute("controller");
             String action = (String) request.getAttribute("action");
-            CheckInRepository cir = new CheckInRepository();
+            ShiftTimeRepository str = new ShiftTimeRepository();
             switch (action) {
                 case "listOf":
                     listOf(request, response);
@@ -50,30 +50,27 @@ public class CheckInController extends HttpServlet {
                 case "create":
                     create(request, response);
                     break;
-                case "create_handler":
+                case "create_handler": 
                     create_handler(request, response);
                     break;
-                case "readExcel": {
-                    readExcel(request, response);
+                case "update":
+                    update(request, response);
                     break;
-                }
-                case "readExcel1": {
-                    readExcel1(request, response);
+                case "update_handler": 
+                    update_handler(request, response);
                     break;
-                }
                 case "delete":
                     delete(request, response);
                     break;
-
             }
         }
     }
 
     protected void listOf(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CheckInRepository cir = new CheckInRepository();
+        ShiftTimeRepository str = new ShiftTimeRepository();
         try {
-            List<CheckIn> list = cir.select();
+            List<ShiftTime> list = str.select();
             request.setAttribute("list", list);
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (Exception ex) {
@@ -85,7 +82,7 @@ public class CheckInController extends HttpServlet {
 
     protected void create(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        ShiftTimeRepository str = new ShiftTimeRepository();
         try {
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (Exception ex) {
@@ -99,44 +96,47 @@ public class CheckInController extends HttpServlet {
 
     protected void create_handler(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CheckInRepository cir = new CheckInRepository();
+        ShiftTimeRepository str = new ShiftTimeRepository();
         String op = request.getParameter("op");
         switch (op) {
-            case "create": {
+            case "create":
                 try {
-
-//                  int checkInID = Integer.parseInt(request.getParameter("checkInID"));
-                    Date checkInTime = sdfDateTime.parse(request.getParameter("checkInTime"));
-                    int userID = Integer.parseInt(request.getParameter("userID"));
-                    CheckIn checkIn = new CheckIn(checkInTime, userID);
-                    cir.create(checkIn);
-//                  request.setAttribute("checkIn", checkIn);
-                    response.sendRedirect(request.getContextPath() + "/checkIn/listOf.do");
+                    String shiftName = request.getParameter("shiftName");
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                    Date timeStart = sdf.parse(request.getParameter("timeStart"));
+                    Date timeEnd = sdf.parse(request.getParameter("timeEnd"));
+                    float coeShift = Float.parseFloat(request.getParameter("coeShift"));
+                    float coeOT = Float.parseFloat(request.getParameter("coeOT"));
+                    float coeDayOff = Float.parseFloat(request.getParameter("coeDayOff"));
+                    float wage = Float.parseFloat(request.getParameter("wage"));
+                    int status = Integer.parseInt(request.getParameter("status"));
+                    String note = request.getParameter("note");
+                    ShiftTime shiftTime = new ShiftTime(timeStart, timeEnd, coeShift, coeOT, coeDayOff, wage, status, note, note, shiftName);
+                    request.setAttribute("shiftTime", shiftTime);
+                    str.create(shiftTime);
+                    response.sendRedirect(request.getContextPath() + "/shiftTime/listOf.do");
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    //Hiện lại create form để nhập lại dữ liệu
+                    ex.printStackTrace();//In thông báo chi tiết cho developer
                     request.setAttribute("message", ex.getMessage());
-                    request.setAttribute("controller", "error");
-                    request.setAttribute("action", "error");
+                    request.setAttribute("action", "create");
                     request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
                 }
                 break;
-            }
-            case "cancel": {
-                response.sendRedirect(request.getContextPath() + "/checkIn/listOf.do");
-                break;
-            }
+            case "cancel":
+                response.sendRedirect(request.getContextPath() + "/shiftTime/listOf.do");
         }
-
     }
 
-    protected void delete(HttpServletRequest request, HttpServletResponse response)
+    protected void update(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CheckInRepository cir = new CheckInRepository();
+        ShiftTimeRepository str = new ShiftTimeRepository();
         try {
-            int checkInID = Integer.parseInt(request.getParameter("checkInID"));
-            cir.delete(checkInID);
-            response.sendRedirect(request.getContextPath() + "/checkIn/listOf.do");
-        } catch (Exception ex) {
+            int shiftID = Integer.parseInt(request.getParameter("shiftID"));
+            ShiftTime shiftTime = str.read(shiftID);
+            request.setAttribute("shiftTime", shiftTime);
+            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+        } catch (SQLException ex) {
             ex.printStackTrace();
             request.setAttribute("message", ex.getMessage());
             request.setAttribute("controller", "error");
@@ -145,49 +145,54 @@ public class CheckInController extends HttpServlet {
         }
     }
 
-    protected void readExcel1(HttpServletRequest request, HttpServletResponse response)
+    protected void update_handler(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        CheckInRepository cir = new CheckInRepository();
-        CheckInService cis = new CheckInService();
-        CheckInRepository cir = new CheckInRepository();
+        ShiftTimeRepository str = new ShiftTimeRepository();
         String op = request.getParameter("op");
         switch (op) {
-            case "readExcel":
+            case "update":
                 try {
-
-                    String fileName = request.getParameter("fileName");
-                    if (!fileName.equals("")) {
-                        File file = new File(request.getServletContext().getAttribute("FILES_DIR") + File.separator + fileName);
-                        String EXCEL_FILE_PATH = file.getAbsolutePath();
-                        List<CheckIn> list = cis.readExcel1(EXCEL_FILE_PATH);
-                        for (CheckIn c : list) {
-                            CheckIn ci = new CheckIn(c.getCheckInTime(), c.getUserID());
-                            System.out.println(c.getCheckInID() + "-" + c.getCheckInTime());
-                            cir.create(ci);
-                        }
-                        response.sendRedirect(request.getContextPath() + "/checkIn/listOf.do");
-                    } else {
-                        request.setAttribute("message", "Please choose your file!!!");
-                        request.getRequestDispatcher("/checkIn/listOf.do").forward(request, response);
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    request.setAttribute("message", e.getMessage());
+                    int shiftID = Integer.parseInt(request.getParameter("shiftID"));
+                    String shiftName = request.getParameter("shiftName");
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                    Date timeStart = sdf.parse(request.getParameter("timeStart"));
+                    Date timeEnd = sdf.parse(request.getParameter("timeEnd"));
+                    float coeShift = Float.parseFloat(request.getParameter("coeShift"));
+                    float coeOT = Float.parseFloat(request.getParameter("coeOT"));
+                     float coeDayOff = Float.parseFloat(request.getParameter("coeDayOff"));
+                    float wage = Float.parseFloat(request.getParameter("wage"));
+                    int status = Integer.parseInt(request.getParameter("status"));
+                    String note = request.getParameter("note");
+                    ShiftTime shiftTime = new ShiftTime(shiftID, timeStart, timeEnd, coeShift, coeOT, coeDayOff, wage, status, note, shiftName);
+                    str.update(shiftTime);
+                    response.sendRedirect(request.getContextPath() + "/shiftTime/listOf.do");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    request.setAttribute("message", ex.getMessage());
                     request.setAttribute("controller", "error");
                     request.setAttribute("action", "error");
                     request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
                 }
                 break;
-            default:
-                break;
+            case "cancel":
+                response.sendRedirect(request.getContextPath() + "/shiftTime/listOf.do");
         }
-
     }
 
-    protected void readExcel(HttpServletRequest request, HttpServletResponse response)
+    protected void delete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        ShiftTimeRepository str = new ShiftTimeRepository();
+        try {
+            int shiftID = Integer.parseInt(request.getParameter("shiftID"));
+            str.delete(shiftID);
+            response.sendRedirect(request.getContextPath() + "/shiftTime/listOf.do");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            request.setAttribute("message", ex.getMessage());
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "error");
+            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

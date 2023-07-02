@@ -8,8 +8,6 @@
     </head>
 
     <body>
-        <c:choose>
-            <c:when test="${Account.roleName.equals('MANAGER')}">
                 <!-- Preloader -->
                 <div class="preloader">
                     <div class="cssload-speeding-wheel"></div>
@@ -23,7 +21,7 @@
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
-                    
+
                     <form action="<c:url value="/report/searchByDate.do"/>">
                         <div style="display: flex; align-items: center; justify-content: center;">
                             <select name="day" style="margin-right: 8px;">
@@ -75,6 +73,8 @@
                                                 <th>Author</th>
                                                 <th>Description</th>
                                                 <th>Planned Date</th>
+                                                <th>Request Soon Time</th>
+                                                <th>Request Late Time</th>
                                                 <th>Status</th>
                                                 <th>Note</th>
                                                 <th>Operations</th>
@@ -91,6 +91,8 @@
                                                     <td>${report.fullName}</td>
                                                     <td>${report.description}</td>
                                                     <td>${report.plannedDate}</td>
+                                                    <td>${report.requestSoonTime}</td>
+                                                    <td>${report.requestLateTime}</td>
                                                     <c:if test="${report.statusText=='Rejected'}">
                                                         <td style="background-color:  #ac2925; color: whitesmoke " >${report.statusText}</td>
                                                     </c:if>
@@ -106,8 +108,10 @@
                                                         <a href="<c:url value="/report/update.do?reportID=${report.reportID}"  />" class="btn btn-sm btn-primary">Update</a>
                                                         <a href="<c:url value="/report/delete.do?reportID=${report.reportID}" /> " onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-danger">Delete</a>
                                                     </td>
-                                                </tr>
-                                            </c:forEach>
+                                                    
+                                            </tr>
+                                        </c:forEach>
+                                            <h5 style="color:red">${message}</h5>
                                         </tbody>
                                     </table>
                                 </div>
@@ -119,11 +123,6 @@
                 <!-- /.container-fluid -->
 
                 <!-- /#page-wrapper -->
-            </c:when>
-            <c:otherwise>
-                <jsp:forward page="/error/error.do" />
-            </c:otherwise>
-        </c:choose>
     </body>
 
 </html>

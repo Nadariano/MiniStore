@@ -185,7 +185,6 @@
     display: flex;
 }
 .schedule th {
-    /*background-color: #4CAF50;*/
     background-color: #81C2E6;
     color: white;
 }
@@ -226,4 +225,9 @@
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltipp:hover .tooltiptext {
     visibility: visible;
+}
+.schedule .today{
+    height: 100%;
+    background-color: goldenrod;
+    /*color: red;*/
 }
