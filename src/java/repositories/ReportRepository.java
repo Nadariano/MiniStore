@@ -20,7 +20,6 @@ import java.util.Date;
 import java.util.List;
 import models.Report;
 import static services.Utilities.sdfDate;
-import static services.Utilities.sdfTime;
 
 /**
  *
@@ -35,7 +34,7 @@ public class ReportRepository {
         //Tạo đối tượng statement
         Statement stm = con.createStatement();
         //Thực thi lệnh SELECT
-        ResultSet rs = stm.executeQuery("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, fullName, reportType.typeName, report.shiftID\n"
+        ResultSet rs = stm.executeQuery("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, fullName, reportType.typeName\n"
                 + "from report join users on report.userID = users.userID \n"
                 + "			join reportType on report.typeID = reportType.typeID");
         list = new ArrayList<>();
@@ -46,14 +45,11 @@ public class ReportRepository {
             report.setCreateDate(rs.getDate("createDate"));
             report.setDescription(rs.getString("description"));
             report.setPlannedDate(rs.getDate("plannedDate"));
-            report.setRequestSoonTime(rs.getTime("requestSoonTime"));
-            report.setRequestLateTime(rs.getTime("requestLateTime"));
             report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
             report.setNote(rs.getString("note"));
             report.setUserID(rs.getInt("userID"));
             report.setFullName(rs.getString("fullName"));
             report.setTypeName(rs.getString("typeName"));
-            report.setShiftID(rs.getInt("shiftID"));
             list.add(report);
         }
         con.close();
@@ -65,7 +61,7 @@ public class ReportRepository {
         //Tạo connection để kết nối vào DBMS
         Connection con = DBContext.getConnection();
         //Tạo đối tượng statement
-        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, fullName, reportType.typeName, report.shiftID\n"
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, fullName, reportType.typeName\n"
                 + "from report join users on report.userID = users.userID \n"
                 + "			join reportType on report.typeID = reportType.typeID\n"
                 + "			where report.userID = ?");
@@ -80,38 +76,32 @@ public class ReportRepository {
             report.setCreateDate(rs.getDate("createDate"));
             report.setDescription(rs.getString("description"));
             report.setPlannedDate(rs.getDate("plannedDate"));
-            report.setRequestSoonTime(rs.getTime("requestSoonTime"));
-            report.setRequestLateTime(rs.getTime("requestLateTime"));
             report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
             report.setNote(rs.getString("note"));
             report.setUserID(rs.getInt("userID"));
             report.setFullName(rs.getString("fullName"));
             report.setTypeName(rs.getString("typeName"));
-            report.setShiftID(rs.getInt("shiftID"));
             list.add(report);
         }
         con.close();
         return list;
     }
 
-    public void create(String reportTitle, String description, String plannedDate, String requestSoonTime, String requestLateTime, int status, String note, int userID, int typeID, int shiftID) throws SQLException {
+    public void create(String reportTitle, String description, String plannedDate, int status, String note, int userID, int typeID) throws SQLException {
         LocalDate curDate = LocalDate.now();
         String date = curDate.toString();
         //Tạo connection để kết nối vào DBMS
         Connection con = DBContext.getConnection();
         //Tạo đối tượng PreparedStatement
-        PreparedStatement stm = con.prepareStatement("insert into report values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        PreparedStatement stm = con.prepareStatement("insert into report values(?, ?, ?, ?, ?, ?, ?, ?)");
         stm.setString(1, reportTitle);
         stm.setString(2, date);
         stm.setString(3, description);
-        stm.setString(4, sdfDate.format(plannedDate));
-        stm.setString(5, sdfTime.format(requestSoonTime));
-        stm.setString(6, sdfTime.format(requestLateTime));
-        stm.setInt(7, status);
-        stm.setString(8, note);
-        stm.setInt(9, userID);
-        stm.setInt(10, typeID);
-        stm.setInt(11, shiftID);
+        stm.setString(4, plannedDate);
+        stm.setInt(5, status);
+        stm.setString(6, note);
+        stm.setInt(7, userID);
+        stm.setInt(8, typeID);
         //Thực thi lệnh sql
         int count = stm.executeUpdate();
         //Đóng kết nối
@@ -123,9 +113,9 @@ public class ReportRepository {
         //Tạo connection để kết nối vào DBMS
         Connection con = DBContext.getConnection();
         //Tạo đối tượng PreparedStatement
-        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, fullName, reportType.typeName, report.shiftID\n"
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, fullName, reportType.typeName\n"
                 + "from report join users on report.userID = users.userID \n"
-                + "join reportType on report.typeID = reportType.typeID "
+                + "			join reportType on report.typeID = reportType.typeID "
                 + "where reportID = ?");
         stm.setInt(1, reportID);
         //Thực thi lệnh sql
@@ -138,45 +128,11 @@ public class ReportRepository {
             report.setCreateDate(rs.getDate("createDate"));
             report.setDescription(rs.getString("description"));
             report.setPlannedDate(rs.getDate("plannedDate"));
-            report.setRequestSoonTime(rs.getTime("requestSoonTime"));
-            report.setRequestLateTime(rs.getTime("requestLateTime"));
             report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
             report.setNote(rs.getString("note"));
             report.setUserID(rs.getInt("userID"));
             report.setFullName(rs.getString("fullName"));
             report.setTypeName(rs.getString("typeName"));
-            report.setShiftID(rs.getInt("shiftID"));
-        }
-        //Đóng kết nối
-        con.close();
-        return report;
-    }
-
-    public Report readDate(Date date, int userID) throws SQLException {
-        Report report = null;
-        //Tạo connection để kết nối vào DBMS
-        Connection con = DBContext.getConnection();
-        //Tạo đối tượng PreparedStatement
-        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, report.status, "
-                + "report.note, report.userID, users.fullName, report.shiftID "
-                + "from report join users on report.userID = users.userID "
-                + "where plannedDate = ? and report.status = 0 and report.userID = ?");
-        stm.setString(1, Utilities.sdfDateTime.format(date));
-        stm.setInt(2, userID);
-        //Thực thi lệnh sql
-        ResultSet rs = stm.executeQuery();
-        //Load dữ liệu vào đối tượng toy nếu có
-        if (rs.next()) {
-            report = new Report();
-            report.setReportID(rs.getInt("reportID"));
-            report.setReportTitle(rs.getString("reportTitle"));
-            report.setCreateDate(rs.getDate("createDate"));
-            report.setDescription(rs.getString("description"));
-            report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
-            report.setNote(rs.getString("note"));
-            report.setUserID(rs.getInt("userID"));
-            report.setFullName(rs.getString("fullName"));
-            report.setShiftID(rs.getInt("shiftID"));
         }
         //Đóng kết nối
         con.close();
@@ -219,7 +175,7 @@ public class ReportRepository {
     public List<Report> search(String createDate) throws SQLException, ClassNotFoundException {
         List<Report> list = null;
         Connection con = DBContext.getConnection();
-        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, "
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, "
                 + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
                 + "where createDate = ?");
         stm.setString(1, createDate);
@@ -232,8 +188,6 @@ public class ReportRepository {
             report.setCreateDate(rs.getDate("createDate"));
             report.setDescription(rs.getString("description"));
             report.setPlannedDate(rs.getDate("plannedDate"));
-            report.setRequestSoonTime(rs.getTime("requestSoonTime"));
-            report.setRequestLateTime(rs.getTime("requestLateTime"));
             report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
             report.setNote(rs.getString("note"));
             report.setUserID(rs.getInt("userID"));
@@ -248,7 +202,7 @@ public class ReportRepository {
     public List<Report> searchByDayAndMonth(String day, String month) throws SQLException, ClassNotFoundException {
         List<Report> list = null;
         Connection con = DBContext.getConnection();
-        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, "
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, "
                 + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
                 + "where DAY(createDate) = ? and MONTH(createDate) = ?");
         stm.setString(1, day);
@@ -262,8 +216,6 @@ public class ReportRepository {
             report.setCreateDate(rs.getDate("createDate"));
             report.setDescription(rs.getString("description"));
             report.setPlannedDate(rs.getDate("plannedDate"));
-            report.setRequestSoonTime(rs.getTime("requestSoonTime"));
-            report.setRequestLateTime(rs.getTime("requestLateTime"));
             report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
             report.setNote(rs.getString("note"));
             report.setUserID(rs.getInt("userID"));
@@ -278,7 +230,7 @@ public class ReportRepository {
     public List<Report> searchByDayAndYear(String day, String year) throws SQLException, ClassNotFoundException {
         List<Report> list = null;
         Connection con = DBContext.getConnection();
-        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, "
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, "
                 + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
                 + "where DAY(createDate) = ? and YEAR(createDate) = ?");
         stm.setString(1, day);
@@ -292,8 +244,6 @@ public class ReportRepository {
             report.setCreateDate(rs.getDate("createDate"));
             report.setDescription(rs.getString("description"));
             report.setPlannedDate(rs.getDate("plannedDate"));
-            report.setRequestSoonTime(rs.getTime("requestSoonTime"));
-            report.setRequestLateTime(rs.getTime("requestLateTime"));
             report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
             report.setNote(rs.getString("note"));
             report.setUserID(rs.getInt("userID"));
@@ -308,7 +258,7 @@ public class ReportRepository {
     public List<Report> searchByMonthAndYear(String month, String year) throws SQLException, ClassNotFoundException {
         List<Report> list = null;
         Connection con = DBContext.getConnection();
-        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, "
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, "
                 + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
                 + "where MONTH(createDate) = ? and YEAR(createDate) = ?");
         stm.setString(1, month);
@@ -322,8 +272,6 @@ public class ReportRepository {
             report.setCreateDate(rs.getDate("createDate"));
             report.setDescription(rs.getString("description"));
             report.setPlannedDate(rs.getDate("plannedDate"));
-            report.setRequestSoonTime(rs.getTime("requestSoonTime"));
-            report.setRequestLateTime(rs.getTime("requestLateTime"));
             report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
             report.setNote(rs.getString("note"));
             report.setUserID(rs.getInt("userID"));
@@ -338,7 +286,7 @@ public class ReportRepository {
     public List<Report> searchByDay(String day) throws SQLException, ClassNotFoundException {
         List<Report> list = null;
         Connection con = DBContext.getConnection();
-        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, "
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, "
                 + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
                 + "where DAY(createDate) = ? ");
         stm.setString(1, day);
@@ -351,8 +299,6 @@ public class ReportRepository {
             report.setCreateDate(rs.getDate("createDate"));
             report.setDescription(rs.getString("description"));
             report.setPlannedDate(rs.getDate("plannedDate"));
-            report.setRequestSoonTime(rs.getTime("requestSoonTime"));
-            report.setRequestLateTime(rs.getTime("requestLateTime"));
             report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
             report.setNote(rs.getString("note"));
             report.setUserID(rs.getInt("userID"));
@@ -363,11 +309,11 @@ public class ReportRepository {
         con.close();
         return list;
     }
-
+    
     public List<Report> searchByMonth(String month) throws SQLException, ClassNotFoundException {
         List<Report> list = null;
         Connection con = DBContext.getConnection();
-        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, "
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, "
                 + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
                 + "where MONTH(createDate) = ?");
         stm.setString(1, month);
@@ -380,8 +326,6 @@ public class ReportRepository {
             report.setCreateDate(rs.getDate("createDate"));
             report.setDescription(rs.getString("description"));
             report.setPlannedDate(rs.getDate("plannedDate"));
-            report.setRequestSoonTime(rs.getTime("requestSoonTime"));
-            report.setRequestLateTime(rs.getTime("requestLateTime"));
             report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
             report.setNote(rs.getString("note"));
             report.setUserID(rs.getInt("userID"));
@@ -392,11 +336,11 @@ public class ReportRepository {
         con.close();
         return list;
     }
-
-    public List<Report> searchByYear(String month) throws SQLException, ClassNotFoundException {
+    
+     public List<Report> searchByYear(String month) throws SQLException, ClassNotFoundException {
         List<Report> list = null;
         Connection con = DBContext.getConnection();
-        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, "
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, report.userID, "
                 + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
                 + "where YEAR(createDate) = ?");
         stm.setString(1, month);
@@ -409,8 +353,6 @@ public class ReportRepository {
             report.setCreateDate(rs.getDate("createDate"));
             report.setDescription(rs.getString("description"));
             report.setPlannedDate(rs.getDate("plannedDate"));
-            report.setRequestSoonTime(rs.getTime("requestSoonTime"));
-            report.setRequestLateTime(rs.getTime("requestLateTime"));
             report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
             report.setNote(rs.getString("note"));
             report.setUserID(rs.getInt("userID"));
@@ -421,26 +363,24 @@ public class ReportRepository {
         con.close();
         return list;
     }
-
-    public List<Report> searchByName(String fullName) throws SQLException, ClassNotFoundException {
+     
+      public List<Report> searchByName (String fullName) throws SQLException, ClassNotFoundException {
         List<Report> list = null;
         Connection con = DBContext.getConnection();
-        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, "
+        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, report.status, report.note, "
                 + "report.userID, fullName, reportType.typeName "
                 + "from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
                 + "where fullName like ?");
-        stm.setString(1, "%" + fullName + "%");
+        stm.setString(1, "%"+fullName+"%");
         ResultSet rs = stm.executeQuery();
         list = new ArrayList<>();
         while (rs.next()) {
-            Report report = new Report();
+           Report report = new Report();
             report.setReportID(rs.getInt("reportID"));
             report.setReportTitle(rs.getString("reportTitle"));
             report.setCreateDate(rs.getDate("createDate"));
             report.setDescription(rs.getString("description"));
             report.setPlannedDate(rs.getDate("plannedDate"));
-            report.setRequestSoonTime(rs.getTime("requestSoonTime"));
-            report.setRequestLateTime(rs.getTime("requestLateTime"));
             report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
             report.setNote(rs.getString("note"));
             report.setUserID(rs.getInt("userID"));

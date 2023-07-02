@@ -13,76 +13,78 @@
             <div class="cssload-speeding-wheel"></div>
         </div>
         <!-- Page Content -->
+        <c:choose>
+            <c:when test="${!Account.roleName.equals('ADMIN')}">
+                <div class="container-fluid">
+                    <div class="row bg-title">
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                            <h4 class="page-title">REPORT LIST</h4>
+                        </div>
+                        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
+                            <a href="<c:url value="/report/create.do"/>" class="btn btn-sm btn-success">Create another report</a>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /row -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="white-box">
+                                <div class="table-responsive">
+                                    <table class="table" id="example">
 
-        <div class="container-fluid">
-            <div class="row bg-title">
-                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">REPORT LIST</h4>
-                </div>
-                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-                    <a href="<c:url value="/report/create.do"/>" class="btn btn-sm btn-success">Create another report</a>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /row -->
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="white-box">
-                        <div class="table-responsive">
-                            <table class="table" id="example">
-
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Report Title</th>
-                                        <th>Type</th>
-                                        <th>Create Date</th>
-                                        <th>User ID</th>
-                                        <th>Author</th>
-                                        <th>Description</th>
-                                        <th>Planned Date</th>
-                                        <th>Request Soon Time</th>
-                                        <th>Request Late Time</th>
-                                        <th>Status</th>
-                                        <th>Note</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="report" items="${list}" varStatus="loop">
-                                        <tr>
-                                            <td>${loop.count}</td>
-                                            <td>${report.reportTitle}</td>
-                                            <td>${report.typeName}</td>
-                                            <td>${report.createDate}</td>
-                                            <td>${report.userID}</td>
-                                            <td>${report.fullName}</td>
-                                            <td>${report.description}</td>
-                                            <td>${report.plannedDate}</td>
-                                            <td>${report.requestSoonTime}</td>
-                                            <td>${report.requestLateTime}</td>
-                                            <c:if test="${report.statusText=='Rejected'}">
-                                                <td style="background-color: #ac2925; color: whitesmoke " >${report.statusText}</td>
-                                            </c:if>
-                                            <c:if test="${report.statusText=='Approved'}">
-                                                <td style="background-color: #398439; color: whitesmoke">${report.statusText}</td>
-                                            </c:if>
-                                            <c:if test="${report.statusText=='Processing'}">
-                                                <td style="background-color: grey; color: whitesmoke">${report.statusText}</td>
-                                            </c:if>    
-                                            <td>${report.note}</td>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Report Title</th>
+                                                <th>Type</th>
+                                                <th>Create Date</th>
+                                                <th>User ID</th>
+                                                <th>Author</th>
+                                                <th>Description</th>
+                                                <th>Planned Date</th>
+                                                <th>Status</th>
+                                                <th>Note</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="report" items="${list}" varStatus="loop">
+                                                <tr>
+                                                    <td>${loop.count}</td>
+                                                    <td>${report.reportTitle}</td>
+                                                    <td>${report.typeName}</td>
+                                                    <td>${report.createDate}</td>
+                                                    <td>${report.userID}</td>
+                                                    <td>${report.fullName}</td>
+                                                    <td>${report.description}</td>
+                                                    <td>${report.plannedDate}</td>
+                                                    <c:if test="${report.statusText=='Rejected'}">
+                                                        <td style="background-color: #ac2925; color: whitesmoke " >${report.statusText}</td>
+                                                    </c:if>
+                                                    <c:if test="${report.statusText=='Approved'}">
+                                                        <td style="background-color: #398439; color: whitesmoke">${report.statusText}</td>
+                                                    </c:if>
+                                                    <c:if test="${report.statusText=='Processing'}">
+                                                        <td style="background-color: grey; color: whitesmoke">${report.statusText}</td>
+                                                    </c:if>    
+                                                    <td>${report.note}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <!-- /.row -->
                 </div>
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
+                <!-- /.container-fluid -->
 
-        <!-- /#page-wrapper -->
+                <!-- /#page-wrapper -->
+            </c:when>
+            <c:otherwise>
+                <jsp:forward page="/error/error.do" />
+            </c:otherwise>
+        </c:choose>
     </body>
 
 </html>
