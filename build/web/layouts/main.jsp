@@ -182,6 +182,12 @@
                             </c:choose>
                             <c:if test="${Account.roleName.equals('MANAGER')}">
                                 <li>
+                                    <a href="<c:url value="/record/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
+                                                                                                         aria-hidden="true"></i><span class="hide-menu">Record</span></a>
+                                </li>
+                            </c:if>
+                            <c:if test="${Account.roleName.equals('MANAGER')}">
+                                <li>
                                     <a href="<c:url value="/checkIn/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
                                                                                                           aria-hidden="true"></i><span class="hide-menu">Check In</span></a>
                                 </li>
@@ -212,7 +218,7 @@
                                 <a href="<c:url value="/error/404.jsp"/>" class="waves-effect"><i class="fa fa-info-circle fa-fw"
                                                                                                   aria-hidden="true"></i><span class="hide-menu">Error 404</span></a>
                             </li>
-                            
+
                             <li>
                                 <a href="<c:url value="/uploadDownloadFile/index.do"/>"><i class="bi bi-file-earmark-plus"></i> <span class="hide-menu">Upload File 
                                         (Check In or Check Out File)</span></a>

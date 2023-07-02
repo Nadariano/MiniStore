@@ -68,6 +68,27 @@ public class UserShiftRepository {
         con.close();
         return userShift;
     }
+    
+    public UserShift read(int userID, int shiftID, Date date) throws SQLException {
+        UserShift userShift = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("select * from UserShift where userID = ? and shiftID = ? and date = ?");
+        stm.setInt(1, userID);
+        stm.setInt(2, shiftID);
+        stm.setString(3, sdfDate.format(date) );
+        ResultSet rs = stm.executeQuery();
+        if (rs.next()) {
+            userShift = new UserShift();
+            userShift.setUserID(rs.getInt("userID"));
+            userShift.setShiftID(rs.getInt("shiftID"));
+            userShift.setDate(rs.getDate("date"));
+            userShift.setStatus(rs.getInt("status"));
+            userShift.setNote(rs.getString("note"));
+            userShift.setIsOT(rs.getBoolean("isOT"));
+        }
+        con.close();
+        return userShift;
+    }
 
     public void create(UserShift userShift) throws SQLException {
         Connection con = DBContext.getConnection();

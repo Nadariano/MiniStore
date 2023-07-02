@@ -8,8 +8,6 @@
     </head>
 
     <body>
-        <c:choose>
-            <c:when test="${Account.roleName.equals('MANAGER')}">
                 <!-- Preloader -->
                 <div class="preloader">
                     <div class="cssload-speeding-wheel"></div>
@@ -58,7 +56,6 @@
                             <button type="submit" class="btn btn-primary" name="op" value="search" style="margin-right: 8px;">Search By Name</button>
                         </div>
                     </form>
-                        
                     <!-- /row -->
                     <div class="row">
                         <div class="col-sm-12">
@@ -76,6 +73,8 @@
                                                 <th>Author</th>
                                                 <th>Description</th>
                                                 <th>Planned Date</th>
+                                                <th>Request Soon Time</th>
+                                                <th>Request Late Time</th>
                                                 <th>Status</th>
                                                 <th>Note</th>
                                                 <th>Operations</th>
@@ -92,6 +91,8 @@
                                                     <td>${report.fullName}</td>
                                                     <td>${report.description}</td>
                                                     <td>${report.plannedDate}</td>
+                                                    <td>${report.requestSoonTime}</td>
+                                                    <td>${report.requestLateTime}</td>
                                                     <c:if test="${report.statusText=='Rejected'}">
                                                         <td style="background-color:  #ac2925; color: whitesmoke " >${report.statusText}</td>
                                                     </c:if>
@@ -120,11 +121,6 @@
                 <!-- /.container-fluid -->
 
                 <!-- /#page-wrapper -->
-            </c:when>
-            <c:otherwise>
-                <jsp:forward page="/error/error.do" />
-            </c:otherwise>
-        </c:choose>
     </body>
 
 </html>

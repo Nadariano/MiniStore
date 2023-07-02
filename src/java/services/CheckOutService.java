@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import models.CheckOut;
+import models.Report;
+import models.ShiftTime;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
@@ -22,6 +24,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import repositories.CheckOutRepository;
+import repositories.ReportRepository;
+import repositories.ShiftTimeRepository;
 import static services.Utilities.sdfDateTime;
 
 /**
@@ -76,4 +80,77 @@ public class CheckOutService {
             }
         }
     }
+
+    public static Date minOutTime(ShiftTime st, Report report, Date date) throws ParseException {
+        String strDate = Utilities.sdfDate.format(date);
+        String strEndTime = Utilities.sdfTime.format(st.getTimeEnd());
+        Date endTime = Utilities.sdfDateTime.parse(strDate + " " + strEndTime);
+
+        long requestSoon = 0;
+        if (report != null) {
+            requestSoon = report.getRequestSoonTime().getTime() - Utilities.correctTime().getTime();
+        }
+
+        long limit = endTime.getTime() - requestSoon - Utilities.limit1h();
+        Date limitTime = new Date(limit);
+        System.out.println(limitTime);
+        return limitTime;
+    }
+
+    public static Date maxOutTime(ShiftTime st, Date date) throws ParseException {
+        String strDate = Utilities.sdfDate.format(date);
+        String strEndTime = Utilities.sdfTime.format(st.getTimeEnd());
+        Date endTime = Utilities.sdfDateTime.parse(strDate + " " + strEndTime);
+
+        long max = endTime.getTime() + Utilities.limit30m();
+        Date maxTime = new Date(max);
+        return maxTime;
+    }
+
+    public static Date maxOutTimeNight(ShiftTime st, Date date) throws ParseException {
+        String strDate = Utilities.sdfDate.format(date);
+        String strEndTime = Utilities.sdfTime.format(st.getTimeEnd());
+        Date endTime = Utilities.sdfDateTime.parse(strDate + " " + strEndTime);
+
+        long max = endTime.getTime() + Utilities.limit24h() + Utilities.limit30m();
+        Date maxTime = new Date(max);
+        return maxTime;
+    }
+
+    public static Report requestTime(Date date, int userID) throws SQLException {
+        ReportRepository rr = new ReportRepository();
+        Report report = null;
+        if (rr.readDate(date, userID) != null) {
+            report = rr.readDate(date, userID);
+        }
+        return report;
+    }
+
+    public static CheckOut outTime(int userID, int shiftID, Date date) throws ParseException, SQLException {
+
+        ShiftTimeRepository str = new ShiftTimeRepository();
+        CheckOutRepository cor = new CheckOutRepository();
+        ShiftTime st = str.read(shiftID);
+        Report report = requestTime(date, userID);
+
+        Date minOutTime = minOutTime(st, report, date);
+        Date maxOutTime = null;
+
+        if (st.getShiftName().equalsIgnoreCase("Night Shift")) {
+            maxOutTime = maxOutTimeNight(st, date);
+        } else {
+            maxOutTime = maxOutTime(st, date);
+        }
+
+        List<CheckOut> coList = cor.search(minOutTime, maxOutTime, userID);
+        CheckOut co = null;
+
+        if (coList.isEmpty()) {
+            co = new CheckOut();
+        } else {
+            co = coList.get(0);
+        }
+        return co;
+    }
+
 }

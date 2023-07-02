@@ -3,12 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SUMMER23/SWP391/Ministore_Upload/MiniStore/src/java/controllers/FileLocationContextListener.java</file>
-            <file>file:/D:/SUMMER23/SWP391/Ministore_Upload/MiniStore/src/java/services/CheckInService.java</file>
-            <file>file:/D:/SUMMER23/SWP391/Ministore_Upload/MiniStore/src/java/controllers/CheckOutController.java</file>
-            <file>file:/D:/SUMMER23/SWP391/Ministore_Upload/MiniStore/src/java/controllers/CheckInController.java</file>
-            <file>file:/D:/SUMMER23/SWP391/Ministore_Upload/MiniStore/src/java/services/CheckOutService.java</file>
-            <file>file:/D:/SUMMER23/SWP391/Ministore_Upload/MiniStore/src/java/controllers/UploadDownLoadFileController.java</file>
+            <file>file:/D:/FPT/kì%205/SWP/Ministore_Min/MiniStore/src/java/controllers/AttendanceController.java</file>
+            <file>file:/D:/FPT/kì%205/SWP/Ministore_Min/MiniStore/src/java/controllers/AccountController.java</file>
         </group>
     </open-files>
 </project-private>

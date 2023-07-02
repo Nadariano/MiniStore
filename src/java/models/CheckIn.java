@@ -69,5 +69,12 @@ public class CheckIn {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
+    @Override
+    public String toString() {
+        return "CheckIn{" + "checkInID=" + checkInID + ", checkInTime=" + checkInTime + ", userID=" + userID + ", fullName=" + fullName + '}';
+    }
+    
+    
     
 }

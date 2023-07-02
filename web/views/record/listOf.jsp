@@ -1,18 +1,21 @@
 <%-- 
     Document   : listOf
-    Created on : Jun 9, 2023, 4:14:06 PM
-    Author     : Dell
+    Created on : Jun 30, 2023, 1:16:58 AM
+    Author     : DELL
 --%>
+
 <!DOCTYPE html>
 <html lang="en">
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Shift Time</title>
+        <title>Record</title>
     </head>
 
     <body>
+        <a href="<c:url value="/record/create.do"/>">Create</a>
+
         <c:choose>
             <c:when test="${Account.roleName.equals('MANAGER')}">
                 <!-- Preloader -->
@@ -24,7 +27,7 @@
                 <div class="container-fluid">
                     <div class="row bg-title">
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                            <h4 class="page-title">Shift Time</h4>
+                            <h4 class="page-title">Record</h4>
                         </div>
                         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
                             <a href="<c:url value="/shiftTime/create.do"/>" class="btn btn-sm btn-success">Create a new shift</a>
@@ -41,35 +44,26 @@
                                         <thead>
                                             <tr >
                                                 <!--<th>No.</th>-->
-                                                <th>Shift</th>
-                                                <th>Shift Name</th>
-                                                <th>Time Start</th>
-                                                <th>Time End</th>
-                                                <th>Coefficient Of Shift</th>
-                                                <th>Coefficient Of Overtime</th>
-                                                <th>Coefficient Of Day Off</th>
-                                                <th style="text-align: center">Wage</th>
-                                                <th>Status</th>
-                                                <th>Note</th>
-                                            <c:if test="${Account.roleName.equals('MANAGER')}">
-                                                <th style="text-align: center">Operations</th>
-                                            </c:if>
+                                                <th>Record ID</th>
+                                                <th>User ID</th>
+                                                <th>Fullname</th>
+                                                <th>Date</th>
+                                                <th>Check In</th>
+                                                <th>Check Out</th>
+                                                <th>Shift ID</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach var="shiftTime" items="${list}" varStatus="loop">
+                                            <c:forEach var="rc" items="${list}" varStatus="loop">
                                                 <tr>
                                                     <!--<td>${loop.count}</td>-->
-                                                    <td>${shiftTime.shiftID}</td>
-                                                    <td>${shiftTime.shiftName}</td>
-                                                    <td>${shiftTime.timeStart}</td>
-                                                    <td>${shiftTime.timeEnd}</td>
-                                                    <td style="text-align: center">${shiftTime.coeShift}</td>
-                                                    <td style="text-align: center">${shiftTime.coeOT}</td>
-                                                    <td style="text-align: center">${shiftTime.coeDayOff}</td>
-                                                    <td style="text-align: center">${shiftTime.wage}</td>
-                                                    <td>${shiftTime.statusText}</td>
-                                                    <td>${shiftTime.note}</td>
+                                                    <td>${rc.recordID}</td>
+                                                    <td>${rc.userID}</td>
+                                                    <td>${rc.fullName}</td>
+                                                    <td>${rc.date}</td>
+                                                    <td>${rc.inTime}</td>
+                                                    <td>${rc.outTime}</td>
+                                                    <td>${rc.shiftID}</td>
                                                     <td style="text-align: center">
                                                         <c:if test="${!role.roleName.equals('MANAGER')}">
                                                             <a href="<c:url value="/shiftTime/update.do?shiftID=${shiftTime.shiftID}" />" class="btn btn-sm btn-primary" ><i class="bi bi-pencil-square"></i>Update</a>
