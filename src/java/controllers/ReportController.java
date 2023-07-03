@@ -83,28 +83,6 @@ public class ReportController extends HttpServlet {
                 }
                 break;
 
-//            case "searchByDate":
-//                try {
-//                    searchByDate(request, response);
-//                } catch (Exception ex) {
-//                    //Hien trang thong bao loi
-//                    ex.printStackTrace();//In thông báo chi tiết cho developer
-//                    request.setAttribute("message", ex.getMessage());
-//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-//                }
-//                break;
-//
-//            case "searchByName":
-//                try {
-//                    searchByName(request, response);
-//                } catch (Exception ex) {
-//                    //Hien trang thong bao loi
-//                    ex.printStackTrace();//In thông báo chi tiết cho developer
-//                    request.setAttribute("message", ex.getMessage());
-//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-//                }
-//                break;
-
             case "search":
                 try {
                     search(request, response);
@@ -134,9 +112,17 @@ public class ReportController extends HttpServlet {
     private void list(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+
             ReportRepository rf = new ReportRepository();
             List<Report> list = rf.select();
+            HttpSession session = request.getSession();
+            List<Report> listSearch = (List<Report>) session.getAttribute("listSearch");
+
+            if (listSearch != null) {
+                list = listSearch;
+            }
             request.setAttribute("list", list);
+
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (SQLException ex) {
             //Hien trang thong bao loi
@@ -375,7 +361,7 @@ public class ReportController extends HttpServlet {
         return count;
     }
 
-    protected void search(HttpServletRequest request, HttpServletResponse response)
+     private void search(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         HttpSession session = request.getSession();
         String op = request.getParameter("op");

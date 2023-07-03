@@ -61,8 +61,8 @@
                         </td>
                         <c:forEach var="i" begin="0" end="${fn:length(listDays) - 1}" step="1" >
                             <td> 
-
-                                <c:forEach var="userShift" items="${usersShiftList}" varStatus="loop">
+                                <div>
+                                   <c:forEach var="userShift" items="${usersShiftList}" varStatus="loop">
 
                                     <c:if test="${userShift.shiftID == shift.shiftID}">
 
@@ -80,7 +80,10 @@
 
                                         </c:if>
                                     </c:if>
-                                </c:forEach>
+                                </c:forEach> 
+                                </div>
+                                
+                                <button class="btn-primary"><i class="bi bi-person-fill-add"></i>Add</button>
 
 
                             </td>    
