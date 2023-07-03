@@ -153,10 +153,6 @@ create table Record (
 alter table Users
 add roleID int foreign key references Roles(roleID)
 
-/*Tạo foreign key cho bảng Report*/
-alter table Report 
-add userID int foreign key references Users(userID)
-
 /*Tạo foreign key cho bảng UserShift*/
 alter table UserShift
 add foreign key(userID) references Users(userID)
@@ -196,7 +192,12 @@ add bonusID int foreign key references Bonus(bonusID)
 alter table PaySlip
 add minusID int foreign key references Minus(minusID)
 */
-/*Tao foreign key cho Report*/
+
+/*Tạo foreign key cho bảng Report*/
+alter table Report 
+add userID int foreign key references Users(userID)
+alter table Report
+add shiftID int foreign key references ShiftTime(shiftID)
 alter table Report 
 add typeID int foreign key references ReportType(typeID)
 
@@ -220,14 +221,14 @@ insert into Users values('D','4B227777D4DD1FC61C6F884F48641D02B4D121D3FD328CB08B
 insert into ReportType values('Application')
 insert into ReportType values('Report')
 
-/*Insert cho Report*/
-insert into Report values('Report1','2023-06-12','I want to change shift..','2023-06-21','00:30:00','00:00:00',1,'',2,1)
-insert into Report values('Report2','2023-05-11','I want to report something..',null,null,null,1,'',3,2)
-
 /*Insert cho ShiftTime*/
 insert into ShiftTime values('Day Shift','06:00:00', '12:00:00', 1, 0.5, 20, 2, 0, '')
 insert into ShiftTime values('Day Shift','12:00:00', '18:00:00', 1, 0.5, 20, 2, 0, '')
 insert into ShiftTime values('Night Shift','18:00:00', '06:00:00', 1.5, 0.5, 20, 2, 0, '')
+
+/*Insert cho Report*/
+insert into Report values('Report1','2023-06-12','I want to change shift..','2023-06-21','00:30:00','00:00:00',1,'',3,1,1)
+insert into Report values('Report2','2023-05-11','I want to report something..',null,null,null,1,'',4,null,2)
 
 /*Insert cho UserShift*/
 insert into UserShift values ('2','1','2023-05-11', 0, '',0)
@@ -277,7 +278,5 @@ select * from CheckIn
 select * from CheckOut 
 select * from Record
 
-update Users set status = 0 where userID = 2
-
-drop table UserShift
-drop table Record
+--drop table UserShift
+--drop table Record

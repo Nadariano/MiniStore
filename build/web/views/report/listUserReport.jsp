@@ -43,6 +43,7 @@
                                         <th>Planned Date</th>
                                         <th>Request Soon Time</th>
                                         <th>Request Late Time</th>
+                                        <th>Shift ID</th>
                                         <th>Status</th>
                                         <th>Note</th>
                                     </tr>
@@ -60,6 +61,7 @@
                                             <td>${report.plannedDate}</td>
                                             <td>${report.requestSoonTime}</td>
                                             <td>${report.requestLateTime}</td>
+                                            <td>${report.shiftID}</td>
                                             <c:if test="${report.statusText=='Rejected'}">
                                                 <td style="background-color: #ac2925; color: whitesmoke " >${report.statusText}</td>
                                             </c:if>
