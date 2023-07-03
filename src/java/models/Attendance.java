@@ -26,8 +26,9 @@ public class Attendance {
     private Date date;
     private Date checkIn;
     private Date checkOut;
-    private int lateTime;
-    private int overTime;
+    private Date soonTime;
+    private Date lateTime;
+    private Date duration;
     private int status;
     private String note;
     private int userID;
@@ -38,13 +39,14 @@ public class Attendance {
     public Attendance() {
     }
 
-    public Attendance(int attendID, Date date, Date checkIn, Date checkOut, int lateTime, int overTime, int status, String note, int userID, String fullName, String confirm, String statusText) {
+    public Attendance(int attendID, Date date, Date checkIn, Date checkOut, Date soonTime, Date lateTime, Date duration, int status, String note, int userID, String fullName, String confirm, String statusText) {
         this.attendID = attendID;
         this.date = date;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
+        this.soonTime = soonTime;
         this.lateTime = lateTime;
-        this.overTime = overTime;
+        this.duration = duration;
         this.status = status;
         this.note = note;
         this.userID = userID;
@@ -85,20 +87,28 @@ public class Attendance {
         this.checkOut = checkOut;
     }
 
-    public int getLateTime() {
+    public Date getSoonTime() {
+        return soonTime;
+    }
+
+    public void setSoonTime(Date soonTime) {
+        this.soonTime = soonTime;
+    }
+
+    public Date getLateTime() {
         return lateTime;
     }
 
-    public void setLateTime(int lateTime) {
+    public void setLateTime(Date lateTime) {
         this.lateTime = lateTime;
     }
 
-    public int getOverTime() {
-        return overTime;
+    public Date getDuration() {
+        return duration;
     }
 
-    public void setOverTime(int overTime) {
-        this.overTime = overTime;
+    public void setDuration(Date duration) {
+        this.duration = duration;
     }
 
     public int getStatus() {
@@ -148,6 +158,6 @@ public class Attendance {
     public void setStatusText(String statusText) {
         this.statusText = statusText;
     }
+
     
-   
 }

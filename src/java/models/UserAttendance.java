@@ -23,16 +23,16 @@ public class UserAttendance {
         map = new HashMap<>();
 
     }
-
-    public void add(int userID) throws SQLException {
-        AttendanceRepository ar = new AttendanceRepository();
-        HashMap<Integer, Attendance> userAttendance = ar.selectUserAttendance(userID);
-        for (Map.Entry<Integer, Attendance> entry : userAttendance.entrySet()) {
-            Attendance attendance = entry.getValue();
-            Item item = new Item(attendance, attendance.getConfirm());
-            map.put(entry.getKey(), item);
-        }
-    }
+//
+//    public void add(int userID) throws SQLException {
+//        AttendanceRepository ar = new AttendanceRepository();
+//        HashMap<Integer, Attendance> userAttendance = ar.selectUserAttendance(userID);
+//        for (Map.Entry<Integer, Attendance> entry : userAttendance.entrySet()) {
+//            Attendance attendance = entry.getValue();
+//            Item item = new Item(attendance, attendance.getConfirm());
+//            map.put(entry.getKey(), item);
+//        }
+//    }
 
     public void update(int attendID, String confirm) {
         Item item = map.get(attendID);
