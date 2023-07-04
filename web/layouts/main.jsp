@@ -137,7 +137,7 @@
                                 <c:when test="${!Account.roleName.equals('ADMIN')}">
                                     <li>
                                         <a href="<c:url value="/attendance/listOfUsers.do?userID=${Account.userID}"/>" class="waves-effect"><i class="fa fa-modx fa-fw"
-                                                                                                                                               aria-hidden="true"></i><span class="hide-menu">Attendance</span></a>
+                                                                                                                                               aria-hidden="true"></i><span class="hide-menu">My Attendance</span></a>
                                     </li> 
                                 </c:when>  
                             </c:choose>

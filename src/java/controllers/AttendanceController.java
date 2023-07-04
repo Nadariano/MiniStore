@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.UserAttendance;
 import static services.Utilities.sdfDate;
 import static services.Utilities.sdfTime;
 
@@ -213,11 +214,6 @@ public class AttendanceController extends HttpServlet {
                         attendIDs[i] = Integer.parseInt(attendIDStr[i]);
                     }
 
-<<<<<<< HEAD
-//                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
-//                    af.update(attendance);
-                    response.sendRedirect(request.getContextPath() + "/attendance/listOfUsers.do?userID="+ userID);
-=======
 //                    Date date = sdfDate.parse(request.getParameter("date"));
 //                    String fullName = request.getParameter("fullName");
 //                    Time checkIn = Time.valueOf(request.getParameter("checkIn"));
@@ -254,7 +250,6 @@ public class AttendanceController extends HttpServlet {
 //                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
 //                    af.updateOfUsers(attendIDs, statuses, notes);
                     response.sendRedirect(request.getContextPath() + "/attendance/listOfUsers.do?userID=" + userID);
->>>>>>> ChunHai
 
                 } catch (Exception ex) {
                     //Hiện trang thông báo lỗi
@@ -318,13 +313,8 @@ public class AttendanceController extends HttpServlet {
                         status = 0;
                     }
 
-<<<<<<< HEAD
-//                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
-//                    ar.update(attendance);
-=======
                     Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, soonTime, lateTime, duration, status, note, userID, fullName, confirm, statusText);
                     ar.update(attendance);
->>>>>>> ChunHai
                     response.sendRedirect(request.getContextPath() + "/attendance/list.do");
 
                 } catch (Exception ex) {
@@ -374,13 +364,8 @@ public class AttendanceController extends HttpServlet {
                     String statusText = "Not Available";
                     String confirm = "Denied";
                     String note = "";
-<<<<<<< HEAD
-//                    Attendance attendance = new Attendance(userID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
-//                    af.create(attendance);
-=======
                     Attendance attendance = new Attendance(userID, date, checkIn, checkOut, soonTime, lateTime, duration, status, note, userID, fullName, confirm, statusText);
                     af.create(attendance);
->>>>>>> ChunHai
                     response.sendRedirect(request.getContextPath() + "/attendance/list.do");
                 } catch (Exception ex) {
                     //Hiện trang thông báo lỗi
