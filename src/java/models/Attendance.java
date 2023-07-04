@@ -26,8 +26,13 @@ public class Attendance {
     private Date date;
     private Date checkIn;
     private Date checkOut;
+<<<<<<< HEAD
     private Date lateTime;
     private Date soonTime;
+=======
+    private Date soonTime;
+    private Date lateTime;
+>>>>>>> ChunHai
     private Date duration;
     private int status;
     private String note;
@@ -41,13 +46,21 @@ public class Attendance {
     public Attendance() {
     }
 
+<<<<<<< HEAD
     public Attendance(int attendID, Date date, Date checkIn, Date checkOut, Date lateTime, Date soonTime, Date duration, int status, String note, int userID, int shiftID, String fullName, String confirm, String statusText) {
+=======
+    public Attendance(int attendID, Date date, Date checkIn, Date checkOut, Date soonTime, Date lateTime, Date duration, int status, String note, int userID, String fullName, String confirm, String statusText) {
+>>>>>>> ChunHai
         this.attendID = attendID;
         this.date = date;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
-        this.lateTime = lateTime;
         this.soonTime = soonTime;
+        this.lateTime = lateTime;
+<<<<<<< HEAD
+        this.soonTime = soonTime;
+=======
+>>>>>>> ChunHai
         this.duration = duration;
         this.status = status;
         this.note = note;
@@ -128,6 +141,17 @@ public class Attendance {
         this.checkOut = checkOut;
     }
 
+<<<<<<< HEAD
+=======
+    public Date getSoonTime() {
+        return soonTime;
+    }
+
+    public void setSoonTime(Date soonTime) {
+        this.soonTime = soonTime;
+    }
+
+>>>>>>> ChunHai
     public Date getLateTime() {
         return lateTime;
     }
@@ -136,12 +160,21 @@ public class Attendance {
         this.lateTime = lateTime;
     }
 
+<<<<<<< HEAD
     public Date getSoonTime() {
         return soonTime;
     }
 
     public void setSoonTime(Date soonTime) {
         this.soonTime = soonTime;
+=======
+    public Date getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Date duration) {
+        this.duration = duration;
+>>>>>>> ChunHai
     }
     
     public int getStatus() {
@@ -200,6 +233,7 @@ public class Attendance {
         this.statusText = statusText;
     }
 
+<<<<<<< HEAD
     public Date getDuration() {
         return duration;
     }
@@ -213,6 +247,7 @@ public class Attendance {
     public String toString() {
         return "Attendance{" + "attendID=" + attendID + ", date=" + date + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", lateTime=" + lateTime + ", soonTime=" + soonTime + ", duration=" + duration + ", status=" + status + ", note=" + note + ", userID=" + userID + ", fullName=" + fullName + ", confirm=" + confirm + ", statusText=" + statusText + '}';
     }
+=======
+>>>>>>> ChunHai
     
-   
 }
