@@ -372,6 +372,67 @@ public class ReportController extends HttpServlet {
                     String day = request.getParameter("day");
                     String month = request.getParameter("month");
                     String year = request.getParameter("year");
+<<<<<<< HEAD
+=======
+                    String createDate = year + "-" + month + "-" + day;
+                    ReportRepository rf = new ReportRepository();
+                    List<Report> list = null;
+                    if (!"".equals(day) && !"".equals(month) && !"".equals(year)) {
+                        list = rf.search(createDate);
+
+                    }
+                    if ("".equals(year)) {
+                        list = rf.searchByDayAndMonth(day, month);
+
+                    }
+                    if ("".equals(month)) {
+                        list = rf.searchByDayAndYear(day, year);
+
+                    }
+                    if ("".equals(day)) {
+                        list = rf.searchByMonthAndYear(month, year);
+
+                    }
+                    if ("".equals(month) && "".equals(year)) {
+                        list = rf.searchByDay(day);
+
+                    }
+                    if ("".equals(day) && "".equals(year)) {
+                        list = rf.searchByMonth(month);
+
+                    }
+                    if ("".equals(day) && "".equals(month)) {
+                        list = rf.searchByYear(year);
+
+                    }
+                    if (list != null){
+                        request.setAttribute("list", list);
+                        request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                    }else {
+                        request.setAttribute("message", "NOT FOUND !!!");
+                        request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                    }
+
+//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                } catch (SQLException ex) {
+                    //Hien trang thong bao loi
+                    ex.printStackTrace();//In thông báo chi tiết cho developer
+                    request.setAttribute("message", ex.getMessage());
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void searchByName(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException {
+        String op = request.getParameter("op");
+        switch (op) {
+            case "search":
+                try {
+>>>>>>> ChunHai
                     String fullName = request.getParameter("fullName");
                     ReportRepository rf = new ReportRepository();
                     List<Report> list = null;
