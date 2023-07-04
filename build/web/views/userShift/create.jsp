@@ -35,20 +35,27 @@
                             <div class="white-box">
 
 
-
                                 <form action="<c:url value="/userShift/create_handler.do"/>" class="form-horizontal form-material">
                                     <div class="form-group">
-                                        <label class="col-md-12">User ID</label>
-                                        <div class="col-md-12">
-                                            <input type="number" placeholder="User ID" name="userID" value="${userShift.userID}"
-                                                   class="form-control form-control-line" />
-                                        </div>
+                                        <label class="col-md-12">Select an employee</label>
+                                        <!--                                        <div class="col-md-12">
+                                                                                    <input type="number" placeholder="User ID" name="userID" value="${userShift.userID}"
+                                                                                           class="form-control form-control-line" />
+                                                                                </div>-->
+                                        <select name="userID">
+                                            <c:forEach var="user" items="${usl}" varStatus="loop">
+                                                <c:if test="${!user.roleName.equals('MANAGER') && !user.roleName.equals('ADMIN')}">
+                                                    <option name="userID" value="${user.userID}">${user.fullName} (${user.roleName})</option>
+                                                </c:if>
+
+                                            </c:forEach>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-12">Shift</label>
                                         <div class="col-md-12">
-                                            <input type="number" placeholder="Shift ID" name="shiftID" value="${userShift.shiftID}"
+                                            <input type="number" placeholder="Shift ID" name="shiftID" value="${shiftID}"
                                                    class="form-control form-control-line" />
                                         </div>
                                     </div>
@@ -56,7 +63,7 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Date</label>
                                         <div class="col-md-12">
-                                            <input type="date" placeholder="Date"name="date" value="${userShift.date}"
+                                            <input type="date" placeholder="Date"name="date" value="${date}"
                                                    class="form-control form-control-line" />
                                         </div>
                                     </div>         

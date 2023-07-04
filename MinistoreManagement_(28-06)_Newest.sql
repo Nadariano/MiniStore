@@ -231,8 +231,15 @@ insert into Report values('Report1','2023-06-12','I want to change shift..','202
 insert into Report values('Report2','2023-05-11','I want to report something..',null,null,null,1,'',4,null,2)
 
 /*Insert cho UserShift*/
-insert into UserShift values ('2','1','2023-05-11', 0, '',0)
-insert into UserShift values ('2','1','2023-10-10', 0, '', 0)
+insert into UserShift values ('3','1','2023-06-27', 0, '',0)
+insert into UserShift values ('4','3','2023-06-29', 0, '', 0)
+insert into UserShift values ('3','1','2023-06-30', 0, '', 0)
+insert into UserShift values ('3','2','2023-06-30', 0, '', 0)
+insert into UserShift values ('4','1','2023-06-30', 0, '', 0)
+insert into UserShift values ('3','1','2023-07-01', 0, '', 0)
+insert into UserShift values ('4','2','2023-07-01', 0, '', 0)
+insert into UserShift values ('3','2','2023-07-01', 0, '', 0)
+insert into UserShift values ('4','1','2023-07-02', 0, '', 0)
 
 --Insert cho DayOff
 insert into DayOff values('2023-04-30',1,'National Independent Day',1,'')

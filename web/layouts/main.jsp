@@ -147,16 +147,12 @@
                                                                                                             aria-hidden="true"></i><span class="hide-menu">Shift Time</span></a>
                                 </li>
                             </c:if>
-                            <c:if test="${Account.roleName.equals('MANAGER')}">
+                            <c:if test="${!Account.roleName.equals('ADMIN')}">
                                 <li>
                                     <a href="<c:url value="/userShift/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
-                                                                                                            aria-hidden="true"></i><span class="hide-menu">Users' Shift </span></a>
+                                                                                                            aria-hidden="true"></i><span class="hide-menu">Schedule </span></a>
                                 </li>
                             </c:if>
-                            <li>
-                                <a href="<c:url value="/schedule/listAll.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
-                                                                                                        aria-hidden="true"></i><span class="hide-menu">Work schedule</span></a>
-                            </li>
 
                             <li>
                                 <a href="<c:url value="/dayOff/index.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
