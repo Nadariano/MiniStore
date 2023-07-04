@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.Account;
 import models.ShiftTime;
 import models.Users;
 import repositories.ShiftTimeRepository;
@@ -82,6 +83,12 @@ public class UserShiftController extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             List<UserShift> list = UserShiftRepository.select();
+            Account acc = (Account) session.getAttribute("Account");
+            String roleName = acc.getRoleName();
+            int userID = acc.getUserID();
+            if (!roleName.equals("MANAGER")) {
+            list = usr.selectByUser(userID);
+            }
             request.setAttribute("list", list);
             //Add for BLOCK View
             Object selectedWeek = session.getAttribute("selectedWeek");
@@ -142,7 +149,7 @@ public class UserShiftController extends HttpServlet {
             List<Users> userList = UsersRepository.select();
             int shiftID = Integer.parseInt(request.getParameter("shiftID"));
             String date = request.getParameter("date");
-            request.setAttribute("usl",userList);
+            request.setAttribute("usl", userList);
             request.setAttribute("shiftID", shiftID);
             request.setAttribute("date", date);
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
