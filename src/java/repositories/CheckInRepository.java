@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import models.CheckIn;
 import static services.Utilities.sdfDateTime;
@@ -31,6 +32,29 @@ public class CheckInRepository {
         ResultSet rs = stm.executeQuery(" select ci.checkInID, ci.checkInTime, ci.userID, u.fullName \n"
                 + " from CheckIn as ci left join Users as u \n"
                 + " on ci.userID =u.userID");
+        list = new ArrayList<>();
+        while (rs.next()) {
+            CheckIn checkIn = new CheckIn();
+            checkIn.setCheckInID(rs.getInt("checkInID"));
+            checkIn.setCheckInTime(rs.getTimestamp("checkInTime"));
+            checkIn.setUserID(rs.getInt("userID"));
+            checkIn.setFullName(rs.getString("fullName"));
+            list.add(checkIn);
+        }
+        con.close();
+        return list;
+    }
+    
+     public List<CheckIn> search(Date minTime, Date maxTime, int userID) throws SQLException {
+        List<CheckIn> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("select ci.checkInID, ci.checkInTime, ci.userID, u.fullName\n"
+                + "from CheckIn as ci left join Users as u on ci.userID = u.userID\n"
+                + "where checkInTime between ? and ? and ci.userID = ? ");
+        stm.setString(1, sdfDateTime.format(minTime));
+        stm.setString(2, sdfDateTime.format(maxTime));
+        stm.setInt(3, userID);
+        ResultSet rs = stm.executeQuery();
         list = new ArrayList<>();
         while (rs.next()) {
             CheckIn checkIn = new CheckIn();

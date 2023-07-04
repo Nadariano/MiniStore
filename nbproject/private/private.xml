@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/acer/Desktop/MS_28/MiniStore/src/java/repositories/UserShiftRepository.java</file>
-            <file>file:/C:/Users/acer/Desktop/MS_28/MiniStore/src/java/models/UserShift.java</file>
-            <file>file:/C:/Users/acer/Desktop/MS_28/MiniStore/web/views/schedule/listAll.jsp</file>
+            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/src/java/repositories/UserShiftRepository.java</file>
+            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/web/views/schedule/listAll.jsp</file>
+            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/src/java/controllers/ScheduleController.java</file>
+            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/web/views/userShift/listOf.jsp</file>
+            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/src/java/services/Utilities.java</file>
+            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/src/java/controllers/UserShiftController.java</file>
+            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/web/layouts/main.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -69,5 +69,12 @@ public class CheckOut {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
+    @Override
+    public String toString() {
+        return "CheckOut{" + "checkOutID=" + checkOutID + ", checkOutTime=" + checkOutTime + ", userID=" + userID + ", fullName=" + fullName + '}';
+    }
+    
+    
     
 }

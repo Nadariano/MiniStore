@@ -20,13 +20,46 @@ public class ShiftTime {
    private Date timeEnd;
     private float coeShift;
     private float coeOT;
+    private float coeDayOff;
     private float wage;
     private int status;
     private String statusText;
     private String note;
+    private String shiftName;
 
     public ShiftTime() {
     }
+
+    public ShiftTime(int shiftID, Date timeStart, Date timeEnd, float coeShift, float coeOT, float coeDayOff, float wage, int status, String note, String shiftName) {
+        this.shiftID = shiftID;
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
+        this.coeShift = coeShift;
+        this.coeOT = coeOT;
+        this.coeDayOff = coeDayOff;
+        this.wage = wage;
+        this.status = status;
+        this.note = note;
+        this.shiftName = shiftName;
+    }
+
+   
+    public ShiftTime(Date timeStart, Date timeEnd, float coeShift, float coeOT, float coeDayOff, float wage, int status, String statusText, String note, String shiftName) {
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
+        this.coeShift = coeShift;
+        this.coeOT = coeOT;
+        this.coeDayOff = coeDayOff;
+        this.wage = wage;
+        this.status = status;
+        this.statusText = statusText;
+        this.note = note;
+        this.shiftName = shiftName;
+    }
+    
+    
+    
+    
 
     public ShiftTime(int shiftID, Date timeStart, Date timeEnd, float coeShift, float coeOT, float wage, int status, String statusText, String note) {
         this.shiftID = shiftID;
@@ -60,6 +93,22 @@ public class ShiftTime {
         this.status = status;
         this.note = note;
     }
+
+    public ShiftTime(int shiftID, Date timeStart, Date timeEnd, float coeShift, float coeOT, float coeDayOff, float wage, int status, String statusText, String note, String shiftName) {
+        this.shiftID = shiftID;
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
+        this.coeShift = coeShift;
+        this.coeOT = coeOT;
+        this.coeDayOff = coeDayOff;
+        this.wage = wage;
+        this.status = status;
+        this.statusText = statusText;
+        this.note = note;
+        this.shiftName = shiftName;
+    }
+    
+    
 
     public int getShiftID() {
         return shiftID;
@@ -132,6 +181,24 @@ public class ShiftTime {
     public void setNote(String note) {
         this.note = note;
     }
+
+    public float getCoeDayOff() {
+        return coeDayOff;
+    }
+
+    public void setCoeDayOff(float coeDayOff) {
+        this.coeDayOff = coeDayOff;
+    }
+
+    public String getShiftName() {
+        return shiftName;
+    }
+
+    public void setShiftName(String shiftName) {
+        this.shiftName = shiftName;
+    }
+    
+    
   
     
 }
