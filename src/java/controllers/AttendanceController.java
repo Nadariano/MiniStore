@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -88,6 +89,7 @@ public class AttendanceController extends HttpServlet {
                     request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
                 }
                 break;
+
             case "updateOfUsers":
                 try {
                     updateOfUsers(request, response);
@@ -148,21 +150,55 @@ public class AttendanceController extends HttpServlet {
         }
     }
 
-    private void listOfUsers(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
-        try {
-            int userID = Integer.parseInt(request.getParameter("userID"));
-            AttendanceRepository af = new AttendanceRepository();
-            List<Attendance> list = af.selectUserAttendance(userID);
-            request.setAttribute("list", list);
-            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-        } catch (SQLException ex) {
-            //Hien trang thong bao loi
-            ex.printStackTrace();//In thông báo chi tiết cho developer
-            request.setAttribute("message", ex.getMessage());
-            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-        }
-    }
+   private void listOfUsers(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException, SQLException {
+      try {
+          int userID = Integer.parseInt(request.getParameter("userID"));
+           AttendanceRepository af = new AttendanceRepository();
+          List<Attendance> list = af.selectUserAttendance(userID);
+           request.setAttribute("list", list);
+           request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+       } catch (SQLException ex) {
+           //Hien trang thong bao loi
+           ex.printStackTrace();//In thông báo chi tiết cho developer
+           request.setAttribute("message", ex.getMessage());
+           request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+      }
+ }
+    
+//    private void listOfUsers(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException, SQLException {
+//        try {
+//            int userID = Integer.parseInt(request.getParameter("userID"));
+//            AttendanceRepository af = new AttendanceRepository();
+//            HashMap<Integer, Attendance> map = af.selectUserAttendance(userID);
+//            request.setAttribute("map", map);
+//            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//        } catch (SQLException ex) {
+//            //Hien trang thong bao loi
+//            ex.printStackTrace();//In thông báo chi tiết cho developer
+//            request.setAttribute("message", ex.getMessage());
+//            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//        }
+//        HttpSession session = request.getSession();
+//        try {
+//            int userID = Integer.parseInt(request.getParameter("userID"));
+//            UserAttendance userAttendance = (UserAttendance) session.getAttribute("userAttendance");
+//            if (userAttendance == null) {
+//                //Nếu chưa có giỏ hàng thì tạo giỏ hàng mới
+//                userAttendance = new UserAttendance();
+//                session.setAttribute("userAttendance", userAttendance);
+//            }
+//            userAttendance.add(userID);
+//            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//        } catch (SQLException ex) {
+//            //Hien trang thong bao loi
+//            ex.printStackTrace();//In thông báo chi tiết cho developer
+//            request.setAttribute("message", ex.getMessage());
+//            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//        }
+//
+//    }
 
     private void updateOfUsers(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -171,29 +207,54 @@ public class AttendanceController extends HttpServlet {
             case "update":
                 try {
                     AttendanceRepository af = new AttendanceRepository();
-                    int attendID = Integer.parseInt(request.getParameter("attendID"));
-                    Date date = sdfDate.parse(request.getParameter("date"));
-                    String fullName = request.getParameter("fullName");
-                    Time checkIn = Time.valueOf(request.getParameter("checkIn"));
-                    Time checkOut = Time.valueOf(request.getParameter("checkOut"));
-                    int lateTime = Integer.parseInt(request.getParameter("lateTime"));
-                    int overTime = Integer.parseInt(request.getParameter("overTime"));
-                    int userID = Integer.parseInt(request.getParameter("userID"));
-                    String note = request.getParameter("note");
-                    String statusText = "Unknown";
-                    String confirm = request.getParameter("confirm");
-                    int status = 2;
-                    if (confirm.equalsIgnoreCase("Accepted")) {
-                        statusText = "Available";
-                        status = 1;
-                    } else {
-                        statusText = "Not Available";
-                        status = 0;
+                    String[] attendIDStr = request.getParameter("attendID").split(",");
+                    int[] attendIDs = new int[attendIDStr.length];
+                    for (int i = 0; i < attendIDStr.length; i++) {
+                        attendIDs[i] = Integer.parseInt(attendIDStr[i]);
                     }
 
+<<<<<<< HEAD
 //                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
 //                    af.update(attendance);
                     response.sendRedirect(request.getContextPath() + "/attendance/listOfUsers.do?userID="+ userID);
+=======
+//                    Date date = sdfDate.parse(request.getParameter("date"));
+//                    String fullName = request.getParameter("fullName");
+//                    Time checkIn = Time.valueOf(request.getParameter("checkIn"));
+//                    Time checkOut = Time.valueOf(request.getParameter("checkOut"));
+//                    int lateTime = Integer.parseInt(request.getParameter("lateTime"));
+//                    int overTime = Integer.parseInt(request.getParameter("overTime"));
+                    int userID = Integer.parseInt(request.getParameter("userID"));
+                    String[] notes = request.getParameterValues("note");
+                    String[] confirms = request.getParameterValues("confirm");
+                    String [] statusTexts = request.getParameterValues("statusText");
+                    String[] statusStr = request.getParameter("status").split(",");
+                    int[] statuses = new int[statusStr.length];
+                    for (int i = 0; i < statusStr.length; i++) {
+                        statuses[i] = Integer.parseInt(statusStr[i]);
+                    }
+                    for (int i = 0 ; i < confirms.length; i++){
+                        if (confirms[i].equalsIgnoreCase("Accepted")){
+                            statusTexts[i]= "Available";
+                            statuses[i] = 1;
+                        }else {
+                            statusTexts[i]= "Not Available";
+                            statuses[i] = 0;
+                        }
+                    }
+//                    if (confirm.equalsIgnoreCase("Accepted")) {
+//                        status = 1;
+//                    } else {
+//                        statusText = "Not Available";
+//                        status = 0;
+//                    }
+                    for (int i=0 ; i< attendIDs.length; i++){
+                        af.updateOfUsers(attendIDs[i], statuses[i], notes[i]);
+                    }
+//                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
+//                    af.updateOfUsers(attendIDs, statuses, notes);
+                    response.sendRedirect(request.getContextPath() + "/attendance/listOfUsers.do?userID=" + userID);
+>>>>>>> ChunHai
 
                 } catch (Exception ex) {
                     //Hiện trang thông báo lỗi
@@ -242,8 +303,9 @@ public class AttendanceController extends HttpServlet {
                     String fullName = request.getParameter("fullName");
                     Time checkIn = Time.valueOf(request.getParameter("checkIn"));
                     Time checkOut = Time.valueOf(request.getParameter("checkOut"));
-                    int lateTime = Integer.parseInt(request.getParameter("lateTime"));
-                    int overTime = Integer.parseInt(request.getParameter("overTime"));
+                    Time soonTime = Time.valueOf(request.getParameter("soonTime"));
+                    Time lateTime = Time.valueOf(request.getParameter("lateTime"));
+                    Time duration = Time.valueOf(request.getParameter("duration"));
                     int userID = Integer.parseInt(request.getParameter("userID"));
                     String note = request.getParameter("note");
                     String statusText = request.getParameter("statusText");
@@ -256,8 +318,13 @@ public class AttendanceController extends HttpServlet {
                         status = 0;
                     }
 
+<<<<<<< HEAD
 //                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
 //                    ar.update(attendance);
+=======
+                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, soonTime, lateTime, duration, status, note, userID, fullName, confirm, statusText);
+                    ar.update(attendance);
+>>>>>>> ChunHai
                     response.sendRedirect(request.getContextPath() + "/attendance/list.do");
 
                 } catch (Exception ex) {
@@ -277,7 +344,7 @@ public class AttendanceController extends HttpServlet {
 
     protected void create(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-         try {
+        try {
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -300,14 +367,20 @@ public class AttendanceController extends HttpServlet {
                     String fullName = request.getParameter("fullName");
                     Date checkIn = sdfTime.parse(request.getParameter("checkIn"));
                     Date checkOut = sdfTime.parse(request.getParameter("checkOut"));
-                    int lateTime = Integer.parseInt(request.getParameter("lateTime"));
-                    int overTime = Integer.parseInt(request.getParameter("overTime"));
+                    Date soonTime = sdfTime.parse(request.getParameter("soonTime"));
+                    Date lateTime = sdfTime.parse(request.getParameter("lateTime"));
+                    Date duration = sdfTime.parse(request.getParameter("duration"));
                     int status = 0;
                     String statusText = "Not Available";
                     String confirm = "Denied";
                     String note = "";
+<<<<<<< HEAD
 //                    Attendance attendance = new Attendance(userID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
 //                    af.create(attendance);
+=======
+                    Attendance attendance = new Attendance(userID, date, checkIn, checkOut, soonTime, lateTime, duration, status, note, userID, fullName, confirm, statusText);
+                    af.create(attendance);
+>>>>>>> ChunHai
                     response.sendRedirect(request.getContextPath() + "/attendance/list.do");
                 } catch (Exception ex) {
                     //Hiện trang thông báo lỗi

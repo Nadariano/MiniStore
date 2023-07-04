@@ -8,6 +8,16 @@
     </head>
 
     <body>
+<<<<<<< HEAD
+=======
+        <c:choose>
+            <c:when test="${Account.roleName.equals('MANAGER')}">
+                <!-- Preloader -->
+                <div class="preloader">
+                    <div class="cssload-speeding-wheel"></div>
+                </div>
+                <!-- Page Content -->
+>>>>>>> ChunHai
 
         <!-- Preloader -->
         <div class="preloader">
@@ -41,8 +51,9 @@
                                                 <th>Author</th>
                                                 <th>Check In</th>
                                                 <th>Check Out</th>
+                                                <th>Soon Time</th>
                                                 <th>Late Time</th>
-                                                <th>Over Time</th>
+                                                <th>Duration</th>
                                                 <th>Status</th>
                                                 <th>Note</th>
                                                 <th>Confirmation</th>
@@ -58,8 +69,9 @@
                                                     <td>${attendance.fullName}</td>
                                                     <td>${attendance.checkIn}</td>
                                                     <td>${attendance.checkOut}</td>
+                                                    <td>${attendance.soonTime}</td>
                                                     <td>${attendance.lateTime}</td>
-                                                    <td>${attendance.overTime}</td>
+                                                    <td>${attendance.duration}</td>
                                                     <td>${attendance.statusText}</td>
                                                     <td>${attendance.note}</td>
                                                     <td>${attendance.confirm}</td>
