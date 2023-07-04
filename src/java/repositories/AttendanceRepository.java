@@ -20,7 +20,6 @@ import java.util.List;
 import models.Attendance;
 import static services.Utilities.sdfTime;
 import static services.Utilities.sdfDate;
-import static services.Utilities.sdfDateTime;
 
 /**
  *
@@ -35,13 +34,8 @@ public class AttendanceRepository {
         //Tạo đối tượng statement
         Statement stm = con.createStatement();
         //Thực thi lệnh SELECT
-<<<<<<< HEAD
-        ResultSet rs = stm.executeQuery("select a.attendID, a.date, a.checkIn, a.checkOut, a.duration, a.lateTime, a.soonTime,a.status, a.note, a.userID, u.fullName, a.shiftID\n"
-                + "from Attendance as a left join Users as u on a.userID = u.userID");
-=======
         ResultSet rs = stm.executeQuery("select attendID, date, checkIn, checkOut, soonTime, lateTime, duration, attendance.status, "
                 + "attendance.note, attendance.userID, users.fullName from attendance join users on attendance.userID = users.userID");
->>>>>>> ChunHai
         list = new ArrayList<>();
         while (rs.next()) {
             Attendance attendance = new Attendance();
@@ -49,20 +43,13 @@ public class AttendanceRepository {
             attendance.setDate(rs.getDate("date"));
             attendance.setCheckIn(rs.getTime("checkIn"));
             attendance.setCheckOut(rs.getTime("checkOut"));
-<<<<<<< HEAD
-            attendance.setDuration(rs.getTime("duration"));
-            attendance.setLateTime(rs.getTime("lateTime"));
-            attendance.setSoonTime(rs.getTime("soonTime"));
-=======
             attendance.setSoonTime(rs.getTime("soonTime"));
             attendance.setLateTime(rs.getTime("lateTime"));
             attendance.setDuration(rs.getTime("duration"));
->>>>>>> ChunHai
             attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
             attendance.setStatus(rs.getInt("status"));
             attendance.setNote(rs.getString("note"));
             attendance.setUserID(rs.getInt("userID"));
-            attendance.setShiftID(rs.getInt("shiftID"));
             attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
             attendance.setFullName(rs.getString("fullName"));
             list.add(attendance);
@@ -85,24 +72,17 @@ public class AttendanceRepository {
         list = new ArrayList<>();
         while (rs.next()) {
             Attendance attendance = new Attendance();
-             attendance.setAttendID(rs.getInt("attendID"));
+            attendance.setAttendID(rs.getInt("attendID"));
             attendance.setDate(rs.getDate("date"));
             attendance.setCheckIn(rs.getTime("checkIn"));
             attendance.setCheckOut(rs.getTime("checkOut"));
-<<<<<<< HEAD
-            attendance.setDuration(rs.getDate("duration"));
-            attendance.setLateTime(rs.getTime("lateTime"));
-            attendance.setSoonTime(rs.getTime("soonTime"));
-=======
             attendance.setSoonTime(rs.getTime("soonTime"));
             attendance.setLateTime(rs.getTime("lateTime"));
             attendance.setDuration(rs.getTime("duration"));
->>>>>>> ChunHai
             attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
             attendance.setStatus(rs.getInt("status"));
             attendance.setNote(rs.getString("note"));
             attendance.setUserID(rs.getInt("userID"));
-            attendance.setShiftID(rs.getInt("shiftID"));
             attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
             attendance.setFullName(rs.getString("fullName"));
             list.add(attendance);
@@ -143,19 +123,6 @@ public class AttendanceRepository {
 //}
     public void create(Attendance attendance) throws SQLException {
         Connection con = DBContext.getConnection();
-<<<<<<< HEAD
-        PreparedStatement stm = con.prepareStatement("insert into Attendance values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        stm.setString(1, sdfDate.format(attendance.getDate()));
-        stm.setString(2, sdfDateTime.format(attendance.getCheckIn()));
-        stm.setString(3, sdfDateTime.format(attendance.getCheckOut()));
-        stm.setString(4, sdfTime.format(attendance.getDuration()));
-        stm.setString(5, sdfTime.format(attendance.getLateTime()));
-        stm.setString(6, sdfTime.format(attendance.getSoonTime()));
-        stm.setInt(7, attendance.getStatus());
-        stm.setString(8, attendance.getNote());
-        stm.setInt(9, attendance.getUserID());
-        stm.setInt(10, attendance.getShiftID());
-=======
         PreparedStatement stm = con.prepareStatement("insert into Attendance values(?, ?, ?, ?, ?, ?, ?, ?, ?)");
         stm.setString(1, sdfDate.format(attendance.getDate()));
         stm.setString(2, sdfTime.format(attendance.getCheckIn()));
@@ -166,7 +133,6 @@ public class AttendanceRepository {
         stm.setInt(7, attendance.getStatus());
         stm.setString(8, attendance.getNote());
         stm.setInt(9, attendance.getUserID());
->>>>>>> ChunHai
         int count = stm.executeUpdate();
         con.close();
     }
@@ -188,14 +154,9 @@ public class AttendanceRepository {
             attendance.setDate(rs.getDate("date"));
             attendance.setCheckIn(rs.getTime("checkIn"));
             attendance.setCheckOut(rs.getTime("checkOut"));
-<<<<<<< HEAD
-//            attendance.setLateTime(rs.getInt("lateTime"));
-//            attendance.setOverTime(rs.getInt("overTime"));
-=======
             attendance.setSoonTime(rs.getTime("soonTime"));
             attendance.setLateTime(rs.getTime("lateTime"));
             attendance.setDuration(rs.getTime("duration"));
->>>>>>> ChunHai
             attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
             attendance.setStatus(rs.getInt("status"));
             attendance.setNote(rs.getString("note"));
@@ -216,14 +177,6 @@ public class AttendanceRepository {
         stm.setString(1, sdfDate.format(attendance.getDate()));
         stm.setString(2, sdfTime.format(attendance.getCheckIn()));
         stm.setString(3, sdfTime.format(attendance.getCheckOut()));
-<<<<<<< HEAD
-//        stm.setInt(4, attendance.getLateTime());
-//        stm.setInt(5, attendance.getOverTime());
-        stm.setInt(6, attendance.getStatus());
-        stm.setString(7, attendance.getNote());
-        stm.setInt(8, attendance.getUserID());
-        stm.setInt(9, attendance.getAttendID());
-=======
         stm.setString(4, sdfTime.format(attendance.getSoonTime()));
         stm.setString(5, sdfTime.format(attendance.getLateTime()));
         stm.setString(6, sdfTime.format(attendance.getDuration()));
@@ -231,7 +184,6 @@ public class AttendanceRepository {
         stm.setString(8, attendance.getNote());
         stm.setInt(9, attendance.getUserID());
         stm.setInt(10, attendance.getAttendID());
->>>>>>> ChunHai
 
         //Thực thi lệnh sql
         int count = stm.executeUpdate();

@@ -13,23 +13,6 @@
             <div class="cssload-speeding-wheel"></div>
         </div>
         <!-- Page Content -->
-<<<<<<< HEAD
-        <c:choose>
-            <c:when test="${!Account.roleName.equals('ADMIN')}">
-                <div class="container-fluid">
-                    <div class="row bg-title">
-                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                            <h4 class="page-title">ATTENDANCE LIST</h4>
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /row -->
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="white-box">
-                                <div class="table-responsive">
-                                    <table class="table" id="example">
-=======
 
         <div class="container-fluid">
             <div class="row bg-title">
@@ -63,7 +46,6 @@
                                             <!--                                        <th>Operation</th>-->
                                         </tr>
                                     </thead>
->>>>>>> ChunHai
 
                                     <tbody>
                                         <c:forEach var="attendance" items="${list}" varStatus="loop">
@@ -176,17 +158,7 @@
         </div>
         <!-- /.container-fluid -->
 
-<<<<<<< HEAD
-                <!-- /#page-wrapper -->
-                  </c:when>
-            <c:otherwise>
-                <jsp:forward page="/error/error.do" />
-            </c:otherwise>
-        </c:choose>
-            </body>
-=======
         <!-- /#page-wrapper -->
     </body>
->>>>>>> ChunHai
 
-        </html>
+</html>
