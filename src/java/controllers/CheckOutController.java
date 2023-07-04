@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -142,14 +143,25 @@ public class CheckOutController extends HttpServlet {
             throws ServletException, IOException {
 //        CheckOutRepository cir = new CheckOutRepository();
         CheckOutService cos = new CheckOutService();
-        try {
-            cos.readExcel();
-            response.sendRedirect(request.getContextPath() + "/checkOut/listOf.do");
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("message", e.getMessage());
-            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+        String op = request.getParameter("op");
+        switch (op) {
+            case "readExcel":
+                try {
+                    String fileName = request.getParameter("fileName");
+                    File file = new File(request.getServletContext().getAttribute("FILES_DIR") + File.separator + fileName);
+                    String EXCEL_FILE_PATH = file.getAbsolutePath();
+                    cos.readExcel(EXCEL_FILE_PATH);
+                    response.sendRedirect(request.getContextPath() + "/checkOut/listOf.do");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    request.setAttribute("message", e.getMessage());
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+                break;
+            default:
+                break;
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

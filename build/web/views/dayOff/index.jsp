@@ -21,7 +21,7 @@
                 </div>
 
 
-                <c:if test="${Account.roleName.equals('Manager')}">
+                <c:if test="${Account.roleName.equals('ADMIN')}">
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
                         <a href="<c:url value="/dayOff/create.do"/>" class="btn btn-sm btn-success">Add another day-off</a>
                     </div>
@@ -44,7 +44,7 @@
                                         <th>Description</th>
                                         <th>Status</th>
                                         <th>Note</th>
-                                            <c:if test="${Account.roleName.equals('Manager')}">
+                                            <c:if test="${Account.roleName.equals('ADMIN')}">
                                             <th>Operation</th>
                                             </c:if>
                                     </tr>
@@ -59,7 +59,7 @@
                                             <td>${dayOff.description}</td>
                                             <td>${dayOff.statusText}</td>
                                             <td>${dayOff.note}</td>
-                                            <c:if test="${Account.roleName.equals('Manager')}">
+                                            <c:if test="${Account.roleName.equals('ADMIN')}">
                                                 <td>
                                                     <a href="<c:url value="/dayOff/edit.do?dayOffID=${dayOff.dayOffID}" />" class="btn btn-sm btn-primary">Edit</a>
                                                     <a href="<c:url value="/dayOff/delete.do?dayOffID=${dayOff.dayOffID}" /> " onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-danger">Delete</a>

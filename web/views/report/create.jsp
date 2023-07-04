@@ -81,6 +81,24 @@
                                            class="form-control form-control-line" />
                                 </div>
                             </div>
+                                           
+                            
+                            <div class="form-group">
+                                <label class="col-md-12">Request Soon Time:</label>
+                                <div class="col-md-12">
+                                    <input type="time" placeholder="Select Request Soon Time" name="requestSoonTime" value="${report.requestSoonTime}"
+                                                class="form-control form-control-line" />
+                                </div>
+                            </div>
+                                           
+                                           
+                           <div class="form-group">
+                                <label class="col-md-12">Request Late Time:</label>
+                                <div class="col-md-12">
+                                    <input type="time" placeholder="Select Request Late Time" name="requestLateTime" value="${report.requestLateTime}"
+                                                class="form-control form-control-line" />
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <div class="col-sm-12">

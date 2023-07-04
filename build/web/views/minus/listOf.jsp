@@ -14,7 +14,7 @@
 
     <body>
         <c:choose>
-            <c:when test="${Account.roleName.equals('Manager')}">
+            <c:when test="${Account.roleName.equals('MANAGER')}">
                 <!-- Preloader -->
                 <div class="preloader">
                     <div class="cssload-speeding-wheel"></div>
@@ -62,7 +62,7 @@
                                                     <td>${minus.status}</td>
                                                     <td>${minus.note}</td>
                                                     <td>
-                                                        <c:if test="${!role.roleName.equals('Manager')}">
+                                                        <c:if test="${!role.roleName.equals('MANAGER')}">
                                                             <a href="<c:url value="/minus/update.do?minusID=${minus.minusID}" />" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i>Update</a> <br/>
                                                             <p> </p>
                                                             <a href="<c:url value="/minus/delete.do?minusID=${minus.minusID}" />" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-warning"><i class="bi bi-trash3"></i>Delete</a>

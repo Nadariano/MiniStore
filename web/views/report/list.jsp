@@ -9,7 +9,7 @@
 
     <body>
         <c:choose>
-            <c:when test="${Account.roleName.equals('Manager')}">
+            <c:when test="${Account.roleName.equals('MANAGER')}">
                 <!-- Preloader -->
                 <div class="preloader">
                     <div class="cssload-speeding-wheel"></div>
@@ -23,41 +23,58 @@
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
-                    
-                    <form action="<c:url value="/report/searchByDate.do"/>">
+
+                    <form action="<c:url value='/report/search.do'/>">
                         <div style="display: flex; align-items: center; justify-content: center;">
-                            <select name="day" style="margin-right: 8px;">
-                                <option value="">Day</option>
-                                <% for (int i = 1; i <= 31; i++) {%>
-                                <option value="<%= i%>"><%= i%></option>
-                                <% } %>
+                            <select id="searchType" name="searchType" onchange="changeSearchType()" style="margin-right: 8px;">
+                                <option value="date">Search By Date</option>
+                                <option value="name">Search By Name</option>
                             </select>
 
-                            <select name="month" style="margin-right: 8px;">
-                                <option value="">Month</option>
-                                <% for (int i = 1; i <= 12; i++) {%>
-                                <option value="<%= i%>"><%= i%></option>
-                                <% } %>
-                            </select>
+                            <div id="dateInputs">
+                                <select name="day" style="margin-right: 8px;">
+                                    <option value="">Day</option>
+                                    <% for (int i = 1; i <= 31; i++) {%>
+                                    <option value="<%= i%>"><%= i%></option>
+                                    <% } %>
+                                </select>
 
-                            <select name="year" style="margin-right: 8px;">
-                                <option value="">Year</option>
-                                <% for (int i = 1900; i <= 2023; i++) {%>
-                                <option value="<%= i%>"><%= i%></option>
-                                <% }%>
-                            </select>
+                                <select name="month" style="margin-right: 8px;">
+                                    <option value="">Month</option>
+                                    <% for (int i = 1; i <= 12; i++) {%>
+                                    <option value="<%= i%>"><%= i%></option>
+                                    <% } %>
+                                </select>
 
-                            <button type="submit" class="btn btn-primary" name="op" value="search" style="margin-right: 8px;">Search By Date</button>
+                                <select name="year" style="margin-right: 8px;">
+                                    <option value="">Year</option>
+                                    <% for (int i = 1900; i <= 2023; i++) {%>
+                                    <option value="<%= i%>"><%= i%></option>
+                                    <% }%>
+                                </select>
+                            </div>
+
+                            <div id="nameInputs" style="display: none;">
+                                <label for="fullName" style="margin-right: 8px;">Name:</label>
+                                <input type="text" id="fullName" name="fullName" style="margin-right: 8px;">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" name="op" value="search" style="margin-right: 8px;">Search</button>
                         </div>
                     </form>
 
-                    <form action="<c:url value="/report/searchByName.do"/>">
-                        <div style="display: flex; align-items: center; justify-content: center;">
-                            <label for="fullName" style="margin-right: 8px;">Name:</label>
-                            <input type="text" id="fullName" name="fullName" style="margin-right: 8px;">
-                            <button type="submit" class="btn btn-primary" name="op" value="search" style="margin-right: 8px;">Search By Name</button>
-                        </div>
-                    </form>
+                    <script>
+                        function changeSearchType() {
+                            var searchType = document.getElementById("searchType").value;
+                            if (searchType === "date") {
+                                document.getElementById("dateInputs").style.display = "block";
+                                document.getElementById("nameInputs").style.display = "none";
+                            } else {
+                                document.getElementById("dateInputs").style.display = "none";
+                                document.getElementById("nameInputs").style.display = "block";
+                            }
+                        }
+                    </script>
                     <!-- /row -->
                     <div class="row">
                         <div class="col-sm-12">
@@ -75,6 +92,9 @@
                                                 <th>Author</th>
                                                 <th>Description</th>
                                                 <th>Planned Date</th>
+                                                <th>Request Soon Time</th>
+                                                <th>Request Late Time</th>
+                                                <th>Shift ID</th>
                                                 <th>Status</th>
                                                 <th>Note</th>
                                                 <th>Operations</th>
@@ -91,6 +111,9 @@
                                                     <td>${report.fullName}</td>
                                                     <td>${report.description}</td>
                                                     <td>${report.plannedDate}</td>
+                                                    <td>${report.requestSoonTime}</td>
+                                                    <td>${report.requestLateTime}</td>
+                                                    <td>${report.shiftID}</td>
                                                     <c:if test="${report.statusText=='Rejected'}">
                                                         <td style="background-color:  #ac2925; color: whitesmoke " >${report.statusText}</td>
                                                     </c:if>

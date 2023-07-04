@@ -59,6 +59,11 @@
     padding: 5%;
     border: solid black 5px;
 }
+.welcome-title{
+    text-align: center;
+    font-family: fantasy;
+    font-size: 250%;
+}
 .profile-content{
     display: flex;
     justify-content: center;
@@ -79,13 +84,13 @@
     max-height: 100%;
 }
 .profile-img{
-    margin-top: 10%;
+    /*margin-top: 10%;*/
     width: 40%;
     background-color: whitesmoke;
 }
-.user-bg {
-    /*border: solid #686868 5px;*/
-    /*border-radius: 50px;*/
+/*.user-bg {
+    border: solid #686868 5px;
+    border-radius: 50px;
     margin: 10px;
     width: 40%;
     height: auto;
@@ -105,8 +110,8 @@
     width: 50%;
     height: auto;
     padding: 5%;
-    /*border-radius: 50px 50px;*/
-    /*border: solid #686868 5px;*/
+    border-radius: 50px 50px;
+    border: solid #686868 5px;
     background: rgb(79,84,103);
     background: linear-gradient(41deg, rgba(79,84,103,1) 0%, rgba(137,184,212,0.9640231092436975) 57%);
 }
@@ -116,16 +121,16 @@
 .info-text h3{
     font-family: sans-serif;
     color: whitesmoke;
-}
-.buttons a{
+}*/
+/*.buttons a{
     margin: 10%;
     padding: 2%;
     font-size: 150%;
-}
-.buttons a:hover{
+}*/
+/*.buttons a:hover{
     background-color: greenyellow;
     color: black;
-}
+}*/
 @media (min-width: 768px) {
     .profile-content {
         width: 100%;
@@ -135,4 +140,94 @@
     .user-bg {
         max-width: 40%;
     }
+}
+
+
+
+/* Avatar section */
+.avatar-section {
+    width: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.avatar-section img {
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    max-height: 500px;
+}
+
+/* Info section */
+.info-section {
+
+}
+/*Schedule*/
+.schedule {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 20px auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.schedule th,
+.schedule td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    width: 100px;
+}
+.shift{
+    height: 150px;
+}
+.table-col{
+    display: flex;
+}
+.schedule th {
+    background-color: #81C2E6;
+    color: white;
+}
+
+.shift:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.shift td:first-of-type {
+    font-weight: bold;
+    background-color: #CBE3EF;
+}
+
+/*Hover for schedule view*/
+.tooltipp {
+    position: relative;
+    display: inline-block;
+    padding: 2%;
+    background-color: greenyellow;
+    border-radius: 25px 25px;
+}
+.tooltipp .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 105%;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltipp:hover .tooltiptext {
+    visibility: visible;
+}
+.schedule .today{
+    height: 100%;
+    background-color: goldenrod;
+    /*color: red;*/
 }

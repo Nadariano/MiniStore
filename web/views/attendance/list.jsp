@@ -8,6 +8,8 @@
     </head>
 
     <body>
+<<<<<<< HEAD
+=======
         <c:choose>
             <c:when test="${Account.roleName.equals('MANAGER')}">
                 <!-- Preloader -->
@@ -15,7 +17,15 @@
                     <div class="cssload-speeding-wheel"></div>
                 </div>
                 <!-- Page Content -->
+>>>>>>> ChunHai
 
+        <!-- Preloader -->
+        <div class="preloader">
+            <div class="cssload-speeding-wheel"></div>
+        </div>
+        <!-- Page Content -->
+        <c:choose>
+            <c:when test="${Account.roleName.equals('MANAGER')}">
                 <div class="container-fluid">
                     <div class="row bg-title">
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">

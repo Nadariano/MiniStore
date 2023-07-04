@@ -99,6 +99,22 @@
                                     <input type="hidden" name="plannedDate" value="${report.plannedDate}">
                                 </div>
                             </div>
+                                
+                                <div class="form-group">
+                                <label class="col-md-12">Request Soon Time:</label>
+                                <div class="col-md-12">
+                                    <input disabled type="time" id="requestSoonTime" placeholder="Request Soon Time" value="${report.requestSoonTime}" class="form-control form-control-line" />
+                                    <input type="hidden" name="requestSoonTime" value="${report.requestSoonTime}">
+                                </div>
+                            </div>
+                                
+                                <div class="form-group">
+                                <label class="col-md-12">Request Late Time:</label>
+                                <div class="col-md-12">
+                                    <input disabled type="time" id="requestLateTime" placeholder="Request Late Time" value="${report.requestLateTime}" class="form-control form-control-line" />
+                                    <input type="hidden" name="requestLateTime" value="${report.requestLateTime}">
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label class="col-md-12">Status:</label>

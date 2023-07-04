@@ -9,7 +9,7 @@
 
     <body>
         <c:choose>
-            <c:when test="${Account.roleName.equals('Manager')}">
+            <c:when test="${Account.roleName.equals('ADMIN')}">
                 <!-- Preloader -->
                 <div class="preloader">
                     <div class="cssload-speeding-wheel"></div>
@@ -45,9 +45,9 @@
                                         <label class="col-md-12">Status</label>
                                         <div class="col-md-12">
                                             <select name="roleStatus"class="form-control form-control-line">
-                                                <option value="1">Available</option>
-                                                <option value="2">Processing</option>
-                                                <option value="3">Not Available</option>
+                                                <option value="0">Available</option>
+                                                <option value="1">Processing</option>
+                                                <option value="2">Not Available</option>
                                             </select>
                                         </div>
                                     </div>

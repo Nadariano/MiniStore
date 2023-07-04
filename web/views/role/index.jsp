@@ -9,7 +9,7 @@
 
     <body>
         <c:choose>
-            <c:when test="${Account.roleName.equals('Manager')}">
+            <c:when test="${Account.roleName.equals('ADMIN')}">
                 <!-- Preloader -->
                 <div class="preloader">
                     <div class="cssload-speeding-wheel"></div>
@@ -52,7 +52,7 @@
                                                     <td>${role.statusText}</td>
                                                     <td>${role.description}</td>
                                                     <td>
-                                                        <c:if test="${!role.roleName.equals('Manager')}">
+                                                        <c:if test="${!role.roleName.equals('ADMIN')}">
                                                         <a href="<c:url value="/role/edit.do?roleID=${role.roleID}" />" class="btn btn-sm btn-primary">Edit</a>
                                                         </c:if>
                                                     </td>

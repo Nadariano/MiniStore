@@ -13,14 +13,14 @@
     </head>
 
     <body>
-        <c:choose>
-            <c:when test="${Account.roleName.equals('Manager')}">
-                <!-- Preloader -->
-                <div class="preloader">
-                    <div class="cssload-speeding-wheel"></div>
-                </div>
-                <!-- Page Content -->
 
+        <!-- Preloader -->
+        <div class="preloader">
+            <div class="cssload-speeding-wheel"></div>
+        </div>
+        <!-- Page Content -->
+        <c:choose>
+            <c:when test="${Account.roleName.equals('MANAGER')}">
                 <div class="container-fluid">
                     <div class="row bg-title">
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -37,6 +37,13 @@
 
 
                                 <form action="<c:url value="/shiftTime/create_handler.do"/>" class="form-horizontal form-material">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Shift Name</label>
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="Shift Name" name="shiftName" value="${shiftTime.shiftName}"
+                                                   class="form-control form-control-line" />
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label class="col-md-12">Time Start</label>
                                         <div class="col-md-12">
@@ -68,7 +75,13 @@
                                                    class="form-control form-control-line" />
                                         </div>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label class="col-md-12">Coefficient of Day Off</label>
+                                        <div class="col-md-12">
+                                            <input type="number"  step="0.1" placeholder="CODO" name="coeDayOff" value="${shiftTime.coeDayOff}"
+                                                   class="form-control form-control-line" />
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label class="col-md-12"> Wage </label>
                                         <div class="col-md-12">
