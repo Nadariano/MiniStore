@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import models.Attendance;
@@ -191,21 +192,309 @@ public class AttendanceRepository {
         con.close();
     }
 
-    public void updateOfUsers(int attendID, int status, String note) throws SQLException {
+    public void updateOfUsers(String attendID, String status, String note) throws SQLException {
         //Tạo connection để kết nối vào DBMS
         Connection con = DBContext.getConnection();
         //Tạo đối tượng PreparedStatement
 
         PreparedStatement stm = con.prepareStatement("update attendance set status = ?, note = ? from attendance join users on attendance.userID = users.userID where attendID = ?");
-        stm.setInt(1, status);
+        stm.setString(1, status);
         stm.setString(2, note);
-        stm.setInt(3, attendID);
+        stm.setString(3, attendID);
 
         //Thực thi lệnh sql
         int count = stm.executeUpdate();
 
         //Đóng kết nối
         con.close();
+    }
+
+    public void done(int status) throws SQLException {
+        //Tạo connection để kết nối vào DBMS
+        Connection con = DBContext.getConnection();
+        //Tạo đối tượng PreparedStatement
+
+        PreparedStatement stm = con.prepareStatement("update attendance set status = ? from attendance join users on attendance.userID = users.userID");
+        stm.setInt(1, status);
+
+        //Thực thi lệnh sql
+        int count = stm.executeUpdate();
+
+        //Đóng kết nối
+        con.close();
+    }
+
+    public Attendance readDate(Date date, int userID) throws SQLException {
+        Attendance attendance = null;
+        // Create connection to DBMS
+        Connection con = DBContext.getConnection();
+        // Create PreparedStatement object
+        PreparedStatement stm = con.prepareStatement("SELECT attendID, date, checkIn, checkOut, soonTime, lateTime, duration, status, note "
+                + "FROM Attendance "
+                + "WHERE date = ? AND status = 0 AND userID = ?");
+        stm.setString(1, Utilities.sdfDateTime.format(date));
+        stm.setInt(2, userID);
+        // Execute SQL statement
+        ResultSet rs = stm.executeQuery();
+        // Load data into Attendance object if available
+        if (rs.next()) {
+            attendance = new Attendance();
+            attendance.setAttendID(rs.getInt("attendID"));
+            attendance.setDate(rs.getDate("date"));
+            attendance.setCheckIn(rs.getTime("checkIn"));
+            attendance.setCheckOut(rs.getTime("checkOut"));
+            attendance.setSoonTime(rs.getTime("soonTime"));
+            attendance.setLateTime(rs.getTime("lateTime"));
+            attendance.setDuration(rs.getTime("duration"));
+            attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
+            attendance.setNote(rs.getString("note"));
+
+            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+
+        }
+        // Close connection
+        con.close();
+        return attendance;
+    }
+
+    public List<Attendance> search(String date) throws SQLException, ClassNotFoundException {
+        List<Attendance> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("SELECT attendID, Attendance.date, checkIn, checkOut, soonTime, lateTime, duration, Attendance.status, Attendance.note, Attendance.userID, fullName "
+                + "FROM Attendance JOIN Users ON Attendance.userID = Users.userID "
+                + "WHERE Attendance.date = ?");
+        stm.setString(1, date);
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Attendance attendance = new Attendance();
+            attendance.setAttendID(rs.getInt("attendID"));
+            attendance.setDate(rs.getDate("date"));
+            attendance.setCheckIn(rs.getTime("checkIn"));
+            attendance.setCheckOut(rs.getTime("checkOut"));
+            attendance.setSoonTime(rs.getTime("soonTime"));
+            attendance.setLateTime(rs.getTime("lateTime"));
+            attendance.setDuration(rs.getTime("duration"));
+            attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
+            attendance.setNote(rs.getString("note"));
+            attendance.setUserID(rs.getInt("userID"));
+            attendance.setFullName(rs.getString("fullName"));
+
+            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+
+            list.add(attendance);
+        }
+        con.close();
+        return list;
+    }
+
+    public List<Attendance> searchByDayAndMonth(String day, String month) throws SQLException, ClassNotFoundException {
+        List<Attendance> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("SELECT attendID, Attendance.date, checkIn, checkOut, soonTime, lateTime, duration, Attendance.status, Attendance.note, Attendance.userID, fullName FROM Attendance JOIN Users ON Attendance.userID = Users.userID WHERE DAY(Attendance.date) = ? AND MONTH(Attendance.date) = ?");
+        stm.setString(1, day);
+        stm.setString(2, month);
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Attendance attendance = new Attendance();
+            attendance.setAttendID(rs.getInt("attendID"));
+            attendance.setDate(rs.getDate("date"));
+            attendance.setCheckIn(rs.getTime("checkIn"));
+            attendance.setCheckOut(rs.getTime("checkOut"));
+            attendance.setSoonTime(rs.getTime("soonTime"));
+            attendance.setLateTime(rs.getTime("lateTime"));
+            attendance.setDuration(rs.getTime("duration"));
+            attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
+            attendance.setNote(rs.getString("note"));
+            attendance.setUserID(rs.getInt("userID"));
+            attendance.setFullName(rs.getString("fullName"));
+
+            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+
+            list.add(attendance);
+        }
+        con.close();
+        return list;
+    }
+
+    public List<Attendance> searchByDayAndYear(String day, String year) throws SQLException, ClassNotFoundException {
+        List<Attendance> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("SELECT attendID, Attendance.date, checkIn, checkOut, soonTime, lateTime, duration, Attendance.status, Attendance.note, Attendance.userID, fullName FROM Attendance JOIN Users ON Attendance.userID = Users.userID WHERE DAY(Attendance.date) = ? AND YEAR(Attendance.date) = ?");
+        stm.setString(1, day);
+        stm.setString(2, year);
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Attendance attendance = new Attendance();
+            attendance.setAttendID(rs.getInt("attendID"));
+            attendance.setDate(rs.getDate("date"));
+            attendance.setCheckIn(rs.getTime("checkIn"));
+            attendance.setCheckOut(rs.getTime("checkOut"));
+            attendance.setSoonTime(rs.getTime("soonTime"));
+            attendance.setLateTime(rs.getTime("lateTime"));
+            attendance.setDuration(rs.getTime("duration"));
+            attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
+            attendance.setNote(rs.getString("note"));
+            attendance.setUserID(rs.getInt("userID"));
+            attendance.setFullName(rs.getString("fullName"));
+
+            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+
+            list.add(attendance);
+        }
+        con.close();
+        return list;
+    }
+
+    public List<Attendance> searchByMonthAndYear(String month, String year) throws SQLException, ClassNotFoundException {
+        List<Attendance> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("SELECT attendID, Attendance.date, checkIn, checkOut, soonTime, lateTime, duration, Attendance.status, Attendance.note, Attendance.userID, fullName FROM Attendance JOIN Users ON Attendance.userID = Users.userID WHERE MONTH(Attendance.date) = ? AND YEAR(Attendance.date) = ?");
+        stm.setString(1, month);
+        stm.setString(2, year);
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Attendance attendance = new Attendance();
+            attendance.setAttendID(rs.getInt("attendID"));
+            attendance.setDate(rs.getDate("date"));
+            attendance.setCheckIn(rs.getTime("checkIn"));
+            attendance.setCheckOut(rs.getTime("checkOut"));
+            attendance.setSoonTime(rs.getTime("soonTime"));
+            attendance.setLateTime(rs.getTime("lateTime"));
+            attendance.setDuration(rs.getTime("duration"));
+            attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
+            attendance.setNote(rs.getString("note"));
+            attendance.setUserID(rs.getInt("userID"));
+            attendance.setFullName(rs.getString("fullName"));
+
+            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+
+            list.add(attendance);
+        }
+        con.close();
+        return list;
+    }
+
+    public List<Attendance> searchByDay(String day) throws SQLException, ClassNotFoundException {
+        List<Attendance> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("SELECT attendID, Attendance.date, checkIn, checkOut, soonTime, lateTime, duration, Attendance.status, Attendance.note, Attendance.userID, fullName FROM Attendance JOIN Users ON Attendance.userID = Users.userID WHERE DAY(Attendance.date) = ?");
+        stm.setString(1, day);
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Attendance attendance = new Attendance();
+            attendance.setAttendID(rs.getInt("attendID"));
+            attendance.setDate(rs.getDate("date"));
+            attendance.setCheckIn(rs.getTime("checkIn"));
+            attendance.setCheckOut(rs.getTime("checkOut"));
+            attendance.setSoonTime(rs.getTime("soonTime"));
+            attendance.setLateTime(rs.getTime("lateTime"));
+            attendance.setDuration(rs.getTime("duration"));
+            attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
+            attendance.setNote(rs.getString("note"));
+            attendance.setUserID(rs.getInt("userID"));
+            attendance.setFullName(rs.getString("fullName"));
+
+            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+
+            list.add(attendance);
+        }
+        con.close();
+        return list;
+    }
+
+    public List<Attendance> searchByMonth(String month) throws SQLException, ClassNotFoundException {
+        List<Attendance> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("SELECT attendID, Attendance.date, checkIn, checkOut, soonTime, lateTime, duration, Attendance.status, Attendance.note, Attendance.userID, fullName FROM Attendance JOIN Users ON Attendance.userID = Users.userID WHERE MONTH(Attendance.date) = ?");
+        stm.setString(1, month);
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Attendance attendance = new Attendance();
+            attendance.setAttendID(rs.getInt("attendID"));
+            attendance.setDate(rs.getDate("date"));
+            attendance.setCheckIn(rs.getTime("checkIn"));
+            attendance.setCheckOut(rs.getTime("checkOut"));
+            attendance.setSoonTime(rs.getTime("soonTime"));
+            attendance.setLateTime(rs.getTime("lateTime"));
+            attendance.setDuration(rs.getTime("duration"));
+            attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
+            attendance.setNote(rs.getString("note"));
+            attendance.setUserID(rs.getInt("userID"));
+            attendance.setFullName(rs.getString("fullName"));
+
+            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+
+            list.add(attendance);
+        }
+        con.close();
+        return list;
+    }
+
+    public List<Attendance> searchByYear(String year) throws SQLException, ClassNotFoundException {
+        List<Attendance> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("SELECT attendID, Attendance.date, checkIn, checkOut, soonTime, lateTime, duration, Attendance.status, Attendance.note, Attendance.userID, fullName FROM Attendance JOIN Users ON Attendance.userID = Users.userID WHERE YEAR(Attendance.date) = ?");
+        stm.setString(1, year);
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Attendance attendance = new Attendance();
+            attendance.setAttendID(rs.getInt("attendID"));
+            attendance.setDate(rs.getDate("date"));
+            attendance.setCheckIn(rs.getTime("checkIn"));
+            attendance.setCheckOut(rs.getTime("checkOut"));
+            attendance.setSoonTime(rs.getTime("soonTime"));
+            attendance.setLateTime(rs.getTime("lateTime"));
+            attendance.setDuration(rs.getTime("duration"));
+            attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
+            attendance.setNote(rs.getString("note"));
+            attendance.setUserID(rs.getInt("userID"));
+            attendance.setFullName(rs.getString("fullName"));
+
+            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+
+            list.add(attendance);
+        }
+        con.close();
+        return list;
+    }
+
+    public List<Attendance> searchByName(String fullName) throws SQLException, ClassNotFoundException {
+        List<Attendance> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("SELECT attendID, Attendance.date, checkIn, checkOut, soonTime, lateTime, duration, Attendance.status, Attendance.note, Attendance.userID, fullName "
+                + "FROM Attendance "
+                + "JOIN Users ON Attendance.userID = Users.userID "
+                + "WHERE fullName LIKE ?");
+        stm.setString(1, "%" + fullName + "%");
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Attendance attendance = new Attendance();
+            attendance.setAttendID(rs.getInt("attendID"));
+            attendance.setDate(rs.getDate("date"));
+            attendance.setCheckIn(rs.getTime("checkIn"));
+            attendance.setCheckOut(rs.getTime("checkOut"));
+            attendance.setSoonTime(rs.getTime("soonTime"));
+            attendance.setLateTime(rs.getTime("lateTime"));
+            attendance.setDuration(rs.getTime("duration"));
+            attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
+            attendance.setNote(rs.getString("note"));
+            attendance.setUserID(rs.getInt("userID"));
+            attendance.setFullName(rs.getString("fullName"));
+
+            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+
+            list.add(attendance);
+        }
+        con.close();
+        return list;
     }
 
     public void delete(int attendID) throws SQLException {

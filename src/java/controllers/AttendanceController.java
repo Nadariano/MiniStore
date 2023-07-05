@@ -80,6 +80,27 @@ public class AttendanceController extends HttpServlet {
                     request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
                 }
                 break;
+            case "done":
+                try {
+                    done(request, response);
+                } catch (SQLException ex) {
+                    //Hien trang thong bao loi
+                    ex.printStackTrace();
+                    request.setAttribute("message", ex.getMessage());
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+                break;
+            case "search":
+                try {
+                    search(request, response);
+                } catch (Exception ex) {
+                    //Hien trang thong bao loi
+                    ex.printStackTrace();//In thông báo chi tiết cho developer
+                    request.setAttribute("message", ex.getMessage());
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+                break;
+
             case "listOfUsers":
                 try {
                     listOfUsers(request, response);
@@ -141,6 +162,30 @@ public class AttendanceController extends HttpServlet {
         try {
             AttendanceRepository af = new AttendanceRepository();
             List<Attendance> list = af.select();
+
+            HttpSession session = request.getSession();
+            List<Attendance> listSearch = (List<Attendance>) session.getAttribute("listSearch");
+
+            if (listSearch != null) {
+                list = listSearch;
+            }
+            request.setAttribute("list", list);
+
+            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            //Hien trang thong bao loi
+            ex.printStackTrace();//In thông báo chi tiết cho developer
+            request.setAttribute("message", ex.getMessage());
+            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+        }
+    }
+
+    private void listOfUsers(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+        try {
+            int userID = Integer.parseInt(request.getParameter("userID"));
+            AttendanceRepository af = new AttendanceRepository();
+            List<Attendance> list = af.selectUserAttendance(userID);
             request.setAttribute("list", list);
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (SQLException ex) {
@@ -151,22 +196,6 @@ public class AttendanceController extends HttpServlet {
         }
     }
 
-   private void listOfUsers(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException, SQLException {
-      try {
-          int userID = Integer.parseInt(request.getParameter("userID"));
-           AttendanceRepository af = new AttendanceRepository();
-          List<Attendance> list = af.selectUserAttendance(userID);
-           request.setAttribute("list", list);
-           request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-       } catch (SQLException ex) {
-           //Hien trang thong bao loi
-           ex.printStackTrace();//In thông báo chi tiết cho developer
-           request.setAttribute("message", ex.getMessage());
-           request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-      }
- }
-    
 //    private void listOfUsers(HttpServletRequest request, HttpServletResponse response)
 //            throws ServletException, IOException, SQLException {
 //        try {
@@ -200,7 +229,6 @@ public class AttendanceController extends HttpServlet {
 //        }
 //
 //    }
-
     private void updateOfUsers(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         String op = request.getParameter("op");
@@ -208,11 +236,13 @@ public class AttendanceController extends HttpServlet {
             case "update":
                 try {
                     AttendanceRepository af = new AttendanceRepository();
-                    String[] attendIDStr = request.getParameter("attendID").split(",");
-                    int[] attendIDs = new int[attendIDStr.length];
-                    for (int i = 0; i < attendIDStr.length; i++) {
-                        attendIDs[i] = Integer.parseInt(attendIDStr[i]);
-                    }
+//                    String[] attendIDStr = request.getParameter("attendID").split(",");
+////                    System.out.println(attendIDStr);
+//                    int[] attendIDs = new int[attendIDStr.length];
+//                    for (int i = 0; i < attendIDStr.length; i++) {
+//                        attendIDs[i] = Integer.parseInt(attendIDStr[i]);
+//                    }
+                    String[] attendIDs = request.getParameterValues("attendID");
 
 //                    Date date = sdfDate.parse(request.getParameter("date"));
 //                    String fullName = request.getParameter("fullName");
@@ -223,19 +253,20 @@ public class AttendanceController extends HttpServlet {
                     int userID = Integer.parseInt(request.getParameter("userID"));
                     String[] notes = request.getParameterValues("note");
                     String[] confirms = request.getParameterValues("confirm");
-                    String [] statusTexts = request.getParameterValues("statusText");
-                    String[] statusStr = request.getParameter("status").split(",");
-                    int[] statuses = new int[statusStr.length];
-                    for (int i = 0; i < statusStr.length; i++) {
-                        statuses[i] = Integer.parseInt(statusStr[i]);
-                    }
-                    for (int i = 0 ; i < confirms.length; i++){
-                        if (confirms[i].equalsIgnoreCase("Accepted")){
-                            statusTexts[i]= "Available";
-                            statuses[i] = 1;
-                        }else {
-                            statusTexts[i]= "Not Available";
-                            statuses[i] = 0;
+                    String[] statusTexts = request.getParameterValues("statusText");
+//                    String[] statusStr = request.getParameter("status").split(",");
+//                    int[] statuses = new int[statusStr.length];
+//                    for (int i = 0; i < statusStr.length; i++) {
+//                        statuses[i] = Integer.parseInt(statusStr[i]);
+//                    }
+                    String[] statuses = request.getParameterValues("status");
+                    for (int i = 0; i < confirms.length; i++) {
+                        if (confirms[i].equalsIgnoreCase("Accepted")) {
+                            statusTexts[i] = "Available";
+                            statuses[i] = "1";
+                        } else {
+                            statusTexts[i] = "Not Available";
+                            statuses[i] = "0";
                         }
                     }
 //                    if (confirm.equalsIgnoreCase("Accepted")) {
@@ -244,12 +275,20 @@ public class AttendanceController extends HttpServlet {
 //                        statusText = "Not Available";
 //                        status = 0;
 //                    }
-                    for (int i=0 ; i< attendIDs.length; i++){
-                        af.updateOfUsers(attendIDs[i], statuses[i], notes[i]);
+                    if (notes.length == statuses.length) {
+                        for (int i = 0; i < notes.length; i++) {
+                            String note = notes[i];
+                            String confirm = confirms[i];
+                            String statusText = statusTexts[i];
+
+                            // Thực hiện updateOfUsers cho mỗi phần tử trong mảng
+                            af.updateOfUsers(attendIDs[i], statuses[i], notes[i]);
+                        }
                     }
 //                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
 //                    af.updateOfUsers(attendIDs, statuses, notes);
                     response.sendRedirect(request.getContextPath() + "/attendance/listOfUsers.do?userID=" + userID);
+//                      request.getRequestDispatcher("/views/home/successconfirm.jsp").forward(request, response);
 
                 } catch (Exception ex) {
                     //Hiện trang thông báo lỗi
@@ -332,6 +371,24 @@ public class AttendanceController extends HttpServlet {
         }
     }
 
+    private void done(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+        try {
+            AttendanceRepository ar = new AttendanceRepository();
+            int status = 2;
+            ar.done(status);
+            response.sendRedirect(request.getContextPath() + "/attendance/list.do");
+
+        } catch (Exception ex) {
+            //Hiện trang thông báo lỗi
+            ex.printStackTrace();//In thông báo chi tiết cho developer
+            request.setAttribute("message", ex.getMessage());
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "error");
+            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+        }
+    }
+
     protected void create(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         try {
@@ -380,6 +437,78 @@ public class AttendanceController extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/attendance/list.do");
         }
     }
+     protected int countParams(String... params) {
+    int count = 0;
+    for (String param : params) {
+        if (param != null && !param.isEmpty()) {
+            count++;
+        }
+    }
+    return count;
+}
+
+private void search(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException, ClassNotFoundException {
+    HttpSession session = request.getSession();
+    String op = request.getParameter("op");
+
+    switch (op) {
+        case "search":
+            try {
+                String day = request.getParameter("day");
+                String month = request.getParameter("month");
+                String year = request.getParameter("year");
+                String fullName = request.getParameter("fullName");
+                AttendanceRepository af = new AttendanceRepository();
+                List<Attendance> list = null;
+
+                switch (countParams(day, month, year, fullName)) {
+
+                    case 3:
+                        String date = year + "-" + month + "-" + day;
+                        list = af.search(date);
+                        break;
+                    case 2:
+                        if ("".equals(year)) {
+                            list = af.searchByDayAndMonth(day, month);
+                        } else if ("".equals(month)) {
+                            list = af.searchByDayAndYear(day, year);
+                        } else {
+                            list = af.searchByMonthAndYear(month, year);
+                        }
+                        break;
+                    case 1:
+                        if (!"".equals(day)) {
+                            list = af.searchByDay(day);
+                        } else if (!"".equals(month)) {
+                            list = af.searchByMonth(month);
+                        } else if (!"".equals(year)) {
+                            list = af.searchByYear(year);
+                        } else {
+                            list = af.searchByName(fullName);
+                        }
+                        break;
+                    default:
+                        // Handle invalid input
+                        break;
+                }
+
+                session.setAttribute("listSearch", list);
+//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/attendance/list.do");
+
+//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+            } catch (SQLException ex) {
+                // Display error page
+                ex.printStackTrace();// Print detailed message for developer
+                request.setAttribute("message", ex.getMessage());
+                request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+            }
+            break;
+        default:
+            break;
+    }
+}
 
     protected void delete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {

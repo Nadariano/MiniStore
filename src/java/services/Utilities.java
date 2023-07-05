@@ -296,6 +296,9 @@ public class Utilities {
             case 1:
                 statusText = "Available";
                 break;
+            case 2:
+                statusText = "Available";
+                break;
             default:
                 statusText = "Unknown";
         }
@@ -311,6 +314,9 @@ public class Utilities {
                 confirm = "Denied";
                 break;
             case 1:
+                confirm = "Accepted";
+                break;
+             case 2:
                 confirm = "Accepted";
                 break;
             default:
