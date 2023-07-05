@@ -361,7 +361,7 @@ public class ReportController extends HttpServlet {
         return count;
     }
 
-     private void search(HttpServletRequest request, HttpServletResponse response)
+    private void search(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         HttpSession session = request.getSession();
         String op = request.getParameter("op");
