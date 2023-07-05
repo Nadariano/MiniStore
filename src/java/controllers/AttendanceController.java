@@ -5,18 +5,10 @@
  */
 package controllers;
 
-import models.Attendance;
-import repositories.AttendanceRepository;
-import models.Report;
-import repositories.ReportRepository;
-import models.Users;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import models.UserAttendance;
+import models.Attendance;
+import repositories.AttendanceRepository;
 import static services.Utilities.sdfDate;
 import static services.Utilities.sdfTime;
 
@@ -131,6 +124,16 @@ public class AttendanceController extends HttpServlet {
                     request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
                 }
                 break;
+                 case "search":
+                try {
+                    search(request, response);
+                } catch (Exception ex) {
+                    //Hien trang thong bao loi
+                    ex.printStackTrace();//In thông báo chi tiết cho developer
+                    request.setAttribute("message", ex.getMessage());
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+                break;
             default:
             //Show error page
         }
@@ -141,7 +144,18 @@ public class AttendanceController extends HttpServlet {
         try {
             AttendanceRepository af = new AttendanceRepository();
             List<Attendance> list = af.select();
+           
+            HttpSession session = request.getSession();
+            List<Attendance> listSearch = (List<Attendance>) session.getAttribute("listSearch");
+
+            if (listSearch != null) {
+                list = listSearch;
+            }
             request.setAttribute("list", list);
+
+            
+            
+            
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (SQLException ex) {
             //Hien trang thong bao loi
@@ -381,6 +395,82 @@ public class AttendanceController extends HttpServlet {
         }
     }
 
+    
+   protected int countParams(String... params) {
+    int count = 0;
+    for (String param : params) {
+        if (param != null && !param.isEmpty()) {
+            count++;
+        }
+    }
+    return count;
+}
+
+private void search(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException, ClassNotFoundException {
+    HttpSession session = request.getSession();
+    String op = request.getParameter("op");
+
+    switch (op) {
+        case "search":
+            try {
+                String day = request.getParameter("day");
+                String month = request.getParameter("month");
+                String year = request.getParameter("year");
+                String fullName = request.getParameter("fullName");
+                AttendanceRepository af = new AttendanceRepository();
+                List<Attendance> list = null;
+
+                switch (countParams(day, month, year, fullName)) {
+
+                    case 3:
+                        String date = year + "-" + month + "-" + day;
+                        list = af.search(date);
+                        break;
+                    case 2:
+                        if ("".equals(year)) {
+                            list = af.searchByDayAndMonth(day, month);
+                        } else if ("".equals(month)) {
+                            list = af.searchByDayAndYear(day, year);
+                        } else {
+                            list = af.searchByMonthAndYear(month, year);
+                        }
+                        break;
+                    case 1:
+                        if (!"".equals(day)) {
+                            list = af.searchByDay(day);
+                        } else if (!"".equals(month)) {
+                            list = af.searchByMonth(month);
+                        } else if (!"".equals(year)) {
+                            list = af.searchByYear(year);
+                        } else {
+                            list = af.searchByName(fullName);
+                        }
+                        break;
+                    default:
+                        // Handle invalid input
+                        break;
+                }
+
+                session.setAttribute("listSearch", list);
+//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/attendance/list.do");
+
+//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+            } catch (SQLException ex) {
+                // Display error page
+                ex.printStackTrace();// Print detailed message for developer
+                request.setAttribute("message", ex.getMessage());
+                request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+    
+    
     protected void delete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         AttendanceRepository ar = new AttendanceRepository();
