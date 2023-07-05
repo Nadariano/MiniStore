@@ -65,15 +65,21 @@
                                                     <td>${attendance.statusText}</td>
                                                     <td>${attendance.note}</td>
                                                     <td>${attendance.confirm}</td>
+                                                    <c:if test="${attendance.status != 2}">
                                                     <td>
                                                         <a href="<c:url value="/attendance/update.do?attendID=${attendance.attendID}"  />" class="btn btn-sm btn-primary">Update</a>
                                                         <p></p>
                                                         <a href="<c:url value="/attendance/delete.do?attendID=${attendance.attendID}" /> " onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-danger">Delete</a>
                                                     </td>
+                                                    </c:if>
+                                                    <c:if test="${attendance.status == 2}">
+                                                        <td class="btn btn-info">Finished <i class="bi bi-cloud-check"></i></td>
+                                                    </c:if>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
+                                    <a style="float: right" href="<c:url value="/attendance/done.do"/>" class="btn btn-success">Done</a>
                                 </div>
                             </div>
                         </div>
