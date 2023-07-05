@@ -37,7 +37,7 @@ public class ReportRepository {
         //Thực thi lệnh SELECT
         ResultSet rs = stm.executeQuery("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, fullName, reportType.typeName, report.shiftID\n"
                 + "from report join users on report.userID = users.userID \n"
-                + "			join reportType on report.typeID = reportType.typeID");
+                + "join reportType on report.typeID = reportType.typeID order by reportID DESC");
         list = new ArrayList<>();
         while (rs.next()) {
             Report report = new Report();
@@ -67,8 +67,8 @@ public class ReportRepository {
         //Tạo đối tượng statement
         PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, fullName, reportType.typeName, report.shiftID\n"
                 + "from report join users on report.userID = users.userID \n"
-                + "			join reportType on report.typeID = reportType.typeID\n"
-                + "			where report.userID = ?");
+                + "join reportType on report.typeID = reportType.typeID\n"
+                + "where report.userID = ? order by reportID DESC");
         stm.setInt(1, userID);
         //Thực thi lệnh sql
         ResultSet rs = stm.executeQuery();
