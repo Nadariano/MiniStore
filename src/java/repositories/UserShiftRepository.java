@@ -54,7 +54,7 @@ public class UserShiftRepository {
     public List<UserShift> selectByUser(int userID) throws SQLException {
         List<UserShift> list = null;
         Connection con = DBContext.getConnection();
-         PreparedStatement stm = con.prepareStatement("select Users.userID, Users.fullName, UserShift.shiftID, UserShift.date, UserShift.status, UserShift.note, UserShift.isOT\n"
+        PreparedStatement stm = con.prepareStatement("select Users.userID, Users.fullName, UserShift.shiftID, UserShift.date, UserShift.status, UserShift.note, UserShift.isOT\n"
                 + "from UserShift left join Users on UserShift.userID = Users.userID \n"
                 + "where UserShift.userID = ?");
         stm.setInt(1, userID);
@@ -132,13 +132,13 @@ public class UserShiftRepository {
 
     public void update(UserShift userShift) throws SQLException {
         Connection con = DBContext.getConnection();
-        PreparedStatement stm = con.prepareStatement("update UserShift set date =?, status = ?, note = ?, isOT = ? where userID = ? and shiftID = ?");
-        stm.setString(1, sdfDate.format(userShift.getDate()));
-        stm.setInt(2, userShift.getStatus());
-        stm.setString(3, userShift.getNote());
-        stm.setBoolean(4, userShift.isIsOT());
-        stm.setInt(5, userShift.getUserID());
-        stm.setInt(6, userShift.getShiftID());
+        PreparedStatement stm = con.prepareStatement("update UserShift set status = ?, note = ?, isOT = ? where userID = ? and shiftID = ? and date = ?");
+        stm.setInt(1, userShift.getStatus());
+        stm.setString(2, userShift.getNote());
+        stm.setBoolean(3, userShift.isIsOT());
+        stm.setInt(4, userShift.getUserID());
+        stm.setInt(5, userShift.getShiftID());
+        stm.setString(6, sdfDate.format(userShift.getDate()));
         int count = stm.executeUpdate();
         con.close();
     }
