@@ -154,7 +154,7 @@
                                                                                 <i class="bi bi-person-dash-fill"></i>
                                                                             </a>
                                                                         </c:if>
-                                                                        <a href="#">${userShift.fullName}</a>
+                                                                        <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&shiftID=${userShift.shiftID}&date=${userShift.date}"/>" >${userShift.fullName}</a>
                                                                         <span class="tooltiptext">
                                                                             UserID: ${userShiftt.userID} -
                                                                             Date: ${userShiftt.date} <br/>
