@@ -149,9 +149,11 @@
                                                                 <c:if test="${userShiftt.date == date}">
                                                                     <!--<p>Emp ${userShiftt.userID} - ${userShiftt.date} - ${userShiftt.shiftID}<p>-->
                                                                     <div class="tooltipp">
-                                                                        <a href="<c:url value="/userShift/delete.do?userID=${userShift.userID}&shiftID=${userShift.shiftID}&date=${userShift.date} "/>" onclick="return confirm('Do you really want to remove this employee from the current shift?');" class="btn btn-circle btn-sm btn-warning">
-                                                                            <i class="bi bi-person-dash-fill"></i>
-                                                                        </a>
+                                                                        <c:if test="${Account.roleName.equals('MANAGER')}">
+                                                                            <a href="<c:url value="/userShift/delete.do?userID=${userShift.userID}&shiftID=${userShift.shiftID}&date=${userShift.date} "/>" onclick="return confirm('Do you really want to remove this employee from the current shift?');" class="btn btn-circle btn-sm btn-warning">
+                                                                                <i class="bi bi-person-dash-fill"></i>
+                                                                            </a>
+                                                                        </c:if>
                                                                         <a href="#">${userShift.fullName}</a>
                                                                         <span class="tooltiptext">
                                                                             UserID: ${userShiftt.userID} -
