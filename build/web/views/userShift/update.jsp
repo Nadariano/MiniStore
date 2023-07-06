@@ -22,7 +22,7 @@
                 <div class="container-fluid">
                     <div class="row bg-title">
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                            <h4 class="page-title">Update a new user</h4>
+                            <h4 class="page-title">Update user's shift info</h4>
                         </div>
                     </div>
                     <!-- /.row -->
@@ -66,8 +66,8 @@
                                         <label class="col-md-12">Status</label>
                                         <div class="col-md-12">
                                             <select name="status"class="form-control form-control-line">
-                                                <option value="0">Available</option>
-                                                <option value="1">Not Available</option>
+                                                <option value="0" ${userShift.status==0 ? "selected" : ""}>Available</option>
+                                                <option value="1" ${userShift.status==1 ? "selected" : ""}>Not Available</option>
                                             </select>
                                         </div>
                                     </div>
@@ -83,9 +83,9 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Over Time</label>
                                         <div class="col-md-12">
-                                            <select name="isOT"class="form-control form-control-line">
-                                                <option value="true">Yes</option>
-                                                <option value="false">No</option>
+                                            <select name="isOT" class="form-control form-control-line">
+                                                <option value="true" ${userShift.isOT==true ? "selected" : ""}>Yes</option>
+                                                <option value="false" ${userShift.isOT==false ? "selected" : ""}>No</option>
                                             </select>
                                         </div>
                                     </div>

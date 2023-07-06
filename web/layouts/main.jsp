@@ -10,7 +10,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
-        <title>Pixel Admin</title>
+        <title>MiniStore Management System</title>
         <!-- Bootstrap Core CSS -->
         <link href="<c:url value="/bootstrap/dist/css/bootstrap.min.css"/>" rel="stylesheet">
         <!-- Menu CSS -->
@@ -55,15 +55,16 @@
                         </a>
                         <div class="top-left-part">
                             <a class="logo" href="<c:url value="/home/index.do"/>">
-                                <b>
+<!--                                <b>
                                     <img src="<c:url value="/plugins/images/pixeladmin-logo.png"/>" alt="home" />
-                                </b>
-                                <span class="hidden-xs">
-                                    <img src="<c:url value="/plugins/images/pixeladmin-text.png"/>" alt="home" />
-                                </span>
+                                </b>-->
+                                <!--<span class="hidden-xs">-->
+                                    <!--<img src="<c:url value="/plugins/images/pixeladmin-text.png"/>" alt="home" />-->
+                                <img src="<c:url value="/plugins/images/ms_logo.png"/>" width="60%" height="100%" style="margin-left: 15%; padding: 3%" alt="home" />
+                                <!--</span>-->
                             </a>
                         </div>
-                        <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
+<!--                        <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
                             <li>
                                 <form role="search" class="app-search hidden-xs">
                                     <input type="text" placeholder="Search..." class="form-control"> 
@@ -72,7 +73,7 @@
                                     </a>
                                 </form>
                             </li>
-                        </ul>
+                        </ul>-->
                         <ul class="nav navbar-top-links navbar-right pull-right">
                             <li>
                                 <div class="dropdown">
