@@ -11,6 +11,7 @@ import models.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -28,6 +29,8 @@ import models.Account;
 import models.Report;
 import repositories.ReportRepository;
 import static services.Utilities.sdfDate;
+import static services.Utilities.sdfDateTime;
+import static services.Utilities.sdfTime;
 
 /**
  *
@@ -243,6 +246,7 @@ public class ReportController extends HttpServlet {
                     int typeID = Integer.parseInt(request.getParameter("typeID"));
                     String description = request.getParameter("description");
                     String plannedDate = request.getParameter("plannedDate");
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                     String requestSoonTime = request.getParameter("requestSoonTime");
                     String requestLateTime = request.getParameter("requestLateTime");
                     int userID = Integer.parseInt(request.getParameter("userID"));
@@ -250,7 +254,7 @@ public class ReportController extends HttpServlet {
                     String note = "";
                     int status = 1;
 //                    rf.create(reportTitle, description, status, note, userID);
-                    rf.create(reportTitle, description, plannedDate, requestSoonTime, requestLateTime, status, note, userID, typeID, shiftID);
+                    rf.create(reportTitle, description, plannedDate, requestSoonTime, requestLateTime, status, note, userID, shiftID, typeID);
                     response.sendRedirect(request.getContextPath() + "/report/listUserReport.do");
                 } catch (Exception ex) {
                     //Hiện trang thông báo lỗi

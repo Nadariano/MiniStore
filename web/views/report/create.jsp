@@ -81,32 +81,42 @@
                                            class="form-control form-control-line" />
                                 </div>
                             </div>
-                                           
-                            
+
+
                             <div class="form-group">
                                 <label class="col-md-12">Request Soon Time:</label>
                                 <div class="col-md-12">
-                                    <input type="time" placeholder="Select Request Soon Time" name="requestSoonTime" value="${report.requestSoonTime}"
-                                                class="form-control form-control-line" />
+                                    <input type="text" placeholder="Fill ?hour:?min (Example: 00:45)" name="requestSoonTime" value="${report.requestSoonTime}"
+                                           class="form-control form-control-line" />
                                 </div>
                             </div>
-                                           
-                                           
-                           <div class="form-group">
+
+
+                            <div class="form-group">
                                 <label class="col-md-12">Request Late Time:</label>
                                 <div class="col-md-12">
-                                    <input type="time" placeholder="Select Request Late Time" name="requestLateTime" value="${report.requestLateTime}"
-                                                class="form-control form-control-line" />
+                                    <input type="text" placeholder="Fill ?hour:?min (Example: 00:30)" name="requestLateTime" value="${report.requestLateTime}"
+                                           class="form-control form-control-line" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-sm-12">
-                                    <!--                                    <button type="submit" class="btn btn-success">Add Role</button>-->
-                                    <button type="submit" class="btn btn-success" name="op" value="create">Create<i class="bi bi-check-square"></i></button>
-                                    <button type="submit" class="btn btn-outline-danger" name="op" value="cancel">Cancel<i class="bi bi-x-square"></i></button>
-                                </div>
+                                <label class="col-md-12">Shift: </label>
+                                <select type="dropdown" id="shiftID" name="shiftID" value="${report.shiftID}" >
+
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+
+                                </select>
                             </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <!--                                    <button type="submit" class="btn btn-success">Add Role</button>-->
+                                        <button type="submit" class="btn btn-success" name="op" value="create">Create<i class="bi bi-check-square"></i></button>
+                                        <button type="submit" class="btn btn-outline-danger" name="op" value="cancel">Cancel<i class="bi bi-x-square"></i></button>
+                                    </div>
+                                </div>
                         </form>
 
                     </div>
