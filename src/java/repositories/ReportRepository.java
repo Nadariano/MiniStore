@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 import models.Report;
 import static services.Utilities.sdfDate;
+import static services.Utilities.sdfDateTime;
 import static services.Utilities.sdfTime;
 
 /**
@@ -37,7 +40,7 @@ public class ReportRepository {
         //Thực thi lệnh SELECT
         ResultSet rs = stm.executeQuery("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, fullName, reportType.typeName, report.shiftID\n"
                 + "from report join users on report.userID = users.userID \n"
-                + "			join reportType on report.typeID = reportType.typeID");
+                + "join reportType on report.typeID = reportType.typeID order by reportID DESC");
         list = new ArrayList<>();
         while (rs.next()) {
             Report report = new Report();
@@ -67,8 +70,8 @@ public class ReportRepository {
         //Tạo đối tượng statement
         PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, fullName, reportType.typeName, report.shiftID\n"
                 + "from report join users on report.userID = users.userID \n"
-                + "			join reportType on report.typeID = reportType.typeID\n"
-                + "			where report.userID = ?");
+                + "join reportType on report.typeID = reportType.typeID\n"
+                + "where report.userID = ? order by reportID DESC");
         stm.setInt(1, userID);
         //Thực thi lệnh sql
         ResultSet rs = stm.executeQuery();
@@ -94,7 +97,7 @@ public class ReportRepository {
         return list;
     }
 
-    public void create(String reportTitle, String description, String plannedDate, String requestSoonTime, String requestLateTime, int status, String note, int userID, int typeID, int shiftID) throws SQLException {
+    public void create(String reportTitle, String description, String plannedDate, String requestSoonTime, String requestLateTime, int status, String note, int userID, int shiftID, int typeID) throws SQLException, ParseException {
         LocalDate curDate = LocalDate.now();
         String date = curDate.toString();
         //Tạo connection để kết nối vào DBMS
@@ -104,14 +107,31 @@ public class ReportRepository {
         stm.setString(1, reportTitle);
         stm.setString(2, date);
         stm.setString(3, description);
-        stm.setString(4, sdfDate.format(plannedDate));
-        stm.setString(5, sdfTime.format(requestSoonTime));
-        stm.setString(6, sdfTime.format(requestLateTime));
+        SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm");
+        
+        if (plannedDate.equals("")){
+        stm.setString(4, null);
+        }else {
+        stm.setString(4, sdfDate.format(sdfDate.parse(plannedDate)));
+        }
+        
+        if (requestSoonTime.equals("")) {
+        stm.setString(5, null);
+        }else {
+        stm.setString(5, sdf1.format(sdf1.parse(requestSoonTime)));
+        }
+        
+        if (requestLateTime.equals("")) {
+        stm.setString(6, null);
+        } else {
+         stm.setString(6, sdf1.format(sdf1.parse(requestLateTime)));
+        }
+       
         stm.setInt(7, status);
         stm.setString(8, note);
         stm.setInt(9, userID);
-        stm.setInt(10, typeID);
-        stm.setInt(11, shiftID);
+        stm.setInt(10, shiftID);
+        stm.setInt(11, typeID);
         //Thực thi lệnh sql
         int count = stm.executeUpdate();
         //Đóng kết nối
@@ -220,7 +240,7 @@ public class ReportRepository {
         List<Report> list = null;
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, "
-                + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
+                + "fullName, reportType.typeName, report.shiftID  from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
                 + "where createDate = ?");
         stm.setString(1, createDate);
         ResultSet rs = stm.executeQuery();
@@ -239,6 +259,7 @@ public class ReportRepository {
             report.setUserID(rs.getInt("userID"));
             report.setFullName(rs.getString("fullName"));
             report.setTypeName(rs.getString("typeName"));
+            report.setShiftID(rs.getInt("shiftID"));
             list.add(report);
         }
         con.close();
@@ -249,7 +270,7 @@ public class ReportRepository {
         List<Report> list = null;
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, "
-                + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
+                + "fullName, reportType.typeName, report.shiftID  from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
                 + "where DAY(createDate) = ? and MONTH(createDate) = ?");
         stm.setString(1, day);
         stm.setString(2, month);
@@ -269,6 +290,7 @@ public class ReportRepository {
             report.setUserID(rs.getInt("userID"));
             report.setFullName(rs.getString("fullName"));
             report.setTypeName(rs.getString("typeName"));
+            report.setShiftID(rs.getInt("shiftID"));
             list.add(report);
         }
         con.close();
@@ -279,7 +301,7 @@ public class ReportRepository {
         List<Report> list = null;
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, "
-                + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
+                + "fullName, reportType.typeName, report.shiftID from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
                 + "where DAY(createDate) = ? and YEAR(createDate) = ?");
         stm.setString(1, day);
         stm.setString(2, year);
@@ -299,6 +321,7 @@ public class ReportRepository {
             report.setUserID(rs.getInt("userID"));
             report.setFullName(rs.getString("fullName"));
             report.setTypeName(rs.getString("typeName"));
+            report.setShiftID(rs.getInt("shiftID"));
             list.add(report);
         }
         con.close();
@@ -309,7 +332,7 @@ public class ReportRepository {
         List<Report> list = null;
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, "
-                + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
+                + "fullName, reportType.typeName, report.shiftID  from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
                 + "where MONTH(createDate) = ? and YEAR(createDate) = ?");
         stm.setString(1, month);
         stm.setString(2, year);
@@ -329,6 +352,7 @@ public class ReportRepository {
             report.setUserID(rs.getInt("userID"));
             report.setFullName(rs.getString("fullName"));
             report.setTypeName(rs.getString("typeName"));
+            report.setShiftID(rs.getInt("shiftID"));
             list.add(report);
         }
         con.close();
@@ -339,7 +363,7 @@ public class ReportRepository {
         List<Report> list = null;
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, "
-                + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
+                + "fullName, reportType.typeName, report.shiftID  from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
                 + "where DAY(createDate) = ? ");
         stm.setString(1, day);
         ResultSet rs = stm.executeQuery();
@@ -358,6 +382,7 @@ public class ReportRepository {
             report.setUserID(rs.getInt("userID"));
             report.setFullName(rs.getString("fullName"));
             report.setTypeName(rs.getString("typeName"));
+            report.setShiftID(rs.getInt("shiftID"));
             list.add(report);
         }
         con.close();
@@ -368,7 +393,7 @@ public class ReportRepository {
         List<Report> list = null;
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, "
-                + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
+                + "fullName, reportType.typeName, report.shiftID  from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
                 + "where MONTH(createDate) = ?");
         stm.setString(1, month);
         ResultSet rs = stm.executeQuery();
@@ -387,6 +412,7 @@ public class ReportRepository {
             report.setUserID(rs.getInt("userID"));
             report.setFullName(rs.getString("fullName"));
             report.setTypeName(rs.getString("typeName"));
+            report.setShiftID(rs.getInt("shiftID"));
             list.add(report);
         }
         con.close();
@@ -397,7 +423,7 @@ public class ReportRepository {
         List<Report> list = null;
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, report.userID, "
-                + "fullName, reportType.typeName from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
+                + "fullName, reportType.typeName, report.shiftID  from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
                 + "where YEAR(createDate) = ?");
         stm.setString(1, month);
         ResultSet rs = stm.executeQuery();
@@ -416,6 +442,7 @@ public class ReportRepository {
             report.setUserID(rs.getInt("userID"));
             report.setFullName(rs.getString("fullName"));
             report.setTypeName(rs.getString("typeName"));
+            report.setShiftID(rs.getInt("shiftID"));
             list.add(report);
         }
         con.close();
@@ -426,7 +453,7 @@ public class ReportRepository {
         List<Report> list = null;
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate, requestSoonTime, requestLateTime, report.status, report.note, "
-                + "report.userID, fullName, reportType.typeName "
+                + "report.userID, fullName, reportType.typeName, report.shiftID  "
                 + "from report join users on report.userID = users.userID join reportType on report.typeID = reportType.typeID "
                 + "where fullName like ?");
         stm.setString(1, "%" + fullName + "%");
@@ -446,6 +473,7 @@ public class ReportRepository {
             report.setUserID(rs.getInt("userID"));
             report.setFullName(rs.getString("fullName"));
             report.setTypeName(rs.getString("typeName"));
+            report.setShiftID(rs.getInt("shiftID"));
             list.add(report);
         }
         con.close();

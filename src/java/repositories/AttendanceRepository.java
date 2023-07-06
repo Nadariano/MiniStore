@@ -6,18 +6,21 @@
 package repositories;
 
 import config.DBContext;
+import services.Utilities;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import models.Attendance;
-import services.Utilities;
-import static services.Utilities.sdfDate;
 import static services.Utilities.sdfTime;
+import static services.Utilities.sdfDate;
 
 /**
  *
@@ -189,15 +192,15 @@ public class AttendanceRepository {
         con.close();
     }
 
-    public void updateOfUsers(int attendID, int status, String note) throws SQLException {
+    public void updateOfUsers(String attendID, String status, String note) throws SQLException {
         //Tạo connection để kết nối vào DBMS
         Connection con = DBContext.getConnection();
         //Tạo đối tượng PreparedStatement
 
         PreparedStatement stm = con.prepareStatement("update attendance set status = ?, note = ? from attendance join users on attendance.userID = users.userID where attendID = ?");
-        stm.setInt(1, status);
+        stm.setString(1, status);
         stm.setString(2, note);
-        stm.setInt(3, attendID);
+        stm.setString(3, attendID);
 
         //Thực thi lệnh sql
         int count = stm.executeUpdate();
@@ -206,14 +209,18 @@ public class AttendanceRepository {
         con.close();
     }
 
-    public void delete(int attendID) throws SQLException {
+    public void done(int status) throws SQLException {
         //Tạo connection để kết nối vào DBMS
         Connection con = DBContext.getConnection();
         //Tạo đối tượng PreparedStatement
-        PreparedStatement stm = con.prepareStatement("delete from attendance where attendID = ?");
-        stm.setInt(1, attendID);
+
+        PreparedStatement stm = con.prepareStatement("update attendance set status = ? from attendance join users on attendance.userID = users.userID");
+        stm.setInt(1, status);
+
         //Thực thi lệnh sql
         int count = stm.executeUpdate();
+
+        //Đóng kết nối
         con.close();
     }
 
@@ -273,7 +280,7 @@ public class AttendanceRepository {
             attendance.setUserID(rs.getInt("userID"));
             attendance.setFullName(rs.getString("fullName"));
 
-           attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
 
             list.add(attendance);
         }
@@ -303,7 +310,7 @@ public class AttendanceRepository {
             attendance.setUserID(rs.getInt("userID"));
             attendance.setFullName(rs.getString("fullName"));
 
-           attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
 
             list.add(attendance);
         }
@@ -333,7 +340,7 @@ public class AttendanceRepository {
             attendance.setUserID(rs.getInt("userID"));
             attendance.setFullName(rs.getString("fullName"));
 
-           attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
 
             list.add(attendance);
         }
@@ -363,7 +370,7 @@ public class AttendanceRepository {
             attendance.setUserID(rs.getInt("userID"));
             attendance.setFullName(rs.getString("fullName"));
 
-           attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
 
             list.add(attendance);
         }
@@ -421,7 +428,7 @@ public class AttendanceRepository {
             attendance.setUserID(rs.getInt("userID"));
             attendance.setFullName(rs.getString("fullName"));
 
-          attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
 
             list.add(attendance);
         }
@@ -482,7 +489,7 @@ public class AttendanceRepository {
             attendance.setUserID(rs.getInt("userID"));
             attendance.setFullName(rs.getString("fullName"));
 
-           attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
 
             list.add(attendance);
         }
@@ -490,4 +497,14 @@ public class AttendanceRepository {
         return list;
     }
 
+    public void delete(int attendID) throws SQLException {
+        //Tạo connection để kết nối vào DBMS
+        Connection con = DBContext.getConnection();
+        //Tạo đối tượng PreparedStatement
+        PreparedStatement stm = con.prepareStatement("delete from attendance where attendID = ?");
+        stm.setInt(1, attendID);
+        //Thực thi lệnh sql
+        int count = stm.executeUpdate();
+        con.close();
+    }
 }

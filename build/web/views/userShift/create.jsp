@@ -63,7 +63,7 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Date</label>
                                         <div class="col-md-12">
-                                            <input type="date" placeholder="Date"name="date" value="${date}"
+                                            <input type="date" placeholder="Date" name="date" value="${date}"
                                                    class="form-control form-control-line" />
                                         </div>
                                     </div>         
@@ -101,7 +101,7 @@
                                         </div>
                                     </div>
                                 </form>
-
+                                <h2 style=" color: red">${message}</h2>
                             </div>
                         </div>
                         <div class="col-md-2 col-12"></div>

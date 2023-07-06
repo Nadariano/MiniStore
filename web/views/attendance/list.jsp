@@ -26,7 +26,7 @@
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
-                        <form action="<c:url value='/attendance/search.do'/>">
+                    <form action="<c:url value='/attendance/search.do'/>">
                         <div style="display: flex; align-items: center; justify-content: center;">
                             <select id="searchType" name="searchType" onchange="changeSearchType()" style="margin-right: 8px;">
                                 <option value="date">Search By Date</option>
@@ -76,12 +76,7 @@
                                 document.getElementById("nameInputs").style.display = "block";
                             }
                         }
-                    </script>
-                        
-                        
-                        
-                        
-                        
+                    </script>  
                     <!-- /row -->
                     <div class="row">
                         <div class="col-sm-12">
@@ -121,15 +116,21 @@
                                                     <td>${attendance.statusText}</td>
                                                     <td>${attendance.note}</td>
                                                     <td>${attendance.confirm}</td>
-                                                    <td>
-                                                        <a href="<c:url value="/attendance/update.do?attendID=${attendance.attendID}"  />" class="btn btn-sm btn-primary">Update</a>
-                                                        <p></p>
-                                                        <a href="<c:url value="/attendance/delete.do?attendID=${attendance.attendID}" /> " onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-danger">Delete</a>
-                                                    </td>
+                                                    <c:if test="${attendance.status != 2}">
+                                                        <td>
+                                                            <a href="<c:url value="/attendance/update.do?attendID=${attendance.attendID}"  />" class="btn btn-sm btn-primary">Update</a>
+                                                            <p></p>
+                                                            <a href="<c:url value="/attendance/delete.do?attendID=${attendance.attendID}" /> " onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-danger">Delete</a>
+                                                        </td>
+                                                    </c:if>
+                                                    <c:if test="${attendance.status == 2}">
+                                                        <td class="btn btn-info">Finished <i class="bi bi-cloud-check"></i></td>
+                                                        </c:if>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
+                                    <a style="float: right" href="<c:url value="/attendance/done.do"/>" class="btn btn-success">Done</a>
                                 </div>
                             </div>
                         </div>
