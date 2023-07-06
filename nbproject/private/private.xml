@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(04-07)/MiniStore/src/java/controllers/AttendanceController.java</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone/MiniStore/web/views/report/list.jsp</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone/MiniStore/src/java/repositories/AttendanceRepository.java</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone/MiniStore/web/views/attendance/list.jsp</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone/MiniStore/src/java/controllers/AttendanceController.java</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone/MiniStore/src/java/repositories/ReportRepository.java</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone/MiniStore/src/java/controllers/PaySlipController.java</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone/MiniStore/src/java/controllers/ReportController.java</file>
         </group>
     </open-files>
 </project-private>
