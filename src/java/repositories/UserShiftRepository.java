@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import models.UserShift;
 import static services.Utilities.sdfDate;
+
 /**
  *
  * @author Dell
@@ -32,6 +33,32 @@ public class UserShiftRepository {
         ResultSet rs = stm.executeQuery("select Users.userID, Users.fullName, UserShift.shiftID, UserShift.date, UserShift.status, UserShift.note, UserShift.isOT\n"
                 + "from UserShift \n"
                 + "left join Users on UserShift.userID = Users.userID");
+        list = new ArrayList<>();
+        while (rs.next()) {
+            UserShift userShift = new UserShift();
+            userShift.setUserID(rs.getInt("userID"));
+            userShift.setShiftID(rs.getInt("shiftID"));
+            userShift.setDate(rs.getDate("date"));
+            userShift.setStatus(rs.getInt("status"));
+            userShift.setStatusText2(Utilities.getStatusText2(Utilities.getInt(rs, "status")));
+            userShift.setNote(rs.getString("note"));
+            userShift.setIsOT(rs.getBoolean("isOT"));
+            userShift.setFullName(rs.getString("fullName"));
+            userShift.setOtText(Utilities.getOtText(Utilities.getBoolean(rs, "isOT")));
+            list.add(userShift);
+        }
+        con.close();
+        return list;
+    }
+
+    public List<UserShift> selectByUser(int userID) throws SQLException {
+        List<UserShift> list = null;
+        Connection con = DBContext.getConnection();
+         PreparedStatement stm = con.prepareStatement("select Users.userID, Users.fullName, UserShift.shiftID, UserShift.date, UserShift.status, UserShift.note, UserShift.isOT\n"
+                + "from UserShift left join Users on UserShift.userID = Users.userID \n"
+                + "where UserShift.userID = ?");
+        stm.setInt(1, userID);
+        ResultSet rs = stm.executeQuery();
         list = new ArrayList<>();
         while (rs.next()) {
             UserShift userShift = new UserShift();
@@ -68,14 +95,14 @@ public class UserShiftRepository {
         con.close();
         return userShift;
     }
-    
+
     public UserShift read(int userID, int shiftID, Date date) throws SQLException {
         UserShift userShift = null;
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("select * from UserShift where userID = ? and shiftID = ? and date = ?");
         stm.setInt(1, userID);
         stm.setInt(2, shiftID);
-        stm.setString(3, sdfDate.format(date) );
+        stm.setString(3, sdfDate.format(date));
         ResultSet rs = stm.executeQuery();
         if (rs.next()) {
             userShift = new UserShift();

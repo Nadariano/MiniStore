@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.Account;
 import models.ShiftTime;
 import models.Users;
 import repositories.ShiftTimeRepository;
@@ -82,10 +83,16 @@ public class UserShiftController extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             List<UserShift> list = UserShiftRepository.select();
+            Account acc = (Account) session.getAttribute("Account");
+            String roleName = acc.getRoleName();
+            int userID = acc.getUserID();
+            if (!roleName.equals("MANAGER")) {
+                list = usr.selectByUser(userID);
+            }
             request.setAttribute("list", list);
             //Add for BLOCK View
             Object selectedWeek = session.getAttribute("selectedWeek");
-            String week = Utilities.listStartEndDates().get(0);
+            String week = Utilities.listStartEndDates().get(2);
             if (selectedWeek != null) {
                 week = (String) selectedWeek;
             }
@@ -98,6 +105,7 @@ public class UserShiftController extends HttpServlet {
             List<LocalDate> startEndDates = Utilities.startEndDates(startDate);
             List<ShiftTime> shifts = ShiftTimeRepository.select();
             List<Date> listDates = Utilities.listDate(listLocalDates);
+            request.setAttribute("week", week);
             request.setAttribute("weeks", weeks);
             request.setAttribute("listDays", listDays);
             request.setAttribute("listLocalDates", listLocalDates);
@@ -111,7 +119,7 @@ public class UserShiftController extends HttpServlet {
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         }
     }
-    
+
     protected void selectWeek(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -121,7 +129,9 @@ public class UserShiftController extends HttpServlet {
                 try {
 //                    int weekNo = Integer.parseInt(request.getParameter("week"));
                     String selectedWeek = request.getParameter("week");
-                    session.setAttribute("selectedWeek", selectedWeek);
+                    if (selectedWeek != null) {
+                        session.setAttribute("selectedWeek", selectedWeek);
+                    }
 //                    request.setAttribute("week", week);
                     response.sendRedirect(request.getContextPath() + "/userShift/listOf.do");
                 } catch (Exception ex) {
@@ -140,11 +150,15 @@ public class UserShiftController extends HttpServlet {
         UserShiftRepository usr = new UserShiftRepository();
         try {
             List<Users> userList = UsersRepository.select();
-            int shiftID = Integer.parseInt(request.getParameter("shiftID"));
-            String date = request.getParameter("date");
-            request.setAttribute("usl",userList);
-            request.setAttribute("shiftID", shiftID);
-            request.setAttribute("date", date);
+            request.setAttribute("usl", userList);
+            int shiftID = 0;
+            String date = null;
+            shiftID = Integer.parseInt(request.getParameter("shiftID"));
+            date = request.getParameter("date");
+            if ((shiftID != 0) && (date != null)) {
+                request.setAttribute("shiftID", shiftID);
+                request.setAttribute("date", date);
+            }
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (Exception ex) {
             request.setAttribute("message", ex.getMessage());
