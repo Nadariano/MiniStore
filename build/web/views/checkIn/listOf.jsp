@@ -24,10 +24,10 @@
                     <div class="row bg-title">
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                             <h4 class="page-title">CHECK IN LIST</h4>
-                            <a href="<c:url value="/checkIn/create.do"/>"><i class="bi bi-file-earmark-plus"></i>Create manually | </a>
-                            <!--<a href="<c:url value="/checkIn/readExcel1.do"/>"><i class="bi bi-file-earmark-plus"></i>Generate from Excel</a>-->
+                            <!--<a href="<c:url value="/checkIn/create.do"/>"><i class="bi bi-file-earmark-plus"></i>Create manually | </a>-->
+                            <!--<a href="<c:url value="/checkIn/readExcel.do"/>"><i class="bi bi-file-earmark-plus"></i>Generate from Excel</a>-->
                             <br>
-                            <form action="<c:url value="/checkIn/readExcel1.do"/>">
+                            <form action="<c:url value="/checkIn/readExcel.do"/>">
                                 <input type="file" name="fileName">
                                 <button type="submit" name="op" value="readExcel">Generate from Excel</button>
                                 <br>

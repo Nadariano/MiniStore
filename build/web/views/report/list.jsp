@@ -23,41 +23,63 @@
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
-                    
-                    <form action="<c:url value="/report/searchByDate.do"/>">
-                        <div style="display: flex; align-items: center; justify-content: center;">
-                            <select name="day" style="margin-right: 8px;">
+
+                   <form action="<c:url value='/report/search.do'/>" class="form-inline "style="display: flex; align-items: center; justify-content: center;">
+                        <div class="form-group" >
+                            <label for="searchType">Search By:</label>
+                            <select id="searchType" name="searchType" onchange="changeSearchType()" class="form-control">
+                                <option value="date">Date</option>
+                                <option value="name">Name</option>
+                            </select>
+                        </div>
+
+                        <div id="dateInputs" class="form-group">
+                            <label for="day">Day:</label>
+                            <select name="day" class="form-control">
                                 <option value="">Day</option>
                                 <% for (int i = 1; i <= 31; i++) {%>
                                 <option value="<%= i%>"><%= i%></option>
                                 <% } %>
                             </select>
 
-                            <select name="month" style="margin-right: 8px;">
+                            <label for="month">Month:</label>
+                            <select name="month" class="form-control">
                                 <option value="">Month</option>
                                 <% for (int i = 1; i <= 12; i++) {%>
                                 <option value="<%= i%>"><%= i%></option>
                                 <% } %>
                             </select>
 
-                            <select name="year" style="margin-right: 8px;">
+                            <label for="year">Year:</label>
+                            <select name="year" class="form-control">
                                 <option value="">Year</option>
                                 <% for (int i = 1900; i <= 2023; i++) {%>
                                 <option value="<%= i%>"><%= i%></option>
                                 <% }%>
                             </select>
-
-                            <button type="submit" class="btn btn-primary" name="op" value="search" style="margin-right: 8px;">Search By Date</button>
                         </div>
+
+                        <div id="nameInputs" style="display: none;" class="form-group">
+                            <label for="fullName">Name:</label>
+                            <input type="text" id="fullName" name="fullName" class="form-control">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" name="op" value="search">Search</button>
                     </form>
 
-                    <form action="<c:url value="/report/searchByName.do"/>">
-                        <div style="display: flex; align-items: center; justify-content: center;">
-                            <label for="fullName" style="margin-right: 8px;">Name:</label>
-                            <input type="text" id="fullName" name="fullName" style="margin-right: 8px;">
-                            <button type="submit" class="btn btn-primary" name="op" value="search" style="margin-right: 8px;">Search By Name</button>
-                        </div>
-                    </form>
+
+                    <script>
+                        function changeSearchType() {
+                            var searchType = document.getElementById("searchType").value;
+                            if (searchType === "date") {
+                                document.getElementById("dateInputs").style.display = "block";
+                                document.getElementById("nameInputs").style.display = "none";
+                            } else {
+                                document.getElementById("dateInputs").style.display = "none";
+                                document.getElementById("nameInputs").style.display = "block";
+                            }
+                        }
+                    </script>
                     <!-- /row -->
                     <div class="row">
                         <div class="col-sm-12">
@@ -77,6 +99,7 @@
                                                 <th>Planned Date</th>
                                                 <th>Request Soon Time</th>
                                                 <th>Request Late Time</th>
+                                                <th>Shift ID</th>
                                                 <th>Status</th>
                                                 <th>Note</th>
                                                 <th>Operations</th>
@@ -95,15 +118,20 @@
                                                     <td>${report.plannedDate}</td>
                                                     <td>${report.requestSoonTime}</td>
                                                     <td>${report.requestLateTime}</td>
-                                                    <c:if test="${report.statusText=='Rejected'}">
-                                                        <td style="background-color:  #ac2925; color: whitesmoke " >${report.statusText}</td>
-                                                    </c:if>
-                                                    <c:if test="${report.statusText=='Approved'}">
-                                                        <td style="background-color: #398439; color: whitesmoke">${report.statusText}</td>
-                                                    </c:if>
-                                                    <c:if test="${report.statusText=='Processing'}">
-                                                        <td style="background-color: grey; color: whitesmoke">${report.statusText}</td>
-                                                    </c:if>    
+                                                    <td>${report.shiftID}</td>
+                                                    <c:choose>
+                                                        <c:when test="${report.statusText=='Rejected'}">
+                                                            <td><span class="badge bg-danger fs-6 px-1 py-0">${report.statusText}</span></td>
+                                                            </c:when>
+                                                            <c:when test="${report.statusText=='Approved'}">
+                                                            <td><span class="badge bg-success fs-6 px-1 py-0">${report.statusText}</span></td>
+                                                            </c:when>
+                                                            <c:when test="${report.statusText=='Processing'}">
+                                                            <td><span class="badge bg-warning text-dark fs-6 px-1 py-0">${report.statusText}</span></td>
+                                                            </c:when>
+                                                        </c:choose>
+
+
                                                     <td>${report.note}</td>
 
                                                     <td>

@@ -11,6 +11,7 @@ import models.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -28,6 +29,8 @@ import models.Account;
 import models.Report;
 import repositories.ReportRepository;
 import static services.Utilities.sdfDate;
+import static services.Utilities.sdfDateTime;
+import static services.Utilities.sdfTime;
 
 /**
  *
@@ -83,28 +86,6 @@ public class ReportController extends HttpServlet {
                 }
                 break;
 
-//            case "searchByDate":
-//                try {
-//                    searchByDate(request, response);
-//                } catch (Exception ex) {
-//                    //Hien trang thong bao loi
-//                    ex.printStackTrace();//In thông báo chi tiết cho developer
-//                    request.setAttribute("message", ex.getMessage());
-//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-//                }
-//                break;
-//
-//            case "searchByName":
-//                try {
-//                    searchByName(request, response);
-//                } catch (Exception ex) {
-//                    //Hien trang thong bao loi
-//                    ex.printStackTrace();//In thông báo chi tiết cho developer
-//                    request.setAttribute("message", ex.getMessage());
-//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-//                }
-//                break;
-
             case "search":
                 try {
                     search(request, response);
@@ -134,9 +115,17 @@ public class ReportController extends HttpServlet {
     private void list(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+
             ReportRepository rf = new ReportRepository();
             List<Report> list = rf.select();
+            HttpSession session = request.getSession();
+            List<Report> listSearch = (List<Report>) session.getAttribute("listSearch");
+
+            if (listSearch != null) {
+                list = listSearch;
+            }
             request.setAttribute("list", list);
+
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (SQLException ex) {
             //Hien trang thong bao loi
@@ -257,6 +246,7 @@ public class ReportController extends HttpServlet {
                     int typeID = Integer.parseInt(request.getParameter("typeID"));
                     String description = request.getParameter("description");
                     String plannedDate = request.getParameter("plannedDate");
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                     String requestSoonTime = request.getParameter("requestSoonTime");
                     String requestLateTime = request.getParameter("requestLateTime");
                     int userID = Integer.parseInt(request.getParameter("userID"));
@@ -264,7 +254,7 @@ public class ReportController extends HttpServlet {
                     String note = "";
                     int status = 1;
 //                    rf.create(reportTitle, description, status, note, userID);
-                    rf.create(reportTitle, description, plannedDate, requestSoonTime, requestLateTime, status, note, userID, typeID, shiftID);
+                    rf.create(reportTitle, description, plannedDate, requestSoonTime, requestLateTime, status, note, userID, shiftID, typeID);
                     response.sendRedirect(request.getContextPath() + "/report/listUserReport.do");
                 } catch (Exception ex) {
                     //Hiện trang thông báo lỗi
@@ -375,7 +365,7 @@ public class ReportController extends HttpServlet {
         return count;
     }
 
-    protected void search(HttpServletRequest request, HttpServletResponse response)
+    private void search(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         HttpSession session = request.getSession();
         String op = request.getParameter("op");

@@ -296,6 +296,9 @@ public class Utilities {
             case 1:
                 statusText = "Available";
                 break;
+            case 2:
+                statusText = "Available";
+                break;
             default:
                 statusText = "Unknown";
         }
@@ -303,7 +306,7 @@ public class Utilities {
         return statusText;
     }
 
-    public static String getStatusTextOfCofirm(int status) {
+    public static String getStatusTextOfConfirm(int status) {
         String confirm;
 
         switch (status) {
@@ -311,6 +314,9 @@ public class Utilities {
                 confirm = "Denied";
                 break;
             case 1:
+                confirm = "Accepted";
+                break;
+             case 2:
                 confirm = "Accepted";
                 break;
             default:
@@ -359,5 +365,33 @@ public class Utilities {
             datexs.add(date);
         }
         return datexs;
+    }
+    
+    public static List<LocalDate> startEndDates(LocalDate selectedDate) {
+//        LocalDate now = LocalDate.now();
+//        LocalDate selectedDate= now.plusDays(i*7);
+        List<LocalDate> collect = Arrays.asList(DayOfWeek.values()).stream().map(selectedDate::with).collect(toList());
+        LocalDate startDate = collect.get(0);
+        LocalDate endDate = collect.get(6);
+        List<LocalDate> startEndDates = Arrays.asList(startDate, endDate);
+        return startEndDates;
+    }
+
+    //List StartDates of the next 5 weeks
+    public static List<String> listStartEndDates() {
+        List<String> listStartEndDates = new ArrayList<>();
+        LocalDate now = LocalDate.now();
+        for (int i = -2; i < 5; i++) {
+            List<LocalDate> startEndDates = startEndDates(now.plusDays(i * 7));
+            LocalDate lst = startEndDates.get(0);
+            LocalDate led = startEndDates.get(1);
+            Date st = Utilities.localDateIntoDate(lst);
+            Date ed = Utilities.localDateIntoDate(led);
+            String startDate = sdfDate.format(st);
+            String endDate = sdfDate.format(ed);
+            String sed = startDate + " - " + endDate;
+            listStartEndDates.add(sed);
+        }
+        return listStartEndDates;
     }
 }

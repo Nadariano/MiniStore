@@ -3,6 +3,7 @@
     Created on : Jun 9, 2023, 3:51:31 PM
     Author     : Dell
 --%>
+<%@page import="java.time.LocalDate"%>
 <!DOCTYPE html>
 <html lang="en">
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,6 +14,11 @@
     </head>
 
     <body>
+        <!--Cannot create the date earlier than today-->
+        <%
+            LocalDate minDate = LocalDate.now().plusDays(1);
+        %>
+        <c:set var="minDate" value="<%=minDate%>"/>
         <c:choose>
             <c:when test="${Account.roleName.equals('MANAGER')}">
                 <!-- Preloader -->
@@ -35,20 +41,30 @@
                             <div class="white-box">
 
 
-
                                 <form action="<c:url value="/userShift/create_handler.do"/>" class="form-horizontal form-material">
                                     <div class="form-group">
-                                        <label class="col-md-12">User ID</label>
+                                        <label class="col-md-12">Select an employee</label>
+                                        <!--                                        <div class="col-md-12">
+                                                                                    <input type="number" placeholder="User ID" name="userID" value="${userShift.userID}"
+                                                                                           class="form-control form-control-line" />
+                                                                                </div>-->
                                         <div class="col-md-12">
-                                            <input type="number" placeholder="User ID" name="userID" value="${userShift.userID}"
-                                                   class="form-control form-control-line" />
+                                            <select name="userID" class="form-control">
+                                                <c:forEach var="user" items="${usl}" varStatus="loop">
+                                                    <c:if test="${!user.roleName.equals('MANAGER') && !user.roleName.equals('ADMIN')}">
+                                                        <option name="userID" value="${user.userID}">${user.fullName} (${user.roleName})</option>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </select>
                                         </div>
+
+
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-12">Shift</label>
                                         <div class="col-md-12">
-                                            <input type="number" placeholder="Shift ID" name="shiftID" value="${userShift.shiftID}"
+                                            <input type="number" placeholder="Shift ID" name="shiftID" value="${shiftID}"
                                                    class="form-control form-control-line" />
                                         </div>
                                     </div>
@@ -56,7 +72,7 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Date</label>
                                         <div class="col-md-12">
-                                            <input type="date" placeholder="Date"name="date" value="${userShift.date}"
+                                            <input type="date" placeholder="Date" name="date" value="${date}" min="${minDate}"
                                                    class="form-control form-control-line" />
                                         </div>
                                     </div>         
@@ -94,7 +110,6 @@
                                         </div>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                         <div class="col-md-2 col-12"></div>

@@ -36,7 +36,7 @@ public class CheckInService {
     
 //    public static final String EXCEL_FILE_PATH = "D:\\FPT\\1.xlsx";
 //    public static int s = 0;
-    public static List<CheckIn> readExcel1(String EXCEL_FILE_PATH) throws FileNotFoundException, IOException, ParseException, SQLException {
+    public static List<CheckIn> readExcel(String EXCEL_FILE_PATH) throws FileNotFoundException, IOException, ParseException, SQLException {
 
 //        String EXCEL_FILE_PATH = "C:\\Users\\acer\\Downloads\\1.xlsx";
         FileInputStream file = new FileInputStream(new File(EXCEL_FILE_PATH));
