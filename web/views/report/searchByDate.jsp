@@ -9,7 +9,7 @@
 
     <body>
         <c:choose>
-            <c:when test="${Account.roleName.equals('MANAGER')}">
+            <c:when test="${Account.roleName.equals('Manager')}">
                 <!-- Preloader -->
                 <div class="preloader">
                     <div class="cssload-speeding-wheel"></div>
@@ -23,7 +23,7 @@
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
-                    
+
                     <form action="<c:url value="/report/searchByDate.do"/>">
                         <div style="display: flex; align-items: center; justify-content: center;">
                             <select name="day" style="margin-right: 8px;">
@@ -106,8 +106,10 @@
                                                         <a href="<c:url value="/report/update.do?reportID=${report.reportID}"  />" class="btn btn-sm btn-primary">Update</a>
                                                         <a href="<c:url value="/report/delete.do?reportID=${report.reportID}" /> " onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-danger">Delete</a>
                                                     </td>
-                                                </tr>
-                                            </c:forEach>
+                                                    
+                                            </tr>
+                                        </c:forEach>
+                                            <h5 style="color:red">${message}</h5>
                                         </tbody>
                                     </table>
                                 </div>

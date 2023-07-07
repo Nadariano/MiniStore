@@ -99,9 +99,9 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Status</label>
                                         <div class="col-md-12">
-                                            <select name="status"class="form-control form-control-line">
-                                                <option value="0">Inactive</option>
-                                                <option value="1">Active</option>
+                                            <select name="status" class="form-control form-control-line">
+                                                <option value="1" ${users.status == 1 ? 'selected' : ''}>Active</option>
+                                                <option value="0" ${users.status == 0 ? 'selected' : ''}>Inactive</option>
                                             </select>
                                         </div>
                                     </div>
@@ -117,17 +117,16 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Role</label>
                                         <div class="col-md-12">
-                                            <select name="roleID"class="form-control form-control-line">
-                                                <option value="1">Admin</option>
-                                                <option value="2">Manager</option>
-                                                <option value="3">Sale</option>
-                                                <option value="4">Guard</option>
+                                            <select name="roleID" class="form-control form-control-line">
+                                                <option value="1" ${users.roleID == 1 ? 'selected' : ''}>Admin</option>
+                                                <option value="2" ${users.roleID == 2 ? 'selected' : ''}>Manager</option>
+                                                <option value="3" ${users.roleID == 3 ? 'selected' : ''}>Sale</option>
+                                                <option value="4" ${users.roleID == 4 ? 'selected' : ''}>Guard</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
-
                                             <button type="submit" class="btn btn-success" name="op" value="update">Update <i class="bi bi-check-square"></i></button>
                                             <button type="submit" class="btn btn-outline-danger" name="op" value="cancel">Cancel<i class="bi bi-x-square"></i></button>
 

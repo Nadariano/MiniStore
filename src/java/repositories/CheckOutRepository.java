@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import models.CheckOut;
 import static services.Utilities.sdfDateTime;
@@ -43,6 +44,32 @@ public class CheckOutRepository {
         con.close();
         return list;
     }
+    
+     public List<CheckOut> search(Date minTime, Date maxTime, int userID) throws SQLException {
+        List<CheckOut> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("select co.checkOutID, co.checkOutTime, co.userID, u.fullName\n"
+                + "from CheckOut as co left join Users as u on co.userID = u.userID\n"
+                + "where checkOutTime between ? and ? and co.userID = ?");
+        stm.setString(1, sdfDateTime.format(minTime));
+        stm.setString(2, sdfDateTime.format(maxTime));
+        stm.setInt(3, userID);
+//        stm.setDate(1, sdfDateTime.parse(date1));
+//        stm.setDate(2, date2);
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            CheckOut checkOut = new CheckOut();
+            checkOut.setCheckOutID(rs.getInt("checkOutID"));
+            checkOut.setCheckOutTime(rs.getTimestamp("checkOutTime"));
+            checkOut.setUserID(rs.getInt("userID"));
+            checkOut.setFullName(rs.getString("fullName"));
+            list.add(checkOut);
+        }
+        con.close();
+        return list;
+    }
+     
      public void create(CheckOut checkOut) throws SQLException {
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("insert into CheckOut values(?, ?)");

@@ -39,19 +39,21 @@
                                     <table class="table" id="example">
 
                                         <thead>
-                                            <tr>
+                                            <tr >
                                                 <!--<th>No.</th>-->
                                                 <th>Shift</th>
+                                                <th>Shift Name</th>
                                                 <th>Time Start</th>
                                                 <th>Time End</th>
                                                 <th>Coefficient Of Shift</th>
                                                 <th>Coefficient Of Overtime</th>
-                                                <th>Wage</th>
+                                                <th>Coefficient Of Day Off</th>
+                                                <th style="text-align: center">Wage</th>
                                                 <th>Status</th>
                                                 <th>Note</th>
-                                                    <c:if test="${Account.roleName.equals('MANAGER')}">
-                                                    <th>Operations</th>
-                                                    </c:if>
+                                            <c:if test="${Account.roleName.equals('MANAGER')}">
+                                                <th style="text-align: center">Operations</th>
+                                            </c:if>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -59,17 +61,19 @@
                                                 <tr>
                                                     <!--<td>${loop.count}</td>-->
                                                     <td>${shiftTime.shiftID}</td>
+                                                    <td>${shiftTime.shiftName}</td>
                                                     <td>${shiftTime.timeStart}</td>
                                                     <td>${shiftTime.timeEnd}</td>
                                                     <td style="text-align: center">${shiftTime.coeShift}</td>
                                                     <td style="text-align: center">${shiftTime.coeOT}</td>
-                                                    <td>${shiftTime.wage}</td>
+                                                    <td style="text-align: center">${shiftTime.coeDayOff}</td>
+                                                    <td style="text-align: center">${shiftTime.wage}</td>
                                                     <td>${shiftTime.statusText}</td>
                                                     <td>${shiftTime.note}</td>
-                                                    <td>
+                                                    <td style="text-align: center">
                                                         <c:if test="${!role.roleName.equals('MANAGER')}">
-                                                            <a href="<c:url value="/shiftTime/update.do?shiftID=${shiftTime.shiftID}" />" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i>Update</a>
-                                                            <a href="<c:url value="/shiftTime/delete.do?shiftID=${shiftTime.shiftID}" />" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-warning"><i class="bi bi-trash3"></i>Delete</a>
+                                                            <a href="<c:url value="/shiftTime/update.do?shiftID=${shiftTime.shiftID}" />" class="btn btn-sm btn-primary" ><i class="bi bi-pencil-square"></i>Update</a>
+                                                            <a href="<c:url value="/shiftTime/delete.do?shiftID=${shiftTime.shiftID}" />" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-warning" ><i class="bi bi-trash3"></i>Delete</a>
                                                         </c:if>
                                                     </td>
                                                 </tr>

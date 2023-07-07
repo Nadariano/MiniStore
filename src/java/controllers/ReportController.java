@@ -5,8 +5,17 @@
  */
 package controllers;
 
+import models.Report;
+import repositories.ReportRepository;
+import models.Users;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +23,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import models.Account;
 import models.Report;
 import repositories.ReportRepository;
+import static services.Utilities.sdfDate;
+import static services.Utilities.sdfDateTime;
+import static services.Utilities.sdfTime;
 
 /**
  *
@@ -72,27 +86,6 @@ public class ReportController extends HttpServlet {
                 }
                 break;
 
-//            case "searchByDate":
-//                try {
-//                    searchByDate(request, response);
-//                } catch (Exception ex) {
-//                    //Hien trang thong bao loi
-//                    ex.printStackTrace();//In thông báo chi tiết cho developer
-//                    request.setAttribute("message", ex.getMessage());
-//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-//                }
-//                break;
-//
-//            case "searchByName":
-//                try {
-//                    searchByName(request, response);
-//                } catch (Exception ex) {
-//                    //Hien trang thong bao loi
-//                    ex.printStackTrace();//In thông báo chi tiết cho developer
-//                    request.setAttribute("message", ex.getMessage());
-//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-//                }
-//                break;
             case "search":
                 try {
                     search(request, response);
@@ -253,11 +246,15 @@ public class ReportController extends HttpServlet {
                     int typeID = Integer.parseInt(request.getParameter("typeID"));
                     String description = request.getParameter("description");
                     String plannedDate = request.getParameter("plannedDate");
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                    String requestSoonTime = request.getParameter("requestSoonTime");
+                    String requestLateTime = request.getParameter("requestLateTime");
                     int userID = Integer.parseInt(request.getParameter("userID"));
+                    int shiftID = Integer.parseInt(request.getParameter("shiftID"));
                     String note = "";
                     int status = 1;
 //                    rf.create(reportTitle, description, status, note, userID);
-                    rf.create(reportTitle, description, plannedDate, status, note, userID, typeID);
+                    rf.create(reportTitle, description, plannedDate, requestSoonTime, requestLateTime, status, note, userID, shiftID, typeID);
                     response.sendRedirect(request.getContextPath() + "/report/listUserReport.do");
                 } catch (Exception ex) {
                     //Hiện trang thông báo lỗi
@@ -273,16 +270,6 @@ public class ReportController extends HttpServlet {
         }
     }
 
-//    private int countParams(String... params) {
-//        int count = 0;
-//        for (String param : params) {
-//            if (param != null && !param.isEmpty()) {
-//                count++;
-//            }
-//        }
-//        return count;
-//    }
-//
 //    private void searchByDate(HttpServletRequest request, HttpServletResponse response)
 //            throws ServletException, IOException, ClassNotFoundException {
 //        String op = request.getParameter("op");
@@ -292,39 +279,44 @@ public class ReportController extends HttpServlet {
 //                    String day = request.getParameter("day");
 //                    String month = request.getParameter("month");
 //                    String year = request.getParameter("year");
+//                    String createDate = year + "-" + month + "-" + day;
 //                    ReportRepository rf = new ReportRepository();
 //                    List<Report> list = null;
+//                    if (!"day".equals(day) && !"month".equals(month) && !"year".equals(year)) {
+//                        list = rf.search(createDate);
 //
-//                    switch (countParams(day, month, year)) {
-//                        case 3:
-//                            String createDate = year + "-" + month + "-" + day;
-//                            list = rf.search(createDate);
-//                            break;
-//                        case 2:
-//                            if ("".equals(year)) {
-//                                list = rf.searchByDayAndMonth(day, month);
-//                            } else if ("".equals(month)) {
-//                                list = rf.searchByDayAndYear(day, year);
-//                            } else {
-//                                list = rf.searchByMonthAndYear(month, year);
-//                            }
-//                            break;
-//                        case 1:
-//                            if (!"".equals(day)) {
-//                                list = rf.searchByDay(day);
-//                            } else if (!"".equals(month)) {
-//                                list = rf.searchByMonth(month);
-//                            } else {
-//                                list = rf.searchByYear(year);
-//                            }
-//                            break;
-//                        default:
-//                            // Handle invalid input
-//                            break;
 //                    }
+//                    if ("year".equals(year)) {
+//                        list = rf.searchByDayAndMonth(day, month);
 //
-//                    request.setAttribute("list", list);
-//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//                    }
+//                    if ("month".equals(month)) {
+//                        list = rf.searchByDayAndYear(day, year);
+//
+//                    }
+//                    if ("day".equals(day)) {
+//                        list = rf.searchByMonthAndYear(month, year);
+//
+//                    }
+//                    if ("".equals(month) && "".equals(year)) {
+//                        list = rf.searchByDay(day);
+//
+//                    }
+//                    if ("".equals(day) && "".equals(year)) {
+//                        list = rf.searchByMonth(month);
+//
+//                    }
+//                    if ("".equals(day) && "".equals(month)) {
+//                        list = rf.searchByYear(year);
+//
+//                    }
+//                    if (list != null){
+//                        request.setAttribute("list", list);
+//                        request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//                    }else {
+//                        request.setAttribute("message", "NOT FOUND !!!");
+//                        request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//                    }
 //
 ////                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
 //                } catch (SQLException ex) {
@@ -363,8 +355,7 @@ public class ReportController extends HttpServlet {
 //                break;
 //        }
 //    }
-//
-    private int countParams(String... params) {
+    protected int countParams(String... params) {
         int count = 0;
         for (String param : params) {
             if (param != null && !param.isEmpty()) {

@@ -8,14 +8,14 @@
     </head>
 
     <body>
-
-        <!-- Preloader -->
-        <div class="preloader">
-            <div class="cssload-speeding-wheel"></div>
-        </div>
-        <!-- Page Content -->
         <c:choose>
             <c:when test="${Account.roleName.equals('MANAGER')}">
+                <!-- Preloader -->
+                <div class="preloader">
+                    <div class="cssload-speeding-wheel"></div>
+                </div>
+                <!-- Page Content -->
+
                 <div class="container-fluid">
                     <div class="row bg-title">
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -24,57 +24,62 @@
                         <!-- /.col-lg-12 -->
                     </div>
 
-                    <form action="<c:url value='/report/search.do'/>">
-    <div style="display: flex; align-items: center; justify-content: center;">
-        <select id="searchType" name="searchType" onchange="changeSearchType()" style="margin-right: 8px;">
-            <option value="date">Search By Date</option>
-            <option value="name">Search By Name</option>
-        </select>
+                   <form action="<c:url value='/report/search.do'/>" class="form-inline "style="display: flex; align-items: center; justify-content: center;">
+                        <div class="form-group" >
+                            <label for="searchType">Search By:</label>
+                            <select id="searchType" name="searchType" onchange="changeSearchType()" class="form-control">
+                                <option value="date">Date</option>
+                                <option value="name">Name</option>
+                            </select>
+                        </div>
 
-        <div id="dateInputs">
-            <select name="day" style="margin-right: 8px;">
-                <option value="">Day</option>
-                <% for (int i = 1; i <= 31; i++) {%>
-                <option value="<%= i%>"><%= i%></option>
-                <% } %>
-            </select>
+                        <div id="dateInputs" class="form-group">
+                            <label for="day">Day:</label>
+                            <select name="day" class="form-control">
+                                <option value="">Day</option>
+                                <% for (int i = 1; i <= 31; i++) {%>
+                                <option value="<%= i%>"><%= i%></option>
+                                <% } %>
+                            </select>
 
-            <select name="month" style="margin-right: 8px;">
-                <option value="">Month</option>
-                <% for (int i = 1; i <= 12; i++) {%>
-                <option value="<%= i%>"><%= i%></option>
-                <% } %>
-            </select>
+                            <label for="month">Month:</label>
+                            <select name="month" class="form-control">
+                                <option value="">Month</option>
+                                <% for (int i = 1; i <= 12; i++) {%>
+                                <option value="<%= i%>"><%= i%></option>
+                                <% } %>
+                            </select>
 
-            <select name="year" style="margin-right: 8px;">
-                <option value="">Year</option>
-                <% for (int i = 1900; i <= 2023; i++) {%>
-                <option value="<%= i%>"><%= i%></option>
-                <% }%>
-            </select>
-        </div>
+                            <label for="year">Year:</label>
+                            <select name="year" class="form-control">
+                                <option value="">Year</option>
+                                <% for (int i = 1900; i <= 2023; i++) {%>
+                                <option value="<%= i%>"><%= i%></option>
+                                <% }%>
+                            </select>
+                        </div>
 
-        <div id="nameInputs" style="display: none;">
-            <label for="fullName" style="margin-right: 8px;">Name:</label>
-            <input type="text" id="fullName" name="fullName" style="margin-right: 8px;">
-        </div>
+                        <div id="nameInputs" style="display: none;" class="form-group">
+                            <label for="fullName">Name:</label>
+                            <input type="text" id="fullName" name="fullName" class="form-control">
+                        </div>
 
-        <button type="submit" class="btn btn-primary" name="op" value="search" style="margin-right: 8px;">Search</button>
-    </div>
-</form>
+                        <button type="submit" class="btn btn-primary" name="op" value="search">Search</button>
+                    </form>
 
-<script>
-    function changeSearchType() {
-        var searchType = document.getElementById("searchType").value;
-        if (searchType === "date") {
-            document.getElementById("dateInputs").style.display = "block";
-            document.getElementById("nameInputs").style.display = "none";
-        } else {
-            document.getElementById("dateInputs").style.display = "none";
-            document.getElementById("nameInputs").style.display = "block";
-        }
-    }
-</script>
+
+                    <script>
+                        function changeSearchType() {
+                            var searchType = document.getElementById("searchType").value;
+                            if (searchType === "date") {
+                                document.getElementById("dateInputs").style.display = "block";
+                                document.getElementById("nameInputs").style.display = "none";
+                            } else {
+                                document.getElementById("dateInputs").style.display = "none";
+                                document.getElementById("nameInputs").style.display = "block";
+                            }
+                        }
+                    </script>
                     <!-- /row -->
                     <div class="row">
                         <div class="col-sm-12">
@@ -92,6 +97,9 @@
                                                 <th>Author</th>
                                                 <th>Description</th>
                                                 <th>Planned Date</th>
+                                                <th>Request Soon Time</th>
+                                                <th>Request Late Time</th>
+                                                <th>Shift ID</th>
                                                 <th>Status</th>
                                                 <th>Note</th>
                                                 <th>Operations</th>
@@ -108,15 +116,22 @@
                                                     <td>${report.fullName}</td>
                                                     <td>${report.description}</td>
                                                     <td>${report.plannedDate}</td>
-                                                    <c:if test="${report.statusText=='Rejected'}">
-                                                        <td style="background-color:  #ac2925; color: whitesmoke " >${report.statusText}</td>
-                                                    </c:if>
-                                                    <c:if test="${report.statusText=='Approved'}">
-                                                        <td style="background-color: #398439; color: whitesmoke">${report.statusText}</td>
-                                                    </c:if>
-                                                    <c:if test="${report.statusText=='Processing'}">
-                                                        <td style="background-color: grey; color: whitesmoke">${report.statusText}</td>
-                                                    </c:if>    
+                                                    <td>${report.requestSoonTime}</td>
+                                                    <td>${report.requestLateTime}</td>
+                                                    <td>${report.shiftID}</td>
+                                                    <c:choose>
+                                                        <c:when test="${report.statusText=='Rejected'}">
+                                                            <td><span class="badge bg-danger fs-6 px-1 py-0">${report.statusText}</span></td>
+                                                            </c:when>
+                                                            <c:when test="${report.statusText=='Approved'}">
+                                                            <td><span class="badge bg-success fs-6 px-1 py-0">${report.statusText}</span></td>
+                                                            </c:when>
+                                                            <c:when test="${report.statusText=='Processing'}">
+                                                            <td><span class="badge bg-warning text-dark fs-6 px-1 py-0">${report.statusText}</span></td>
+                                                            </c:when>
+                                                        </c:choose>
+
+
                                                     <td>${report.note}</td>
 
                                                     <td>

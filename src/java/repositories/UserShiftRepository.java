@@ -13,12 +13,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import java.util.List;
 import models.UserShift;
 import static services.Utilities.sdfDate;
+
 /**
  *
  * @author Dell
@@ -32,6 +34,32 @@ public class UserShiftRepository {
         ResultSet rs = stm.executeQuery("select Users.userID, Users.fullName, UserShift.shiftID, UserShift.date, UserShift.status, UserShift.note, UserShift.isOT\n"
                 + "from UserShift \n"
                 + "left join Users on UserShift.userID = Users.userID");
+        list = new ArrayList<>();
+        while (rs.next()) {
+            UserShift userShift = new UserShift();
+            userShift.setUserID(rs.getInt("userID"));
+            userShift.setShiftID(rs.getInt("shiftID"));
+            userShift.setDate(rs.getDate("date"));
+            userShift.setStatus(rs.getInt("status"));
+            userShift.setStatusText2(Utilities.getStatusText2(Utilities.getInt(rs, "status")));
+            userShift.setNote(rs.getString("note"));
+            userShift.setIsOT(rs.getBoolean("isOT"));
+            userShift.setFullName(rs.getString("fullName"));
+            userShift.setOtText(Utilities.getOtText(Utilities.getBoolean(rs, "isOT")));
+            list.add(userShift);
+        }
+        con.close();
+        return list;
+    }
+
+    public List<UserShift> selectByUser(int userID) throws SQLException {
+        List<UserShift> list = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("select Users.userID, Users.fullName, UserShift.shiftID, UserShift.date, UserShift.status, UserShift.note, UserShift.isOT\n"
+                + "from UserShift left join Users on UserShift.userID = Users.userID \n"
+                + "where UserShift.userID = ?");
+        stm.setInt(1, userID);
+        ResultSet rs = stm.executeQuery();
         list = new ArrayList<>();
         while (rs.next()) {
             UserShift userShift = new UserShift();
@@ -69,6 +97,27 @@ public class UserShiftRepository {
         return userShift;
     }
 
+    public UserShift read(int userID, int shiftID, Date date) throws SQLException {
+        UserShift userShift = null;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("select * from UserShift where userID = ? and shiftID = ? and date = ?");
+        stm.setInt(1, userID);
+        stm.setInt(2, shiftID);
+        stm.setString(3, sdfDate.format(date));
+        ResultSet rs = stm.executeQuery();
+        if (rs.next()) {
+            userShift = new UserShift();
+            userShift.setUserID(rs.getInt("userID"));
+            userShift.setShiftID(rs.getInt("shiftID"));
+            userShift.setDate(rs.getDate("date"));
+            userShift.setStatus(rs.getInt("status"));
+            userShift.setNote(rs.getString("note"));
+            userShift.setIsOT(rs.getBoolean("isOT"));
+        }
+        con.close();
+        return userShift;
+    }
+
     public void create(UserShift userShift) throws SQLException {
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("insert into UserShift values(?, ?, ?, ?, ?, ?)");
@@ -82,15 +131,17 @@ public class UserShiftRepository {
         con.close();
     }
 
-    public void update(UserShift userShift) throws SQLException {
+    public void update(UserShift userShift, int oldShiftID, String oldDate) throws SQLException, ParseException {
         Connection con = DBContext.getConnection();
-        PreparedStatement stm = con.prepareStatement("update UserShift set date =?, status = ?, note = ?, isOT = ? where userID = ? and shiftID = ?");
-        stm.setString(1, sdfDate.format(userShift.getDate()));
-        stm.setInt(2, userShift.getStatus());
-        stm.setString(3, userShift.getNote());
-        stm.setBoolean(4, userShift.isIsOT());
-        stm.setInt(5, userShift.getUserID());
-        stm.setInt(6, userShift.getShiftID());
+        PreparedStatement stm = con.prepareStatement("update UserShift set shiftID = ?, date = ?, status = ?, note = ?, isOT = ? where userID = ? and shiftID = ? and date = ?");
+        stm.setInt(1, userShift.getShiftID());
+        stm.setString(2, sdfDate.format(userShift.getDate()));
+        stm.setInt(3, userShift.getStatus());
+        stm.setString(4, userShift.getNote());
+        stm.setBoolean(5, userShift.isIsOT());
+        stm.setInt(6, userShift.getUserID());
+        stm.setInt(7, oldShiftID);
+        stm.setString(8, sdfDate.format(sdfDate.parse(oldDate)));
         int count = stm.executeUpdate();
         con.close();
     }

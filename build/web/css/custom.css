@@ -71,9 +71,7 @@
     text-align: center;
     padding: 2%;
 }
-.white-box{
-    margin: 0;
-}
+
 .overlay-box{
     /*    width: 100%;
         height: 100%;*/
@@ -203,6 +201,7 @@
     position: relative;
     display: inline-block;
     padding: 2%;
+    margin-bottom: 5%;
     background-color: greenyellow;
     border-radius: 25px 25px;
 }
@@ -230,4 +229,16 @@
     height: 100%;
     background-color: goldenrod;
     /*color: red;*/
+}
+.popup {
+    display: none;
+    height: auto;
+    position: fixed;
+    z-index: 1;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    background-color: #f1f1f1;
+    padding: 20px;
+    border: 1px solid #000;
 }
