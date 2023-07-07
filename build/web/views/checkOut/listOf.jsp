@@ -23,7 +23,7 @@
                     <div class="row bg-title">
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                             <h4 class="page-title">CHECK OUT LIST</h4>
-                            <a href="<c:url value="/checkOut/create.do"/>"><i class="bi bi-file-earmark-plus"></i>Create manually |</a>
+                            <!--<a href="<c:url value="/checkOut/create.do"/>"><i class="bi bi-file-earmark-plus"></i>Create manually |</a>-->
                             <!--<a href="<c:url value="/checkOut/readExcel.do"/>"><i class="bi bi-file-earmark-plus"></i>Generate from Excel</a>-->
                              <form action="<c:url value="/checkOut/readExcel.do"/>">
                                 <input type="file" name="fileName">

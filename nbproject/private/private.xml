@@ -11,6 +11,11 @@
             <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(07-07)/MiniStore/src/java/controllers/AttendanceController.java</file>
             <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(07-07)/MiniStore/web/views/attendance/listOfUsers.jsp</file>
             <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(07-07)/MiniStore/web/views/attendance/list.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne/MiniStore/src/java/controllers/CheckInController.java</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne/MiniStore/src/java/services/CheckInService.java</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne/MiniStore/src/java/controllers/ShiftTimeController.java</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne/MiniStore/web/views/checkOut/listOf.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne/MiniStore/src/java/repositories/ShiftTimeRepository.java</file>
         </group>
     </open-files>
 </project-private>

@@ -105,15 +105,20 @@ public class ShiftTimeController extends HttpServlet {
         switch (op) {
             case "create":
                 try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 //                                int shiftID = Integer.parseInt(request.getParameter("shiftID"));
-                    Date timeStart = sdfTime.parse(request.getParameter("timeStart"));
-                    Date timeEnd = sdfTime.parse(request.getParameter("timeEnd"));
+//                    Date timeStart = sdfTime.parse(request.getParameter("timeStart"));
+//                    System.out.println(timeStart);
+//                    Date timeEnd = sdfTime.parse(request.getParameter("timeEnd"));
+                    String shiftName = request.getParameter("shiftName");
+                    Date timeStart= sdf.parse(request.getParameter("timeStart"));
+                    Date timeEnd= sdf.parse(request.getParameter("timeEnd"));
                     float coeShift = Float.parseFloat(request.getParameter("coeShift"));
                     float coeOT = Float.parseFloat(request.getParameter("coeOT"));
                     float wage = Float.parseFloat(request.getParameter("wage"));
                     int status = Integer.parseInt(request.getParameter("status"));
                     String note = request.getParameter("note");
-                    ShiftTime shiftTime = new ShiftTime(timeStart, timeEnd, coeShift, coeOT, wage, status, note);
+                    ShiftTime shiftTime = new ShiftTime(timeStart, timeEnd, coeShift, coeOT, coeOT, wage, status, note, note, shiftName);
                     request.setAttribute("shiftTime", shiftTime);
                     str.create(shiftTime);
                     response.sendRedirect(request.getContextPath() + "/shiftTime/listOf.do");
@@ -138,7 +143,7 @@ public class ShiftTimeController extends HttpServlet {
             ShiftTime shiftTime = str.read(shiftID);
             request.setAttribute("shiftTime", shiftTime);
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             request.setAttribute("message", ex.getMessage());
             request.setAttribute("controller", "error");
@@ -154,15 +159,17 @@ public class ShiftTimeController extends HttpServlet {
         switch (op) {
             case "update":
                 try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                     int shiftID = Integer.parseInt(request.getParameter("shiftID"));
-                    Date timeStart = sdfTime.parse(request.getParameter("timeStart"));
-                    Date timeEnd = sdfTime.parse(request.getParameter("timeEnd"));
+                    String shiftName = request.getParameter("shiftName");
+                    Date timeStart= sdf.parse(request.getParameter("timeStart"));
+                    Date timeEnd= sdf.parse(request.getParameter("timeEnd"));
                     float coeShift = Float.parseFloat(request.getParameter("coeShift"));
                     float coeOT = Float.parseFloat(request.getParameter("coeOT"));
                     float wage = Float.parseFloat(request.getParameter("wage"));
                     int status = Integer.parseInt(request.getParameter("status"));
                     String note = request.getParameter("note");
-                    ShiftTime shiftTime = new ShiftTime(shiftID, timeStart, timeEnd, coeShift, coeOT, wage, status, note);
+                    ShiftTime shiftTime = new ShiftTime(shiftID, timeStart, timeEnd, coeShift, coeOT, coeOT, wage, status, note, shiftName);
                     str.update(shiftTime);
                     response.sendRedirect(request.getContextPath() + "/shiftTime/listOf.do");
                 } catch (Exception ex) {
