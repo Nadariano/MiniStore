@@ -40,9 +40,11 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /row -->
-            <div id="myTab" class="pull-left">
-                <a href="#listView" data-toggle="tab">List View |</a>
-                <a href="#blockView" data-toggle="tab">Block View</a>
+            <div class=" row bg-white">
+                <div id="myTab" class="pull-left ">
+                    <a href="#listView" data-toggle="tab">List View |</a>
+                    <a href="#blockView" data-toggle="tab">Block View</a>
+                </div>
             </div>
             <div class="tab-content">
                 <div class="tab-pane" id="listView">
@@ -98,10 +100,12 @@
                 </div>
 
                 <div class="tab-pane active" id="blockView">
+                    <div class="white-box">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="table-responsive">
                                 <table class="table-striped schedule">
+
                                     <tr>
                                         <th>
                                             <div class="dropdown">
@@ -175,14 +179,11 @@
                                                         </button>
                                                     </c:if>
 
-                                                </td>    
-                                            </c:forEach>
-                                        </tr>
-                                    </c:forEach>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                                    </td>    
+                                </c:forEach>
+                            </tr>
+                        </c:forEach>
+                    </table>
                 </div>
             </div>  
         </div>
