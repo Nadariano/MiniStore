@@ -84,7 +84,7 @@
                             <div class="form-group">
                                 <label class="col-md-12">Soon Time: </label>
                                 <div class="col-md-12">
-                                    <input type="time" id="soonTime" placeholder="Soon Time" name="soonTime" value="${attendance.soonTime}"
+                                    <input type="text" id="soonTime" placeholder="Fill ?hour:?min:?sec (Example:00:30:00)" name="soonTime" value="${attendance.soonTime}"
                                            class="form-control form-control-line" />
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                             <div class="form-group">
                                 <label class="col-md-12">Late Time: </label>
                                 <div class="col-md-12">
-                                    <input type="time" id="lateTime" placeholder="Late Time" name="lateTime" value="${attendance.lateTime}"
+                                    <input type="text" id="lateTime" placeholder="Fill ?hour:?min:?sec (Example:00:40:00)" name="lateTime" value="${attendance.lateTime}"
                                            class="form-control form-control-line" />
                                 </div>
                             </div>
