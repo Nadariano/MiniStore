@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -130,15 +131,17 @@ public class UserShiftRepository {
         con.close();
     }
 
-    public void update(UserShift userShift) throws SQLException {
+    public void update(UserShift userShift, int oldShiftID, String oldDate) throws SQLException, ParseException {
         Connection con = DBContext.getConnection();
-        PreparedStatement stm = con.prepareStatement("update UserShift set status = ?, note = ?, isOT = ? where userID = ? and shiftID = ? and date = ?");
-        stm.setInt(1, userShift.getStatus());
-        stm.setString(2, userShift.getNote());
-        stm.setBoolean(3, userShift.isIsOT());
-        stm.setInt(4, userShift.getUserID());
-        stm.setInt(5, userShift.getShiftID());
-        stm.setString(6, sdfDate.format(userShift.getDate()));
+        PreparedStatement stm = con.prepareStatement("update UserShift set shiftID = ?, date = ?, status = ?, note = ?, isOT = ? where userID = ? and shiftID = ? and date = ?");
+        stm.setInt(1, userShift.getShiftID());
+        stm.setString(2, sdfDate.format(userShift.getDate()));
+        stm.setInt(3, userShift.getStatus());
+        stm.setString(4, userShift.getNote());
+        stm.setBoolean(5, userShift.isIsOT());
+        stm.setInt(6, userShift.getUserID());
+        stm.setInt(7, oldShiftID);
+        stm.setString(8, sdfDate.format(sdfDate.parse(oldDate)));
         int count = stm.executeUpdate();
         con.close();
     }
