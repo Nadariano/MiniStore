@@ -21,9 +21,9 @@
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                             <h4 class="page-title">ATTENDANCE LIST</h4>
                         </div>
-                        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
+<!--                        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
                             <a href="<c:url value="/attendance/create.do"/>" class="btn btn-sm btn-success">Create</a>
-                        </div>
+                        </div>-->
                         <!-- /.col-lg-12 -->
                     </div>
                 <form action="<c:url value='/attendance/search.do'/>" class="form-inline "style="display: flex; align-items: center; justify-content: center;">
