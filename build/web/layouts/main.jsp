@@ -10,7 +10,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
-        <title>Pixel Admin</title>
+        <title>MiniStore Management System</title>
         <!-- Bootstrap Core CSS -->
         <link href="<c:url value="/bootstrap/dist/css/bootstrap.min.css"/>" rel="stylesheet">
         <!-- Menu CSS -->
@@ -55,15 +55,16 @@
                         </a>
                         <div class="top-left-part">
                             <a class="logo" href="<c:url value="/home/index.do"/>">
-                                <b>
+<!--                                <b>
                                     <img src="<c:url value="/plugins/images/pixeladmin-logo.png"/>" alt="home" />
-                                </b>
-                                <span class="hidden-xs">
-                                    <img src="<c:url value="/plugins/images/pixeladmin-text.png"/>" alt="home" />
-                                </span>
+                                </b>-->
+                                <!--<span class="hidden-xs">-->
+                                    <!--<img src="<c:url value="/plugins/images/pixeladmin-text.png"/>" alt="home" />-->
+                                <img src="<c:url value="/plugins/images/ms_logo.png"/>" width="60%" height="100%" style="margin-left: 15%; padding: 3%" alt="home" />
+                                <!--</span>-->
                             </a>
                         </div>
-                        <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
+<!--                        <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
                             <li>
                                 <form role="search" class="app-search hidden-xs">
                                     <input type="text" placeholder="Search..." class="form-control"> 
@@ -72,7 +73,7 @@
                                     </a>
                                 </form>
                             </li>
-                        </ul>
+                        </ul>-->
                         <ul class="nav navbar-top-links navbar-right pull-right">
                             <li>
                                 <div class="dropdown">
@@ -109,12 +110,12 @@
                             <li>
                                 <c:choose>
                                     <c:when test="${Account.roleName.equals('MANAGER')}">
-                                        <a href="<c:url value="/report/list.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
+                                        <a href="<c:url value="/report/list.do"/>" class="waves-effect"><i class="fa fa-file-text-o fa-fw"
                                                                                                            aria-hidden="true"></i><span class="hide-menu">Reports</span></a>
                                             </c:when>
 
                                     <c:when test="${!Account.roleName.equals('ADMIN')}">
-                                        <a href="<c:url value="/report/listUserReport.do"/>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><span class="hide-menu">My Report</span></a>  
+                                        <a href="<c:url value="/report/listUserReport.do"/>" class="waves-effect"><i class="fa fa-file fa-fw" aria-hidden="true"></i><span class="hide-menu">My Report</span></a>  
                                             </c:when> 
 
                                 </c:choose>
@@ -128,7 +129,7 @@
                             <c:choose>
                                 <c:when test="${Account.roleName.equals('MANAGER')}">
                                     <li>
-                                        <a href="<c:url value="/attendance/list.do"/>" class="waves-effect"><i class="fa fa-modx fa-fw"
+                                        <a href="<c:url value="/attendance/list.do"/>" class="waves-effect"><i class="fa fa-check-circle-o fa-fw"
                                                                                                                aria-hidden="true"></i><span class="hide-menu">Attendance</span></a>
                                     </li>
 
@@ -162,7 +163,7 @@
                             <c:choose>
                                 <c:when test="${Account.roleName.equals('MANAGER')}">
                                     <li>
-                                        <a href="<c:url value="/paySlip/listOf.do"/>" class="waves-effect"><i class="fa fa-modx fa-fw"
+                                        <a href="<c:url value="/paySlip/listOf.do"/>" class="waves-effect"><i class="fa fa-bank fa-fw"
                                                                                                               aria-hidden="true"></i><span class="hide-menu">Pay Slip management</span></a>
                                     </li>
 
@@ -178,31 +179,31 @@
                             </c:choose>
                             <c:if test="${Account.roleName.equals('MANAGER')}">
                                 <li>
-                                    <a href="<c:url value="/record/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
+                                    <a href="<c:url value="/record/listOf.do"/>" class="waves-effect"><i class="fa fa-file-excel-o fa-fw"
                                                                                                          aria-hidden="true"></i><span class="hide-menu">Record</span></a>
                                 </li>
                             </c:if>
                             <c:if test="${Account.roleName.equals('MANAGER')}">
                                 <li>
-                                    <a href="<c:url value="/checkIn/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
+                                    <a href="<c:url value="/checkIn/listOf.do"/>" class="waves-effect"><i class="fa fa-file-excel-o fa-fw"
                                                                                                           aria-hidden="true"></i><span class="hide-menu">Check In</span></a>
                                 </li>
                             </c:if>
                             <c:if test="${Account.roleName.equals('MANAGER')}">
                                 <li>
-                                    <a href="<c:url value="/checkOut/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
+                                    <a href="<c:url value="/checkOut/listOf.do"/>" class="waves-effect"><i class="fa fa-file-excel-o fa-fw"
                                                                                                            aria-hidden="true"></i><span class="hide-menu">Check Out</span></a>
                                 </li>
                             </c:if>
                             <c:if test="${Account.roleName.equals('MANAGER')}">
                                 <li>
-                                    <a href="<c:url value="/bonus/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
+                                    <a href="<c:url value="/bonus/listOf.do"/>" class="waves-effect"><i class="fa fa-money fa-fw"
                                                                                                         aria-hidden="true"></i><span class="hide-menu">Bonus List </span></a>
                                 </li>
                             </c:if>
                             <c:if test="${Account.roleName.equals('MANAGER')}">
                                 <li>
-                                    <a href="<c:url value="/minus/listOf.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
+                                    <a href="<c:url value="/minus/listOf.do"/>" class="waves-effect"><i class="fa fa-money fa-fw"
                                                                                                         aria-hidden="true"></i><span class="hide-menu">Minus List </span></a>
                                 </li>
                             </c:if>
@@ -210,10 +211,10 @@
                                 <a href="<c:url value="/blank.do"/>" class="waves-effect"><i class="fa fa-columns fa-fw"
                                                                                              aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>
                             </li>
-                            <li>
+<!--                            <li>
                                 <a href="<c:url value="/error/404.jsp"/>" class="waves-effect"><i class="fa fa-info-circle fa-fw"
                                                                                                   aria-hidden="true"></i><span class="hide-menu">Error 404</span></a>
-                            </li>
+                            </li>-->
 
                             <li>
                                 <a href="<c:url value="/uploadDownloadFile/index.do"/>"><i class="bi bi-file-earmark-plus"></i> <span class="hide-menu">Upload File 

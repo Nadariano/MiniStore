@@ -26,44 +26,49 @@
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
-                    <form action="<c:url value='/attendance/search.do'/>">
-                        <div style="display: flex; align-items: center; justify-content: center;">
-                            <select id="searchType" name="searchType" onchange="changeSearchType()" style="margin-right: 8px;">
-                                <option value="date">Search By Date</option>
-                                <option value="name">Search By Name</option>
+                <form action="<c:url value='/attendance/search.do'/>" class="form-inline "style="display: flex; align-items: center; justify-content: center;">
+                        <div class="form-group" >
+                            <label for="searchType">Search By:</label>
+                            <select id="searchType" name="searchType" onchange="changeSearchType()" class="form-control">
+                                <option value="date">Date</option>
+                                <option value="name">Name</option>
+                            </select>
+                        </div>
+
+                        <div id="dateInputs" class="form-group">
+                            <label for="day">Day:</label>
+                            <select name="day" class="form-control">
+                                <option value="">Day</option>
+                                <% for (int i = 1; i <= 31; i++) {%>
+                                <option value="<%= i%>"><%= i%></option>
+                                <% } %>
                             </select>
 
-                            <div id="dateInputs">
-                                <select name="day" style="margin-right: 8px;">
-                                    <option value="">Day</option>
-                                    <% for (int i = 1; i <= 31; i++) {%>
-                                    <option value="<%= i%>"><%= i%></option>
-                                    <% } %>
-                                </select>
+                            <label for="month">Month:</label>
+                            <select name="month" class="form-control">
+                                <option value="">Month</option>
+                                <% for (int i = 1; i <= 12; i++) {%>
+                                <option value="<%= i%>"><%= i%></option>
+                                <% } %>
+                            </select>
 
-                                <select name="month" style="margin-right: 8px;">
-                                    <option value="">Month</option>
-                                    <% for (int i = 1; i <= 12; i++) {%>
-                                    <option value="<%= i%>"><%= i%></option>
-                                    <% } %>
-                                </select>
-
-                                <select name="year" style="margin-right: 8px;">
-                                    <option value="">Year</option>
-                                    <% for (int i = 1900; i <= 2023; i++) {%>
-                                    <option value="<%= i%>"><%= i%></option>
-                                    <% }%>
-                                </select>
-                            </div>
-
-                            <div id="nameInputs" style="display: none;">
-                                <label for="fullName" style="margin-right: 8px;">Name:</label>
-                                <input type="text" id="fullName" name="fullName" style="margin-right: 8px;">
-                            </div>
-
-                            <button type="submit" class="btn btn-primary" name="op" value="search" style="margin-right: 8px;">Search</button>
+                            <label for="year">Year:</label>
+                            <select name="year" class="form-control">
+                                <option value="">Year</option>
+                                <% for (int i = 1900; i <= 2023; i++) {%>
+                                <option value="<%= i%>"><%= i%></option>
+                                <% }%>
+                            </select>
                         </div>
+
+                        <div id="nameInputs" style="display: none;" class="form-group">
+                            <label for="fullName">Name:</label>
+                            <input type="text" id="fullName" name="fullName" class="form-control">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" name="op" value="search">Search</button>
                     </form>
+
 
                     <script>
                         function changeSearchType() {
@@ -115,7 +120,16 @@
                                                     <td>${attendance.duration}</td>
                                                     <td>${attendance.statusText}</td>
                                                     <td>${attendance.note}</td>
-                                                    <td>${attendance.confirm}</td>
+                                                    <c:choose>
+                                                        <c:when test="${attendance.confirm=='Denied'}">
+                                                            <td><span class="badge bg-danger fs-6 px-1 py-0">${attendance.confirm}</span></td>
+                                                            </c:when>
+                                                            <c:when test="${attendance.confirm=='Accepted'}">
+                                                            <td><span class="badge bg-success fs-6 px-1 py-0">${attendance.confirm}</span></td>
+                                                            </c:when>
+
+                                                    </c:choose>
+
                                                     <c:if test="${attendance.status != 2}">
                                                         <td>
                                                             <a href="<c:url value="/attendance/update.do?attendID=${attendance.attendID}"  />" class="btn btn-sm btn-primary">Update</a>

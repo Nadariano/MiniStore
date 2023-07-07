@@ -200,10 +200,12 @@ public class UserShiftController extends HttpServlet {
         UserShiftRepository usr = new UserShiftRepository();
         try {
             int userID = Integer.parseInt(request.getParameter("userID"));
-            UserShift userShift = usr.read(userID);
+            int shiftID = Integer.parseInt(request.getParameter("shiftID"));
+            Date date = sdfDate.parse(request.getParameter("date"));
+            UserShift userShift = usr.read(userID, shiftID, date);
             request.setAttribute("userShift", userShift);
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             request.setAttribute("message", ex.getMessage());
             request.setAttribute("controller", "error");

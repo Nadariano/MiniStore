@@ -40,9 +40,11 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /row -->
-            <div id="myTab" class="pull-left">
-                <a href="#listView" data-toggle="tab">List View |</a>
-                <a href="#blockView" data-toggle="tab">Block View</a>
+            <div class=" row bg-white">
+                <div id="myTab" class="pull-left ">
+                    <a href="#listView" data-toggle="tab">List View |</a>
+                    <a href="#blockView" data-toggle="tab">Block View</a>
+                </div>
             </div>
             <div class="tab-content">
                 <div class="tab-pane" id="listView">
@@ -98,10 +100,12 @@
                 </div>
 
                 <div class="tab-pane active" id="blockView">
+                    <div class="white-box">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="table-responsive">
                                 <table class="table-striped schedule">
+
                                     <tr>
                                         <th>
                                             <div class="dropdown">
@@ -149,10 +153,12 @@
                                                                 <c:if test="${userShiftt.date == date}">
                                                                     <!--<p>Emp ${userShiftt.userID} - ${userShiftt.date} - ${userShiftt.shiftID}<p>-->
                                                                     <div class="tooltipp">
-                                                                        <a href="<c:url value="/userShift/delete.do?userID=${userShift.userID}&shiftID=${userShift.shiftID}&date=${userShift.date} "/>" onclick="return confirm('Do you really want to remove this employee from the current shift?');" class="btn btn-circle btn-sm btn-warning">
-                                                                            <i class="bi bi-person-dash-fill"></i>
-                                                                        </a>
-                                                                        <a href="#">${userShift.fullName}</a>
+                                                                        <c:if test="${Account.roleName.equals('MANAGER')}">
+                                                                            <a href="<c:url value="/userShift/delete.do?userID=${userShift.userID}&shiftID=${userShift.shiftID}&date=${userShift.date} "/>" onclick="return confirm('Do you really want to remove this employee from the current shift?');" class="btn btn-circle btn-sm btn-warning">
+                                                                                <i class="bi bi-person-dash-fill"></i>
+                                                                            </a>
+                                                                        </c:if>
+                                                                        <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&shiftID=${userShift.shiftID}&date=${userShift.date}"/>" >${userShift.fullName}</a>
                                                                         <span class="tooltiptext">
                                                                             UserID: ${userShiftt.userID} -
                                                                             Date: ${userShiftt.date} <br/>
@@ -173,14 +179,13 @@
                                                         </button>
                                                     </c:if>
 
-                                                </td>    
-                                            </c:forEach>
-                                        </tr>
-                                    </c:forEach>
-                                </table>
+                                    </td>    
+                                </c:forEach>
+                            </tr>
+                        </c:forEach>
+
+                    </table>
                             </div>
-                        </div>
-                    </div>
                 </div>
             </div>  
         </div>

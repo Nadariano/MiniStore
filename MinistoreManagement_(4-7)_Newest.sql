@@ -220,7 +220,12 @@ insert into Users values('A','6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C0
 insert into Users values('B','D4735E3A265E16EEE03F59718B9B5D03019C07D8B6C51F90DA3A666EEC13AB35','Nguyen Van B', 'https://demoda.vn/wp-content/uploads/2022/04/avatar-dep-anime.jpg','Can Tho', '0945076587', 'B@gmail.com', 1, '', 2)
 insert into Users values('C','4E07408562BEDB8B60CE05C1DECFE3AD16B72230967DE01F640B7E4729B49FCE','Nguyen Van C', 'https://cdn.vox-cdn.com/thumbor/WR9hE8wvdM4hfHysXitls9_bCZI=/0x0:1192x795/1400x1400/filters:focal(596x398:597x399)/cdn.vox-cdn.com/uploads/chorus_asset/file/22312759/rickroll_4k.jpg','Vung Tau', '0945076589', 'C@gmail.com', 1, '', 4)
 insert into Users values('D','4B227777D4DD1FC61C6F884F48641D02B4D121D3FD328CB08B5531FCACDABF8A','Nguyen Thi D', 'https://cdn.shopify.com/s/files/1/0150/0643/3380/products/SB-Standees-Spong-1_800x.jpg?v=1603744567','Vinh Long', '0945076590', 'D@gmail.com', 1, '', 3)
-insert into Users values('E','EF2D127DE37B942BAAD06145E54B0C619A1F22327B2EBBCFBEC78F5564AFE39D','Tran Thi E', 'https://www.comingsoon.net/wp-content/uploads/sites/3/2023/04/sandy-cheeks-movie-header.png','Nha Trang', '0945076591', 'E@gmail.com', 1, '', 3)
+insert into Users values('E','EF2D127DE37B942BAAD06145E54B0C619A1F22327B2EBBCFBEC78F5564AFE39D','Tran Thi E', 'https://www.comingsoon.net/wp-content/uploads/sites/3/2023/04/sandy-cheeks-movie-header.png','Soc Trang', '0945076591', 'E@gmail.com', 1, '', 3)
+insert into Users values('F','E7F6C011776E8DB7CD330B54174FD76F7D0216B612387A5FFCFB81E6F0919683','Tran Van F', 'https://cdn.shopify.com/s/files/1/0150/0643/3380/products/SB-Standees-Pat-1_800x.jpg?v=1603744570','Ben Tre', '0945076592', 'F@gmail.com', 1, '', 4)
+insert into Users values('G','7902699BE42C8A8E46FBBB4501726517E86B22C56A189F7625A6DA49081B2451','Le Van G', 'https://yt3.googleusercontent.com/YaJHh5SnF1sCzOnWvyXv2oF9aNZCHBBa6yBiqq_2OBF6zF2xM0_n60Y2nBe5tRQU_2qmXpr2=s900-c-k-c0x00ffffff-no-rj','Nha Trang', '0945076593', 'G@gmail.com', 1, '', 3)
+insert into Users values('H','2C624232CDD221771294DFBB310ACA000A0DF6AC8B66B696D90EF06FDEFB64A3','Le Thi H', 'https://i.pinimg.com/originals/a4/bc/4c/a4bc4c9714b357388fb061520c40b6d4.jpg','Hogwarts', '0945076594', 'H@gmail.com', 1, '', 3)
+
+
 
 /*Insert cho ReportType*/
 insert into ReportType values('Application')
@@ -238,10 +243,18 @@ insert into Report values('Report2','2023-05-11','I want to report something..',
 
 
 /*Insert cho UserShift*/
-insert into UserShift values ('2','1','2023-05-11', 0, '',0)
-insert into UserShift values ('2','1','2023-10-10', 0, '', 0)
-insert into UserShift values ('1','1','2023-05-11', 0, '',0)
-insert into UserShift values ('1','3','2023-05-11', 0, '',0)
+insert into UserShift values ('4','1','2023-07-01', 0, '',0)
+insert into UserShift values ('5','1','2023-07-01', 0, '',0)
+insert into UserShift values ('4','2','2023-07-01', 0, '',0)
+insert into UserShift values ('4','1','2023-07-03', 0, '',0)
+insert into UserShift values ('7','2','2023-07-03', 0, '',0)
+insert into UserShift values ('4','2','2023-07-04', 0, '',0)
+insert into UserShift values ('4','1','2023-07-06', 0, '',0)
+insert into UserShift values ('3','1','2023-07-01', 0, '',0)
+insert into UserShift values ('3','2','2023-07-02', 0, '',0)
+insert into UserShift values ('3','2','2023-07-04', 0, '', 0)
+insert into UserShift values ('3','1','2023-07-05', 0, '',0)
+insert into UserShift values ('5','3','2023-07-01', 0, '',0)
 
 
 --Insert cho DayOff
