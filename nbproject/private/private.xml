@@ -3,6 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(07-07)/MiniStore/src/java/repositories/AttendanceRepository.java</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(07-07)/MiniStore/web/views/report/create.jsp</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(07-07)/MiniStore/web/views/attendance/update.jsp</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(07-07)/MiniStore/web/views/report/update.jsp</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(07-07)/MiniStore/src/java/models/Attendance.java</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(07-07)/MiniStore/src/java/controllers/AttendanceController.java</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(07-07)/MiniStore/web/views/attendance/listOfUsers.jsp</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(07-07)/MiniStore/web/views/attendance/list.jsp</file>
             <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne/MiniStore/src/java/controllers/CheckInController.java</file>
             <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne/MiniStore/src/java/services/CheckInService.java</file>
             <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne/MiniStore/src/java/controllers/ShiftTimeController.java</file>

@@ -102,7 +102,7 @@
 
                             <div class="form-group">
                                 <label class="col-md-12">Shift: </label>
-                                <select type="dropdown" id="shiftID" name="shiftID" value="${report.shiftID}" >
+                                <select type="dropdown" id="shiftID" name="shiftID" value="${report.shiftID}" class="form-control form-control-line">
 
                                     <option value="1"> 1 </option>
                                     <option value="2"> 2 </option>

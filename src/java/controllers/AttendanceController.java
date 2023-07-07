@@ -286,15 +286,15 @@ public class AttendanceController extends HttpServlet {
                     String note = request.getParameter("note");
                     String statusText = request.getParameter("statusText");
                     String confirm = request.getParameter("confirm");
-
+                    
                     int status = 1;
                     if (statusText.equalsIgnoreCase("Available")) {
                         status = 1;
                     } else {
                         status = 0;
                     }
-
-                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, soonTime, lateTime, duration, status, note, userID, fullName, confirm, statusText);
+                    int shiftID = Integer.parseInt(request.getParameter("shiftID"));
+                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, soonTime, lateTime, duration, status, note, userID, fullName, confirm, statusText, shiftID);
                     ar.update(attendance);
                     response.sendRedirect(request.getContextPath() + "/attendance/list.do");
 
