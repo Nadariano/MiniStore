@@ -200,10 +200,13 @@ public class UserShiftController extends HttpServlet {
         UserShiftRepository usr = new UserShiftRepository();
         try {
             int userID = Integer.parseInt(request.getParameter("userID"));
-            int shiftID = Integer.parseInt(request.getParameter("shiftID"));
-            Date date = sdfDate.parse(request.getParameter("date"));
+            int shiftID = Integer.parseInt(request.getParameter("oldShiftID"));
+            String strOldDate = request.getParameter("oldDate");
+            Date date = sdfDate.parse(strOldDate);
             UserShift userShift = usr.read(userID, shiftID, date);
             request.setAttribute("userShift", userShift);
+            request.setAttribute("oldDate", strOldDate);
+            request.setAttribute("oldShiftID", shiftID);
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -222,13 +225,15 @@ public class UserShiftController extends HttpServlet {
             case "update":
                 try {
                     int userID = Integer.parseInt(request.getParameter("userID"));
-                    int shiftID = Integer.parseInt(request.getParameter("shiftID"));
-                    Date date = sdfDate.parse(request.getParameter("date"));
+                    int oldShiftID = Integer.parseInt(request.getParameter("oldShiftID"));
+                    int newShiftID = Integer.parseInt(request.getParameter("shiftID"));
+                    String oldDate = request.getParameter("oldDate");
+                    Date newDate = sdfDate.parse(request.getParameter("date"));
                     int status = Integer.parseInt(request.getParameter("status"));
                     String note = request.getParameter("note");
                     boolean isOT = Boolean.parseBoolean(request.getParameter("isOT"));
-                    UserShift userShift = new UserShift(userID, shiftID, date, status, note, isOT);
-                    usr.update(userShift);
+                    UserShift userShift = new UserShift(userID, newShiftID, newDate, status, note, isOT);
+                    usr.update(userShift,oldShiftID,oldDate);
                     response.sendRedirect(request.getContextPath() + "/userShift/listOf.do");
                 } catch (Exception ex) {
                     ex.printStackTrace();

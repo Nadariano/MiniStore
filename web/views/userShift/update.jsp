@@ -3,6 +3,7 @@
     Created on : Jun 9, 2023, 10:28:09 AM
     Author     : Dell
 --%>
+<%@page import="java.time.LocalDate"%>
 <html lang="en">
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,6 +13,10 @@
     </head>
 
     <body>
+        <%
+            LocalDate minDate = LocalDate.now().plusDays(1);
+        %>
+        <c:set var="minDate" value="<%=minDate%>"/>
         <!-- Preloader -->
         <div class="preloader">
             <div class="cssload-speeding-wheel"></div>
@@ -48,18 +53,18 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Shift</label>
                                         <div class="col-md-12">
-                                            <input type="number" placeholder="Shift ID" value="${userShift.shiftID}"
+                                            <input type="number" placeholder="Shift ID" name="shiftID" value="${oldShiftID}"
                                                    class="form-control form-control-line" />
-                                            <input type="hidden" name="shiftID" value="${userShift.shiftID}">
+                                            <input type="hidden" name="oldShiftID" value="${oldShiftID}">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-12">Date</label>
                                         <div class="col-md-12">
-                                            <input  disabled type="date" placeholder="Date" value="${userShift.date}"
-                                                    class="form-control form-control-line" />
-                                            <input type="hidden" name="date" value="${userShift.date}">
+                                            <input type="date" placeholder="Date" name="date" value="${userShift.date}" min="${minDate}"
+                                                   class="form-control form-control-line" />
+                                            <input type="hidden" name="oldDate" value="${oldDate}">
                                         </div>
                                     </div>         
                                     <div class="form-group">
