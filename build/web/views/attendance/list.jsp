@@ -21,12 +21,12 @@
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                             <h4 class="page-title">ATTENDANCE LIST</h4>
                         </div>
-                        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
+<!--                        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
                             <a href="<c:url value="/attendance/create.do"/>" class="btn btn-sm btn-success">Create</a>
-                        </div>
+                        </div>-->
                         <!-- /.col-lg-12 -->
                     </div>
-                    <form action="<c:url value='/attendance/search.do'/>" class="form-inline "style="display: flex; align-items: center; justify-content: center;">
+                <form action="<c:url value='/attendance/search.do'/>" class="form-inline "style="display: flex; align-items: center; justify-content: center;">
                         <div class="form-group" >
                             <label for="searchType">Search By:</label>
                             <select id="searchType" name="searchType" onchange="changeSearchType()" class="form-control">
@@ -81,9 +81,7 @@
                                 document.getElementById("nameInputs").style.display = "block";
                             }
                         }
-                    </script>
-
-
+                    </script>  
                     <!-- /row -->
                     <div class="row">
                         <div class="col-sm-12">
@@ -97,6 +95,7 @@
                                                 <th>Date</th>
                                                 <th>User ID</th>
                                                 <th>Author</th>
+                                                <th>Shift ID</th>
                                                 <th>Check In</th>
                                                 <th>Check Out</th>
                                                 <th>Soon Time</th>
@@ -115,6 +114,7 @@
                                                     <td>${attendance.date}</td>
                                                     <td>${attendance.userID}</td>
                                                     <td>${attendance.fullName}</td>
+                                                    <td>${attendance.shiftID}</td>
                                                     <td>${attendance.checkIn}</td>
                                                     <td>${attendance.checkOut}</td>
                                                     <td>${attendance.soonTime}</td>

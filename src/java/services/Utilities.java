@@ -306,7 +306,7 @@ public class Utilities {
         return statusText;
     }
 
-    public static String getStatusTextOfCofirm(int status) {
+    public static String getStatusTextOfConfirm(int status) {
         String confirm;
 
         switch (status) {

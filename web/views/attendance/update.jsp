@@ -66,6 +66,30 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-md-12">Shift: </label>
+                                <select type="dropdown" id="shiftID" name="shiftID" value="${attendance.shiftID}" class="form-control form-control-line">
+                                    
+                                    <c:if test="${attendance.shiftID == 1}">
+                                        <option > ${attendance.shiftID} </option>
+                                        <option > 2 </option>
+                                        <option > 3 </option>
+                                    </c:if>
+
+                                    <c:if test="${attendance.shiftID == 2}">
+                                        <option > ${attendance.shiftID} </option>
+                                        <option > 1 </option>
+                                        <option > 3 </option>
+                                    </c:if>
+
+                                    <c:if test="${attendance.shiftID == 3}">
+                                        <option > ${attendance.shiftID} </option>
+                                        <option > 1 </option>
+                                        <option > 2 </option>
+                                    </c:if>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-md-12">Check In:</label>
                                 <div class="col-md-12">
                                     <input type="time" id="checkIn" placeholder="Check In"name="checkIn" value="${attendance.checkIn}"
@@ -84,7 +108,7 @@
                             <div class="form-group">
                                 <label class="col-md-12">Soon Time: </label>
                                 <div class="col-md-12">
-                                    <input type="time" id="soonTime" placeholder="Soon Time" name="soonTime" value="${attendance.soonTime}"
+                                    <input type="text" id="soonTime" placeholder="Fill ?hour:?min:?sec (Example:00:30:00)" name="soonTime" value="${attendance.soonTime}"
                                            class="form-control form-control-line" />
                                 </div>
                             </div>
@@ -92,7 +116,7 @@
                             <div class="form-group">
                                 <label class="col-md-12">Late Time: </label>
                                 <div class="col-md-12">
-                                    <input type="time" id="lateTime" placeholder="Late Time" name="lateTime" value="${attendance.lateTime}"
+                                    <input type="text" id="lateTime" placeholder="Fill ?hour:?min:?sec (Example:00:40:00)" name="lateTime" value="${attendance.lateTime}"
                                            class="form-control form-control-line" />
                                 </div>
                             </div>

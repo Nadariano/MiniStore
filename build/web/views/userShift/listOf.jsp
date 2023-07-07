@@ -4,6 +4,7 @@
     Author     : Dell
 --%>
 
+<%@page import="java.util.Date"%>
 <%@page import="java.time.LocalDate"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,9 +19,11 @@
 
     <body>
         <%
-            LocalDate now = LocalDate.now();
+            LocalDate nowLocalDate = LocalDate.now();
+            Date nowDate = new Date();
         %>
-        <c:set var="now" value="<%=now%>"/>
+        <c:set var="nowLocalDate" value="<%=nowLocalDate%>"/>
+        <c:set var="nowDate" value="<%=nowDate%>"/>
         <%--        
                 <c:choose>
                     <c:when test="${Account.roleName.equals('MANAGER')}">
@@ -83,9 +86,9 @@
                                                     <td>${userShift.statusText2}</td>
                                                     <td>${userShift.note}</td>
                                                     <td>${userShift.otText}</td>
-                                                    <c:if test="${Account.roleName.equals('MANAGER')}">
+                                                    <c:if test="${Account.roleName.equals('MANAGER') && (userShift.date>nowDate)}">
                                                         <td>
-                                                            <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&shiftID=${userShift.shiftID}&date=${userShift.date}"/>" class="btn btn-sm btn-primary" ><i class="bi bi-pencil-square"></i>Update</a>
+                                                            <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&oldShiftID=${userShift.shiftID}&oldDate=${userShift.date}"/>" class="btn btn-sm btn-primary" ><i class="bi bi-pencil-square"></i>Update</a>
                                                             <a href="<c:url value="/userShift/delete.do?userID=${userShift.userID}&shiftID=${userShift.shiftID}&date=${userShift.date} "/>" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-warning"><i class="bi bi-trash3"></i>Delete</a>
                                                         </td>
                                                     </c:if>
@@ -121,7 +124,7 @@
                                             <p>${startEndDates[0]} - ${startEndDates[1]}</p>
                                         </th>
                                         <c:forEach var="i" begin="0" end="${fn:length(listDays) - 1}" step="1" >
-                                            <th class="<c:if test='${listLocalDates[i]==now}'>today</c:if>">
+                                            <th class="<c:if test='${listLocalDates[i]==nowLocalDate}'>today</c:if>">
                                                 <h2>${listDays[i]}</h2>
                                                 <p>${listLocalDates[i]}</p>  
                                             </th>
@@ -153,12 +156,12 @@
                                                                 <c:if test="${userShiftt.date == date}">
                                                                     <!--<p>Emp ${userShiftt.userID} - ${userShiftt.date} - ${userShiftt.shiftID}<p>-->
                                                                     <div class="tooltipp">
-                                                                        <c:if test="${Account.roleName.equals('MANAGER')}">
+                                                                        <c:if test="${Account.roleName.equals('MANAGER') && (listLocalDates[i]>nowLocalDate)}">
                                                                             <a href="<c:url value="/userShift/delete.do?userID=${userShift.userID}&shiftID=${userShift.shiftID}&date=${userShift.date} "/>" onclick="return confirm('Do you really want to remove this employee from the current shift?');" class="btn btn-circle btn-sm btn-warning">
                                                                                 <i class="bi bi-person-dash-fill"></i>
                                                                             </a>
                                                                         </c:if>
-                                                                        <a href="#">${userShift.fullName}</a>
+                                                                        <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&oldShiftID=${userShift.shiftID}&oldDate=${userShift.date}"/>" ${(listLocalDates[i]<nowLocalDate) ? "style='pointer-events: none'" : ""}>${userShift.fullName}</a>
                                                                         <span class="tooltiptext">
                                                                             UserID: ${userShiftt.userID} -
                                                                             Date: ${userShiftt.date} <br/>
@@ -171,7 +174,8 @@
                                                         </c:forEach> 
                                                         <c:set var = "count" value="<%=count%>"/>
                                                     </div>
-                                                    <c:if test="${Account.roleName.equals('MANAGER') && (count<3)}">
+                                                    <!--The day to add shift must be AFTER today-->
+                                                    <c:if test="${Account.roleName.equals('MANAGER') && (count<3) && (listLocalDates[i]>nowLocalDate)}">
                                                         <button class="btn btn-sm btn-success">
                                                             <a href="<c:url value="/userShift/create.do?shiftID=${shift.shiftID}&date=${listLocalDates[i]}"/>">
                                                                 <i class="bi bi-person-fill-add"></i>Add
@@ -183,7 +187,9 @@
                                 </c:forEach>
                             </tr>
                         </c:forEach>
+
                     </table>
+                            </div>
                 </div>
             </div>  
         </div>

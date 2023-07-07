@@ -3,6 +3,7 @@
     Created on : Jun 9, 2023, 3:51:31 PM
     Author     : Dell
 --%>
+<%@page import="java.time.LocalDate"%>
 <!DOCTYPE html>
 <html lang="en">
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,6 +14,11 @@
     </head>
 
     <body>
+        <!--Cannot create the date earlier than today-->
+        <%
+            LocalDate minDate = LocalDate.now().plusDays(1);
+        %>
+        <c:set var="minDate" value="<%=minDate%>"/>
         <c:choose>
             <c:when test="${Account.roleName.equals('MANAGER')}">
                 <!-- Preloader -->
@@ -66,7 +72,7 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Date</label>
                                         <div class="col-md-12">
-                                            <input type="date" placeholder="Date" name="date" value="${date}"
+                                            <input type="date" placeholder="Date" name="date" value="${date}" min="${minDate}"
                                                    class="form-control form-control-line" />
                                         </div>
                                     </div>         
@@ -104,7 +110,6 @@
                                         </div>
                                     </div>
                                 </form>
-                                <h2 style=" color: red">${message}</h2>
                             </div>
                         </div>
                         <div class="col-md-2 col-12"></div>

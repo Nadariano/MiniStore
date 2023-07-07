@@ -35,11 +35,12 @@ public class Attendance {
     private String fullName;
     private String confirm;
     private String statusText;
+    private int shiftID;
 
     public Attendance() {
     }
 
-    public Attendance(int attendID, Date date, Date checkIn, Date checkOut, Date soonTime, Date lateTime, Date duration, int status, String note, int userID, String fullName, String confirm, String statusText) {
+    public Attendance(int attendID, Date date, Date checkIn, Date checkOut, Date soonTime, Date lateTime, Date duration, int status, String note, int userID, String fullName, String confirm, String statusText, int shiftID) {
         this.attendID = attendID;
         this.date = date;
         this.checkIn = checkIn;
@@ -53,6 +54,7 @@ public class Attendance {
         this.fullName = fullName;
         this.confirm = confirm;
         this.statusText = statusText;
+        this.shiftID = shiftID;
     }
 
     public int getAttendID() {
@@ -159,5 +161,14 @@ public class Attendance {
         this.statusText = statusText;
     }
 
+    public int getShiftID() {
+        return shiftID;
+    }
+
+    public void setShiftID(int shiftID) {
+        this.shiftID = shiftID;
+    }
+    
     
 }
+    
