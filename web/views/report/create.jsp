@@ -70,7 +70,7 @@
                             <div class="form-group">
                                 <label class="col-md-12">Description(Content):</label>
                                 <div class="col-md-12">
-                                    <textarea style="resize: both" placeholder="Write here"  id="description" name="description" value="${report.description}"></textarea>
+                                 <textarea class="form-control" placeholder="Write here"  id="description" name="description"  style=" max-height: 226px; min-width: 100%; min-height: 50px;"value="${report.description}"></textarea>
                                 </div>
                             </div>
 
@@ -83,20 +83,20 @@
                             </div>
 
 
-                            <div class="form-group">
+                           <div class="form-group">
                                 <label class="col-md-12">Request Soon Time:</label>
                                 <div class="col-md-12">
-                                    <input type="text" placeholder="Fill ?hour:?min (Example: 00:45)" name="requestSoonTime" value="${report.requestSoonTime}"
-                                           class="form-control form-control-line" />
+                                    <input type="time" placeholder="Select Request Soon Time" name="requestSoonTime" value="${report.requestSoonTime}"
+                                                class="form-control form-control-line" />
                                 </div>
                             </div>
 
 
-                            <div class="form-group">
+                              <div class="form-group">
                                 <label class="col-md-12">Request Late Time:</label>
                                 <div class="col-md-12">
-                                    <input type="text" placeholder="Fill ?hour:?min (Example: 00:30)" name="requestLateTime" value="${report.requestLateTime}"
-                                           class="form-control form-control-line" />
+                                    <input type="time" placeholder="Select Request Late Time" name="requestLateTime" value="${report.requestLateTime}"
+                                                class="form-control form-control-line" />
                                 </div>
                             </div>
 

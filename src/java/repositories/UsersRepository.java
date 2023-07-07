@@ -6,7 +6,6 @@
 package repositories;
 
 import config.DBContext;
-import services.Utilities;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import models.Users;
+import services.Utilities;
 
 /**
  *
@@ -22,34 +22,35 @@ import models.Users;
  */
 public class UsersRepository {
     
-    public static List<Users> select() throws SQLException {
-        List<Users> list = null;
-        Connection con = DBContext.getConnection();
-        Statement stm = con.createStatement();
-        ResultSet rs = stm.executeQuery("select Users.userID, Users.userName, Users.password, Users.fullName, Users.avatar, Users.address, Users.phone, Users.email,Users.status, Users.note,Users.roleID, Roles.roleName\n"
-                + "from Users \n"
-                + "left join Roles on Users.roleID= Roles.roleID ");
-        list = new ArrayList<>();
-        while (rs.next()) {
-            Users users = new Users();
-            users.setUserID(rs.getInt("userID"));
-            users.setUserName(rs.getString("userName"));
-            users.setPassword(rs.getString("password"));
-            users.setFullName(rs.getString("fullName"));
-            users.setAvatar(rs.getString("avatar"));
-            users.setAddress(rs.getString("address"));
-            users.setPhone(rs.getString("phone"));
-            users.setEmail(rs.getString("email"));
-            users.setStatus(rs.getInt("status"));
-            users.setStatusText1(Utilities.getStatusText1(Utilities.getInt(rs, "status")));
-            users.setNote(rs.getString("note"));
-            users.setRoleID(rs.getInt("roleID"));
-            users.setRoleName(rs.getString("roleName"));
-            list.add(users);
-        }
-        con.close();
-        return list;
+   public static List<Users> select() throws SQLException {
+    List<Users> list = null;
+    Connection con = DBContext.getConnection();
+    Statement stm = con.createStatement();
+    ResultSet rs = stm.executeQuery("select Users.userID, Users.userName, Users.password, Users.fullName, Users.avatar, Users.address, Users.phone, Users.email,Users.status, Users.note,Users.roleID, Roles.roleName\n"
+            + "from Users \n"
+            + "left join Roles on Users.roleID= Roles.roleID "
+            + "ORDER BY Users.roleID ASC");
+    list = new ArrayList<>();
+    while (rs.next()) {
+        Users users = new Users();
+        users.setUserID(rs.getInt("userID"));
+        users.setUserName(rs.getString("userName"));
+        users.setPassword(rs.getString("password"));
+        users.setFullName(rs.getString("fullName"));
+        users.setAvatar(rs.getString("avatar"));
+        users.setAddress(rs.getString("address"));
+        users.setPhone(rs.getString("phone"));
+        users.setEmail(rs.getString("email"));
+        users.setStatus(rs.getInt("status"));
+        users.setStatusText1(Utilities.getStatusText1(Utilities.getInt(rs, "status")));
+        users.setNote(rs.getString("note"));
+        users.setRoleID(rs.getInt("roleID"));
+        users.setRoleName(rs.getString("roleName"));
+        list.add(users);
     }
+    con.close();
+    return list;
+}
     
     public void create(Users users) throws SQLException {
         Connection con = DBContext.getConnection();
