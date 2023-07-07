@@ -73,6 +73,7 @@
                                                     <td style="text-align: center">
                                                         <c:if test="${!role.roleName.equals('MANAGER')}">
                                                             <a href="<c:url value="/shiftTime/update.do?shiftID=${shiftTime.shiftID}" />" class="btn btn-sm btn-primary" ><i class="bi bi-pencil-square"></i>Update</a>
+                                                            <p></p>
                                                             <a href="<c:url value="/shiftTime/delete.do?shiftID=${shiftTime.shiftID}" />" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-warning" ><i class="bi bi-trash3"></i>Delete</a>
                                                         </c:if>
                                                     </td>
