@@ -66,6 +66,30 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-md-12">Shift: </label>
+                                <select type="dropdown" id="shiftID" name="shiftID" value="${attendance.shiftID}" class="form-control form-control-line">
+                                    
+                                    <c:if test="${attendance.shiftID == 1}">
+                                        <option > ${attendance.shiftID} </option>
+                                        <option > 2 </option>
+                                        <option > 3 </option>
+                                    </c:if>
+
+                                    <c:if test="${attendance.shiftID == 2}">
+                                        <option > ${attendance.shiftID} </option>
+                                        <option > 1 </option>
+                                        <option > 3 </option>
+                                    </c:if>
+
+                                    <c:if test="${attendance.shiftID == 3}">
+                                        <option > ${attendance.shiftID} </option>
+                                        <option > 1 </option>
+                                        <option > 2 </option>
+                                    </c:if>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-md-12">Check In:</label>
                                 <div class="col-md-12">
                                     <input type="time" id="checkIn" placeholder="Check In"name="checkIn" value="${attendance.checkIn}"

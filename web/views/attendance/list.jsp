@@ -95,6 +95,7 @@
                                                 <th>Date</th>
                                                 <th>User ID</th>
                                                 <th>Author</th>
+                                                <th>Shift ID</th>
                                                 <th>Check In</th>
                                                 <th>Check Out</th>
                                                 <th>Soon Time</th>
@@ -113,6 +114,7 @@
                                                     <td>${attendance.date}</td>
                                                     <td>${attendance.userID}</td>
                                                     <td>${attendance.fullName}</td>
+                                                    <td>${attendance.shiftID}</td>
                                                     <td>${attendance.checkIn}</td>
                                                     <td>${attendance.checkOut}</td>
                                                     <td>${attendance.soonTime}</td>

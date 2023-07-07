@@ -35,6 +35,7 @@
                                             <th>Date</th>
                                             <th>User ID</th>
                                             <th>Author</th>
+                                            <th>Shift ID</th>
                                             <th>Check In</th>
                                             <th>Check Out</th>
                                             <th>Soon Time</th>
@@ -72,6 +73,12 @@
                                             <input disabled type="text" id="fullName" placeholder="Full Name" value="${attendance.fullName}" 
                                                    class="form-control form-control-line">
                                             <input type="hidden" name="fullName" value="${attendance.fullName}"class="form-control form-control-line">
+                                        </td>
+                                        
+                                        <td>
+                                            <input disabled type="number" id="shiftID" placeholder="ShiftID" value="${attendance.shiftID}" 
+                                                   class="form-control form-control-line">
+                                            <input type="hidden" name="shiftID" value="${attendance.shiftID}"class="form-control form-control-line">
                                         </td>
 
                                         <td>
