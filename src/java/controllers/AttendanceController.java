@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import models.UserAttendance;
 import static services.Utilities.sdfDate;
 import static services.Utilities.sdfTime;
 
@@ -157,7 +156,7 @@ public class AttendanceController extends HttpServlet {
         }
     }
 
-    public void list(HttpServletRequest request, HttpServletResponse response)
+    protected void list(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         try {
             AttendanceRepository af = new AttendanceRepository();
@@ -180,7 +179,7 @@ public class AttendanceController extends HttpServlet {
         }
     }
 
-    private void listOfUsers(HttpServletRequest request, HttpServletResponse response)
+    protected void listOfUsers(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         try {
             int userID = Integer.parseInt(request.getParameter("userID"));
@@ -196,69 +195,19 @@ public class AttendanceController extends HttpServlet {
         }
     }
 
-//    private void listOfUsers(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException, SQLException {
-//        try {
-//            int userID = Integer.parseInt(request.getParameter("userID"));
-//            AttendanceRepository af = new AttendanceRepository();
-//            HashMap<Integer, Attendance> map = af.selectUserAttendance(userID);
-//            request.setAttribute("map", map);
-//            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-//        } catch (SQLException ex) {
-//            //Hien trang thong bao loi
-//            ex.printStackTrace();//In thông báo chi tiết cho developer
-//            request.setAttribute("message", ex.getMessage());
-//            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-//        }
-//        HttpSession session = request.getSession();
-//        try {
-//            int userID = Integer.parseInt(request.getParameter("userID"));
-//            UserAttendance userAttendance = (UserAttendance) session.getAttribute("userAttendance");
-//            if (userAttendance == null) {
-//                //Nếu chưa có giỏ hàng thì tạo giỏ hàng mới
-//                userAttendance = new UserAttendance();
-//                session.setAttribute("userAttendance", userAttendance);
-//            }
-//            userAttendance.add(userID);
-//            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-//        } catch (SQLException ex) {
-//            //Hien trang thong bao loi
-//            ex.printStackTrace();//In thông báo chi tiết cho developer
-//            request.setAttribute("message", ex.getMessage());
-//            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-//        }
-//
-//    }
-    private void updateOfUsers(HttpServletRequest request, HttpServletResponse response)
+    protected void updateOfUsers(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         String op = request.getParameter("op");
         switch (op) {
             case "update":
                 try {
                     AttendanceRepository af = new AttendanceRepository();
-//                    String[] attendIDStr = request.getParameter("attendID").split(",");
-////                    System.out.println(attendIDStr);
-//                    int[] attendIDs = new int[attendIDStr.length];
-//                    for (int i = 0; i < attendIDStr.length; i++) {
-//                        attendIDs[i] = Integer.parseInt(attendIDStr[i]);
-//                    }
-                    String[] attendIDs = request.getParameterValues("attendID");
 
-//                    Date date = sdfDate.parse(request.getParameter("date"));
-//                    String fullName = request.getParameter("fullName");
-//                    Time checkIn = Time.valueOf(request.getParameter("checkIn"));
-//                    Time checkOut = Time.valueOf(request.getParameter("checkOut"));
-//                    int lateTime = Integer.parseInt(request.getParameter("lateTime"));
-//                    int overTime = Integer.parseInt(request.getParameter("overTime"));
+                    String[] attendIDs = request.getParameterValues("attendID");
                     int userID = Integer.parseInt(request.getParameter("userID"));
                     String[] notes = request.getParameterValues("note");
                     String[] confirms = request.getParameterValues("confirm");
                     String[] statusTexts = request.getParameterValues("statusText");
-//                    String[] statusStr = request.getParameter("status").split(",");
-//                    int[] statuses = new int[statusStr.length];
-//                    for (int i = 0; i < statusStr.length; i++) {
-//                        statuses[i] = Integer.parseInt(statusStr[i]);
-//                    }
                     String[] statuses = request.getParameterValues("status");
                     for (int i = 0; i < confirms.length; i++) {
                         if (confirms[i].equalsIgnoreCase("Accepted")) {
@@ -269,12 +218,6 @@ public class AttendanceController extends HttpServlet {
                             statuses[i] = "0";
                         }
                     }
-//                    if (confirm.equalsIgnoreCase("Accepted")) {
-//                        status = 1;
-//                    } else {
-//                        statusText = "Not Available";
-//                        status = 0;
-//                    }
                     if (notes.length == statuses.length) {
                         for (int i = 0; i < notes.length; i++) {
                             String note = notes[i];
@@ -285,8 +228,6 @@ public class AttendanceController extends HttpServlet {
                             af.updateOfUsers(attendIDs[i], statuses[i], notes[i]);
                         }
                     }
-//                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, lateTime, overTime, status, note, userID, fullName, confirm, statusText);
-//                    af.updateOfUsers(attendIDs, statuses, notes);
                     response.sendRedirect(request.getContextPath() + "/attendance/listOfUsers.do?userID=" + userID);
 //                      request.getRequestDispatcher("/views/home/successconfirm.jsp").forward(request, response);
 
@@ -304,7 +245,7 @@ public class AttendanceController extends HttpServlet {
         }
     }
 
-    private void update(HttpServletRequest request, HttpServletResponse response)
+    protected void update(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         AttendanceRepository ar = new AttendanceRepository();
         try {
@@ -325,7 +266,7 @@ public class AttendanceController extends HttpServlet {
         }
     }
 
-    private void update_handler(HttpServletRequest request, HttpServletResponse response)
+    protected void update_handler(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         String op = request.getParameter("op");
         switch (op) {
@@ -335,11 +276,11 @@ public class AttendanceController extends HttpServlet {
                     int attendID = Integer.parseInt(request.getParameter("attendID"));
                     Date date = sdfDate.parse(request.getParameter("date"));
                     String fullName = request.getParameter("fullName");
-                    Time checkIn = Time.valueOf(request.getParameter("checkIn"));
-                    Time checkOut = Time.valueOf(request.getParameter("checkOut"));
-                    Time soonTime = Time.valueOf(request.getParameter("soonTime"));
-                    Time lateTime = Time.valueOf(request.getParameter("lateTime"));
-                    Time duration = Time.valueOf(request.getParameter("duration"));
+                    Date checkIn = sdfTime.parse(request.getParameter("checkIn"));
+                    Date checkOut = sdfTime.parse(request.getParameter("checkOut"));
+                    Date soonTime = sdfTime.parse(request.getParameter("soonTime"));
+                    Date lateTime = sdfTime.parse(request.getParameter("lateTime"));
+                    Date duration = sdfTime.parse(request.getParameter("duration"));
                     int userID = Integer.parseInt(request.getParameter("userID"));
                     String note = request.getParameter("note");
                     String statusText = request.getParameter("statusText");
@@ -371,7 +312,7 @@ public class AttendanceController extends HttpServlet {
         }
     }
 
-    private void done(HttpServletRequest request, HttpServletResponse response)
+    protected void done(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         try {
             AttendanceRepository ar = new AttendanceRepository();
@@ -447,7 +388,7 @@ public class AttendanceController extends HttpServlet {
     return count;
 }
 
-private void search(HttpServletRequest request, HttpServletResponse response)
+protected void search(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException, ClassNotFoundException {
     HttpSession session = request.getSession();
     String op = request.getParameter("op");
@@ -516,7 +457,6 @@ private void search(HttpServletRequest request, HttpServletResponse response)
         try {
             int attendID = Integer.parseInt(request.getParameter("attendID"));
             ar.delete(attendID);
-            //Chuyen den trang /toy?op=list
             response.sendRedirect(request.getContextPath() + "/attendance/list.do");
         } catch (SQLException ex) {
             //Hien trang thong bao loi
