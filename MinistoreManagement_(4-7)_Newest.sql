@@ -258,8 +258,13 @@ insert into UserShift values ('5','3','2023-07-01', 0, '',0)
 
 
 --Insert cho DayOff
-insert into DayOff values('2023-04-30',1,'National Independent Day',1,'')
-insert into DayOff values('2023-05-01',1,'International Labor Day',1,'')
+insert into DayOff values('2023-01-01',1,'New Year''s Day',1,'')
+insert into DayOff values('2023-01-22',1,'Vietnamese New Year (Tet)',1,'')
+insert into DayOff values('2023-04-29',1,'Hung Kings Commemorations',1,'')
+insert into DayOff values('2023-04-30',1,'Day of Southern Liberation and National Reunification',1,'')
+insert into DayOff values('2023-05-01',1,'International Workers'' Day',1,'')
+insert into DayOff values('2023-09-02',1,'National Day',1,'')
+
 
 --Insert cho Attendance
 insert into Attendance values ('2023-06-01', '06:00:00', '11:30:00', '00:30:00', '00:00:00','05:30:00', 1, '', 2, 1);

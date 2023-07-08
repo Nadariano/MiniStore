@@ -78,10 +78,12 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-12">Note</label>
+                                        <label class="col-md-12">Note:</label>
+                                        <!--                                        <div class="col-md-12">
+                                                                                    <textarea type="text" maxlength="300" style="resize: vertical;width: 500px" placeholder="Note(Maximum: 300 characters)"  id="note" name="note">${report.note}</textarea>
+                                                                                </div>-->
                                         <div class="col-md-12">
-                                            <input type="text" placeholder="Note" name="note" value="${userShift.note}"
-                                                   class="form-control form-control-line" />
+                                            <textarea type="text" maxlength="300" class="form-control form-control-line" placeholder="Note(Maximum: 300 characters)"  id="note"  name="note"  style=" max-height: 226px; min-width: 100%; min-height: 50px;"value="${report.note}"></textarea>
                                         </div>
                                     </div>
 

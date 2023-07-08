@@ -66,6 +66,30 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-md-12">Shift: </label>
+                                <select type="dropdown" id="shiftID" name="shiftID" value="${attendance.shiftID}" class="form-control form-control-line">
+
+                                    <c:if test="${attendance.shiftID == 1}">
+                                        <option > ${attendance.shiftID} </option>
+                                        <option > 2 </option>
+                                        <option > 3 </option>
+                                    </c:if>
+
+                                    <c:if test="${attendance.shiftID == 2}">
+                                        <option > ${attendance.shiftID} </option>
+                                        <option > 1 </option>
+                                        <option > 3 </option>
+                                    </c:if>
+
+                                    <c:if test="${attendance.shiftID == 3}">
+                                        <option > ${attendance.shiftID} </option>
+                                        <option > 1 </option>
+                                        <option > 2 </option>
+                                    </c:if>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-md-12">Check In:</label>
                                 <div class="col-md-12">
                                     <input type="time" id="checkIn" placeholder="Check In"name="checkIn" value="${attendance.checkIn}"
@@ -108,7 +132,7 @@
                             <div class="form-group">
                                 <label class="col-md-12">Status: </label>
                                 <div class="col-md-12">
-                                    <select type="dropdown" id="statusText" name="statusText" value="${attendance.statusText}" >
+                                    <select class="form-control" type="dropdown" id="statusText" name="statusText" value="${attendance.statusText}" >
                                         <c:if test="${attendance.statusText.equals('Available')}">
                                             <option>${attendance.statusText}</option>
                                             <option> Not Available </option>
@@ -123,14 +147,15 @@
 
                             <div class="form-group">
                                 <label class="col-md-12">Note:</label>
+                                
                                 <div class="col-md-12">
-                                    <textarea  disabled maxlength="300" style="resize: vertical;width: 500px" placeholder="Note(Maximum: 300 characters)"  id="note" name="note">${attendance.note}</textarea>
+                                    <textarea type="text" maxlength="300" class="form-control form-control-line" placeholder="Note(Maximum: 300 characters)"  id="note"  name="note"  style=" max-height: 226px; min-width: 100%; min-height: 50px;"value="${attendance.note}">${attendance.note}</textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-12">Confirmation:</label>
-                                <div class="col-md-12">
+                                <div class="col-md-12 form-control-line">
                                     <c:if test="${attendance.confirm.equals('Accepted')}">
                                         <input disabled type="radio" name="confirm" id="confirm" value="Accepted" checked> 
                                         <label for="confirm">Accepted</label> 

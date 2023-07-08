@@ -88,9 +88,9 @@
 
                                     <div class="form-group">
                                         <label class="col-md-12">Note</label>
+
                                         <div class="col-md-12">
-                                            <input type="text" placeholder="Note" name="note" value="${userShift.note}"
-                                                   class="form-control form-control-line" />
+                                            <textarea  type="text" placeholder="Note" name="note"  style=" max-height: 226px; min-width: 100%; min-height: 50px;"value="${userShift.note}"   class="form-control form-control-line" ></textarea>
                                         </div>
                                     </div>
 
@@ -110,7 +110,6 @@
                                         </div>
                                     </div>
                                 </form>
-                                <h2 style=" color: red">${message}</h2>
                             </div>
                         </div>
                         <div class="col-md-2 col-12"></div>
