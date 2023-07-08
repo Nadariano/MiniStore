@@ -230,6 +230,9 @@
     background-color: goldenrod;
     /*color: red;*/
 }
+.currWeek a{
+    background-color: goldenrod;
+}
 .popup {
     display: none;
     height: auto;

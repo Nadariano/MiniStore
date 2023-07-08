@@ -7,11 +7,11 @@ use Ministore
 go
 create table Users(
 	userID int identity(1,1),
-	userName varchar(255),
-	password varchar(255),
-	fullName nvarchar(255),
+	userName varchar (255) not null unique,
+	password varchar (255) not null ,
+	fullName nvarchar (255)not null ,
 	avatar varchar(MAX),
-	address nvarchar(MAX),
+	address nvarchar (MAX) not null,
 	phone varchar(20),
 	email varchar(255),
 	status int,
@@ -243,18 +243,212 @@ insert into Report values('Report2','2023-05-11','I want to report something..',
 
 
 /*Insert cho UserShift*/
-insert into UserShift values ('4','1','2023-07-01', 0, '',0)
-insert into UserShift values ('5','1','2023-07-01', 0, '',0)
-insert into UserShift values ('4','2','2023-07-01', 0, '',0)
-insert into UserShift values ('4','1','2023-07-03', 0, '',0)
-insert into UserShift values ('7','2','2023-07-03', 0, '',0)
-insert into UserShift values ('4','2','2023-07-04', 0, '',0)
-insert into UserShift values ('4','1','2023-07-06', 0, '',0)
+/*1-6*/
+insert into UserShift values ('4','1','2023-06-01', 0, '',0)
+insert into UserShift values ('5','1','2023-06-01', 0, '',0)
+insert into UserShift values ('6','1','2023-06-01', 0, '',0)
+insert into UserShift values ('8','2','2023-06-01', 0, '',0)
+insert into UserShift values ('6','2','2023-06-01', 0, '',0)
+insert into UserShift values ('7','3','2023-06-01', 0, '',0)
+insert into UserShift values ('3','3','2023-06-01', 0, '',0)
+/*3-6*/
+insert into UserShift values ('4','1','2023-06-03', 0, '',0)
+insert into UserShift values ('5','1','2023-06-03', 0, '',0)
+insert into UserShift values ('6','1','2023-06-03', 0, '',0)
+insert into UserShift values ('7','2','2023-06-03', 0, '',0)
+insert into UserShift values ('6','2','2023-06-03', 0, '',0)
+insert into UserShift values ('8','3','2023-06-03', 0, '',0)
+insert into UserShift values ('3','3','2023-06-03', 0, '',0)
+/*4-6*/
+insert into UserShift values ('8','1','2023-06-04', 0, '',0)
+insert into UserShift values ('6','1','2023-06-04', 0, '',0)
+insert into UserShift values ('4','2','2023-06-04', 0, '',0)
+insert into UserShift values ('7','2','2023-06-04', 0, '',0)
+insert into UserShift values ('6','2','2023-06-04', 0, '',0)
+insert into UserShift values ('5','3','2023-06-04', 0, '',0)
+insert into UserShift values ('3','3','2023-06-04', 0, '',0)
+/*6-6*/
+insert into UserShift values ('4','1','2023-06-06', 0, '',0)
+insert into UserShift values ('5','1','2023-06-06', 0, '',0)
+insert into UserShift values ('6','1','2023-06-06', 0, '',0)
+insert into UserShift values ('8','2','2023-06-06', 0, '',0)
+insert into UserShift values ('6','2','2023-06-06', 0, '',0)
+insert into UserShift values ('7','3','2023-06-06', 0, '',0)
+insert into UserShift values ('3','3','2023-06-06', 0, '',0)
+/*8-6*/
+insert into UserShift values ('4','1','2023-06-08', 0, '',0)
+insert into UserShift values ('5','1','2023-06-08', 0, '',0)
+insert into UserShift values ('6','1','2023-06-08', 0, '',0)
+insert into UserShift values ('7','2','2023-06-08', 0, '',0)
+insert into UserShift values ('6','2','2023-06-08', 0, '',0)
+insert into UserShift values ('8','3','2023-06-08', 0, '',0)
+insert into UserShift values ('3','3','2023-06-08', 0, '',0)
+/*10-6*/
+insert into UserShift values ('5','1','2023-06-10', 0, '',0)
+insert into UserShift values ('6','1','2023-06-10', 0, '',0)
+insert into UserShift values ('4','2','2023-06-10', 0, '',0)
+insert into UserShift values ('6','2','2023-06-10', 0, '',0)
+insert into UserShift values ('7','3','2023-06-10', 0, '',0)
+insert into UserShift values ('3','3','2023-06-10', 0, '',0)
+/*11-6*/
+insert into UserShift values ('4','1','2023-06-11', 0, '',0)
+insert into UserShift values ('5','1','2023-06-11', 0, '',0)
+insert into UserShift values ('6','1','2023-06-11', 0, '',0)
+insert into UserShift values ('8','2','2023-06-11', 0, '',0)
+insert into UserShift values ('6','2','2023-06-11', 0, '',0)
+insert into UserShift values ('7','3','2023-06-11', 0, '',0)
+insert into UserShift values ('3','3','2023-06-11', 0, '',0)
+/*13-6*/
+insert into UserShift values ('4','1','2023-06-13', 0, '',0)
+insert into UserShift values ('5','1','2023-06-13', 0, '',0)
+insert into UserShift values ('6','1','2023-06-13', 0, '',0)
+insert into UserShift values ('7','2','2023-06-13', 0, '',0)
+insert into UserShift values ('6','2','2023-06-13', 0, '',0)
+insert into UserShift values ('8','3','2023-06-13', 0, '',0)
+insert into UserShift values ('3','3','2023-06-13', 0, '',0)
+/*15-6*/
+insert into UserShift values ('5','1','2023-06-15', 0, '',0)
+insert into UserShift values ('6','1','2023-06-15', 0, '',0)
+insert into UserShift values ('4','2','2023-06-15', 0, '',0)
+insert into UserShift values ('6','2','2023-06-15', 0, '',0)
+insert into UserShift values ('7','3','2023-06-15', 0, '',0)
+insert into UserShift values ('3','3','2023-06-15', 0, '',0)
+/*17-6*/
+insert into UserShift values ('4','1','2023-06-17', 0, '',0)
+insert into UserShift values ('5','1','2023-06-17', 0, '',0)
+insert into UserShift values ('6','1','2023-06-17', 0, '',0)
+insert into UserShift values ('7','2','2023-06-17', 0, '',0)
+insert into UserShift values ('6','2','2023-06-17', 0, '',0)
+insert into UserShift values ('8','3','2023-06-17', 0, '',0)
+insert into UserShift values ('3','3','2023-06-17', 0, '',0)
+/*18-6*/
+insert into UserShift values ('8','1','2023-06-18', 0, '',0)
+insert into UserShift values ('6','1','2023-06-18', 0, '',0)
+insert into UserShift values ('4','2','2023-06-18', 0, '',0)
+insert into UserShift values ('7','2','2023-06-18', 0, '',0)
+insert into UserShift values ('6','2','2023-06-18', 0, '',0)
+insert into UserShift values ('5','3','2023-06-18', 0, '',0)
+insert into UserShift values ('3','3','2023-06-18', 0, '',0)
+/*20-6*/
+insert into UserShift values ('4','1','2023-06-20', 0, '',0)
+insert into UserShift values ('5','1','2023-06-20', 0, '',0)
+insert into UserShift values ('6','1','2023-06-20', 0, '',0)
+insert into UserShift values ('8','2','2023-06-20', 0, '',0)
+insert into UserShift values ('6','2','2023-06-20', 0, '',0)
+insert into UserShift values ('7','3','2023-06-20', 0, '',0)
+insert into UserShift values ('3','3','2023-06-20', 0, '',0)
+/*22-6*/
+insert into UserShift values ('4','1','2023-06-22', 0, '',0)
+insert into UserShift values ('5','1','2023-06-22', 0, '',0)
+insert into UserShift values ('6','1','2023-06-22', 0, '',0)
+insert into UserShift values ('7','2','2023-06-22', 0, '',0)
+insert into UserShift values ('6','2','2023-06-22', 0, '',0)
+insert into UserShift values ('8','3','2023-06-22', 0, '',0)
+insert into UserShift values ('3','3','2023-06-22', 0, '',0)
+/*24-6*/
+insert into UserShift values ('5','1','2023-06-24', 0, '',0)
+insert into UserShift values ('6','1','2023-06-24', 0, '',0)
+insert into UserShift values ('4','2','2023-06-24', 0, '',0)
+insert into UserShift values ('6','2','2023-06-24', 0, '',0)
+insert into UserShift values ('7','3','2023-06-24', 0, '',0)
+insert into UserShift values ('3','3','2023-06-24', 0, '',0)
+/*25-6*/
+insert into UserShift values ('4','1','2023-06-25', 0, '',0)
+insert into UserShift values ('5','1','2023-06-25', 0, '',0)
+insert into UserShift values ('6','1','2023-06-25', 0, '',0)
+insert into UserShift values ('8','2','2023-06-25', 0, '',0)
+insert into UserShift values ('6','2','2023-06-25', 0, '',0)
+insert into UserShift values ('7','3','2023-06-25', 0, '',0)
+insert into UserShift values ('3','3','2023-06-25', 0, '',0)
+/*27-6*/
+insert into UserShift values ('8','1','2023-06-27', 0, '',0)
+insert into UserShift values ('6','1','2023-06-27', 0, '',0)
+insert into UserShift values ('4','2','2023-06-27', 0, '',0)
+insert into UserShift values ('5','2','2023-06-27', 0, '',0)
+insert into UserShift values ('6','2','2023-06-27', 0, '',0)
+insert into UserShift values ('7','3','2023-06-27', 0, '',0)
+insert into UserShift values ('3','3','2023-06-27', 0, '',0)
+/*29-6*/
+insert into UserShift values ('8','1','2023-06-29', 0, '',0)
+insert into UserShift values ('6','1','2023-06-29', 0, '',0)
+insert into UserShift values ('4','2','2023-06-29', 0, '',0)
+insert into UserShift values ('7','2','2023-06-29', 0, '',0)
+insert into UserShift values ('6','2','2023-06-29', 0, '',0)
+insert into UserShift values ('5','3','2023-06-29', 0, '',0)
+insert into UserShift values ('3','3','2023-06-29', 0, '',0)
+/*1-7*/
+insert into UserShift values ('7','1','2023-07-01', 0, '',0)
 insert into UserShift values ('3','1','2023-07-01', 0, '',0)
+insert into UserShift values ('5','2','2023-07-01', 0, '',0)
+insert into UserShift values ('8','2','2023-07-01', 0, '',0)
+insert into UserShift values ('3','2','2023-07-01', 0, '',0)
+insert into UserShift values ('4','3','2023-07-01', 0, '',0)
+insert into UserShift values ('6','3','2023-07-01', 0, '',0)
+/*2-7*/
+insert into UserShift values ('5','1','2023-07-02', 0, '',0)
+insert into UserShift values ('3','1','2023-07-02', 0, '',0)
+insert into UserShift values ('4','2','2023-07-02', 0, '',0)
 insert into UserShift values ('3','2','2023-07-02', 0, '',0)
-insert into UserShift values ('3','2','2023-07-04', 0, '', 0)
-insert into UserShift values ('3','1','2023-07-05', 0, '',0)
-insert into UserShift values ('5','3','2023-07-01', 0, '',0)
+insert into UserShift values ('7','3','2023-07-02', 0, '',0)
+insert into UserShift values ('8','3','2023-07-02', 0, '',0)
+insert into UserShift values ('6','3','2023-07-02', 0, '',0)
+/*4-7*/
+insert into UserShift values ('4','1','2023-07-04', 0, '',0)
+insert into UserShift values ('8','1','2023-07-04', 0, '',0)
+insert into UserShift values ('3','1','2023-07-04', 0, '',0)
+insert into UserShift values ('5','2','2023-07-04', 0, '',0)
+insert into UserShift values ('3','2','2023-07-04', 0, '',0)
+insert into UserShift values ('7','3','2023-07-04', 0, '',0)
+insert into UserShift values ('6','3','2023-07-04', 0, '',0)
+/*6-7*/
+insert into UserShift values ('5','1','2023-07-06', 0, '',0)
+insert into UserShift values ('3','1','2023-07-06', 0, '',0)
+insert into UserShift values ('4','2','2023-07-06', 0, '',0)
+insert into UserShift values ('3','2','2023-07-06', 0, '',0)
+insert into UserShift values ('7','3','2023-07-06', 0, '',0)
+insert into UserShift values ('8','3','2023-07-06', 0, '',0)
+insert into UserShift values ('6','3','2023-07-06', 0, '',0)
+/*8-7*/
+insert into UserShift values ('4','1','2023-07-08', 0, '',0)
+insert into UserShift values ('8','1','2023-07-08', 0, '',0)
+insert into UserShift values ('3','1','2023-07-08', 0, '',0)
+insert into UserShift values ('5','2','2023-07-08', 0, '',0)
+insert into UserShift values ('3','2','2023-07-08', 0, '',0)
+insert into UserShift values ('7','3','2023-07-08', 0, '',0)
+insert into UserShift values ('6','3','2023-07-08', 0, '',0)
+/*9-7*/
+insert into UserShift values ('7','1','2023-07-09', 0, '',0)
+insert into UserShift values ('3','1','2023-07-09', 0, '',0)
+insert into UserShift values ('5','2','2023-07-09', 0, '',0)
+insert into UserShift values ('8','2','2023-07-09', 0, '',0)
+insert into UserShift values ('3','2','2023-07-09', 0, '',0)
+insert into UserShift values ('4','3','2023-07-09', 0, '',0)
+insert into UserShift values ('6','3','2023-07-09', 0, '',0)
+/*11-7*/
+insert into UserShift values ('8','1','2023-07-11', 0, '',0)
+insert into UserShift values ('3','1','2023-07-11', 0, '',0)
+insert into UserShift values ('5','2','2023-07-11', 0, '',0)
+insert into UserShift values ('7','2','2023-07-11', 0, '',0)
+insert into UserShift values ('3','2','2023-07-11', 0, '',0)
+insert into UserShift values ('4','3','2023-07-11', 0, '',0)
+insert into UserShift values ('6','3','2023-07-11', 0, '',0)
+/*13-7*/
+insert into UserShift values ('5','1','2023-07-13', 0, '',0)
+insert into UserShift values ('3','1','2023-07-13', 0, '',0)
+insert into UserShift values ('4','2','2023-07-13', 0, '',0)
+insert into UserShift values ('3','2','2023-07-13', 0, '',0)
+insert into UserShift values ('7','3','2023-07-13', 0, '',0)
+insert into UserShift values ('8','3','2023-07-13', 0, '',0)
+insert into UserShift values ('6','3','2023-07-13', 0, '',0)
+/*15-7*/
+insert into UserShift values ('4','1','2023-07-15', 0, '',0)
+insert into UserShift values ('8','1','2023-07-15', 0, '',0)
+insert into UserShift values ('3','1','2023-07-15', 0, '',0)
+insert into UserShift values ('5','2','2023-07-15', 0, '',0)
+insert into UserShift values ('3','2','2023-07-15', 0, '',0)
+insert into UserShift values ('7','3','2023-07-15', 0, '',0)
+insert into UserShift values ('6','3','2023-07-15', 0, '',0)
+
 
 
 --Insert cho DayOff
@@ -264,6 +458,8 @@ insert into DayOff values('2023-04-29',1,'Hung Kings Commemorations',1,'')
 insert into DayOff values('2023-04-30',1,'Day of Southern Liberation and National Reunification',1,'')
 insert into DayOff values('2023-05-01',1,'International Workers'' Day',1,'')
 insert into DayOff values('2023-09-02',1,'National Day',1,'')
+insert into DayOff values('2023-12-25',1,'Christmas Day',1,'')
+
 
 
 --Insert cho Attendance
