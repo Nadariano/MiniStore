@@ -57,7 +57,7 @@
                                                 <option value="${shift.shiftID}" ${shift.shiftID==oldShiftID ? "selected" : ""}>${shift.shiftID}</option>
                                             </c:forEach>
                                         </select>
-                                            <input type="hidden" name="oldShiftID" value="${oldShiftID}">  
+                                        <input type="hidden" name="oldShiftID" value="${oldShiftID}">  
                                     </div>
 
                                     <div class="form-group">
@@ -104,7 +104,7 @@
                                         </div>
                                     </div>
                                 </form>
-
+                                <h3 style="color: red">${message}</h3>
                             </div>
                         </div>
                         <div class="col-md-2 col-12"></div>
