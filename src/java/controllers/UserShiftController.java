@@ -92,7 +92,7 @@ public class UserShiftController extends HttpServlet {
             request.setAttribute("list", list);
             //Add for BLOCK View
             Object selectedWeek = session.getAttribute("selectedWeek");
-            String week = Utilities.listStartEndDates().get(2);
+            String week = Utilities.listStartEndDates().get(5);
             if (selectedWeek != null) {
                 week = (String) selectedWeek;
             }
@@ -153,11 +153,15 @@ public class UserShiftController extends HttpServlet {
             request.setAttribute("usl", userList);
             int shiftID = 0;
             String date = null;
-            shiftID = Integer.parseInt(request.getParameter("shiftID"));
+            List<ShiftTime> shiftList = ShiftTimeRepository.select();
+            request.setAttribute("shiftList", shiftList);
+            if(request.getParameter("shiftID") !=null && request.getParameter("date")!=null){
+               shiftID = Integer.parseInt(request.getParameter("shiftID"));
             date = request.getParameter("date");
             if ((shiftID != 0) && (date != null)) {
                 request.setAttribute("shiftID", shiftID);
                 request.setAttribute("date", date);
+            } 
             }
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (Exception ex) {
@@ -204,9 +208,11 @@ public class UserShiftController extends HttpServlet {
             String strOldDate = request.getParameter("oldDate");
             Date date = sdfDate.parse(strOldDate);
             UserShift userShift = usr.read(userID, shiftID, date);
+            List<ShiftTime> shiftList = ShiftTimeRepository.select();
             request.setAttribute("userShift", userShift);
             request.setAttribute("oldDate", strOldDate);
             request.setAttribute("oldShiftID", shiftID);
+            request.setAttribute("shiftList", shiftList);
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -233,7 +239,7 @@ public class UserShiftController extends HttpServlet {
                     String note = request.getParameter("note");
                     boolean isOT = Boolean.parseBoolean(request.getParameter("isOT"));
                     UserShift userShift = new UserShift(userID, newShiftID, newDate, status, note, isOT);
-                    usr.update(userShift,oldShiftID,oldDate);
+                    usr.update(userShift, oldShiftID, oldDate);
                     response.sendRedirect(request.getContextPath() + "/userShift/listOf.do");
                 } catch (Exception ex) {
                     ex.printStackTrace();
