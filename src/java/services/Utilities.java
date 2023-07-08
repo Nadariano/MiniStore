@@ -381,7 +381,7 @@ public class Utilities {
     public static List<String> listStartEndDates() {
         List<String> listStartEndDates = new ArrayList<>();
         LocalDate now = LocalDate.now();
-        for (int i = -2; i < 5; i++) {
+        for (int i = -5; i < 6; i++) {
             List<LocalDate> startEndDates = startEndDates(now.plusDays(i * 7));
             LocalDate lst = startEndDates.get(0);
             LocalDate led = startEndDates.get(1);
