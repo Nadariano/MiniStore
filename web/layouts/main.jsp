@@ -196,16 +196,16 @@
                                 </li>
                             </c:if>
                             <c:if test="${Account.roleName.equals('MANAGER')}">
-                                <li>
+<!--                                <li>
                                     <a href="<c:url value="/bonus/listOf.do"/>" class="waves-effect"><i class="fa fa-money fa-fw"
                                                                                                         aria-hidden="true"></i><span class="hide-menu">Bonus List </span></a>
-                                </li>
+                                </li>-->
                             </c:if>
                             <c:if test="${Account.roleName.equals('MANAGER')}">
-                                <li>
+<!--                                <li>
                                     <a href="<c:url value="/minus/listOf.do"/>" class="waves-effect"><i class="fa fa-money fa-fw"
                                                                                                         aria-hidden="true"></i><span class="hide-menu">Minus List </span></a>
-                                </li>
+                                </li>-->
                             </c:if>
                             <li>
                                 <a href="<c:url value="/blank.do"/>" class="waves-effect"><i class="fa fa-columns fa-fw"

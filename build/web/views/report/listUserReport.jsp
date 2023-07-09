@@ -62,17 +62,15 @@
                                             <td>${report.requestSoonTime}</td>
                                             <td>${report.requestLateTime}</td>
                                             <td>${report.shiftID}</td>
-                                            <c:choose>
-                                                <c:when test="${report.statusText=='Rejected'}">
-                                                    <td><span class="badge bg-danger fs-6 px-1 py-0">${report.statusText}</span></td>
-                                                    </c:when>
-                                                    <c:when test="${report.statusText=='Approved'}">
-                                                    <td><span class="badge bg-success fs-6 px-1 py-0">${report.statusText}</span></td>
-                                                    </c:when>
-                                                    <c:when test="${report.statusText=='Processing'}">
-                                                    <td><span class="badge bg-warning text-dark fs-6 px-1 py-0">${report.statusText}</span></td>
-                                                    </c:when>
-                                                </c:choose>
+                                            <c:if test="${report.statusText=='Rejected'}">
+                                                <td style="background-color: #ac2925; color: whitesmoke " >${report.statusText}</td>
+                                            </c:if>
+                                            <c:if test="${report.statusText=='Approved'}">
+                                                <td style="background-color: #398439; color: whitesmoke">${report.statusText}</td>
+                                            </c:if>
+                                            <c:if test="${report.statusText=='Processing'}">
+                                                <td style="background-color: grey; color: whitesmoke">${report.statusText}</td>
+                                            </c:if>    
                                             <td>${report.note}</td>
                                         </tr>
                                     </c:forEach>

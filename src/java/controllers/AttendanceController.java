@@ -24,6 +24,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.Record;
+import repositories.RecordRepository;
+import services.AttendanceService;
 import static services.Utilities.sdfDate;
 import static services.Utilities.sdfTime;
 
@@ -121,16 +124,16 @@ public class AttendanceController extends HttpServlet {
                     request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
                 }
                 break;
-//            case "create":
-//                try {
-//                    create(request, response);
-//                } catch (SQLException ex) {
-//                    //Hien trang thong bao loi
-//                    ex.printStackTrace();//In thông báo chi tiết cho developer
-//                    request.setAttribute("message", ex.getMessage());
-//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-//                }
-//                break;
+            case "create":
+                try {
+                    create(request, response);
+                } catch (SQLException ex) {
+                    //Hien trang thong bao loi
+                    ex.printStackTrace();//In thông báo chi tiết cho developer
+                    request.setAttribute("message", ex.getMessage());
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+                break;
 //            case "create_handler":
 //                try {
 //                    create_handler(request, response);
@@ -277,16 +280,36 @@ public class AttendanceController extends HttpServlet {
                     Date date = sdfDate.parse(request.getParameter("date"));
                     String fullName = request.getParameter("fullName");
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                    Date checkIn = sdf.parse(request.getParameter("checkIn"));
-                    Date checkOut = sdf.parse(request.getParameter("checkOut"));
-                    Date soonTime = sdfTime.parse(request.getParameter("soonTime"));
-                    Date lateTime = sdfTime.parse(request.getParameter("lateTime"));
-                    Date duration = sdfTime.parse(request.getParameter("duration"));
+
+                    Date checkIn = null;
+                    if (!request.getParameter("checkIn").equals("")) {
+                        checkIn = sdf.parse(request.getParameter("checkIn"));
+                    }
+                    
+                    Date checkOut = null;
+                    if (!request.getParameter("checkOut").equals("")){
+                        checkOut = sdf.parse(request.getParameter("checkOut"));
+                    }
+                    
+                    Date soonTime = null;
+                    if (!request.getParameter("soonTime").equals("")) {
+                        soonTime = sdfTime.parse(request.getParameter("soonTime"));
+                    }
+
+                    Date lateTime = null;
+                    if (!request.getParameter("lateTime").equals("")) {
+                        lateTime = sdfTime.parse(request.getParameter("lateTime"));
+                    }
+
+                    Date duration = null;
+                    if (!request.getParameter("duration").equals("")) {
+                        duration = sdfTime.parse(request.getParameter("duration"));
+                    }
                     int userID = Integer.parseInt(request.getParameter("userID"));
                     String note = request.getParameter("note");
                     String statusText = request.getParameter("statusText");
                     String confirm = request.getParameter("confirm");
-                    
+
                     int status = 1;
                     if (statusText.equalsIgnoreCase("Available")) {
                         status = 1;
@@ -294,7 +317,8 @@ public class AttendanceController extends HttpServlet {
                         status = 0;
                     }
                     int shiftID = Integer.parseInt(request.getParameter("shiftID"));
-                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, soonTime, lateTime, duration, status, note, userID, fullName, confirm, statusText, shiftID);
+                    Attendance attendance = new Attendance(attendID, date, checkIn, checkOut, lateTime, soonTime, duration, status, note, userID, shiftID, fullName, confirm, statusText);
+                    System.out.println(attendance.toString());
                     ar.update(attendance);
                     response.sendRedirect(request.getContextPath() + "/attendance/list.do");
 
@@ -319,7 +343,7 @@ public class AttendanceController extends HttpServlet {
             AttendanceRepository ar = new AttendanceRepository();
             int status = 2;
             ar.done(status);
-            response.sendRedirect(request.getContextPath() + "/attendance/list.do");
+            response.sendRedirect(request.getContextPath() + "/paySlip/create.do");
 
         } catch (Exception ex) {
             //Hiện trang thông báo lỗi
@@ -449,6 +473,45 @@ public class AttendanceController extends HttpServlet {
                 break;
             default:
                 break;
+        }
+    }
+
+    protected void create(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+        try {
+            System.out.println("asdfghj");
+            RecordRepository rcr = new RecordRepository();
+            AttendanceService as = new AttendanceService();
+            AttendanceRepository ar = new AttendanceRepository();
+
+            List<Record> list = rcr.select1();
+            System.out.println("OTP");
+            for (Record rc : list) {
+                System.out.println("Minh so kute");
+                Date lateTime = as.lateTime(rc.getDate(), rc.getInTime(),rc.getUserID(), rc.getShiftID());
+                System.out.println("LateTime " + lateTime);
+                Date soonTime = as.soonTime(rc.getDate(), rc.getOutTime(),rc.getUserID(), rc.getShiftID());
+                System.out.println("SoonTime " + soonTime);
+                Date duration = as.duration(rc.getInTime(), rc.getOutTime(), rc.getDate());
+                System.out.println("Duration " + duration);
+                int status = 0;
+//                String statusText = "Not Available";
+                String confirm = "Denied";
+                String note = "";
+                Attendance a = new Attendance(rc.getDate(), rc.getInTime(), rc.getOutTime(), lateTime, soonTime, duration, status, note, rc.getUserID(), rc.getShiftID(), confirm);
+                System.out.println("attendance "+ a.toString());
+                ar.create(a);
+            }
+//            }
+
+            response.sendRedirect(request.getContextPath() + "/attendance/list.do");
+//            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+        } catch (Exception ex) {
+//            ex.printStackTrace();
+            request.setAttribute("message", ex.getMessage());
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "error");
+            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         }
     }
 

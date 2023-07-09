@@ -76,6 +76,9 @@ public class UserShiftController extends HttpServlet {
                 case "delete":
                     delete(request, response);
                     break;
+                case "done":
+                    done(request, response);
+                    break;
             }
         }
     }
@@ -308,6 +311,21 @@ public class UserShiftController extends HttpServlet {
 //            usd.delete1(userID);
             //Chuyen den trang /toy?op=list
             response.sendRedirect(request.getContextPath() + "/userShift/listOf.do");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            request.setAttribute("message", ex.getMessage());
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "error");
+            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+        }
+    }
+    protected void done(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        UserShiftRepository usr = new UserShiftRepository();
+        try {
+            int status = 2;
+            usr.done(status);
+            response.sendRedirect(request.getContextPath() + "/record/listOf.do");
         } catch (Exception ex) {
             ex.printStackTrace();
             request.setAttribute("message", ex.getMessage());

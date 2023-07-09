@@ -26,36 +26,92 @@ public class Attendance {
     private Date date;
     private Date checkIn;
     private Date checkOut;
-    private Date soonTime;
     private Date lateTime;
+    private Date soonTime;
     private Date duration;
     private int status;
     private String note;
     private int userID;
+    private int shiftID;
     private String fullName;
     private String confirm;
     private String statusText;
-    private int shiftID;
+    
 
     public Attendance() {
     }
 
-    public Attendance(int attendID, Date date, Date checkIn, Date checkOut, Date soonTime, Date lateTime, Date duration, int status, String note, int userID, String fullName, String confirm, String statusText, int shiftID) {
-        this.attendID = attendID;
+    public Attendance(Date date, Date checkIn, Date checkOut, Date lateTime, Date soonTime, Date duration, int status, String note, int userID, int shiftID, String confirm) {
         this.date = date;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
-        this.soonTime = soonTime;
         this.lateTime = lateTime;
+        this.soonTime = soonTime;
         this.duration = duration;
         this.status = status;
         this.note = note;
         this.userID = userID;
+        this.shiftID = shiftID;
+        this.confirm = confirm;
+    }
+    
+
+    public Attendance(int attendID, Date date, Date checkIn, Date checkOut, Date lateTime, Date soonTime, Date duration, int status, String note, int userID, int shiftID, String fullName, String confirm, String statusText) {
+        this.attendID = attendID;
+        this.date = date;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.lateTime = lateTime;
+        this.soonTime = soonTime;
+        this.duration = duration;
+        this.status = status;
+        this.note = note;
+        this.userID = userID;
+        this.shiftID = shiftID;
         this.fullName = fullName;
         this.confirm = confirm;
         this.statusText = statusText;
+    }
+    
+    
+
+    public Attendance(Date date, Date checkIn, Date checkOut, Date lateTime, Date soonTime, int userID) {
+        this.date = date;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.lateTime = lateTime;
+        this.soonTime = soonTime;
+        this.userID = userID;
+    }
+
+    public Attendance(int attendID, Date date, Date checkIn, Date checkOut, Date lateTime, Date soonTime, Date duration, int status, String note, int userID, int shiftID) {
+        this.attendID = attendID;
+        this.date = date;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.lateTime = lateTime;
+        this.soonTime = soonTime;
+        this.duration = duration;
+        this.status = status;
+        this.note = note;
+        this.userID = userID;
         this.shiftID = shiftID;
     }
+
+    public Attendance(Date date, Date checkIn, Date checkOut, Date lateTime, Date soonTime, Date duration, int status, String note, int userID, int shiftID) {
+        this.date = date;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.lateTime = lateTime;
+        this.soonTime = soonTime;
+        this.duration = duration;
+        this.status = status;
+        this.note = note;
+        this.userID = userID;
+        this.shiftID = shiftID;
+    }
+    
+    
 
     public int getAttendID() {
         return attendID;
@@ -89,14 +145,6 @@ public class Attendance {
         this.checkOut = checkOut;
     }
 
-    public Date getSoonTime() {
-        return soonTime;
-    }
-
-    public void setSoonTime(Date soonTime) {
-        this.soonTime = soonTime;
-    }
-
     public Date getLateTime() {
         return lateTime;
     }
@@ -105,14 +153,14 @@ public class Attendance {
         this.lateTime = lateTime;
     }
 
-    public Date getDuration() {
-        return duration;
+    public Date getSoonTime() {
+        return soonTime;
     }
 
-    public void setDuration(Date duration) {
-        this.duration = duration;
+    public void setSoonTime(Date soonTime) {
+        this.soonTime = soonTime;
     }
-
+    
     public int getStatus() {
         return status;
     }
@@ -135,6 +183,14 @@ public class Attendance {
 
     public void setUserID(int userID) {
         this.userID = userID;
+    }
+
+    public int getShiftID() {
+        return shiftID;
+    }
+
+    public void setShiftID(int shiftID) {
+        this.shiftID = shiftID;
     }
 
     public String getFullName() {
@@ -161,14 +217,20 @@ public class Attendance {
         this.statusText = statusText;
     }
 
-    public int getShiftID() {
-        return shiftID;
+    public Date getDuration() {
+        return duration;
     }
 
-    public void setShiftID(int shiftID) {
-        this.shiftID = shiftID;
+    public void setDuration(Date duration) {
+        this.duration = duration;
+    }
+
+    @Override
+    public String toString() {
+        return "Attendance{" + "attendID=" + attendID + ", date=" + date + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", lateTime=" + lateTime + ", soonTime=" + soonTime + ", duration=" + duration + ", status=" + status + ", note=" + note + ", userID=" + userID + ", shiftID=" + shiftID + ", fullName=" + fullName + ", confirm=" + confirm + ", statusText=" + statusText + '}';
     }
     
+
     
+   
 }
-    
