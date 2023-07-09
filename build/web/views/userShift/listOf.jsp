@@ -45,8 +45,8 @@
             <!-- /row -->
             <div class=" row bg-white">
                 <div id="myTab" class="pull-left ">
-                    <a href="#listView" data-toggle="tab">List View |</a>
-                    <a href="#blockView" data-toggle="tab">Block View</a>
+                    <a class="" href="#listView" data-toggle="tab">List View |</a>
+                    <a class="" href="#blockView" data-toggle="tab">Block View</a>
                 </div>
             </div>
             <div class="tab-content">
@@ -55,7 +55,9 @@
                         <div class="col-sm-12">
                             <div class="white-box">
                                 <c:if test="${Account.roleName.equals('MANAGER')}">
-                                    <a href="<c:url value="/userShift/create.do"/>" class="btn btn-sm btn-success"><i class="bi bi-file-earmark-plus"></i>Add a new User Shift</a>
+                                    <a href="<c:url value="/userShift/create.do"/>" class="btn btn-lg btn-success btn-rounded" title="Add a new User Shift">
+                                        <i class="bi bi-file-earmark-plus"></i> 
+                                    </a>
                                 </c:if>
                                 <div class="table-responsive">
                                     <table class="table" id="example">
@@ -88,9 +90,14 @@
                                                     <td>${userShift.otText}</td>
                                                     <c:if test="${Account.roleName.equals('MANAGER') && (userShift.date>nowDate) && userShift.status != 2}">
                                                         <td>
-                                                            <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&oldShiftID=${userShift.shiftID}&oldDate=${userShift.date}"/>" class="btn btn-sm btn-primary" ><i class="bi bi-pencil-square"></i>Update</a>
-                                                            <a href="<c:url value="/userShift/delete.do?userID=${userShift.userID}&shiftID=${userShift.shiftID}&date=${userShift.date} "/>" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-warning"><i class="bi bi-trash3"></i>Delete</a>
+                                                            <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&oldShiftID=${userShift.shiftID}&oldDate=${userShift.date}"/>" class="btn btn-sm btn-github btn-rounded" title="Update">
+                                                                <i class="bi bi-pencil-square"></i>
+                                                            </a>
+                                                            <a href="<c:url value="/userShift/delete.do?userID=${userShift.userID}&shiftID=${userShift.shiftID}&date=${userShift.date} "/>" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-googleplus btn-rounded" title="Delete">
+                                                                <i class="bi bi-trash"></i>
+                                                            </a>
                                                         </td>
+
                                                     </c:if>
                                                     <c:if test="${userShift.status == 2}">
                                                         <td class="btn btn-info">Finished <i class="bi bi-cloud-check"></i></td>
@@ -99,7 +106,7 @@
                                             </c:forEach>
                                         </tbody>
                                     </table>
-                                     <a href="<c:url value="/userShift/done.do"/>" onclick="return confirm('Do you really want to finish?');" class="btn btn-sm btn-primary">Done</a>
+                                    <a href="<c:url value="/userShift/done.do"/>" onclick="return confirm('Do you really want to finish?');" class="btn btn-sm btn-primary">Done</a>
                                 </div>
                             </div>
                         </div>

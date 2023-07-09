@@ -24,68 +24,64 @@
                         <!-- /.col-lg-12 -->
                     </div>
 
-                   <form action="<c:url value='/report/search.do'/>" class="form-inline "style="display: flex; align-items: center; justify-content: center;">
-                        <div class="form-group" >
-                            <label for="searchType">Search By:</label>
-                            <select id="searchType" name="searchType" onchange="changeSearchType()" class="form-control">
-                                <option value="date">Date</option>
-                                <option value="name">Name</option>
-                            </select>
+                    <form action="<c:url value='/report/search.do'/>" class="form-inline " style="display: flex; align-items: center; justify-content: center;">
+                        <div class="" style="display: flex;align-items: center; justify-content: center;">
+                            <div class="form-group badge bg-info text-uppercase text-white">
+                                <label class="text-uppercase" for="searchType">Search By:</label>
+                                <select id="searchType" name="searchType" onchange="changeSearchType()" class="form-control btn-rounded ">
+                                    <option value="date">Date</option>
+                                    <option value="name">Name</option>
+                                </select>
+                            </div>
+
+                            <div id="dateInputs" class="form-group  badge bg-info text-uppercase text-white ">
+                                <label class="text-uppercase" for="day">Day:</label>
+                                <select name="day" class="form-control btn-rounded ">
+                                    <option value="">Day</option>
+                                    <% for (int i = 1; i <= 31; i++) {%>
+                                    <option value="<%= i%>"><%= i%></option>
+                                    <% } %>
+                                </select>
+
+                                <label class="text-uppercase" for="month">Month:</label>
+                                <select name="month" class="form-control btn-rounded">
+                                    <option value="">Month</option>
+                                    <% for (int i = 1; i <= 12; i++) {%>
+                                    <option value="<%= i%>"><%= i%></option>
+                                    <% } %>
+                                </select>
+
+                                <label class="text-uppercase" for="year">Year:</label>
+                                <select name="year" class="form-control btn-rounded">
+                                    <option value="">Year</option>
+                                    <% for (int i = 1900; i <= 2023; i++) {%>
+                                    <option value="<%= i%>"><%= i%></option>
+                                    <% }%>
+                                </select>
+                            </div>
+
+                            <div id="nameInputs" style="display: none;" class="form-group badge bg-info text-uppercase text-white ">
+                                <label class="text-uppercase" for="fullName">Name:</label>
+                                <input type="text" id="fullName" name="fullName" class="form-control btn-rounded">
+                            </div>
+
+                            <div class="badge bg-info">
+                                <button type="submit" class="form-control btn btn-rounded " name="op" value="search" title="Search">
+                                    <i class="bi bi-search text-dark text-uppercase"></i>
+                                </button>
+                            </div>
                         </div>
-
-                        <div id="dateInputs" class="form-group">
-                            <label for="day">Day:</label>
-                            <select name="day" class="form-control">
-                                <option value="">Day</option>
-                                <% for (int i = 1; i <= 31; i++) {%>
-                                <option value="<%= i%>"><%= i%></option>
-                                <% } %>
-                            </select>
-
-                            <label for="month">Month:</label>
-                            <select name="month" class="form-control">
-                                <option value="">Month</option>
-                                <% for (int i = 1; i <= 12; i++) {%>
-                                <option value="<%= i%>"><%= i%></option>
-                                <% } %>
-                            </select>
-
-                            <label for="year">Year:</label>
-                            <select name="year" class="form-control">
-                                <option value="">Year</option>
-                                <% for (int i = 1900; i <= 2023; i++) {%>
-                                <option value="<%= i%>"><%= i%></option>
-                                <% }%>
-                            </select>
-                        </div>
-
-                        <div id="nameInputs" style="display: none;" class="form-group">
-                            <label for="fullName">Name:</label>
-                            <input type="text" id="fullName" name="fullName" class="form-control">
-                        </div>
-
-                        <button type="submit" class="btn btn-primary" name="op" value="search">Search</button>
                     </form>
 
 
-                    <script>
-                        function changeSearchType() {
-                            var searchType = document.getElementById("searchType").value;
-                            if (searchType === "date") {
-                                document.getElementById("dateInputs").style.display = "block";
-                                document.getElementById("nameInputs").style.display = "none";
-                            } else {
-                                document.getElementById("dateInputs").style.display = "none";
-                                document.getElementById("nameInputs").style.display = "block";
-                            }
-                        }
-                    </script>
+
+
                     <!-- /row -->
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="white-box">
+                            <div class="white-box  center-block">
                                 <div class="table-responsive">
-                                    <table class="table" id="example">
+                                    <table class="table  table-striped " id="example">
 
                                         <thead>
                                             <tr>
@@ -132,12 +128,19 @@
                                                         </c:choose>
 
 
-                                                    <td>${report.note}</td>
+                                                    <td>
+                                                        <a tabindex="0" class="btn btn-sm btn-circle btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${report.note}" data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip"><div class="arrow"></div><div class="popover-body text-white p-3"><span class="d-block">${report.note}</span></div></div>'>
+                                                            <i class="bi bi-eye"></i>
+                                                        </a>
+                                                    </td>
 
                                                     <td>
-                                                        <a href="<c:url value="/report/update.do?reportID=${report.reportID}"  />" class="btn btn-sm btn-primary">Update</a>
-                                                        <p></p>
-                                                        <a href="<c:url value="/report/delete.do?reportID=${report.reportID}" /> " onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-danger">Delete</a>
+                                                        <a href="<c:url value="/report/update.do?reportID=${report.reportID}"  />" class="btn btn-sm btn-github btn-rounded" title="Update">
+                                                            <i class="bi bi-pencil-square"></i>
+                                                        </a>
+                                                        <a href="<c:url value="/report/delete.do?reportID=${report.reportID}" /> " onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-googleplus btn-rounded" title="Delete">
+                                                            <i class="bi bi-trash"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>

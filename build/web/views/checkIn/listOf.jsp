@@ -13,7 +13,7 @@
         <title>Check In </title>
     </head>
     <body>
-        
+
         <div class="preloader">
             <div class="cssload-speeding-wheel"></div>
         </div>
@@ -27,34 +27,58 @@
                             <!--<a href="<c:url value="/checkIn/create.do"/>"><i class="bi bi-file-earmark-plus"></i>Create manually | </a>-->
                             <!--<a href="<c:url value="/checkIn/readExcel.do"/>"><i class="bi bi-file-earmark-plus"></i>Generate from Excel</a>-->
                             <br>
-                            <form action="<c:url value="/checkIn/readExcel.do"/>">
-                                <input type="file" name="fileName">
-                                <button type="submit" name="op" value="readExcel">Generate from Excel</button>
+                            <form action="<c:url value="/checkIn/readExcel.do"/>" class="form-inline">
+                                <div class="form-group mb-2">
+                                    <div class="custom-file">
+                                        <!--                                        <label class="custom-file-label btn-rounded" for="fileName">Choose file</label>
+                                                                                <input type="file" class="custom-file-input" id="fileName" name="fileName">-->
+                                        <div class="input-group">
+                                            <label class="input-group-btn">
+                                                <span class="btn btn-info">
+                                                    Browse… <input type="file" style="display: none;" id="fileName" multiple name="fileName" onchange="updateFileName()">
+                                                </span>
+                                            </label>
+                                            <input type="text" class="form-control" id="inputBox" readonly name="fileName">
+                                        </div>
+
+                                    </div>
+                                    <button type="submit" class="btn btn-info btn-block mb-2 ml-2" name="op" value="readExcel">
+                                        <i class="bi bi-file-earmark-spreadsheet"></i> Generate from Excel
+                                    </button>
+                                </div>
                                 <br>
                                 <i style="color: red">${message}</i>
                             </form>
+
                         </div>
+                            
                     </div>
-                    <table class="table table-bordered">
-                        <tr>
-                            <!--<th>No.</th>-->
-                            <th>Check In ID</th>
-                            <th>Check In Time</th>
-                            <th>Full Name</th>
-                            <th>Operations</th>
-                        </tr>
-                        <c:forEach var="checkIn" items="${list}" varStatus="loop">
+                            
+                    <div class="white-box">
+                        <table class="table table-bordered table-striped">
                             <tr>
-                                <!--<td>${loop.count}</td>-->
-                                <td>${checkIn.checkInID}</td>
-                                <td>${checkIn.checkInTime}</td>
-                                <td>${checkIn.fullName}</td>
-                                <td>
-                                    <a href="<c:url value="/checkIn/delete.do?checkInID=${checkIn.checkInID}" />" onclick="return confirm('Do you really want to remove it?');"><i class="bi bi-trash3"></i>Delete</a>
-                                </td>
+                                <!--<th>No.</th>-->
+                                <th>Check In ID</th>
+                                <th>Check In Time</th>
+                                <th>Full Name</th>
+                                <th>Operations</th>
                             </tr>
-                        </c:forEach>
-                    </table>
+                            <c:forEach var="checkIn" items="${list}" varStatus="loop">
+                                <tr>
+                                    <!--<td>${loop.count}</td>-->
+                                    <td>${checkIn.checkInID}</td>
+                                    <td>${checkIn.checkInTime}</td>
+                                    <td>${checkIn.fullName}</td>
+                                    <td>
+                                        <a href="<c:url value="/checkIn/delete.do?checkInID=${checkIn.checkInID}" />" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-googleplus btn-rounded" title="Delete">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </div>
                 </div>
             </c:when>
             <c:otherwise>
