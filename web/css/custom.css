@@ -71,9 +71,7 @@
     text-align: center;
     padding: 2%;
 }
-.white-box{
-    margin: 0;
-}
+
 .overlay-box{
     /*    width: 100%;
         height: 100%;*/
@@ -231,6 +229,9 @@
     height: 100%;
     background-color: goldenrod;
     /*color: red;*/
+}
+.currWeek a{
+    background-color: goldenrod;
 }
 .popup {
     display: none;

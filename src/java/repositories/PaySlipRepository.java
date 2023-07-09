@@ -21,7 +21,7 @@ import models.PaySlip;
  * @author Dell
  */
 public class PaySlipRepository {
-    
+
     public static List<PaySlip> select() throws SQLException {
         List<PaySlip> list = null;
         Connection con = DBContext.getConnection();
@@ -45,7 +45,7 @@ public class PaySlipRepository {
         con.close();
         return list;
     }
-    
+
     public PaySlip myPaySlip(int userID) throws SQLException {
         PaySlip paySlip = null;
         Connection con = DBContext.getConnection();
@@ -69,7 +69,7 @@ public class PaySlipRepository {
         con.close();
         return paySlip;
     }
-    
+
     public List<PaySlip> select1(int userID) throws SQLException {
         List<PaySlip> list = null;
         Connection con = DBContext.getConnection();
@@ -118,20 +118,21 @@ public class PaySlipRepository {
         con.close();
         return paySlip;
     }
-    
+
     public void create(PaySlip paySlip) throws SQLException {
         Connection con = DBContext.getConnection();
-        PreparedStatement stm = con.prepareStatement("insert into PaySlip values(?, ?, ?, ?, ?, ?)");
-        stm.setFloat(1, paySlip.getSalary());
-        stm.setFloat(2, paySlip.getBonus());
-        stm.setFloat(3, paySlip.getMinus());
-        stm.setInt(4, paySlip.getStatus());
-        stm.setString(5, paySlip.getNote());
-        stm.setInt(6, paySlip.getUserID());
+        PreparedStatement stm = con.prepareStatement("insert into PaySlip values(?, ?, ?, ?, ?, ?,?)");
+        stm.setString(1, Utilities.sdfDate.format(paySlip.getCreateDate()));
+        stm.setFloat(2, paySlip.getSalary());
+        stm.setFloat(3, paySlip.getBonus());
+        stm.setFloat(4, paySlip.getMinus());
+        stm.setInt(5, paySlip.getStatus());
+        stm.setString(6, paySlip.getNote());
+        stm.setInt(7, paySlip.getUserID());
         stm.executeUpdate();
         con.close();
     }
-    
+
     public void update(PaySlip paySlip) throws SQLException {
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("update PaySlip set salary=?, bonus=?, minus=?,  status = ?, note = ?\n"
@@ -148,7 +149,16 @@ public class PaySlipRepository {
         stm.executeUpdate();
         con.close();
     }
-    
+
+    public void done(int status) throws SQLException {
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("update PaySlip set status = ? \n"
+                + "from PaySlip as p left join Users as u on p.userID = u.userID");
+        stm.setInt(1, status);
+        stm.executeUpdate();
+        con.close();
+    }
+
     public void delete(int paySlipID) throws SQLException {
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("delete from PaySlip where paySlipID = ? ");
@@ -156,5 +166,5 @@ public class PaySlipRepository {
         int count = stm.executeUpdate();
         con.close();
     }
-    
+
 }

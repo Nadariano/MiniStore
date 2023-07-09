@@ -10,10 +10,13 @@ import repositories.UserShiftRepository;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -73,6 +76,9 @@ public class UserShiftController extends HttpServlet {
                 case "delete":
                     delete(request, response);
                     break;
+                case "done":
+                    done(request, response);
+                    break;
             }
         }
     }
@@ -92,7 +98,7 @@ public class UserShiftController extends HttpServlet {
             request.setAttribute("list", list);
             //Add for BLOCK View
             Object selectedWeek = session.getAttribute("selectedWeek");
-            String week = Utilities.listStartEndDates().get(2);
+            String week = Utilities.listStartEndDates().get(5);
             if (selectedWeek != null) {
                 week = (String) selectedWeek;
             }
@@ -153,11 +159,15 @@ public class UserShiftController extends HttpServlet {
             request.setAttribute("usl", userList);
             int shiftID = 0;
             String date = null;
-            shiftID = Integer.parseInt(request.getParameter("shiftID"));
-            date = request.getParameter("date");
-            if ((shiftID != 0) && (date != null)) {
-                request.setAttribute("shiftID", shiftID);
-                request.setAttribute("date", date);
+            List<ShiftTime> shiftList = ShiftTimeRepository.select();
+            request.setAttribute("shiftList", shiftList);
+            if (request.getParameter("shiftID") != null && request.getParameter("date") != null) {
+                shiftID = Integer.parseInt(request.getParameter("shiftID"));
+                date = request.getParameter("date");
+                if ((shiftID != 0) && (date != null)) {
+                    request.setAttribute("shiftID", shiftID);
+                    request.setAttribute("date", date);
+                }
             }
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (Exception ex) {
@@ -184,10 +194,29 @@ public class UserShiftController extends HttpServlet {
                     usr.create(userShift);
                     response.sendRedirect(request.getContextPath() + "/userShift/listOf.do");
                 } catch (Exception ex) {
-                    ex.printStackTrace();
-                    request.setAttribute("message", ex.getMessage());
-                    request.setAttribute("action", "create");
-                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                    try {
+                        ex.printStackTrace();
+                        request.setAttribute("message", ex.getMessage());
+                        List<Users> userList = UsersRepository.select();
+                        request.setAttribute("usl", userList);
+                        List<ShiftTime> shiftList = ShiftTimeRepository.select();
+                        request.setAttribute("shiftList", shiftList);
+                        int shiftID = 0;
+                        String date = null;
+                        if (request.getParameter("shiftID") != null && request.getParameter("date") != null) {
+                            shiftID = Integer.parseInt(request.getParameter("shiftID"));
+                            date = request.getParameter("date");
+                            if ((shiftID != 0) && (date != null)) {
+                                request.setAttribute("shiftID", shiftID);
+                                request.setAttribute("date", date);
+                            }
+                        }
+                        request.setAttribute("controller", "userShift");
+                        request.setAttribute("action", "create");
+                        request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                    } catch (SQLException ex1) {
+                        Logger.getLogger(UserShiftController.class.getName()).log(Level.SEVERE, null, ex1);
+                    }
                 }
                 break;
             case "cancel":
@@ -200,10 +229,15 @@ public class UserShiftController extends HttpServlet {
         UserShiftRepository usr = new UserShiftRepository();
         try {
             int userID = Integer.parseInt(request.getParameter("userID"));
-            int shiftID = Integer.parseInt(request.getParameter("shiftID"));
-            Date date = sdfDate.parse(request.getParameter("date"));
+            int shiftID = Integer.parseInt(request.getParameter("oldShiftID"));
+            String strOldDate = request.getParameter("oldDate");
+            Date date = sdfDate.parse(strOldDate);
             UserShift userShift = usr.read(userID, shiftID, date);
+            List<ShiftTime> shiftList = ShiftTimeRepository.select();
             request.setAttribute("userShift", userShift);
+            request.setAttribute("oldDate", strOldDate);
+            request.setAttribute("oldShiftID", shiftID);
+            request.setAttribute("shiftList", shiftList);
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -222,20 +256,42 @@ public class UserShiftController extends HttpServlet {
             case "update":
                 try {
                     int userID = Integer.parseInt(request.getParameter("userID"));
-                    int shiftID = Integer.parseInt(request.getParameter("shiftID"));
-                    Date date = sdfDate.parse(request.getParameter("date"));
+                    int oldShiftID = Integer.parseInt(request.getParameter("oldShiftID"));
+                    int newShiftID = Integer.parseInt(request.getParameter("shiftID"));
+                    String oldDate = request.getParameter("oldDate");
+                    Date newDate = sdfDate.parse(request.getParameter("date"));
                     int status = Integer.parseInt(request.getParameter("status"));
                     String note = request.getParameter("note");
                     boolean isOT = Boolean.parseBoolean(request.getParameter("isOT"));
-                    UserShift userShift = new UserShift(userID, shiftID, date, status, note, isOT);
-                    usr.update(userShift);
+                    UserShift userShift = new UserShift(userID, newShiftID, newDate, status, note, isOT);
+                    usr.update(userShift, oldShiftID, oldDate);
                     response.sendRedirect(request.getContextPath() + "/userShift/listOf.do");
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     request.setAttribute("message", ex.getMessage());
-                    request.setAttribute("controller", "error");
-                    request.setAttribute("action", "error");
-                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//                    request.setAttribute("controller", "error");
+//                    request.setAttribute("action", "error");
+                    int userID = Integer.parseInt(request.getParameter("userID"));
+                    int shiftID = Integer.parseInt(request.getParameter("oldShiftID"));
+                    String strOldDate = request.getParameter("oldDate");
+                    UserShift userShift;
+                    try {
+                        Date date = sdfDate.parse(strOldDate);
+                        userShift = usr.read(userID, shiftID, date);
+                        List<ShiftTime> shiftList = ShiftTimeRepository.select();
+                        request.setAttribute("userShift", userShift);
+                        request.setAttribute("oldDate", strOldDate);
+                        request.setAttribute("oldShiftID", shiftID);
+                        request.setAttribute("shiftList", shiftList);
+                        request.setAttribute("controller", "userShift");
+                        request.setAttribute("action", "update");
+                        request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                    } catch (SQLException ex1) {
+                        Logger.getLogger(UserShiftController.class.getName()).log(Level.SEVERE, null, ex1);
+                    } catch (ParseException ex1) {
+                        Logger.getLogger(UserShiftController.class.getName()).log(Level.SEVERE, null, ex1);
+                    }
+
                 }
                 break;
             case "cancel":
@@ -255,6 +311,22 @@ public class UserShiftController extends HttpServlet {
 //            usd.delete1(userID);
             //Chuyen den trang /toy?op=list
             response.sendRedirect(request.getContextPath() + "/userShift/listOf.do");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            request.setAttribute("message", ex.getMessage());
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "error");
+            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+        }
+    }
+    protected void done(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        UserShiftRepository usr = new UserShiftRepository();
+        try {
+            int status = 2;
+            int lastMonth = Utilities.getLastMonth();
+            usr.done(status, lastMonth);
+            response.sendRedirect(request.getContextPath() + "/record/listOf.do");
         } catch (Exception ex) {
             ex.printStackTrace();
             request.setAttribute("message", ex.getMessage());

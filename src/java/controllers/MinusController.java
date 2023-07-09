@@ -104,9 +104,9 @@ public class MinusController extends HttpServlet {
                     int status = Integer.parseInt(request.getParameter("status"));
                     String note = request.getParameter("note");
                     int userID  = Integer.parseInt(request.getParameter("userID"));
-                  Minus minus = new Minus(lateTime, reduction, fine, description, status, note, userID);
-                    mr.create(minus);
-                    request.setAttribute("minus", minus);
+//                  Minus minus = new Minus(lateTime, reduction, fine, description, status, note, userID);
+//                    mr.create(minus);
+//                    request.setAttribute("minus", minus);
                     response.sendRedirect(request.getContextPath() + "/minus/listOf.do");
                 } catch (Exception ex) {
                     //Hiện lại create form để nhập lại dữ liệu

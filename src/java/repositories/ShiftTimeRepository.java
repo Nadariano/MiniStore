@@ -78,6 +78,9 @@ public class ShiftTimeRepository {
         stm.setString(1, shiftTime.getShiftName());
         stm.setString(2, sdf.format(shiftTime.getTimeStart()));
         stm.setString(3, sdf.format(shiftTime.getTimeEnd()));
+
+//        stm.setString(2, Utilities.sdfTime.format(shiftTime.getTimeStart()));
+//        stm.setString(3, Utilities.sdfTime.format(shiftTime.getTimeEnd()));
         stm.setFloat(4, shiftTime.getCoeShift());
         stm.setFloat(5, shiftTime.getCoeOT());
         stm.setFloat(6, shiftTime.getCoeDayOff());
@@ -92,9 +95,11 @@ public class ShiftTimeRepository {
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("update ShiftTime set shiftName=?, timeStart=?, timeEnd=?, coeShift=?, coeOT=?, coeDayOff=?, wage=?, status = ?, note = ? where shiftID = ?");
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-         stm.setString(1, shiftTime.getShiftName());
+        stm.setString(1, shiftTime.getShiftName());
         stm.setString(2, sdf.format(shiftTime.getTimeStart()));
         stm.setString(3, sdf.format(shiftTime.getTimeEnd()));
+//        stm.setString(2, Utilities.sdfTime.format(shiftTime.getTimeStart()));
+//        stm.setString(3, Utilities.sdfTime.format(shiftTime.getTimeEnd()));
         stm.setFloat(4, shiftTime.getCoeShift());
         stm.setFloat(5, shiftTime.getCoeOT());
         stm.setFloat(6, shiftTime.getCoeDayOff());

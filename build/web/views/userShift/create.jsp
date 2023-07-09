@@ -3,6 +3,7 @@
     Created on : Jun 9, 2023, 3:51:31 PM
     Author     : Dell
 --%>
+<%@page import="java.time.LocalDate"%>
 <!DOCTYPE html>
 <html lang="en">
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,6 +14,11 @@
     </head>
 
     <body>
+        <!--Cannot create the date earlier than today-->
+        <%
+            LocalDate minDate = LocalDate.now().plusDays(1);
+        %>
+        <c:set var="minDate" value="<%=minDate%>"/>
         <c:choose>
             <c:when test="${Account.roleName.equals('MANAGER')}">
                 <!-- Preloader -->
@@ -42,28 +48,36 @@
                                                                                     <input type="number" placeholder="User ID" name="userID" value="${userShift.userID}"
                                                                                            class="form-control form-control-line" />
                                                                                 </div>-->
-                                        <select name="userID">
-                                            <c:forEach var="user" items="${usl}" varStatus="loop">
-                                                <c:if test="${!user.roleName.equals('MANAGER') && !user.roleName.equals('ADMIN')}">
-                                                    <option name="userID" value="${user.userID}">${user.fullName} (${user.roleName})</option>
-                                                </c:if>
+                                        <div class="col-md-12">
+                                            <select name="userID" class="form-control">
+                                                <c:forEach var="user" items="${usl}" varStatus="loop">
+                                                    <c:if test="${!user.roleName.equals('MANAGER') && !user.roleName.equals('ADMIN')}">
+                                                        <option name="userID" value="${user.userID}">${user.fullName} (${user.roleName})</option>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
 
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-12">Shift</label>
+                                        <!--                                        <div class="col-md-12">
+                                                                                    <input type="number" placeholder="Shift ID" name="shiftID" value="${shiftID}"
+                                                                                           class="form-control form-control-line" />
+                                                                                </div>-->
+                                        <select name="shiftID" class="form-control">
+                                            <c:forEach var="shift" items="${shiftList}" varStatus="loop">
+                                                <option value="${shift.shiftID}" ${shift.shiftID==shiftID ? "selected" : ""}>${shift.shiftID}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-12">Shift</label>
-                                        <div class="col-md-12">
-                                            <input type="number" placeholder="Shift ID" name="shiftID" value="${shiftID}"
-                                                   class="form-control form-control-line" />
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
                                         <label class="col-md-12">Date</label>
                                         <div class="col-md-12">
-                                            <input type="date" placeholder="Date" name="date" value="${date}"
+                                            <input type="date" placeholder="Date" name="date" value="${date}" min="${minDate}"
                                                    class="form-control form-control-line" />
                                         </div>
                                     </div>         
@@ -79,9 +93,9 @@
 
                                     <div class="form-group">
                                         <label class="col-md-12">Note</label>
+
                                         <div class="col-md-12">
-                                            <input type="text" placeholder="Note" name="note" value="${userShift.note}"
-                                                   class="form-control form-control-line" />
+                                            <textarea  type="text" placeholder="Note" name="note"  style=" max-height: 226px; min-width: 100%; min-height: 50px;"value="${userShift.note}"   class="form-control form-control-line" ></textarea>
                                         </div>
                                     </div>
 
@@ -101,7 +115,7 @@
                                         </div>
                                     </div>
                                 </form>
-                                <h2 style=" color: red">${message}</h2>
+                                        <h3 style="color: red">${message}</h3>
                             </div>
                         </div>
                         <div class="col-md-2 col-12"></div>

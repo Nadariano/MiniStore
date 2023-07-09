@@ -24,29 +24,35 @@
                         <!-- /.col-lg-12 -->
                     </div>
 
-                    <form action="<c:url value='/report/search.do'/>">
-                        <div style="display: flex; align-items: center; justify-content: center;">
-                            <select id="searchType" name="searchType" onchange="changeSearchType()" style="margin-right: 8px;">
-                                <option value="date">Search By Date</option>
-                                <option value="name">Search By Name</option>
-                            </select>
+                    <form action="<c:url value='/report/search.do'/>" class="form-inline " style="display: flex; align-items: center; justify-content: center;">
+                        <div class="" style="display: flex;align-items: center; justify-content: center;">
+                            <div class="form-group badge bg-info text-uppercase text-white">
+                                <label class="text-uppercase" for="searchType">Search By:</label>
+                                <select id="searchType" name="searchType" onchange="changeSearchType()" class="form-control btn-rounded ">
+                                    <option value="date">Date</option>
+                                    <option value="name">Name</option>
+                                </select>
+                            </div>
 
-                            <div id="dateInputs">
-                                <select name="day" style="margin-right: 8px;">
+                            <div id="dateInputs" class="form-group  badge bg-info text-uppercase text-white ">
+                                <label class="text-uppercase" for="day">Day:</label>
+                                <select name="day" class="form-control btn-rounded ">
                                     <option value="">Day</option>
                                     <% for (int i = 1; i <= 31; i++) {%>
                                     <option value="<%= i%>"><%= i%></option>
                                     <% } %>
                                 </select>
 
-                                <select name="month" style="margin-right: 8px;">
+                                <label class="text-uppercase" for="month">Month:</label>
+                                <select name="month" class="form-control btn-rounded">
                                     <option value="">Month</option>
                                     <% for (int i = 1; i <= 12; i++) {%>
                                     <option value="<%= i%>"><%= i%></option>
                                     <% } %>
                                 </select>
 
-                                <select name="year" style="margin-right: 8px;">
+                                <label class="text-uppercase" for="year">Year:</label>
+                                <select name="year" class="form-control btn-rounded">
                                     <option value="">Year</option>
                                     <% for (int i = 1900; i <= 2023; i++) {%>
                                     <option value="<%= i%>"><%= i%></option>
@@ -54,33 +60,28 @@
                                 </select>
                             </div>
 
-                            <div id="nameInputs" style="display: none;">
-                                <label for="fullName" style="margin-right: 8px;">Name:</label>
-                                <input type="text" id="fullName" name="fullName" style="margin-right: 8px;">
+                            <div id="nameInputs" style="display: none;" class="form-group badge bg-info text-uppercase text-white ">
+                                <label class="text-uppercase" for="fullName">Name:</label>
+                                <input type="text" id="fullName" name="fullName" class="form-control btn-rounded">
                             </div>
 
-                            <button type="submit" class="btn btn-primary" name="op" value="search" style="margin-right: 8px;">Search</button>
+                            <div class="badge bg-info">
+                                <button type="submit" class="form-control btn btn-rounded " name="op" value="search" title="Search">
+                                    <i class="bi bi-search text-dark text-uppercase"></i>
+                                </button>
+                            </div>
                         </div>
                     </form>
 
-                    <script>
-                        function changeSearchType() {
-                            var searchType = document.getElementById("searchType").value;
-                            if (searchType === "date") {
-                                document.getElementById("dateInputs").style.display = "block";
-                                document.getElementById("nameInputs").style.display = "none";
-                            } else {
-                                document.getElementById("dateInputs").style.display = "none";
-                                document.getElementById("nameInputs").style.display = "block";
-                            }
-                        }
-                    </script>
+
+
+
                     <!-- /row -->
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="white-box">
+                            <div class="white-box  center-block">
                                 <div class="table-responsive">
-                                    <table class="table" id="example">
+                                    <table class="table  table-striped " id="example">
 
                                         <thead>
                                             <tr>
@@ -114,20 +115,32 @@
                                                     <td>${report.requestSoonTime}</td>
                                                     <td>${report.requestLateTime}</td>
                                                     <td>${report.shiftID}</td>
-                                                    <c:if test="${report.statusText=='Rejected'}">
-                                                        <td style="background-color:  #ac2925; color: whitesmoke " >${report.statusText}</td>
-                                                    </c:if>
-                                                    <c:if test="${report.statusText=='Approved'}">
-                                                        <td style="background-color: #398439; color: whitesmoke">${report.statusText}</td>
-                                                    </c:if>
-                                                    <c:if test="${report.statusText=='Processing'}">
-                                                        <td style="background-color: grey; color: whitesmoke">${report.statusText}</td>
-                                                    </c:if>    
-                                                    <td>${report.note}</td>
+                                                    <c:choose>
+                                                        <c:when test="${report.statusText=='Rejected'}">
+                                                            <td><span class="badge bg-danger fs-6 px-1 py-0">${report.statusText}</span></td>
+                                                            </c:when>
+                                                            <c:when test="${report.statusText=='Approved'}">
+                                                            <td><span class="badge bg-success fs-6 px-1 py-0">${report.statusText}</span></td>
+                                                            </c:when>
+                                                            <c:when test="${report.statusText=='Processing'}">
+                                                            <td><span class="badge bg-warning text-dark fs-6 px-1 py-0">${report.statusText}</span></td>
+                                                            </c:when>
+                                                        </c:choose>
+
 
                                                     <td>
-                                                        <a href="<c:url value="/report/update.do?reportID=${report.reportID}"  />" class="btn btn-sm btn-primary">Update</a>
-                                                        <a href="<c:url value="/report/delete.do?reportID=${report.reportID}" /> " onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-danger">Delete</a>
+                                                        <a tabindex="0" class="btn btn-sm btn-circle btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${report.note}" data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip"><div class="arrow"></div><div class="popover-body text-white p-3"><span class="d-block">${report.note}</span></div></div>'>
+                                                            <i class="bi bi-eye"></i>
+                                                        </a>
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="<c:url value="/report/update.do?reportID=${report.reportID}"  />" class="btn btn-sm btn-github btn-rounded" title="Update">
+                                                            <i class="bi bi-pencil-square"></i>
+                                                        </a>
+                                                        <a href="<c:url value="/report/delete.do?reportID=${report.reportID}" /> " onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-googleplus btn-rounded" title="Delete">
+                                                            <i class="bi bi-trash"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
