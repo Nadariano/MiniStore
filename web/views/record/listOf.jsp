@@ -30,7 +30,10 @@
                             <h4 class="page-title">Record</h4>
                         </div>
                         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-                            <a href="<c:url value="/record/create.do"/>" class="btn btn-sm btn-success">Create Record</a>
+                            <a href="<c:url value="/record/create.do"/>" class="btn btn-lg btn-success btn-rounded" title="Create a new record">
+                                <i class="bi bi-card-text"></i> 
+                            </a>
+
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
@@ -39,7 +42,7 @@
                         <div class="col-sm-12">
                             <div class="white-box">
                                 <div class="table-responsive">
-                                    <table class="table" id="example">
+                                    <table class="table table-striped" id="example">
 
                                         <thead>
                                             <tr >
