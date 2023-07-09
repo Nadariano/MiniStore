@@ -43,10 +43,10 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /row -->
-            <div class=" row bg-white">
-                <div id="myTab" class="pull-left ">
-                    <a class="" href="#listView" data-toggle="tab">List View |</a>
-                    <a class="" href="#blockView" data-toggle="tab">Block View</a>
+            <div class=" row ">
+                <div id="myTab" class="pull-left badge bg-white">
+                    <a class="btn btn-rounded btn-flickr" href="#listView" data-toggle="tab">List View </a>
+                    <a class="btn btn-rounded btn-linkedin" href="#blockView" data-toggle="tab">Block View</a>
                 </div>
             </div>
             <div class="tab-content">
@@ -100,34 +100,35 @@
 
                                                     </c:if>
                                                     <c:if test="${userShift.status == 2}">
-                                                        <td class="btn btn-info">Finished <i class="bi bi-cloud-check"></i></td>
+                                                        <td class="badge badge-info">Finished <i class="bi bi-cloud-check"></i></td>
                                                         </c:if>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
-                                    <a href="<c:url value="/userShift/done.do"/>" onclick="return confirm('Do you really want to finish?');" class="btn btn-sm btn-primary">Done</a>
+                                    <a href="<c:url value="/userShift/done.do"/>" onclick="return confirm('Do you really want to finish?');" class="btn btn-dropbox btn-rounded"><i class="bi bi-check-circle"></i> Done</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+
                 <div class="tab-pane active" id="blockView">
-                    <div class="white-box">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="table-responsive">
-                                    <table class="table-striped schedule">
+                    <div class="white-box ">
+                        <div class="row ">
+                            <div class="col-sm-12 ">
+                                <div class="table-responsive  center-block overlay-box overflow">
+                                    <table class="table-striped schedule  font-bold">
 
                                         <tr>
                                             <th>
                                                 <div class="dropdown">
-                                                    <button class="btn btn-primary dropdown-toggle" name="subOp" type="button" data-toggle="dropdown">Select week:
+                                                    <button class="btn btn-tumblr dropdown-toggle" name="subOp" type="button" data-toggle="dropdown">Select week:
                                                         <span class="caret"></span></button>
-                                                    <ul class="dropdown-menu">
-                                                        <c:forEach var="listItem" items="${weeks}" varStatus="loop">
-                                                            <li class="col-sm-12 ${listItem==weeks[5] ? 'currWeek':''}"><a href="<c:url value="/userShift/selectWeek.do?op=filter&week=${listItem}"/>" ${listItem==weeks[5] ? 'selected':''}>${listItem}</a></li>
+                                                    <ul class="dropdown-menu text-uppercase">
+                                                        <c:forEach var="listItem" items="${weeks}" varStatus="loop" >
+                                                            <li class="col-sm-12  ${listItem==weeks[5] ? 'currWeek':''}"><a href="<c:url value="/userShift/selectWeek.do?op=filter&week=${listItem}"/>" ${listItem==weeks[5] ? 'selected':''}>${listItem}</a></li>
                                                             </c:forEach>
                                                     </ul>
                                                 </div>     
@@ -204,13 +205,15 @@
                             </div>
                         </div>  
                     </div>
-                    <%--
-                                </c:when>
-                                <c:otherwise>
-                                    <jsp:forward page="/error/error.do" />
-                                </c:otherwise>
-                            </c:choose>
-                    --%>
-                    </body>
+                </div>
+            </div>
+            <%--
+                        </c:when>
+                        <c:otherwise>
+                            <jsp:forward page="/error/error.do" />
+                        </c:otherwise>
+                    </c:choose>
+            --%>
+    </body>
 
-                    </html>
+</html>
