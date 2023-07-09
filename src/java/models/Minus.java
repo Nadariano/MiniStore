@@ -11,7 +11,7 @@ package models;
  */
 public class Minus {
     private int minusID;
-    private int lateTime;
+    private float lateTime;
     private float reduction;
     private float fine;
     private String description;
@@ -23,7 +23,7 @@ public class Minus {
     public Minus() {
     }
 
-    public Minus(int lateTime, float reduction, float fine, String description, int status, String note, int userID) {
+    public Minus(float lateTime, float reduction, float fine, String description, int status, String note, int userID) {
         this.lateTime = lateTime;
         this.reduction = reduction;
         this.fine = fine;
@@ -33,7 +33,9 @@ public class Minus {
         this.userID = userID;
     }
 
-    public Minus(int minusID, int lateTime, float reduction, float fine, String description, int status, String note, int userID) {
+
+
+    public Minus(int minusID, float lateTime, float reduction, float fine, String description, int status, String note, int userID) {
         this.minusID = minusID;
         this.lateTime = lateTime;
         this.reduction = reduction;
@@ -44,7 +46,7 @@ public class Minus {
         this.userID = userID;
     }
 
-    public Minus(int minusID, int lateTime, float reduction, float fine, String description, int status, String note, int userID, String fullName) {
+    public Minus(int minusID, float lateTime, float reduction, float fine, String description, int status, String note, int userID, String fullName) {
         this.minusID = minusID;
         this.lateTime = lateTime;
         this.reduction = reduction;
@@ -60,15 +62,34 @@ public class Minus {
         return minusID;
     }
 
+    public Minus(float lateTime, float reduction, String description, int status, String note, int userID) {
+        this.lateTime = lateTime;
+        this.reduction = reduction;
+        this.description = description;
+        this.status = status;
+        this.note = note;
+        this.userID = userID;
+    }
+
+    public Minus(float lateTime, float reduction, String description, int status, String note, int userID, String fullName) {
+        this.lateTime = lateTime;
+        this.reduction = reduction;
+        this.description = description;
+        this.status = status;
+        this.note = note;
+        this.userID = userID;
+        this.fullName = fullName;
+    }
+
     public void setMinusID(int minusID) {
         this.minusID = minusID;
     }
 
-    public int getLateTime() {
+    public float getLateTime() {
         return lateTime;
     }
 
-    public void setLateTime(int lateTime) {
+    public void setLateTime(float lateTime) {
         this.lateTime = lateTime;
     }
 

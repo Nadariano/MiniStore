@@ -5,6 +5,8 @@
  */
 package models;
 
+import java.util.Date;
+
 /**
  *
  * @author Dell
@@ -17,6 +19,7 @@ public class PaySlip {
     private float salary;
     private float bonus;
     private float minus;
+    private Date createDate;
     private int status;
     private String statusText3;
     private String confirm;
@@ -24,6 +27,16 @@ public class PaySlip {
     public PaySlip() {
     }
 
+    public PaySlip(int userID, float salary, float bonus, float minus, int status, String note) {
+        this.userID = userID;
+        this.salary = salary;
+        this.bonus = bonus;
+        this.minus = minus;
+        this.status = status;
+        this.note = note;
+    }
+
+    
     public PaySlip(int paySlipID, int userID, float salary, float bonus, float minus, int status, String note) {
         this.paySlipID = paySlipID;
         this.userID = userID;
@@ -46,14 +59,17 @@ public class PaySlip {
         this.note = note;
     }
 
-    public PaySlip(int userID, float salary, float bonus, float minus, int status, String note) {
+    public PaySlip(int userID, float salary, float bonus, float minus, Date createDate, int status, String note) {
         this.userID = userID;
         this.salary = salary;
         this.bonus = bonus;
         this.minus = minus;
+        this.createDate = createDate;
         this.status = status;
         this.note = note;
     }
+
+
 
     public PaySlip(int paySlipID, int userID, String fullName, float salary, float bonus, float minus, int status, String statusText3, String confirm, String note) {
         this.paySlipID = paySlipID;
@@ -94,6 +110,15 @@ public class PaySlip {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
 
     public float getSalary() {
         return salary;
@@ -141,6 +166,19 @@ public class PaySlip {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getConfirm() {
+        return confirm;
+    }
+
+    public void setConfirm(String confirm) {
+        this.confirm = confirm;
+    }
+
+    @Override
+    public String toString() {
+        return "PaySlip{" + "paySlipID=" + paySlipID + ", userID=" + userID + ", fullName=" + fullName + ", salary=" + salary + ", bonus=" + bonus + ", minus=" + minus + ", createDate=" + createDate + ", status=" + status + ", statusText3=" + statusText3 + ", confirm=" + confirm + ", note=" + note + '}';
     }
 
 
