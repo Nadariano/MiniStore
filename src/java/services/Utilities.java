@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -381,7 +382,7 @@ public class Utilities {
     public static List<String> listStartEndDates() {
         List<String> listStartEndDates = new ArrayList<>();
         LocalDate now = LocalDate.now();
-        for (int i = -2; i < 5; i++) {
+        for (int i = -5; i < 5; i++) {
             List<LocalDate> startEndDates = startEndDates(now.plusDays(i * 7));
             LocalDate lst = startEndDates.get(0);
             LocalDate led = startEndDates.get(1);
@@ -393,5 +394,12 @@ public class Utilities {
             listStartEndDates.add(sed);
         }
         return listStartEndDates;
+    }
+    
+    public static int getLastMonth(){
+        LocalDate now = LocalDate.now();
+        Month lastMonth = now.minusMonths(1).getMonth();
+        int lastMonthNum= lastMonth.getValue();
+        return lastMonthNum;
     }
 }

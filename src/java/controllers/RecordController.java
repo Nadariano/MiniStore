@@ -133,8 +133,8 @@ public class RecordController extends HttpServlet {
                         }
                     }
                 }else {
-                    request.setAttribute("message", "Please DONE UserShift before!!!");
-                    request.getRequestDispatcher("/record/listOf.do").forward(request, response);
+//                    request.setAttribute("message", "Please DONE UserShift before!!!");
+//                    request.getRequestDispatcher("/record/listOf.do").forward(request, response);
                 }
 
             }
