@@ -27,7 +27,7 @@
                             <h4 class="page-title">List of Pay Slip</h4>
                         </div>
                         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-                            <a href="<c:url value="/paySlip/create.do"/>" class="btn btn-sm btn-success">Add a new user</a>
+                            <a href="<c:url value="/paySlip/create.do"/>" class="btn btn-sm btn-success">Add PaySlip</a>
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
@@ -48,39 +48,41 @@
                                                 <th>Minus Money</th>
                                                 <th>Status</th>
                                                 <th>Note</th>
+                                                <th>Total</th>
                                                 <th>Operations</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <c:forEach var="paySlip" items="${list}" varStatus="loop">
                                                 <tr>
-<!--                                                    <td>
-                                                        <input disabled type="number" id="paySlipID"  value="${paySlip.paySlipID}">
-                                                        <input type="hidden" name="paySlipID" value="${paySlip.paySlipID}">
-                                                    </td>   
-                                                    <td>
-                                                        <input disabled type="number" id="userID"  value="${paySlip.userID}">
-                                                        <input type="hidden" name="userID" value="${paySlip.userID}">
-                                                    </td>
-                                                    <td>
-                                                        <input disabled type="text" id="fullName"  value="${paySlip.fullName}">
-                                                        <input type="hidden" name="fullName" value="${paySlip.fullName}">
-                                                    </td>
-                                                    <td>
-                                                        <input type="number" id="salary" name="salary" value="${paySlip.salary}"/>
-                                                    </td>
-                                                    <td>
-                                                        <input type="number" id="bonus" name="bonus" value="${paySlip.bonus}"/>
-                                                    </td>
-                                                    <td>
-                                                        <input type="number" id="minus" name="minus" value="${paySlip.minus}"/>
-                                                    </td>
-                                                    <td>
-                                                        <input type="number" name="status" value="${paySlip.status}">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" id="note" name="note" value="${paySlip.note}"/>
-                                                    </td>
+                                                    <!--                                                    <td>
+                                                                                                            <input disabled type="number" id="paySlipID"  value="${paySlip.paySlipID}">
+                                                                                                            <input type="hidden" name="paySlipID" value="${paySlip.paySlipID}">
+                                                                                                        </td>   
+                                                                                                        <td>
+                                                                                                            <input disabled type="number" id="userID"  value="${paySlip.userID}">
+                                                                                                            <input type="hidden" name="userID" value="${paySlip.userID}">
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <input disabled type="text" id="fullName"  value="${paySlip.fullName}">
+                                                                                                            <input type="hidden" name="fullName" value="${paySlip.fullName}">
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <input type="number" id="salary" name="salary" value="${paySlip.salary}"/>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <input type="number" id="bonus" name="bonus" value="${paySlip.bonus}"/>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <input type="number" id="minus" name="minus" value="${paySlip.minus}"/>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <input type="number" name="status" value="${paySlip.status}">
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <input type="text" id="note" name="note" value="${paySlip.note}"/>
+                                                                                                        </td>
                                                     -->
                                                     <td>${paySlip.paySlipID}</td>
                                                     <td>${paySlip.userID}</td>
@@ -90,14 +92,19 @@
                                                     <td>${paySlip.minus}</td>
                                                     <td>${paySlip.statusText3}</td>
                                                     <td>${paySlip.note}</td>
-                                                    <td>
-                                                        <a href="<c:url value="/paySlip/update.do?paySlipID=${paySlip.paySlipID}&userID=${paySlip.userID}"/>" class="btn btn-sm btn-primary" ><i class="bi bi-pencil-square"></i>Update</a>
-                                                        <p> </p>
-                                                        <a href="<c:url value="/paySlip/delete.do?paySlipID=${paySlip.paySlipID}"/>" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-warning"><i class="bi bi-trash3"></i>Delete</a>
-                                                    </td>       
+                                                    <td>${paySlip.salary + paySlip.bonus - paySlip.minus}</td>
+                                                    <c:if test="${paySlip.status!=2}">
+                                                    <td> 
+                                                            <a href="<c:url value="/paySlip/update.do?paySlipID=${paySlip.paySlipID}&userID=${paySlip.userID}"/>" class="btn btn-sm btn-primary" ><i class="bi bi-pencil-square"></i>Update</a>
+                                                    </td>
+                                                    </c:if>
+                                                    <c:if test="${paySlip.status == 2}">
+                                                        <td class="btn btn-info">Finished <i class="bi bi-cloud-check"></i></td>
+                                                        </c:if>
                                                 </tr>
-                                        </c:forEach>
+                                            </c:forEach>
                                         </tbody>
+                                        <a href="<c:url value="/paySlip/done.do"/>" onclick="return confirm('Do you want to finish ?');" class="btn btn-sm btn-primary">Done</a>
                                     </table>
                                 </div>
                             </div>

@@ -63,10 +63,15 @@
 
                                     <div class="form-group">
                                         <label class="col-md-12">Shift</label>
-                                        <div class="col-md-12">
-                                            <input type="number" placeholder="Shift ID" name="shiftID" value="${shiftID}"
-                                                   class="form-control form-control-line" />
-                                        </div>
+                                        <!--                                        <div class="col-md-12">
+                                                                                    <input type="number" placeholder="Shift ID" name="shiftID" value="${shiftID}"
+                                                                                           class="form-control form-control-line" />
+                                                                                </div>-->
+                                        <select name="shiftID" class="form-control">
+                                            <c:forEach var="shift" items="${shiftList}" varStatus="loop">
+                                                <option value="${shift.shiftID}" ${shift.shiftID==shiftID ? "selected" : ""}>${shift.shiftID}</option>
+                                            </c:forEach>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
@@ -110,6 +115,7 @@
                                         </div>
                                     </div>
                                 </form>
+                                        <h3 style="color: red">${message}</h3>
                             </div>
                         </div>
                         <div class="col-md-2 col-12"></div>

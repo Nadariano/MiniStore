@@ -65,11 +65,11 @@ public class Utilities {
         return nextDay;
     }
 
-    public static Report requestTime(Date date, int userID) throws SQLException {
+    public static Report requestTime(Date date, int userID, int shiftID) throws SQLException {
         ReportRepository rr = new ReportRepository();
         Report report = null;
-        if (rr.readDate(date, userID) != null) {
-            report = rr.readDate(date, userID);
+        if (rr.readDate(date, userID,shiftID) != null) {
+            report = rr.readDate(date, userID, shiftID);
         }
         return report;
     }
@@ -253,7 +253,7 @@ public class Utilities {
                 statusText = "Not Available";
                 break;
             default:
-                statusText = "Unknown";
+                statusText = "Done";
         }
 
         return statusText;
@@ -270,7 +270,7 @@ public class Utilities {
                 statusText = "Done";
                 break;
             default:
-                statusText = "Unknown";
+                statusText = "Done";
         }
 
         return statusText;

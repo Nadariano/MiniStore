@@ -136,6 +136,7 @@
 
                                                     <td>
                                                         <a href="<c:url value="/report/update.do?reportID=${report.reportID}"  />" class="btn btn-sm btn-primary">Update</a>
+                                                        <p></p>
                                                         <a href="<c:url value="/report/delete.do?reportID=${report.reportID}" /> " onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-danger">Delete</a>
                                                     </td>
                                                 </tr>

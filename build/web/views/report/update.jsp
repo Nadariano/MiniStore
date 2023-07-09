@@ -118,7 +118,7 @@
 
                             <div class="form-group">
                                 <label class="col-md-12">Status:</label>
-                                <select class="form-control" type="dropdown" id="statusText" name="statusText" value="${report.statusText}" >
+                                <select type="dropdown" id="statusText" name="statusText" value="${report.statusText}" >
                                     <c:if test="${report.statusText.equals('Processing')}">
                                         <option>${report.statusText}</option>
                                         <option> Approved </option>
@@ -135,13 +135,17 @@
                                         <option> Processing </option>
                                     </c:if>    
                                 </select>
+    <!--                                <select id="status" name="status" value="${report.status}" >
+                                        <option value="0">Approved</option>
+                                        <option value="1">Processing</option>
+                                        <option value="2">Rejected</option>
+                                    </select>-->
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-12">Note:</label>
-                               
                                 <div class="col-md-12">
-                                    <textarea type="text" maxlength="300" class="form-control form-control-line" placeholder="Note(Maximum: 300 characters)"  id="note"  name="note"  style=" max-height: 226px; min-width: 100%; min-height: 50px;"value="${report.note}"></textarea>
+                                    <textarea  maxlength="300" style="resize: vertical;width: 500px" placeholder="Note(Maximum: 300 characters)"  id="note" name="note">${report.note}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
