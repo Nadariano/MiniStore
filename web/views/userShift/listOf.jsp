@@ -86,16 +86,20 @@
                                                     <td>${userShift.statusText2}</td>
                                                     <td>${userShift.note}</td>
                                                     <td>${userShift.otText}</td>
-                                                    <c:if test="${Account.roleName.equals('MANAGER') && (userShift.date>nowDate)}">
+                                                    <c:if test="${Account.roleName.equals('MANAGER') && (userShift.date>nowDate) && userShift.status != 2}">
                                                         <td>
                                                             <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&oldShiftID=${userShift.shiftID}&oldDate=${userShift.date}"/>" class="btn btn-sm btn-primary" ><i class="bi bi-pencil-square"></i>Update</a>
                                                             <a href="<c:url value="/userShift/delete.do?userID=${userShift.userID}&shiftID=${userShift.shiftID}&date=${userShift.date} "/>" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-warning"><i class="bi bi-trash3"></i>Delete</a>
                                                         </td>
                                                     </c:if>
+                                                    <c:if test="${userShift.status == 2}">
+                                                        <td class="btn btn-info">Finished <i class="bi bi-cloud-check"></i></td>
+                                                        </c:if>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
+                                     <a href="<c:url value="/userShift/done.do"/>" onclick="return confirm('Do you really want to finish?');" class="btn btn-sm btn-primary">Done</a>
                                 </div>
                             </div>
                         </div>

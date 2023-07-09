@@ -47,8 +47,12 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Shift Name</label>
                                         <div class="col-md-12">
-                                            <input type="text" placeholder="Shift Name" name="shiftName" value="${shiftTime.shiftName}"
-                                                   class="form-control form-control-line" />
+<!--                                            <input type="text" placeholder="Shift Name" name="shiftName" value="${shiftTime.shiftName}"
+                                                   class="form-control form-control-line" />-->
+                                            <select name="shiftName" class="form-control form-control-line" value="${shiftTime.shiftName}" >
+                                                <option value="Day Shift">Day Shift</option>
+                                                <option value="Night Shift">Night Shift</option> 
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">

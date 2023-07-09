@@ -108,25 +108,25 @@ public class ReportRepository {
         stm.setString(2, date);
         stm.setString(3, description);
         SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm");
-        
-        if (plannedDate.equals("")){
-        stm.setString(4, null);
-        }else {
-        stm.setString(4, sdfDate.format(sdfDate.parse(plannedDate)));
-        }
-        
-        if (requestSoonTime.equals("")) {
-        stm.setString(5, null);
-        }else {
-        stm.setString(5, sdf1.format(sdf1.parse(requestSoonTime)));
-        }
-        
-        if (requestLateTime.equals("")) {
-        stm.setString(6, null);
+
+        if (plannedDate.equals("")) {
+            stm.setString(4, null);
         } else {
-         stm.setString(6, sdf1.format(sdf1.parse(requestLateTime)));
+            stm.setString(4, sdfDate.format(sdfDate.parse(plannedDate)));
         }
-       
+
+        if (requestSoonTime.equals("")) {
+            stm.setString(5, null);
+        } else {
+            stm.setString(5, sdf1.format(sdf1.parse(requestSoonTime)));
+        }
+
+        if (requestLateTime.equals("")) {
+            stm.setString(6, null);
+        } else {
+            stm.setString(6, sdf1.format(sdf1.parse(requestLateTime)));
+        }
+
         stm.setInt(7, status);
         stm.setString(8, note);
         stm.setInt(9, userID);
@@ -172,17 +172,23 @@ public class ReportRepository {
         return report;
     }
 
-    public Report readDate(Date date, int userID) throws SQLException {
+    public Report readDate(Date date, int userID, int shiftID) throws SQLException {
         Report report = null;
         //Tạo connection để kết nối vào DBMS
         Connection con = DBContext.getConnection();
         //Tạo đối tượng PreparedStatement
-        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, report.status, "
-                + "report.note, report.userID, users.fullName, report.shiftID "
-                + "from report join users on report.userID = users.userID "
-                + "where plannedDate = ? and report.status = 0 and report.userID = ?");
-        stm.setString(1, Utilities.sdfDateTime.format(date));
+//        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate,requestSoonTime, requestLateTime, report.status, report.note, report.userID, users.fullName, reportType.typeName, report.shiftID "
+//               
+//                + "from report join users on report.userID = users.userID "
+//                + "where plannedDate = ? and report.status = 0 and report.userID = ? and report.shiftID = ? ");
+        PreparedStatement stm = con.prepareStatement("select r.reportID, r.reportTitle, r.createDate, r.description, r.plannedDate, r.requestSoonTime, r.requestLateTime, r.status, r.note, r.userID, u.fullName, r.shiftID, r.typeID, rt.typeName\n"
+                + "from Report as r join Users as u on r.userID = u.userID\n"
+                + "join ShiftTime as st on r.shiftID = st.shiftID \n"
+                + "join ReportType as rt on r.typeID = rt.typeID\n"
+                + "where r.plannedDate = ? and r.userID= ? and r.shiftID = ?");
+        stm.setString(1, Utilities.sdfDate.format(date));
         stm.setInt(2, userID);
+        stm.setInt(3, shiftID);
         //Thực thi lệnh sql
         ResultSet rs = stm.executeQuery();
         //Load dữ liệu vào đối tượng toy nếu có
@@ -192,10 +198,14 @@ public class ReportRepository {
             report.setReportTitle(rs.getString("reportTitle"));
             report.setCreateDate(rs.getDate("createDate"));
             report.setDescription(rs.getString("description"));
+            report.setPlannedDate(rs.getDate("plannedDate"));
+            report.setRequestSoonTime(rs.getTime("requestSoonTime"));
+            report.setRequestLateTime(rs.getTime("requestLateTime"));
             report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
             report.setNote(rs.getString("note"));
             report.setUserID(rs.getInt("userID"));
             report.setFullName(rs.getString("fullName"));
+            report.setTypeName(rs.getString("typeName"));
             report.setShiftID(rs.getInt("shiftID"));
         }
         //Đóng kết nối

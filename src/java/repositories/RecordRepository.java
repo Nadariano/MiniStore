@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -49,10 +50,55 @@ public class RecordRepository {
         return list;
     }
 
+    public List<Record> select1() throws SQLException, ParseException {
+        List<Record> list = null;
+        //Tạo connection để kết nối vào DBMS
+        Connection con = DBContext.getConnection();
+        //Tạo đối tượng statement
+        Statement stm = con.createStatement();
+        //Thực thi lệnh SELECT
+        ResultSet rs = stm.executeQuery("select rc.recordID, rc.date, rc.inTime, rc.outTime, rc.userID, u.fullName, rc.shiftID\n"
+                + "from Record as rc left join Users as u on rc.userID = u.userID");
+        list = new ArrayList<>();
+
+        while (rs.next()) {
+            System.out.println("asdhgj");
+            int recordID = rs.getInt("recordID");
+            
+            Date date = rs.getDate("date");
+            
+ 
+            Date inTime = null;
+            if (rs.getTime("inTime") != null || rs.getDate("inTime") != null) {
+                String strInTime = Utilities.sdfTime.format(rs.getTime("inTime"));
+                String strInDate = Utilities.sdfDate.format(rs.getDate("inTime"));
+                inTime = Utilities.sdfDateTime.parse(strInDate + " " + strInTime);
+            }
+            System.out.println("REPOSITORY INTIME " + inTime);
+
+            Date outTime = null;
+            if (rs.getTime("outTime") != null || rs.getDate("outTime") != null) {
+                String strOutTime = Utilities.sdfTime.format(rs.getTime("outTime"));
+                String strOutDate = Utilities.sdfDate.format(rs.getDate("outTime"));
+                outTime = Utilities.sdfDateTime.parse(strOutDate + " " + strOutTime);
+            }
+           
+
+            int userID = rs.getInt("userID");
+            String fullName = rs.getString("fullName");
+            int shiftID = rs.getInt("shiftID");
+
+            list.add(new Record(recordID, userID, date, inTime, outTime, shiftID, fullName));
+        
+        }
+        con.close();
+        return list;
+    }
+
     public void create(Record record) throws SQLException {
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("insert into Record values(?,?,?,?,?)");
-        
+
         stm.setString(1, Utilities.sdfDate.format(record.getDate()));
         stm.setInt(2, record.getUserID());
         stm.setInt(3, record.getShiftID());

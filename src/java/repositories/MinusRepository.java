@@ -70,7 +70,7 @@ public class MinusRepository {
     public void create(Minus minus) throws SQLException {
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("insert into Minus values(?, ?, ?, ?, ?, ?, ?)");
-       stm.setInt(1, minus.getLateTime());
+       stm.setFloat(1, minus.getLateTime());
        stm.setFloat(2, minus.getReduction());
        stm.setFloat(3, minus.getFine());
        stm.setString(4, minus.getDescription());
@@ -84,7 +84,7 @@ public class MinusRepository {
     public void update(Minus minus) throws SQLException {
         Connection con = DBContext.getConnection();
         PreparedStatement stm = con.prepareStatement("update Minus set lateTime=?, reduction= ?, fine=? , description=?, status = ?, note = ?, userID= ? where minusID = ?");
-        stm.setInt(1, minus.getLateTime());
+        stm.setFloat(1, minus.getLateTime());
        stm.setFloat(2, minus.getReduction());
        stm.setFloat(3, minus.getFine());
        stm.setString(4, minus.getDescription());
