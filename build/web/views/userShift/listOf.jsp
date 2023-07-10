@@ -88,7 +88,7 @@
                                                     <td>${userShift.statusText2}</td>
                                                     <td>${userShift.note}</td>
                                                     <td>${userShift.otText}</td>
-                                                    <c:if test="${Account.roleName.equals('MANAGER') && (userShift.date>nowDate) && userShift.status != 2}">
+                                                    <c:if test="${Account.roleName.equals('MANAGER') && userShift.status != 2}">
                                                         <td>
                                                             <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&oldShiftID=${userShift.shiftID}&oldDate=${userShift.date}"/>" class="btn btn-sm btn-github btn-rounded" title="Update">
                                                                 <i class="bi bi-pencil-square"></i>

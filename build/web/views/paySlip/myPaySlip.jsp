@@ -50,6 +50,7 @@
                                                 <th>Status</th>
                                                 <th>Confirmation</th>
                                                 <th>Note</th>
+                                                <th>Total</th>
                                                 <th>Operations</th>
                                             </tr>
                                         </thead>
@@ -109,6 +110,9 @@
                                                     <td> 
                                                         <input type= "text"id= "note"name= "note"class= "form-control"value= "${paySlip.note}"/> 
                                                     </td> 
+                                                    <td>
+                                                        <input  type ="text" class= "form-control" value ="${paySlip.salary + paySlip.bonus - paySlip.minus}">
+                                                    </td>
 
                                                     <td>
                                                         <c:if test="${paySlip.status == 0}">

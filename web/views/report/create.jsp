@@ -86,7 +86,7 @@
                             <div class="form-group">
                                 <label class="col-md-12">Request Soon Time:</label>
                                 <div class="col-md-12">
-                                    <input type="time" placeholder="Fill ?hour:?min (Example: 00:45)" name="requestSoonTime" value="${report.requestSoonTime}"
+                                    <input type="text" placeholder="Fill ?hour:?min (Example: 00:45)" name="requestSoonTime" value="${report.requestSoonTime}"
                                            class="form-control form-control-line" />
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                             <div class="form-group">
                                 <label class="col-md-12">Request Late Time:</label>
                                 <div class="col-md-12">
-                                    <input type="time" placeholder="Fill ?hour:?min (Example: 00:30)" name="requestLateTime" value="${report.requestLateTime}"
+                                    <input type="text" placeholder="Fill ?hour:?min (Example: 00:30)" name="requestLateTime" value="${report.requestLateTime}"
                                            class="form-control form-control-line" />
                                 </div>
                             </div>
