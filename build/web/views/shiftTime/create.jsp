@@ -102,9 +102,9 @@
 
                                     <div class="form-group">
                                         <label class="col-md-12">Note</label>
+
                                         <div class="col-md-12">
-                                            <input type="text" placeholder="Note" name="note" value="${shiftTime.note}"
-                                                   class="form-control form-control-line" />
+                                            <textarea type="text" maxlength="300" class="form-control form-control-line" placeholder="Note(Maximum: 300 characters)"  id="note"  name="note"  style=" max-height: 226px; min-width: 100%; min-height: 50px;"value="${shiftTime.note}">${shiftTime.note}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">

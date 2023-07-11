@@ -27,8 +27,11 @@
                             <h4 class="page-title">List of Pay Slip</h4>
                         </div>
                         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-                            <a href="<c:url value="/paySlip/create.do"/>" class="btn btn-sm btn-success">Add PaySlip</a>
+                            <a href="<c:url value="/paySlip/create.do"/>" class="btn btn-lg btn-success btn-rounded" title="Add PaySlip">
+                                <i class="bi bi-credit-card"></i>
+                            </a>
                         </div>
+
                         <!-- /.col-lg-12 -->
                     </div>
                     <!-- /row -->
@@ -36,7 +39,7 @@
                         <div class="col-sm-12">
                             <div class="white-box">
                                 <div class="table-responsive">
-                                    <table class="table" id="example">
+                                    <table class="table table-striped " id="example">
 
                                         <thead>
                                             <tr>
@@ -91,20 +94,35 @@
                                                     <td>${paySlip.bonus}</td>
                                                     <td>${paySlip.minus}</td>
                                                     <td>${paySlip.statusText3}</td>
-                                                    <td>${paySlip.note}</td>
+                                                    <td>
+                                                        <a tabindex="0" class="btn btn-sm btn-circle btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${dayOff.note}" data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip"><div class="arrow"></div><div class="popover-body text-white p-3"><span class="d-block">${dayOff.note}</span></div></div>'>
+                                                            <i class="bi bi-eye"></i>
+                                                        </a>
+                                                    </td>
                                                     <td>${paySlip.salary + paySlip.bonus - paySlip.minus}</td>
                                                     <c:if test="${paySlip.status!=2}">
-                                                    <td> 
-                                                            <a href="<c:url value="/paySlip/update.do?paySlipID=${paySlip.paySlipID}&userID=${paySlip.userID}"/>" class="btn btn-sm btn-primary" ><i class="bi bi-pencil-square"></i>Update</a>
-                                                    </td>
+                                                        <td>
+                                                            <a href="<c:url value="/paySlip/update.do?paySlipID=${paySlip.paySlipID}&userID=${paySlip.userID}"/>" class="btn btn-sm btn-github btn-rounded" title="Update">
+                                                                <i class="bi bi-pencil-square"></i>
+                                                            </a>
+                                                        </td>
+
                                                     </c:if>
                                                     <c:if test="${paySlip.status == 2}">
-                                                        <td class="btn btn-info">Finished <i class="bi bi-cloud-check"></i></td>
+
+                                                        <td class="badge badge-info ">Finished <i class="bi bi-cloud-check"></i></td>
                                                         </c:if>
+
                                                 </tr>
                                             </c:forEach>
+
                                         </tbody>
-                                        <a href="<c:url value="/paySlip/done.do"/>" onclick="return confirm('Do you want to finish ?');" class="btn btn-sm btn-primary">Done</a>
+                                        <%--<c:if test="${paySlip.status != 2}">--%>
+                                        <a href="<c:url value="/paySlip/done.do"/>" onclick="return confirm('Do you want to finish ?');" class="btn btn-sm btn-dropbox btn-rounded">
+                                            <i class="bi bi-check-circle"></i> Done
+                                        </a>
+                                        <%--</c:if>--%>
+
                                     </table>
                                 </div>
                             </div>

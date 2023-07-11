@@ -326,7 +326,7 @@ public class UserShiftController extends HttpServlet {
             int status = 2;
             int lastMonth = Utilities.getLastMonth();
             usr.done(status, lastMonth);
-            response.sendRedirect(request.getContextPath() + "/record/listOf.do");
+            response.sendRedirect(request.getContextPath() + "/record/create.do");
         } catch (Exception ex) {
             ex.printStackTrace();
             request.setAttribute("message", ex.getMessage());

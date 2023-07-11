@@ -15,7 +15,7 @@
         </div>
         <!-- Page Content -->
         <c:choose>
-            <c:when test="${Account.roleName.equals('ADMIN')}">
+            <c:when test="${Account.roleName.equals('ADMIN')||Account.roleName.equals('MANAGER')}">
                 <div class="container-fluid">
                     <div class="row bg-title">
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -66,11 +66,12 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Status</label>
                                         <div class="col-md-12">
-                                            <select name="status"class="form-control form-control-line">
-                                                <option value="0">Active</option>
-                                                <option value="1">Inactive</option>
+                                            <select name="status" class="form-control form-control-line" >
+                                                <option value="0" ${dayOff.status == 0 ? 'selected' : ''}>Active</option>
+                                                <option value="1" ${dayOff.status == 1 ? 'selected' : ''}>Inactive</option>
                                             </select>
                                         </div>
+
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">Note</label>
@@ -83,7 +84,7 @@
                                         <div class="col-sm-12">
                                             <!--                                    <button type="submit" class="btn btn-success">Add Role</button>-->
                                             <button type="submit" class="btn btn-success" name="op" value="edit">Edit<i class="bi bi-check-square"></i></button>
-                                            <button type="submit" class="btn btn-outline-danger" name="op" value="cancel">Quay lại <i class="bi bi-x-square"></i></button>
+                                            <button type="submit" class="btn btn-outline-danger" name="op" value="cancel">Return <i class="bi bi-x-square"></i></button>
                                         </div>
                                     </div>
                                 </form>

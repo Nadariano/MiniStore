@@ -22,7 +22,7 @@
                             <h4 class="page-title">Roles</h4>
                         </div>
                         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-                            <a href="<c:url value="/role/create.do"/>" class="btn btn-sm btn-success">Add a new role</a>
+                            <a href="<c:url value="/role/create.do"/>" class="btn btn-sm btn-success btn-rounded">Add a new role</a>
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
@@ -53,8 +53,11 @@
                                                     <td>${role.description}</td>
                                                     <td>
                                                         <c:if test="${!role.roleName.equals('ADMIN')}">
-                                                        <a href="<c:url value="/role/edit.do?roleID=${role.roleID}" />" class="btn btn-sm btn-primary">Edit</a>
+                                                            <a href="<c:url value="/role/edit.do?roleID=${role.roleID}" />" class="btn btn-sm btn-github btn-rounded" title="Edit">
+                                                                <i class="bi bi-pencil-square"></i>
+                                                            </a>
                                                         </c:if>
+
                                                     </td>
                                                 </tr>
                                             </c:forEach>

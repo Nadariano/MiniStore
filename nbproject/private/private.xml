@@ -3,11 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/src/java/controllers/RecordController.java</file>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/src/java/services/AttendanceService.java</file>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/src/java/repositories/UserShiftRepository.java</file>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/src/java/services/Utilities.java</file>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/src/java/controllers/UserShiftController.java</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/web/views/report/create.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/web/views/attendance/listOfUsers.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/src/java/services/Utilities.java</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/web/views/account/login.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/src/java/controllers/UserShiftController.java</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/src/java/controllers/AttendanceController.java</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/src/java/controllers/DayOffContoller.java</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/src/java/controllers/CheckInController.java</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/web/views/attendance/list.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/src/java/controllers/PaySlipController.java</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/web/layouts/main.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/src/java/controllers/UploadDownLoadFileController.java</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/src/java/services/PaySlipService.java</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/web/views/paySlip/listOf.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/web/views/userShift/listOf.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/web/views/paySlip/myPaySlip.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Sonne2/MiniStore/src/java/services/CheckInService.java</file>
         </group>
     </open-files>
 </project-private>
