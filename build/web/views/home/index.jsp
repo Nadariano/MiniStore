@@ -23,14 +23,6 @@
                     <h4 class="welcome-title">Welcome to the MiniStore Management System</h4>
                 </div>
             </div>
-        </div>
-        <!--                    <div class="container-fluid">
-            <div class="row bg-title">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <h3 class="welcome-title">Hi ${Account.fullName}!</h3>
-                    <h4 class="welcome-title">Welcome to the MiniStore Management System</h4>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="card card-stats">
@@ -97,10 +89,10 @@
                     </div>
                 </div>        
             </div>
-        
-             Add more rows and columns as needed 
-        
-        </div>-->
+
+            Add more rows and columns as needed 
+
+        </div>
 
 
     </body>
