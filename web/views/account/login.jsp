@@ -17,8 +17,8 @@
 
         <link rel="stylesheet" href="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>">
     </head>
-    <body class="justify-content-center" style="background-image: url('plugins/images/MiniStore_bg.png'); background-size: 100%; background-repeat: no-repeat;">
-        <!--<body>--> 
+    <!--<body class="justify-content-center" style="background-image: url('../plugins/images/MiniStore_bg.png'); background-size: 100%; background-repeat: no-repeat;">-->
+        <body class="justify-content-center" style="background-image: url('https://storage.cloudconvert.com/tasks/c65365fa-9d18-414f-a999-757b5f14b495/empty-supermarket-shelves-design.png?AWSAccessKeyId=cloudconvert-production&Expires=1689131366&Signature=lv96oLQlSI3G8UrsBFQS%2BMn2xx4%3D&response-content-disposition=inline%3B%20filename%3D%22empty-supermarket-shelves-design.png%22&response-content-type=image%2Fpng'); background-size: 100%; background-repeat: no-repeat;">
         <div class="container login-container">
             <div class="row justify-content-center mt-5">
                 <div class="col-md-6">
@@ -36,8 +36,8 @@
                                 <div class="form-group">
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                                        <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter your password">
-                                    
+                                        <input type="password" id="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter your password"/>
+                                        <i class="bi bi-eye-slash" id="togglePassword"></i>
                                     </div>
                                 </div>
                                 <h5 style="color:red">${message}</h5>
@@ -70,7 +70,7 @@
         <script src="<c:url value="/js/dashboard1.js"/>"></script>
         <script src="<c:url value="/plugins/bower_components/toast-master/js/jquery.toast.js"/>"></script>
 
-
+        <script src="<c:url value="/js/revealPass.js"/>"></script>
 
 
         <script src="<c:url value="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"/>"></script>
