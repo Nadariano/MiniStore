@@ -20,16 +20,19 @@
                     <h4 class="page-title">REPORT LIST</h4>
                 </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-                    <a href="<c:url value="/report/create.do"/>" class="btn btn-sm btn-success">Create another report</a>
+                    <a href="<c:url value="/report/create.do"/>" class="btn btn-lg btn-success btn-rounded" title="Create another report">
+                        <i class="bi bi-credit-card-2-front"></i>
+                    </a>
+
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /row -->
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="white-box">
+                    <div class="white-box center-block">
                         <div class="table-responsive">
-                            <table class="table" id="example">
+                            <table class="table  table-striped " id="example">
 
                                 <thead>
                                     <tr>
@@ -73,7 +76,11 @@
                                                     <td><span class="badge bg-warning text-dark fs-6 px-1 py-0">${report.statusText}</span></td>
                                                     </c:when>
                                                 </c:choose>
-                                            <td>${report.note}</td>
+                                            <td>
+                                                <a tabindex="0" class="btn btn-sm btn-circle btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${report.note}" data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip"><div class="arrow"></div><div class="popover-body text-white p-3"><span class="d-block">${report.note}</span></div></div>'>
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

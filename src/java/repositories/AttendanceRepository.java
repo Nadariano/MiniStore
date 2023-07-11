@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,8 +20,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import models.Attendance;
-import static services.Utilities.sdfTime;
 import static services.Utilities.sdfDate;
+import static services.Utilities.sdfDateTime;
+import static services.Utilities.sdfTime;
 
 /**
  *
@@ -54,6 +56,76 @@ public class AttendanceRepository {
             attendance.setConfirm(Utilities.getStatusTextOfConfirm(rs.getInt("status")));
             attendance.setFullName(rs.getString("fullName"));
             attendance.setShiftID(rs.getInt("shiftID"));
+            list.add(attendance);
+        }
+        con.close();
+        return list;
+    }
+
+    public List<Attendance> select1() throws SQLException, ParseException {
+        List<Attendance> list = null;
+        //Tạo connection để kết nối vào DBMS
+        Connection con = DBContext.getConnection();
+        //Tạo đối tượng statement
+        Statement stm = con.createStatement();
+        //Thực thi lệnh SELECT
+        ResultSet rs = stm.executeQuery("select a.attendID, a.date, a.checkIn, a.checkOut, a.duration, a.lateTime, a.soonTime,a.status, a.note, a.userID, u.fullName, a.shiftID\n"
+                + "from Attendance as a left join Users as u on a.userID = u.userID");
+        list = new ArrayList<>();
+        while (rs.next()) {
+
+            int id = rs.getInt("attendID");
+            Date date = rs.getDate("date");
+
+            Date inTime = null, outTime = null, duration = null, lateTime = null, soonTime = null;
+
+            if (rs.getTime("checkIn") != null) {
+                String strInDate = sdfDate.format(rs.getDate("checkIn"));
+                String strInTime = sdfTime.format(rs.getTime("checkIn"));
+                inTime = sdfDateTime.parse(strInDate + " " + strInTime);
+            }
+            if (rs.getTime("checkOut") != null) {
+                String strOutDate = sdfDate.format(rs.getDate("checkOut"));
+                String strOutTime = sdfTime.format(rs.getTime("checkOut"));
+                outTime = sdfDateTime.parse(strOutDate + " " + strOutTime);
+            }
+            if (rs.getTime("duration") != null) {
+                String strDurDate = sdfDate.format(rs.getDate("duration"));
+                String strDurTime = sdfTime.format(rs.getTime("duration"));
+                duration = sdfDateTime.parse(strDurDate + " " + strDurTime);
+            }
+            if (rs.getTime("lateTime") != null) {
+                String strLateDate = sdfDate.format(rs.getDate("lateTime"));
+                String strLateTime = sdfTime.format(rs.getTime("lateTime"));
+                lateTime = sdfDateTime.parse(strLateDate + " " + strLateTime);
+            }
+
+            if (rs.getTime("soonTime") != null) {
+                String strSoonDate = sdfDate.format(rs.getDate("soonTime"));
+                String strSoonTime = sdfTime.format(rs.getTime("soonTime"));
+                soonTime = sdfDateTime.parse(strSoonDate + " " + strSoonTime);
+            }
+
+            String note = rs.getString("note");
+            int status = rs.getInt("status");
+            int userID = rs.getInt("userID");
+            int shiftID = rs.getInt("shiftID");
+
+//            attendance.setAttendID(rs.getInt("attendID"));
+//            attendance.setDate(rs.getDate("date"));
+//            attendance.setCheckIn(rs.getDate("checkIn"));
+//            attendance.setCheckOut(rs.getDate("checkOut"));
+//            attendance.setDuration(rs.getDate("duration"));
+//            attendance.setLateTime(rs.getDate("lateTime"));
+//            attendance.setSoonTime(rs.getDate("soonTime"));
+//            attendance.setStatusText(Utilities.getStatusTextOfAttendance(rs.getInt("status")));
+//            attendance.setStatus(rs.getInt("status"));
+//            attendance.setNote(rs.getString("note"));
+//            attendance.setUserID(rs.getInt("userID"));
+//            attendance.setShiftID(rs.getInt("shiftID"));
+//            attendance.setConfirm(Utilities.getStatusTextOfCofirm(rs.getInt("status")));
+//            attendance.setFullName(rs.getString("fullName"));
+            Attendance attendance = new Attendance(id, date, inTime, outTime, lateTime, soonTime, duration, status, note, userID, shiftID);
             list.add(attendance);
         }
         con.close();
@@ -109,6 +181,50 @@ public class AttendanceRepository {
 //        int count = stm.executeUpdate();
 //        con.close();
 //    }
+    public void create(Attendance a) throws SQLException {
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("insert into Attendance values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+        stm.setString(1, sdfDate.format(a.getDate()));
+
+        if (a.getCheckIn() == null) {
+            stm.setString(2, null);
+        } else {
+            stm.setString(2, sdfDateTime.format(a.getCheckIn()));
+        }
+
+        if (a.getCheckOut() == null) {
+            stm.setString(3, null);
+        } else {
+            stm.setString(3, sdfDateTime.format(a.getCheckOut()));
+        }
+
+        if (a.getSoonTime() == null) {
+            stm.setString(4, null);
+        } else {
+            stm.setString(4, sdfDateTime.format(a.getSoonTime()));
+        }
+
+        if (a.getLateTime() == null) {
+            stm.setString(5, null);
+        } else {
+            stm.setString(5, sdfDateTime.format(a.getLateTime()));
+        }
+        if (a.getDuration() == null) {
+            stm.setString(6, null);
+        } else {
+            stm.setString(6, sdfDateTime.format(a.getDuration()));
+        }
+
+        stm.setInt(7, a.getStatus());
+        stm.setString(8, a.getNote());
+        stm.setInt(9, a.getUserID());
+        stm.setInt(10, a.getShiftID());
+
+        stm.executeUpdate();
+
+        con.close();
+    }
 
     public Attendance read(int attendID) throws SQLException {
         Attendance attendance = null;
@@ -148,18 +264,46 @@ public class AttendanceRepository {
         Connection con = DBContext.getConnection();
         //Tạo đối tượng PreparedStatement
         PreparedStatement stm = con.prepareStatement("update attendance set date = ?, checkIn = ?, checkOut = ?, soonTime = ?, lateTime = ?, duration = ?, status = ?, note = ?, userID = ?, shiftID = ? from attendance join users on attendance.userID = users.userID where attendID = ?");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         stm.setString(1, sdfDate.format(attendance.getDate()));
-        stm.setString(2, sdfTime.format(attendance.getCheckIn()));
-        stm.setString(3, sdfTime.format(attendance.getCheckOut()));
-        stm.setString(4, sdfTime.format(attendance.getSoonTime()));
-        stm.setString(5, sdfTime.format(attendance.getLateTime()));
-        stm.setString(6, sdfTime.format(attendance.getDuration()));
+
+        if (attendance.getCheckIn() == null) {
+            stm.setString(2, null);
+        } else {
+            stm.setString(2, sdf.format(attendance.getCheckIn()));
+        }
+
+        if (attendance.getCheckOut() == null) {
+            stm.setString(3, null);
+        } else {
+            stm.setString(3, sdf.format(attendance.getCheckOut()));
+        }
+
+        if (attendance.getSoonTime() == null) {
+            stm.setString(4, null);
+        } else {
+            stm.setString(4, sdfTime.format(attendance.getSoonTime()));
+        }
+
+        if (attendance.getLateTime() == null) {
+            stm.setString(5, null);
+        } else {
+            stm.setString(5, sdfTime.format(attendance.getLateTime()));
+        }
+        
+        if (attendance.getDuration() == null) {
+            stm.setString(6, null);
+        } else {
+            stm.setString(6, sdfTime.format(attendance.getDuration()));
+        }
+
+       
         stm.setInt(7, attendance.getStatus());
         stm.setString(8, attendance.getNote());
         stm.setInt(9, attendance.getUserID());
         stm.setInt(10, attendance.getShiftID());
         stm.setInt(11, attendance.getAttendID());
-        
+
         //Thực thi lệnh sql
         int count = stm.executeUpdate();
         //Đóng kết nối
@@ -343,7 +487,7 @@ public class AttendanceRepository {
             attendance.setFullName(rs.getString("fullName"));
             attendance.setShiftID(rs.getInt("shiftID"));
             attendance.setConfirm(Utilities.getStatusTextOfConfirm(rs.getInt("status")));
-            
+
             list.add(attendance);
         }
         con.close();
@@ -372,7 +516,7 @@ public class AttendanceRepository {
             attendance.setFullName(rs.getString("fullName"));
             attendance.setShiftID(rs.getInt("shiftID"));
             attendance.setConfirm(Utilities.getStatusTextOfConfirm(rs.getInt("status")));
-            
+
             list.add(attendance);
         }
         con.close();
@@ -401,7 +545,7 @@ public class AttendanceRepository {
             attendance.setFullName(rs.getString("fullName"));
             attendance.setShiftID(rs.getInt("shiftID"));
             attendance.setConfirm(Utilities.getStatusTextOfConfirm(rs.getInt("status")));
-            
+
             list.add(attendance);
         }
         con.close();
@@ -430,7 +574,7 @@ public class AttendanceRepository {
             attendance.setFullName(rs.getString("fullName"));
             attendance.setShiftID(rs.getInt("shiftID"));
             attendance.setConfirm(Utilities.getStatusTextOfConfirm(rs.getInt("status")));
-            
+
             list.add(attendance);
         }
         con.close();
@@ -462,7 +606,7 @@ public class AttendanceRepository {
             attendance.setFullName(rs.getString("fullName"));
             attendance.setShiftID(rs.getInt("shiftID"));
             attendance.setConfirm(Utilities.getStatusTextOfConfirm(rs.getInt("status")));
-            
+
             list.add(attendance);
         }
         con.close();

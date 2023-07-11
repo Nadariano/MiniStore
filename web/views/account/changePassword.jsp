@@ -32,15 +32,15 @@
                     <form action="<c:url value="/account/changePassword_handler.do"/>">
                         <div class="mb-3">
                             <label for="userName" class="form-label">Enter your current password:</label>
-                            <input type="text" class="form-control" name="oldPass" placeholder="Current Password">
+                            <input type="password" class="form-control" name="oldPass" placeholder="Current Password">
                         </div>
                         <div class="mb-3">
                             <label for="fullName" class="form-label">Enter new password:</label>
-                            <input type="text" class="form-control" name="newPass1" placeholder="New Password">
+                            <input type="password" class="form-control" name="newPass1" placeholder="New Password">
                         </div>
                         <div class="mb-3">
                             <label for="fullName" class="form-label">Re-enter new password:</label>
-                            <input type="text" class="form-control" name="newPass2" placeholder="Re-enter New Password">
+                            <input type="password" class="form-control" name="newPass2" placeholder="Re-enter New Password">
                         </div>
                         <button type="submit" class="btn btn-outline-success" name="op" value="change">Confirm change <i class="bi bi-check-square"></i></button>
                         <button type="submit" class="btn btn-outline-danger" name="op" value="cancel">Cancel <i class="bi bi-x-square"></i></button>
