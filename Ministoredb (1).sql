@@ -450,13 +450,13 @@ insert into UserShift values ('6','3','2023-07-02', 0, '',0)
 --insert into UserShift values ('6','3','2023-07-15', 0, '',0)
 
 --Insert cho DayOff
-insert into DayOff values('2023-01-01',1,'New Year''s Day',1,'')
-insert into DayOff values('2023-01-22',1,'Vietnamese New Year (Tet)',1,'')
-insert into DayOff values('2023-04-29',1,'Hung Kings Commemorations',1,'')
-insert into DayOff values('2023-04-30',1,'Day of Southern Liberation and National Reunification',1,'')
-insert into DayOff values('2023-05-01',1,'International Workers'' Day',1,'')
-insert into DayOff values('2023-09-02',1,'National Day',1,'')
-insert into DayOff values('2023-12-25',1,'Christmas Day',1,'')
+insert into DayOff values('2023-01-01',2,'New Year''s Day',1,'')
+insert into DayOff values('2023-01-22',2,'Vietnamese New Year (Tet)',1,'')
+insert into DayOff values('2023-04-29',2,'Hung Kings Commemorations',1,'')
+insert into DayOff values('2023-04-30',2,'Day of Southern Liberation and National Reunification',1,'')
+insert into DayOff values('2023-05-01',2,'International Workers'' Day',1,'')
+insert into DayOff values('2023-09-02',2,'National Day',1,'')
+insert into DayOff values('2023-12-25',2,'Christmas Day',1,'')
 
 select * from Users
 select * from Roles

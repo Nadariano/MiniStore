@@ -28,7 +28,7 @@
                             <!--<a href="<c:url value="/checkIn/readExcel.do"/>"><i class="bi bi-file-earmark-plus"></i>Generate from Excel</a>-->
                             <br>
                             <form action="<c:url value="/checkIn/readExcel.do"/>" class="form-inline">
-                                <div class="form-group mb-2">
+                                <div class="form-group mb-2 ">
                                     <div class="custom-file">
                                         <!--                                        <label class="custom-file-label btn-rounded" for="fileName">Choose file</label>
                                                                                 <input type="file" class="custom-file-input" id="fileName" name="fileName">-->
@@ -40,8 +40,9 @@
                                             </label>
                                             <input type="text" class="form-control" id="inputBox" readonly name="fileName">
                                         </div>
-
+                                        
                                     </div>
+                                    <p></p>
                                     <button type="submit" class="btn btn-info btn-block mb-2 ml-2" name="op" value="readExcel">
                                         <i class="bi bi-file-earmark-spreadsheet"></i> Generate from Excel
                                     </button>

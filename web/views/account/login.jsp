@@ -9,7 +9,8 @@
             <link rel="stylesheet" href="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>">
         </head>
         <body style="background-image: url(https://img.freepik.com/premium-vector/blue-shop-background_748315-11.jpg?w=2000); background-size: 100%; background-repeat: no-repeat">
-            <body id= "login-background">
+           
+    <body id= "login-background">
             <div class="login-container">
                 <div class="row mt-5">
                     <div class="col-md-4 m-auto mt-4 login-box">
@@ -51,7 +52,8 @@
         <link href="<c:url value="/css/custom.css"/>" rel="stylesheet">
         <link rel="stylesheet" href="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>">
     </head>
-    <body style="background-image: url(https://img.freepik.com/premium-vector/blue-shop-background_748315-11.jpg?w=2000); background-size: auto; background-repeat: no-repeat">
+    <!--<body style="background-image: url(https://img.freepik.com/premium-vector/blue-shop-background_748315-11.jpg?w=2000); background-size: auto; background-repeat: no-repeat">-->
+    <body> 
         <div class="container ">
             <div class="row justify-content-center mt-5">
                 <div class="col-md-6">
