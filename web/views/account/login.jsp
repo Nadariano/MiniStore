@@ -17,8 +17,7 @@
 
         <link rel="stylesheet" href="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>">
     </head>
-    <!--<body class="justify-content-center" style="background-image: url('../plugins/images/MiniStore_bg.png'); background-size: 100%; background-repeat: no-repeat;">-->
-        <body class="justify-content-center" style="background-image: url('https://storage.cloudconvert.com/tasks/c65365fa-9d18-414f-a999-757b5f14b495/empty-supermarket-shelves-design.png?AWSAccessKeyId=cloudconvert-production&Expires=1689131366&Signature=lv96oLQlSI3G8UrsBFQS%2BMn2xx4%3D&response-content-disposition=inline%3B%20filename%3D%22empty-supermarket-shelves-design.png%22&response-content-type=image%2Fpng'); background-size: 100%; background-repeat: no-repeat;">
+    <body class="justify-content-center" style="background-image: url(<c:url value='/plugins/images/MiniStore_bg.png'/>); background-size: 100%; background-repeat: no-repeat;">
         <div class="container login-container">
             <div class="row justify-content-center mt-5">
                 <div class="col-md-6">
@@ -29,14 +28,14 @@
                                 <div class="form-group">
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-                                        <input type="text" class="form-control form-control-lg " id="userName" name="userName" placeholder="Enter your username">
+                                        <input required type="text" class="form-control form-control-lg " id="userName" name="userName" placeholder="Enter your username">
 
                                     </div></div>
 
                                 <div class="form-group">
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                                        <input type="password" id="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter your password"/>
+                                        <input required type="password" id="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter your password"/>
                                         <i class="bi bi-eye-slash" id="togglePassword"></i>
                                     </div>
                                 </div>
