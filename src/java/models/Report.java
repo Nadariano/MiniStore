@@ -242,5 +242,11 @@ public class Report {
         this.shiftID = shiftID;
     }
 
+    @Override
+    public String toString() {
+        return "Report{" + "reportID=" + reportID + ", reportTitle=" + reportTitle + ", createDate=" + createDate + ", description=" + description + ", plannedDate=" + plannedDate + ", requestSoonTime=" + requestSoonTime + ", requestLateTime=" + requestLateTime + ", status=" + status + ", statusText=" + statusText + ", note=" + note + ", userID=" + userID + ", fullName=" + fullName + ", typeID=" + typeID + ", typeName=" + typeName + ", shiftID=" + shiftID + '}';
+    }
+
+    
     
 }

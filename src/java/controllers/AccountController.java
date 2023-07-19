@@ -163,7 +163,7 @@ public class AccountController extends HttpServlet {
                             failMessage = "New password must not be blank";
                         } else if (newPass2.equals(newPass1) && !newPass2.isEmpty()) {
                             ar.updatePass(userID, newPass2);
-                            successMessage = "Your password has been change";
+                            successMessage = "Your password has been changed";
                         } else {
                             failMessage = "You have re-enter the wrong password, please try again.";
                         }

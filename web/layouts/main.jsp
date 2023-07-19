@@ -9,9 +9,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
+
         <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
         <title>MiniStore Management System</title>
         <!-- Bootstrap Core CSS -->
+
         <link href="<c:url value="/bootstrap/dist/css/bootstrap.min.css"/>" rel="stylesheet">
         <!-- Menu CSS -->
         <link href="<c:url value="/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css"/>" rel="stylesheet">
@@ -55,25 +57,25 @@
                         </a>
                         <div class="top-left-part">
                             <a class="logo" href="<c:url value="/home/index.do"/>">
-<!--                                <b>
-                                    <img src="<c:url value="/plugins/images/pixeladmin-logo.png"/>" alt="home" />
-                                </b>-->
+                                <!--                                <b>
+                                                                    <img src="<c:url value="/plugins/images/pixeladmin-logo.png"/>" alt="home" />
+                                                                </b>-->
                                 <!--<span class="hidden-xs">-->
                                     <!--<img src="<c:url value="/plugins/images/pixeladmin-text.png"/>" alt="home" />-->
                                 <img src="<c:url value="/plugins/images/ms_logo.png"/>" width="60%" height="100%" style="margin-left: 15%; padding: 3%" alt="home" />
                                 <!--</span>-->
                             </a>
                         </div>
-<!--                        <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
-                            <li>
-                                <form role="search" class="app-search hidden-xs">
-                                    <input type="text" placeholder="Search..." class="form-control"> 
-                                    <a href="">
-                                        <i class="fa fa-search"></i>
-                                    </a>
-                                </form>
-                            </li>
-                        </ul>-->
+                        <!--                        <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
+                                                    <li>
+                                                        <form role="search" class="app-search hidden-xs">
+                                                            <input type="text" placeholder="Search..." class="form-control"> 
+                                                            <a href="">
+                                                                <i class="fa fa-search"></i>
+                                                            </a>
+                                                        </form>
+                                                    </li>
+                                                </ul>-->
                         <ul class="nav navbar-top-links navbar-right pull-right">
                             <li>
                                 <div class="dropdown">
@@ -196,25 +198,25 @@
                                 </li>
                             </c:if>
                             <c:if test="${Account.roleName.equals('MANAGER')}">
-                                <li>
-                                    <a href="<c:url value="/bonus/listOf.do"/>" class="waves-effect"><i class="fa fa-money fa-fw"
-                                                                                                        aria-hidden="true"></i><span class="hide-menu">Bonus List </span></a>
-                                </li>
+                                <!--                                <li>
+                                                                    <a href="<c:url value="/bonus/listOf.do"/>" class="waves-effect"><i class="fa fa-money fa-fw"
+                                                                                                                                        aria-hidden="true"></i><span class="hide-menu">Bonus List </span></a>
+                                                                </li>-->
                             </c:if>
                             <c:if test="${Account.roleName.equals('MANAGER')}">
-                                <li>
-                                    <a href="<c:url value="/minus/listOf.do"/>" class="waves-effect"><i class="fa fa-money fa-fw"
-                                                                                                        aria-hidden="true"></i><span class="hide-menu">Minus List </span></a>
-                                </li>
+                                <!--                                <li>
+                                                                    <a href="<c:url value="/minus/listOf.do"/>" class="waves-effect"><i class="fa fa-money fa-fw"
+                                                                                                                                        aria-hidden="true"></i><span class="hide-menu">Minus List </span></a>
+                                                                </li>-->
                             </c:if>
                             <li>
                                 <a href="<c:url value="/blank.do"/>" class="waves-effect"><i class="fa fa-columns fa-fw"
                                                                                              aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>
                             </li>
-<!--                            <li>
-                                <a href="<c:url value="/error/404.jsp"/>" class="waves-effect"><i class="fa fa-info-circle fa-fw"
-                                                                                                  aria-hidden="true"></i><span class="hide-menu">Error 404</span></a>
-                            </li>-->
+                            <!--                            <li>
+                                                            <a href="<c:url value="/error/404.jsp"/>" class="waves-effect"><i class="fa fa-info-circle fa-fw"
+                                                                                                                              aria-hidden="true"></i><span class="hide-menu">Error 404</span></a>
+                                                        </li>-->
 
                             <li>
                                 <a href="<c:url value="/uploadDownloadFile/index.do"/>"><i class="bi bi-file-earmark-plus"></i> <span class="hide-menu">Upload File 
@@ -254,6 +256,9 @@
         <script src="<c:url value="/js/custom.min.js"/>"></script>
         <script src="<c:url value="/js/dashboard1.js"/>"></script>
         <script src="<c:url value="/plugins/bower_components/toast-master/js/jquery.toast.js"/>"></script>
+        <script src="<c:url value="/js/uploadFile.js"/>"></script>
+        <script src="<c:url value="/js/changeSearchType.js"/>"></script>
+        <script src="<c:url value="/js/revealPass.js"/>"></script>
     </body>
 
 </html>

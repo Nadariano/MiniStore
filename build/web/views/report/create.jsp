@@ -70,7 +70,7 @@
                             <div class="form-group">
                                 <label class="col-md-12">Description(Content):</label>
                                 <div class="col-md-12">
-                                    <textarea style="resize: both" placeholder="Write here"  id="description" name="description" value="${report.description}"></textarea>
+                                    <textarea class="form-control " style="resize: both" placeholder="Write here"  id="description" name="description" value="${report.description}"></textarea>
                                 </div>
                             </div>
 

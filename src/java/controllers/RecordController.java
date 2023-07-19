@@ -8,6 +8,7 @@ package controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -80,14 +81,70 @@ public class RecordController extends HttpServlet {
             UserShiftRepository usr = new UserShiftRepository();
             RecordService rcs = new RecordService();
             RecordRepository rcr = new RecordRepository();
-            
-            List<UserShift> list = usr.select();
-            
-            for (UserShift us : list) {
-                Record rc = rcs.createRecord(us.getUserID(), us.getShiftID(), us.getDate());
-                rcr.create(rc);
+
+            List<UserShift> listU = usr.select();
+            for(UserShift us: listU){
+                System.out.println(us.toString());
             }
-            response.sendRedirect(request.getContextPath() + "/record/listOf.do");
+            List<Record> listR = rcr.select1();
+            if(listR==null){
+                System.out.println("listR null");
+            }else if(listR.isEmpty()){
+                System.out.println("listR empty");
+            }else{
+                for (Record r : listR) {
+                System.out.println(r.toString());
+            }
+            }
+            
+            
+            
+            System.out.println("rtyui");
+            boolean checkList = false;
+            for (UserShift us : listU) {
+                boolean check = false;
+                System.out.println("jkl");
+                if (us.getStatus() == 2) {
+                    System.out.println("-----------------------");
+                    Record rc = rcs.createRecord(us.getUserID(), us.getShiftID(), us.getDate());
+                    System.out.println(rc.toString());
+                    System.out.println("son");
+                    if (listR.isEmpty()) {
+                        System.out.println("ilu");
+                        System.out.println("createrc1" + rc.toString());
+                        rcr.create(rc);
+                        System.out.println("minh");
+                        checkList = false;
+                    } else {
+                        System.out.println("ListR OK");
+                        for (Record r : listR) {
+                            if (rc.getUserID() == r.getUserID()
+                                    && rc.getShiftID() == r.getShiftID()
+                                    && rc.getDate().compareTo(r.getDate()) == 0) {
+                                System.out.println("duplicate");
+                                check = true;
+                                checkList = true;
+                                break;
+                            }
+                        }
+                        if (check == false) {
+                            System.out.println("createrc2" + rc.toString());
+                            rcr.create(rc);
+                        }
+                    }
+                }else {
+//                    request.setAttribute("message", "Please DONE UserShift before!!!");
+//                    request.getRequestDispatcher("/record/listOf.do").forward(request, response);
+                }
+
+            }
+            if (checkList == false) {
+                response.sendRedirect(request.getContextPath() + "/attendance/create.do");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/attendance/list.do");
+            }
+
+//            request.setAttribute("listA", listA);
         } catch (Exception e) {
 
         }

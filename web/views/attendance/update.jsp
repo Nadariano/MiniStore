@@ -68,7 +68,7 @@
                             <div class="form-group">
                                 <label class="col-md-12">Shift: </label>
                                 <select type="dropdown" id="shiftID" name="shiftID" value="${attendance.shiftID}" class="form-control form-control-line">
-                                    
+
                                     <c:if test="${attendance.shiftID == 1}">
                                         <option > ${attendance.shiftID} </option>
                                         <option > 2 </option>
@@ -132,7 +132,7 @@
                             <div class="form-group">
                                 <label class="col-md-12">Status: </label>
                                 <div class="col-md-12">
-                                    <select type="dropdown" id="statusText" name="statusText" value="${attendance.statusText}" >
+                                    <select class="form-control" type="dropdown" id="statusText" name="statusText" value="${attendance.statusText}" >
                                         <c:if test="${attendance.statusText.equals('Available')}">
                                             <option>${attendance.statusText}</option>
                                             <option> Not Available </option>
@@ -147,31 +147,23 @@
 
                             <div class="form-group">
                                 <label class="col-md-12">Note:</label>
+
                                 <div class="col-md-12">
-                                    <textarea  disabled maxlength="300" style="resize: vertical;width: 500px" placeholder="Note(Maximum: 300 characters)"  id="note" name="note">${attendance.note}</textarea>
+                                    <textarea type="text" maxlength="300" class="form-control form-control-line" placeholder="Note(Maximum: 300 characters)"  id="note"  name="note"  style=" max-height: 226px; min-width: 100%; min-height: 50px;"value="${attendance.note}">${attendance.note}</textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-12">Confirmation:</label>
-                                <div class="col-md-12">
-                                    <c:if test="${attendance.confirm.equals('Accepted')}">
-                                        <input disabled type="radio" name="confirm" id="confirm" value="Accepted" checked> 
-                                        <label for="confirm">Accepted</label> 
+                                <div class="col-md-12 form-control-line">
+                                    <input disabled type="radio" name="confirm" id="confirm-accepted" value="Accepted" ${attendance.confirm.equals('Accepted') ? 'checked' : ''}> 
+                                    <label for="confirm-accepted">Accepted</label> 
 
-                                        <input disabled type="radio" name="confirm" id="confirm" value="Denied"> 
-                                        <label for="confirm">Denied</label>
-                                    </c:if>
-
-                                    <c:if test="${attendance.confirm.equals('Denied')}">
-                                        <input disabled type="radio" name="confirm" id="confirm" value="Accepted"> 
-                                        <label for="confirm">Accepted</label> 
-
-                                        <input disabled type="radio" name="confirm" id="confirm" value="Denied" checked> 
-                                        <label for="confirm">Denied</label>
-                                    </c:if>
+                                    <input disabled type="radio" name="confirm" id="confirm-denied" value="Denied" ${attendance.confirm.equals('Denied') ? 'checked' : ''}> 
+                                    <label for="confirm-denied">Denied</label>
                                 </div>
                             </div>
+
 
                             <div class="form-group">
                                 <div class="col-sm-12">

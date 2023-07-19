@@ -230,6 +230,9 @@
     background-color: goldenrod;
     /*color: red;*/
 }
+.currWeek a{
+    background-color: goldenrod;
+}
 .popup {
     display: none;
     height: auto;
@@ -241,4 +244,15 @@
     background-color: #f1f1f1;
     padding: 20px;
     border: 1px solid #000;
+}
+.overflow {
+  overflow-y:hidden;
+  overflow-x:hidden;
+}
+.cus-table{
+   
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    width: 100px;
 }
