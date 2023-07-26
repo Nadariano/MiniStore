@@ -45,8 +45,8 @@
                         <p>
                             <input type="checkbox" onClick="revealPass()"/>Reveal All
                         </p>
-                        <button type="submit" class="btn btn-outline-success" name="op" value="change">Confirm change <i class="bi bi-check-square"></i></button>
-                        <button type="submit" class="btn btn-outline-danger" name="op" value="cancel">Cancel <i class="bi bi-x-square"></i></button>
+                        <button type="submit" class="btn btn-success" name="op" value="change">Confirm change <i class="bi bi-check-square"></i></button>
+                        <button type="submit" class="btn btn-warning" name="op" value="cancel">Cancel <i class="bi bi-x-square"></i></button>
                     </form>
                     <h3 style="color: yellowgreen">${successMsg}</h3>
                     <h3 style="color: red">${failMsg}</h3>
