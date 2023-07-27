@@ -7,11 +7,17 @@ package controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import models.Account;
+import repositories.UsersRepository;
 
 /**
  *
@@ -36,13 +42,42 @@ public class HomeController extends HttpServlet {
         String action = (String) request.getAttribute("action");
         switch (action) {
             case "index":
-                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                    index(request,response);
                 break;
             default:
             //Show error page
         }
     }
 
+     protected void index(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        UsersRepository ur = new UsersRepository();
+        Account acc =(Account) session.getAttribute("Account");
+        String role = acc.getRoleName();
+        switch (role) {
+            case "ADMIN":
+        {
+            try {
+                int countAll = ur.countAll();
+                int countActive = ur.countIfStatus(1);
+                int countInActive = ur.countIfStatus(0);
+                List<Integer> roleCount = ur.countBasedRole();
+                List<String> roleNames = ur.listRoleName();
+                request.setAttribute("allUser", countAll);
+                request.setAttribute("activeUser", countActive);
+                request.setAttribute("inactiveUser", countInActive);
+                request.setAttribute("roleCount", roleCount);
+                request.setAttribute("roleNames", roleNames);
+            } catch (SQLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+                break;
+        }
+        request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
