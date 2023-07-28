@@ -48,7 +48,7 @@
                             <hr>
                             <div class="">
                                 <a href="<c:url value="/account/updateProfile.do"/>" class="btn btn-sm btn-success">Edit Information</a>
-                                <a href="<c:url value="/account/changePassword.do"/>" class="btn btn-sm btn-primary">Change Password</a>
+                                <a href="<c:url value="/account/changePassword.do"/>" class="btn btn-sm btn-linkedin">Change Password</a>
                             </div>
                         </div>
                     </div>
