@@ -31,15 +31,17 @@
                     <c:if test="${Account.roleName.equals('ADMIN')}">
                         <h4>Accounts: (Total: ${allUser})</h4>
                         <div class="row">
-                            <div class="progress progress-animated col-md-6" style="height: 20px">
+                            <div class="progress progress-animated col-md-6" style="height: 30px">
                                 <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: ${(activeUser / allUser) *100}%" aria-valuenow="${activeUser}" aria-valuemin="0" aria-valuemax="${allUser}">${activeUser}</div>
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: ${(inactiveUser / allUser) *100}%" aria-valuenow="${inactiveUser}" aria-valuemin="0" aria-valuemax="${allUser}">${inactiveUser}</div>
+                                <div class="progress-bar progress-bar-striped bg-primary active" role="progressbar" style="width: ${(inactiveUser / allUser) *100}%" aria-valuenow="${inactiveUser}" aria-valuemin="0" aria-valuemax="${allUser}">${inactiveUser}</div>
+                                <!--<div class="progress-bar progress-bar-striped bg-danger " role="progressbar" style="width: ${(bannedUser/ allUser) *100}%" aria-valuenow="${bannedUser}" aria-valuemin="0" aria-valuemax="${allUser}">${bannedUser}</div>-->
+
                             </div> 
                             <div class="col-md-6">
                                 <span style="display:flex;">
-
                                     Active:   <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 30px; height: 20px; text-align: center" >${activeUser}</div>
-                                    | Inactive: <div class="progress-bar-striped bg-danger" role="progressbar" style="width: 30px; height: 20px; text-align: center" >${inactiveUser}</div>
+                                    | Inactive: <div class="progress-bar-striped bg-warning" role="progressbar" style="width: 30px; height: 20px; text-align: center" >${inactiveUser}</div>
+                                    <!--| Banned: <div class="progress-bar-striped bg-danger" role="progressbar" style="width: 30px; height: 20px; text-align: center" >${bannedUser}</div>-->
                                 </span>
                             </div>
                         </div>
