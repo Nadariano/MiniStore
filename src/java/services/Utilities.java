@@ -69,7 +69,7 @@ public class Utilities {
     public static Report requestTime(Date date, int userID, int shiftID) throws SQLException {
         ReportRepository rr = new ReportRepository();
         Report report = null;
-        if (rr.readDate(date, userID,shiftID) != null) {
+        if (rr.readDate(date, userID, shiftID) != null) {
             report = rr.readDate(date, userID, shiftID);
         }
         return report;
@@ -198,6 +198,8 @@ public class Utilities {
             case 1:
                 statusText1 = "Active ";
                 break;
+            case 2:
+                statusText1 = "Banned";
             default:
                 statusText1 = "Unknown";
         }
@@ -317,7 +319,7 @@ public class Utilities {
             case 1:
                 confirm = "Accepted";
                 break;
-             case 2:
+            case 2:
                 confirm = "Accepted";
                 break;
             default:
@@ -367,7 +369,7 @@ public class Utilities {
         }
         return datexs;
     }
-    
+
     public static List<LocalDate> startEndDates(LocalDate selectedDate) {
 //        LocalDate now = LocalDate.now();
 //        LocalDate selectedDate= now.plusDays(i*7);
@@ -395,11 +397,11 @@ public class Utilities {
         }
         return listStartEndDates;
     }
-    
-    public static int getLastMonth(){
+
+    public static int getLastMonth() {
         LocalDate now = LocalDate.now();
         Month lastMonth = now.minusMonths(1).getMonth();
-        int lastMonthNum= lastMonth.getValue();
+        int lastMonthNum = lastMonth.getValue();
         return lastMonthNum;
     }
 }

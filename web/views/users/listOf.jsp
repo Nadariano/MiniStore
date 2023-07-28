@@ -28,7 +28,7 @@
                         </div>
                         <c:if test="${Account.roleName.equals('ADMIN')}">
                             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-                                <a href="<c:url value="/users/create.do"/>" class="btn btn-sm btn-success btn-rounded">Add a new user</a>
+                                <a href="<c:url value="/users/create.do"/>" class="btn btn-sm btn-success btn-rounded ">Add a new user</a>
                             </div>
                         </c:if>
                         <!-- /.col-lg-12 -->
@@ -38,7 +38,7 @@
                         <div class="col-sm-12">
                             <div class="white-box">
                                 <div class="table-responsive">
-                                    <table class="table table-striped" id="example">
+                                    <table class="table table-striped " id="example">
 
                                         <thead>
                                             <tr>
@@ -61,7 +61,7 @@
                                         </thead>
                                         <tbody>
                                             <c:forEach var="users" items="${list}" varStatus="loop">
-                                                <tr>
+                                                <tr >
                                                     <!--<td>${loop.count}</td>-->
                                                     <c:if test="${!users.roleName.equals('ADMIN')||Account.roleName.equals('ADMIN')}">
                                                         <td>${users.userID}</td>
@@ -75,10 +75,23 @@
                                                         <td>${users.roleName}</td>
                                                         <td>${users.statusText1}</td>
                                                         <td>
-                                                            <a tabindex="0" class="btn btn-sm btn-circle btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${users.note}" data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip"><div class="arrow"></div><div class="popover-body text-white p-3"><span class="d-block">${users.note}</span></div></div>'>
-                                                                <i class="bi bi-eye"></i>
-                                                            </a>
+                                                            <button tabindex="0" class="${empty users.note ? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${users.note}" 
+                                                                    data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
+                                                                    <div class="arrow">
+                                                                    </div>
+                                                                    <div class="popover-body text-white p-3">
+                                                                    <span class="d-block">${users.note}
+                                                                    </span>
+                                                                    </div>
+                                                                    </div>' ${empty users.note ? 'disabled' : ''}>
+                                                            <!--        <i class="${empty users.note ? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
+                                                            </button>
                                                         </td>
+
+
+
+
+
                                                         <td>
                                                             <c:if test="${!users.roleName.equals('ADMIN')&&(!users.roleName.equals('MANAGER')||Account.roleName.equals('ADMIN'))}">
                                                                 <a href="<c:url value="/users/update.do?userID=${users.userID}" />" class="btn btn-sm btn-github btn-rounded" title="Update">

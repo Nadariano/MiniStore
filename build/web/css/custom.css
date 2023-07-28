@@ -64,6 +64,12 @@
     font-family: monospace;
     font-size: 250%;
 }
+.welcome-title{
+    text-align: center;
+    font-family: monospace;
+    
+}
+
 .profile-content{
     display: flex;
     justify-content: center;
@@ -246,13 +252,23 @@
     border: 1px solid #000;
 }
 .overflow {
-  overflow-y:hidden;
-  overflow-x:hidden;
+    overflow-y:hidden;
+    overflow-x:hidden;
 }
 .cus-table{
-   
+
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
     width: 100px;
+}
+
+.btn-disabled{
+    background-color: #C0C0C0;
+    color:#404040;
+    text-align: center;
+}
+.text-center{
+   
+    
 }
