@@ -117,9 +117,17 @@
                                                     <td>${attendance.duration}</td>
                                                     <td>${attendance.statusText}</td>
                                                     <td>
-                                                        <a tabindex="0" class="btn btn-sm btn-circle btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${attendance.note}" data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip"><div class="arrow"></div><div class="popover-body text-white p-3"><span class="d-block">${attendance.note}</span></div></div>'>
-                                                            <i class="bi bi-eye"></i>
-                                                        </a>
+                                                        <button tabindex="0" class="${empty attendance.note ? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${attendance.note}" 
+                                                                data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
+                                                                <div class="arrow">
+                                                                </div>
+                                                                <div class="popover-body text-white p-3">
+                                                                <span class="d-block">${attendance.note}
+                                                                </span>
+                                                                </div>
+                                                                </div>' ${empty attendance.note ? 'disabled' : ''}>
+                                                        <!--        <i class="${empty users.note ? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
+                                                        </button>
                                                     </td>
 
                                                     <c:choose>

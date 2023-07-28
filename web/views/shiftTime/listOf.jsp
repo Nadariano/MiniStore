@@ -87,10 +87,18 @@
                                                 </div>
                                               </td>-->
                                                     <td>
-                                                        <a tabindex="0" class="btn btn-sm btn-circle btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${shiftTime.note}" data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip"><div class="arrow"></div><div class="popover-body text-white p-3"><span class="d-block">${shiftTime.note}</span></div></div>'>
-                                                            <i class="bi bi-eye"></i>
-                                                        </a>
-                                                    </td>
+                                                            <button tabindex="0" class="${empty shiftTime.note ? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${shiftTime.note}" 
+                                                                    data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
+                                                                    <div class="arrow">
+                                                                    </div>
+                                                                    <div class="popover-body text-white p-3">
+                                                                    <span class="d-block">${shiftTime.note}
+                                                                    </span>
+                                                                    </div>
+                                                                    </div>' ${empty shiftTime.note ? 'disabled' : ''}>
+                                                            <!--        <i class="${empty shiftTime.note ? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
+                                                            </button>
+                                                        </td>
 
                                                     <td>
                                                         <c:if test="${!role.roleName.equals('MANAGER')}">

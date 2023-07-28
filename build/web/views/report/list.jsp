@@ -129,10 +129,18 @@
 
 
                                                     <td>
-                                                        <a tabindex="0" class="btn btn-sm btn-circle btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${report.note}" data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip"><div class="arrow"></div><div class="popover-body text-white p-3"><span class="d-block">${report.note}</span></div></div>'>
-                                                            <i class="bi bi-eye"></i>
-                                                        </a>
-                                                    </td>
+                                                            <button tabindex="0" class="${empty report.note ? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${report.note}" 
+                                                                    data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
+                                                                    <div class="arrow">
+                                                                    </div>
+                                                                    <div class="popover-body text-white p-3">
+                                                                    <span class="d-block">${report.note}
+                                                                    </span>
+                                                                    </div>
+                                                                    </div>' ${empty report.note ? 'disabled' : ''}>
+                                                            <!--        <i class="${empty report.note ? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
+                                                            </button>
+                                                        </td>
 
                                                     <td>
                                                         <a href="<c:url value="/report/update.do?reportID=${report.reportID}"  />" class="btn btn-sm btn-github btn-rounded" title="Update">
