@@ -39,23 +39,180 @@
                             <div class="white-box">
                                 <div class="table-responsive">
                                     <table class="table table-striped " id="example">
-
                                         <thead>
                                             <tr>
-                                                <!--<th>No.</th>-->
-                                                <th>User ID</th>
-                                                <th>User Name</th>
-                                                <!--<th>Password</th>-->
-                                                <th>Full Name</th>
-                                                <th>Avatar</th>
-                                                <th>Address</th>
-                                                <th>Phone</th>
-                                                <th>Email</th>
-                                                <th>Role</th>
-                                                <th>Status</th>
-                                                <th>Note</th>
+                                                <th>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-instagram dropdown-toggle btn-rounded" type="button" id="userIDDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            User ID <i class="bi bi-caret-down-fill"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="userIDDropdown">
+                                                            <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Search User ID" id="searchUserID">
 
-                                                <th>Operations</th>
+
+                                                            <!-- Add sorting functionality here -->
+
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-instagram dropdown-toggle btn-rounded" type="button" id="userNameDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            User Name <i class="bi bi-caret-down-fill"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="userNameDropdown">
+                                                            <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Search User Name" id="searchUserName">
+
+
+                                                            <!-- Add sorting functionality here -->
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-instagram dropdown-toggle btn-rounded" type="button" id="fullNameDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Full Name <i class="bi bi-caret-down-fill"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="fullNameDropdown">
+                                                            <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Search Full Name" id="searchFullName">
+
+
+                                                            <!-- Add sorting functionality here -->
+
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-instagram dropdown-toggle btn-rounded" type="button" id="avatarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Avatar <i class="bi bi-caret-down-fill"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="avatarDropdown">
+                                                            <!-- Add sorting functionality here -->
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-instagram dropdown-toggle btn-rounded" type="button" id="addressDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Address <i class="bi bi-caret-down-fill"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="addressDropdown">
+                                                            <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Search Address" id="searchAddress">
+
+
+                                                            <!-- Add sorting functionality here -->
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-instagram dropdown-toggle btn-rounded" type="button" id="phoneDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Phone <i class="bi bi-caret-down-fill"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="phoneDropdown">
+                                                            <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Search Phone" id="searchPhone">
+
+                                                            <!-- Add sorting functionality here -->
+
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-instagram dropdown-toggle btn-rounded" type="button" id="emailDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Email <i class="bi bi-caret-down-fill"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="emailDropdown">
+                                                            <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Search Email" id="searchEmail">
+
+
+
+                                                            <!-- Add sorting functionality here -->
+
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <!--                                                    <div class="btn-group">
+                                                                                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                                Right-aligned menu
+                                                                                                            </button>
+                                                                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                                                                <button class="dropdown-item" type="button">Action</button>
+                                                                                                                <button class="dropdown-item" type="button">Another action</button>
+                                                                                                                <button class="dropdown-item" type="button">Something else here</button>
+                                                                                                            </div>
+                                                                                                        </div>-->
+                                                    <div class="btn-group">
+
+                                                        <button class="btn btn-instagram dropdown-toggle btn-rounded " type="button" id="roleDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Role <i class="bi bi-caret-down-fill"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-left  p-2 btn-rounded " aria-labelledby="roleDropdown" >
+                                                            <input type="text" class="form-control form-control-sm btn-rounded " placeholder="Search Role" id="searchRole">
+
+                                                            <!-- Add sorting functionality here -->
+
+
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-instagram dropdown-toggle btn-rounded" type="button" id="statusDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Status <i class="bi bi-caret-down-fill"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="statusDropdown">
+                                                            <!-- Add sorting functionality here -->
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </th>
+
+                                                <th>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-instagram dropdown-toggle btn-rounded" type="button" id="noteDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Note <i class="bi bi-caret-down-fill"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="noteDropdown">
+                                                            <!-- Add sorting functionality here -->
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-instagram dropdown-toggle btn-rounded" type="button" id="operationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Operations <i class="bi bi-caret-down-fill"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="operationsDropdown">
+                                                            <!-- Add sorting functionality here -->
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </th>
 
                                             </tr>
                                         </thead>
@@ -87,11 +244,6 @@
                                                             <!--        <i class="${empty users.note ? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
                                                             </button>
                                                         </td>
-
-
-
-
-
                                                         <td>
                                                             <c:if test="${!users.roleName.equals('ADMIN')&&(!users.roleName.equals('MANAGER')||Account.roleName.equals('ADMIN'))}">
                                                                 <a href="<c:url value="/users/update.do?userID=${users.userID}" />" class="btn btn-sm btn-github btn-rounded" title="Update">

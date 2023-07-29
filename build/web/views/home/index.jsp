@@ -96,7 +96,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+<!--                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                         <div class="card card-stats">
                             <div class="card-header card-header-warning card-header-icon">
                                 <div class="card-icon">
@@ -143,7 +143,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>        
+                    </div>        -->
+
+
+
+
                 </div>
 
                 Add more rows and columns as needed 

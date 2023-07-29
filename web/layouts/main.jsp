@@ -255,6 +255,7 @@
         <script src="<c:url value="/js/uploadFile.js"/>"></script>
         <script src="<c:url value="/js/changeSearchType.js"/>"></script>
         <script src="<c:url value="/js/revealPass.js"/>"></script>
+         <script src="<c:url value="/js/filterEmployeeList.js"/>"></script>
     </body>
 
 </html>
