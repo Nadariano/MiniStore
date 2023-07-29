@@ -86,7 +86,23 @@
                                                     <td>${userShift.shiftID}</td>
                                                     <td>${userShift.date}</td>
                                                     <td>${userShift.statusText2}</td>
-                                                    <td>${userShift.note}</td>
+                                                  
+                                                     <td>
+                                                            <button tabindex="0" class="${empty userShift.note ? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${userShift.note}" 
+                                                                    data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
+                                                                    <div class="arrow">
+                                                                    </div>
+                                                                    <div class="popover-body text-white p-3">
+                                                                    <span class="d-block">${userShift.note}
+                                                                    </span>
+                                                                    </div>
+                                                                    </div>' ${empty userShift.note ? 'disabled' : ''}>
+                                                            <!--        <i class="${empty userShift.note ? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
+                                                            </button>
+                                                        </td>
+                                                    
+                                                    
+                                                    
                                                     <td>${userShift.otText}</td>
                                                     <c:if test="${Account.roleName.equals('MANAGER') && userShift.status != 2 && (userShift.date>nowDate)}">
                                                         <td>

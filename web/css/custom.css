@@ -268,7 +268,7 @@
     color:#404040;
     text-align: center;
 }
-.text-center{
-   
+.border-rounded{
+    border-radius:  15px;
     
 }
