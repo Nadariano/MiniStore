@@ -27,8 +27,9 @@
                     <h4 class="page-title">Change password</h4>
                 </div>
             </div>
-            <div class="row white-box">
-                <div class="col form-group">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 white-box form-group">
                     <form action="<c:url value="/account/changePassword_handler.do"/>">
                         <div class="mb-3">
                             <label for="userName" class="form-label">Enter your current password:</label>
@@ -45,12 +46,13 @@
                         <p>
                             <input type="checkbox" onClick="revealPass()"/>Reveal All
                         </p>
-                        <button type="submit" class="btn btn-outline-success" name="op" value="change">Confirm change <i class="bi bi-check-square"></i></button>
-                        <button type="submit" class="btn btn-outline-danger" name="op" value="cancel">Cancel <i class="bi bi-x-square"></i></button>
+                        <button type="submit" class="btn btn-success" name="op" value="change">Confirm change <i class="bi bi-check-square"></i></button>
+                        <button type="submit" class="btn btn-warning" name="op" value="cancel">Cancel <i class="bi bi-x-square"></i></button>
                     </form>
                     <h3 style="color: yellowgreen">${successMsg}</h3>
                     <h3 style="color: red">${failMsg}</h3>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
         <!--<script src="<c:url value="/js/revealPass.js"/>"></script>-->

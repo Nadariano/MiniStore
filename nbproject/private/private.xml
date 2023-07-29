@@ -3,11 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/web/views/account/login.jsp</file>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/web/views/account/changePassword.jsp</file>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/src/java/controllers/AccountController.java</file>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/web/js/revealPass.js</file>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/web/layouts/main.jsp</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone%20incase/MiniStore/web/views/home/index.jsp</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone%20incase/MiniStore/src/java/controllers/UsersController.java</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone%20incase/MiniStore/web/js/filterEmployeeList.js</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone%20incase/MiniStore/web/views/report/list.jsp</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone%20incase/MiniStore/web/css/custom.css</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone%20incase/MiniStore/web/views/userShift/listOf.jsp</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone%20incase/MiniStore/web/views/users/listOf.jsp</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone%20incase/MiniStore/src/java/repositories/UsersRepository.java</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone%20incase/MiniStore/web/layouts/main.jsp</file>
+            <file>file:/C:/Users/Pc/Downloads/MiniStore-main/clone%20incase/MiniStore/web/js/custom.js</file>
         </group>
     </open-files>
 </project-private>

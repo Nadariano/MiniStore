@@ -209,10 +209,6 @@
                                                                                                                                         aria-hidden="true"></i><span class="hide-menu">Minus List </span></a>
                                                                 </li>-->
                             </c:if>
-                            <li>
-                                <a href="<c:url value="/blank.do"/>" class="waves-effect"><i class="fa fa-columns fa-fw"
-                                                                                             aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>
-                            </li>
                             <!--                            <li>
                                                             <a href="<c:url value="/error/404.jsp"/>" class="waves-effect"><i class="fa fa-info-circle fa-fw"
                                                                                                                               aria-hidden="true"></i><span class="hide-menu">Error 404</span></a>
@@ -259,6 +255,7 @@
         <script src="<c:url value="/js/uploadFile.js"/>"></script>
         <script src="<c:url value="/js/changeSearchType.js"/>"></script>
         <script src="<c:url value="/js/revealPass.js"/>"></script>
+         <script src="<c:url value="/js/filterEmployeeList.js"/>"></script>
     </body>
 
 </html>

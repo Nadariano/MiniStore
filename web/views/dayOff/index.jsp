@@ -62,17 +62,18 @@
                                             <td>${dayOff.description}</td>
                                             <td>${dayOff.statusText}</td>
                                             <td>
-                                                <a tabindex="0" class="btn btn-sm btn-circle btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${dayOff.note}" data-template='
-                                                   <div class="popover bg-info shadow-lg border-0" role="tooltip">
-                                                   <div class="arrow">
-                                                   </div>
-                                                   <div class="popover-body text-white p-3">
-                                                   <span class="d-block">${dayOff.note}</span>
-                                                   </div>
-                                                   </div>'>
-                                                    <i class="bi bi-eye"></i>
-                                                </a>
-                                            </td>
+                                                <button tabindex="0" class="${empty dayOff.note ||dayOff.note.equals("N/A")? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${dayOff.note}" 
+                                                                    data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
+                                                                    <div class="arrow">
+                                                                    </div>
+                                                                    <div class="popover-body text-white p-3">
+                                                                    <span class="d-block">${dayOff.note}
+                                                                    </span>
+                                                                    </div>
+                                                                    </div>' ${empty dayOff.note||dayOff.note.equals("N/A") ? 'disabled' : ''}>
+                                                            <!--        <i class="${empty dayOff.note ||dayOff.note.equals("N/A")? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
+                                                            </button>
+                                                        </td>
                                             <c:if test="${Account.roleName.equals('ADMIN')||Account.roleName.equals('MANAGER')}">
                                                 <td>
                                                     <a href="<c:url value="/dayOff/edit.do?dayOffID=${dayOff.dayOffID}" />" class="btn btn-sm btn-github btn-rounded" title="Edit">
