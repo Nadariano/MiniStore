@@ -37,7 +37,7 @@
                             <div class="white-box">
                                 <div class="table-responsive">
                                     <table class="table" id="example">
-
+                                        <h5><b>(Currency: VNĐ)</b></h5>
                                         <thead>
                                             <tr>
                                                 <th>Pay Slip ID</th>
