@@ -151,7 +151,7 @@
                                         </tbody>
                                     </table>
                                     <%--<c:if test="${attendance.status == 2}">--%>
-                                    <a style="float: right" href="<c:url value="/attendance/done.do"/>"  onclick="return confirm('Do you really want to finish?');" class="btn btn-dropbox btn-rounded" title="Done" onclick="return confirm('Do you want to finish ?');">
+                                    <a style="float: right" href="<c:url value="/attendance/done.do"/>"  onclick="return confirm('Do you really want to finish?');" class="btn btn-dropbox btn-rounded">
                                         Done <i class="bi bi-check-circle"></i>
                                     </a>
                                     <%--</c:if>--%>

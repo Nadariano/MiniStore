@@ -40,7 +40,7 @@
                             <div class="white-box">
                                 <div class="table-responsive">
                                     <table class="table table-striped " id="example">
-
+                                        <h5><b>(Currency: VNĐ)</b></h5>
                                         <thead>
                                             <tr>
                                                 <th>Pay Slip ID</th>
@@ -118,12 +118,13 @@
 
                                         </tbody>
                                         <%--<c:if test="${paySlip.status != 2}">--%>
-                                        <a href="<c:url value="/paySlip/done.do"/>" onclick="return confirm('Do you want to finish ?');" class="btn btn-sm btn-dropbox btn-rounded">
-                                            <i class="bi bi-check-circle"></i> Done
-                                        </a>
+                                        
                                         <%--</c:if>--%>
 
                                     </table>
+                                        <a  style="float: right" href="<c:url value="/paySlip/done.do"/>" onclick="return confirm('Do you want to finish ?');" class="btn btn-sm btn-dropbox btn-rounded">
+                                             Done <i class="bi bi-check-circle"></i>
+                                        </a>
                                 </div>
                             </div>
                         </div>
