@@ -52,9 +52,9 @@
                                                 <th>Shift Name</th>
                                                 <th>Time Start</th>
                                                 <th>Time End</th>
-                                                <th>Coefficient Of Shift</th>
-                                                <th>Coefficient Of Overtime</th>
-                                                <th>Coefficient Of Day Off</th>
+                                                <th  style="text-align: center">Coefficient Of Shift</th>
+                                                <th  style="text-align: center">Coefficient Of Overtime</th>
+                                                <th  style="text-align: center">Coefficient Of Day Off</th>
                                                 <th>Wage</th>
                                                 <th>Status</th>
                                                 <th>Note</th>
@@ -71,9 +71,9 @@
                                                     <td>${shiftTime.shiftName}</td>
                                                     <td>${shiftTime.timeStart}</td>
                                                     <td>${shiftTime.timeEnd}</td>
-                                                    <td>${shiftTime.coeShift}</td>
-                                                    <td>${shiftTime.coeOT}</td>
-                                                    <td>${shiftTime.coeDayOff}</td>
+                                                    <td style="text-align: center">${shiftTime.coeShift}</td>
+                                                    <td style="text-align: center">${shiftTime.coeOT}</td>
+                                                    <td style="text-align: center">${shiftTime.coeDayOff}</td>
                                                     <td>${shiftTime.wage}</td>
                                                     <td>${shiftTime.statusText}</td>
                                                     <!--<td>
@@ -87,18 +87,18 @@
                                                 </div>
                                               </td>-->
                                                     <td>
-                                                            <button tabindex="0" class="${empty shiftTime.note ? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${shiftTime.note}" 
-                                                                    data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
-                                                                    <div class="arrow">
-                                                                    </div>
-                                                                    <div class="popover-body text-white p-3">
-                                                                    <span class="d-block">${shiftTime.note}
-                                                                    </span>
-                                                                    </div>
-                                                                    </div>' ${empty shiftTime.note ? 'disabled' : ''}>
-                                                            <!--        <i class="${empty shiftTime.note ? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
-                                                            </button>
-                                                        </td>
+                                                        <button tabindex="0" class="${empty shiftTime.note ? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${shiftTime.note}" 
+                                                                data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
+                                                                <div class="arrow">
+                                                                </div>
+                                                                <div class="popover-body text-white p-3">
+                                                                <span class="d-block">${shiftTime.note}
+                                                                </span>
+                                                                </div>
+                                                                </div>' ${empty shiftTime.note ? 'disabled' : ''}>
+                                                        <!--        <i class="${empty shiftTime.note ? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
+                                                        </button>
+                                                    </td>
 
                                                     <td>
                                                         <c:if test="${!role.roleName.equals('MANAGER')}">

@@ -87,9 +87,9 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Date</th>
+                                                <th style="text-align: center">Date</th>
                                                 <th>User ID</th>
-                                                <th>Author</th>
+                                                <th style="text-align: center">Author</th>
                                                 <th>Shift ID</th>
                                                 <th>Check In</th>
                                                 <th>Check Out</th>

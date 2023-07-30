@@ -66,9 +66,9 @@
                                             <tr>
                                                 <!--<th>No.</th>-->
                                                 <th>User ID</th>
-                                                <th>Full Name</th>
-                                                <th>Shift</th>
-                                                <th>Date</th>
+                                                <th style="text-align: center">Full Name</th>
+                                                <th style="text-align: center">Shift</th>
+                                                <th style="text-align: center">Date</th>
                                                 <th>Status</th>
                                                 <th>Note</th>
                                                 <th>Over Time</th>
@@ -82,9 +82,9 @@
                                                 <tr>
                                                     <!--<td>${loop.count}</td>-->
                                                     <td>${userShift.userID}</td>
-                                                    <td>${userShift.fullName}</td>
-                                                    <td>${userShift.shiftID}</td>
-                                                    <td>${userShift.date}</td>
+                                                    <td style="text-align: center">${userShift.fullName}</td>
+                                                    <td style="text-align: center">${userShift.shiftID}</td>
+                                                    <td style="text-align: center">${userShift.date}</td>
                                                     <td>${userShift.statusText2}</td>
                                                   
                                                      <td>

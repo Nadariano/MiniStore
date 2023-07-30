@@ -115,7 +115,8 @@
                                         </div>
                                     </div>
                                 </form>
-                                        <h3 style="color: red">${message}</h3>
+                                        <h3 style="color: red">${msg}</h3>
+                                    
                             </div>
                         </div>
                         <div class="col-md-2 col-12"></div>
