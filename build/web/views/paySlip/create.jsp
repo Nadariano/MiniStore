@@ -6,6 +6,7 @@
 <html lang="en">
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>Pay Slip Creation</title>
@@ -45,24 +46,27 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Salary</label>
                                         <div class="col-md-12">
-                                            <input type="number" step="0.1" placeholder="Salary" name="salary" value="${paySlip.salary}"
-                                                   class="form-control form-control-line" />
+                                            <input type="text" placeholder="Salary" name="salary"
+                                                   class="form-control form-control-line" id="salaryInput"
+                                                   value="<fmt:formatNumber value='${paySlip.salary}' type='currency' currencySymbol='₫' maxFractionDigits='0' />" />
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-12">Bonus Money</label>
                                         <div class="col-md-12">
-                                            <input type="number" step="0.1" placeholder="Bonus Money" name="bonus" value="${paySlip.bonus}"
-                                                   class="form-control form-control-line" />
+                                            <input type="text" placeholder="Bonus Money" name="bonus"
+                                                   class="form-control form-control-line" id="bonusInput"
+                                                   value="<fmt:formatNumber value='${paySlip.bonus}' type='currency' currencySymbol='₫' maxFractionDigits='0' />" />
                                         </div>
                                     </div>         
 
                                     <div class="form-group">
                                         <label class="col-md-12">Minus Money</label>
                                         <div class="col-md-12">
-                                            <input type="number" step="0.1" placeholder="Minus Money" name="minus" value="${paySlip.minus}"
-                                                   class="form-control form-control-line" />
+                                            <input type="text" placeholder="Minus Money" name="minus"
+                                                   class="form-control form-control-line" id="minusInput"
+                                                   value="<fmt:formatNumber value='${paySlip.minus}' type='currency' currencySymbol='₫' maxFractionDigits='0' />" />
                                         </div>
                                     </div>   
 

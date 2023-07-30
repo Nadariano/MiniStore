@@ -7,6 +7,8 @@
 <html lang="en">
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>Pay Slip</title>
@@ -46,7 +48,7 @@
                                                 <th>Pay Slip ID</th>
                                                 <th>User ID</th>
                                                 <th>Full Name</th>
-                                                <th>Salary</th>
+                                                <th>Salary(₫)</th>
                                                 <th>Bonus Money</th>
                                                 <th>Minus Money</th>
                                                 <th>Status</th>
@@ -90,24 +92,33 @@
                                                     <td>${paySlip.paySlipID}</td>
                                                     <td>${paySlip.userID}</td>
                                                     <td>${paySlip.fullName}</td>
-                                                    <td>${paySlip.salary}</td>
-                                                    <td>${paySlip.bonus}</td>
-                                                    <td>${paySlip.minus}</td>
+                                                    <td><fmt:formatNumber value="${paySlip.salary}" type="currency" currencySymbol="₫" maxFractionDigits="0" /></td>
+
+                                                    <td>
+                                                        <fmt:formatNumber value="${paySlip.bonus}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
+                                                    </td>
+                                                    <td>
+                                                        <fmt:formatNumber value="${paySlip.minus}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
+                                                    </td>
+
                                                     <td>${paySlip.statusText3}</td>
-                                                   <td>
-                                                            <button tabindex="0" class="${empty paySlip.note ? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${paySlip.note}" 
-                                                                    data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
-                                                                    <div class="arrow">
-                                                                    </div>
-                                                                    <div class="popover-body text-white p-3">
-                                                                    <span class="d-block">${paySlip.note}
-                                                                    </span>
-                                                                    </div>
-                                                                    </div>' ${empty paySlip.note ? 'disabled' : ''}>
-                                                            <!--        <i class="${empty paySlip.note ? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
-                                                            </button>
-                                                        </td>
-                                                    <td>${paySlip.salary + paySlip.bonus - paySlip.minus}</td>
+                                                    <td>
+                                                        <button tabindex="0" class="${empty paySlip.note ? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${paySlip.note}" 
+                                                                data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
+                                                                <div class="arrow">
+                                                                </div>
+                                                                <div class="popover-body text-white p-3">
+                                                                <span class="d-block">${paySlip.note}
+                                                                </span>
+                                                                </div>
+                                                                </div>' ${empty paySlip.note ? 'disabled' : ''}>
+                                                        <!--        <i class="${empty paySlip.note ? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
+                                                        </button>
+                                                    </td>
+                                                 <td>
+    <fmt:formatNumber value="${paySlip.salary + paySlip.bonus - paySlip.minus}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
+</td>
+
                                                     <c:if test="${paySlip.status!=2}">
                                                         <td>
                                                             <a href="<c:url value="/paySlip/update.do?paySlipID=${paySlip.paySlipID}&userID=${paySlip.userID}"/>" class="btn btn-sm btn-github btn-rounded" title="Update">
@@ -126,13 +137,13 @@
 
                                         </tbody>
                                         <%--<c:if test="${paySlip.status != 2}">--%>
-                                        
+
                                         <%--</c:if>--%>
 
                                     </table>
-                                        <a  style="float: right" href="<c:url value="/paySlip/done.do"/>" onclick="return confirm('Do you want to finish ?');" class="btn btn-sm btn-dropbox btn-rounded">
-                                             Done <i class="bi bi-check-circle"></i>
-                                        </a>
+                                    <a  style="float: right" href="<c:url value="/paySlip/done.do"/>" onclick="return confirm('Do you want to finish ?');" class="btn btn-sm btn-dropbox btn-rounded">
+                                        Done <i class="bi bi-check-circle"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
