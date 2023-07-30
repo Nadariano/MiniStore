@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.Account;
+import models.Report;
 import repositories.ReportRepository;
 import repositories.UsersRepository;
 
@@ -91,6 +92,38 @@ public class HomeController extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            }
+            break;
+            
+            case "SALE": {
+                try {
+                    int userID = acc.getUserID();
+                    ReportRepository rf = new ReportRepository();
+                    List<Report> list1 = rf.selectStatusProcessing(userID);
+                    request.setAttribute("list1", list1);
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                } catch (SQLException ex) {
+                    //Hien trang thong bao loi
+                    ex.printStackTrace();//In thông báo chi tiết cho developer
+                    request.setAttribute("message", ex.getMessage());
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
+            }
+            break;
+            
+            case "GUARD": {
+                try {
+                    int userID = acc.getUserID();
+                    ReportRepository rf = new ReportRepository();
+                    List<Report> list1 = rf.selectStatusProcessing(userID);
+                    request.setAttribute("list1", list1);
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                } catch (SQLException ex) {
+                    //Hien trang thong bao loi
+                    ex.printStackTrace();//In thông báo chi tiết cho developer
+                    request.setAttribute("message", ex.getMessage());
+                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+                }
             }
             break;
         }

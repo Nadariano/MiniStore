@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/web/views/users/listOf.jsp</file>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/web/views/report/list.jsp</file>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/web/views/report/listUserReport.jsp</file>
+            <file>file:/D:/SUMMER%202023/SWP391/OtherMinistore/MiniStore/web/index.jsp</file>
+            <file>file:/D:/SUMMER%202023/SWP391/OtherMinistore/MiniStore/web/views/home/index.jsp</file>
+            <file>file:/D:/SUMMER%202023/SWP391/OtherMinistore/MiniStore/src/java/controllers/HomeController.java</file>
+            <file>file:/D:/SUMMER%202023/SWP391/OtherMinistore/MiniStore/src/java/repositories/ReportRepository.java</file>
         </group>
     </open-files>
 </project-private>
