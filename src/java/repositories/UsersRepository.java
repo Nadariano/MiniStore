@@ -6,7 +6,6 @@
 package repositories;
 
 import config.DBContext;
-import services.Utilities;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import models.Users;
+import services.Utilities;
 
 /**
  *
@@ -22,34 +22,35 @@ import models.Users;
  */
 public class UsersRepository {
     
-    public static List<Users> select() throws SQLException {
-        List<Users> list = null;
-        Connection con = DBContext.getConnection();
-        Statement stm = con.createStatement();
-        ResultSet rs = stm.executeQuery("select Users.userID, Users.userName, Users.password, Users.fullName, Users.avatar, Users.address, Users.phone, Users.email,Users.status, Users.note,Users.roleID, Roles.roleName\n"
-                + "from Users \n"
-                + "left join Roles on Users.roleID= Roles.roleID ");
-        list = new ArrayList<>();
-        while (rs.next()) {
-            Users users = new Users();
-            users.setUserID(rs.getInt("userID"));
-            users.setUserName(rs.getString("userName"));
-            users.setPassword(rs.getString("password"));
-            users.setFullName(rs.getString("fullName"));
-            users.setAvatar(rs.getString("avatar"));
-            users.setAddress(rs.getString("address"));
-            users.setPhone(rs.getString("phone"));
-            users.setEmail(rs.getString("email"));
-            users.setStatus(rs.getInt("status"));
-            users.setStatusText1(Utilities.getStatusText1(Utilities.getInt(rs, "status")));
-            users.setNote(rs.getString("note"));
-            users.setRoleID(rs.getInt("roleID"));
-            users.setRoleName(rs.getString("roleName"));
-            list.add(users);
-        }
-        con.close();
-        return list;
+   public static List<Users> select() throws SQLException {
+    List<Users> list = null;
+    Connection con = DBContext.getConnection();
+    Statement stm = con.createStatement();
+    ResultSet rs = stm.executeQuery("select Users.userID, Users.userName, Users.password, Users.fullName, Users.avatar, Users.address, Users.phone, Users.email,Users.status, Users.note,Users.roleID, Roles.roleName\n"
+            + "from Users \n"
+            + "left join Roles on Users.roleID= Roles.roleID "
+            + "ORDER BY Users.roleID ASC");
+    list = new ArrayList<>();
+    while (rs.next()) {
+        Users users = new Users();
+        users.setUserID(rs.getInt("userID"));
+        users.setUserName(rs.getString("userName"));
+        users.setPassword(rs.getString("password"));
+        users.setFullName(rs.getString("fullName"));
+        users.setAvatar(rs.getString("avatar"));
+        users.setAddress(rs.getString("address"));
+        users.setPhone(rs.getString("phone"));
+        users.setEmail(rs.getString("email"));
+        users.setStatus(rs.getInt("status"));
+        users.setStatusText1(Utilities.getStatusText1(Utilities.getInt(rs, "status")));
+        users.setNote(rs.getString("note"));
+        users.setRoleID(rs.getInt("roleID"));
+        users.setRoleName(rs.getString("roleName"));
+        list.add(users);
     }
+    con.close();
+    return list;
+}
     
     public void create(Users users) throws SQLException {
         Connection con = DBContext.getConnection();
@@ -108,62 +109,59 @@ public class UsersRepository {
         int count = stm.executeUpdate();
         con.close();
     }
+    public int countAll() throws SQLException {
+        int count = 0;
+        Connection con = DBContext.getConnection();
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("select count(userID) as countAll from Users");
+        if (rs.next()) {
+        count = rs.getInt("countAll");
+        }
+        con.close();
+        return count;
+    }
     
-//    public void delete(int userID) throws SQLException {
-//        Connection con = DBContext.getConnection();
-//        PreparedStatement stm = con.prepareStatement("delete from Users where userID = ?");
-//        stm.setInt(1, userID);
-//        int count = stm.executeUpdate();
-//        con.close();
-//    }
+    public int countIfStatus(int status) throws SQLException {
+        int count = 0;
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("select count(userID) as countIfStatus from Users where status= ?");
+        stm.setInt(1, status);
+        ResultSet rs = stm.executeQuery();
+        if (rs.next()) {
+        count = rs.getInt("countIfStatus");
+        }
+        con.close();
+        return count;
+    }
     
-//    public List<Object> myProfile(int userId) throws SQLException {
-//        List list = null;
-//        Connection con = DBContext.getConnection();
-//        String sql = "select Users.userID, Users.userName, Users.password, Users.fullName, Users.avatar, Users.address, Users.phone, Users.email, Roles.roleName\n"
-//                + "from Users \n"
-//                + "left join Roles on Users.roleID= Roles.roleID \n"
-//                + "where userID = ?";
-//        PreparedStatement stm = con.prepareStatement(sql);
-//        stm.setInt(1, userId);
-//        ResultSet rs = stm.executeQuery();
-//        while (rs.next()) {
-//            Users users = new Users();
-//            int userID = rs.getInt("userID");
-//            list.add(userID);
-//            String userName = rs.getString("userName");
-//            list.add(userName);
-//            String password = rs.getString("password");
-//            list.add(password);
-//            String fullName = rs.getString("fullName");
-//            list.add(fullName);
-//            String avatar = rs.getString("avatar");
-//            list.add(avatar);
-//            String address = rs.getString("address");
-//            list.add(address);
-//            String phone = rs.getString("phone");
-//            list.add(phone);
-//            String email = rs.getString("email");
-//            list.add(email);
-//            String roleName = rs.getString("roleName");
-//            list.add(roleName);
-//
-////            users.setUserID(rs.getInt("userID"));
-////            users.setUsername(rs.getString("username"));
-////            users.setPassword(rs.getString("password"));
-////            users.setFullName(rs.getString("fullName"));
-////            users.setAvatar(rs.getString("avatar"));
-////            users.setAddress(rs.getString("address"));
-////            users.setPhone(rs.getString("phone"));
-////            users.setEmail(rs.getString("email"));
-////            users.setRoleName(rs.getString("roleName"));
-//        }
-//        con.close();
-//        return list;
-//    }
-
+    public List<Integer> countBasedRole() throws SQLException{
+        List<Integer> roleCounts = new ArrayList<Integer>();
+        int count = 0;
+        Connection con = DBContext.getConnection();
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("select u.roleID, count(u.roleID) as roleCount, r.roleName from users u left join roles r on u.roleID=r.roleID where u.status =1 group by r.roleName, u.roleID");
+        while (rs.next()) {
+        count = rs.getInt("roleCount");
+        roleCounts.add(count);
+        }
+        con.close();
+        return roleCounts;
+    }
     
-    
-   
-    
+    public List<String> listRoleName() throws SQLException{
+        List<String> listRoleName = new ArrayList<String>();
+        String roleName = null;
+        Connection con = DBContext.getConnection();
+         Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("select u.roleID, count(u.roleID) as roleCount, r.roleName from users u left join roles r on u.roleID=r.roleID where u.status =1 group by r.roleName, u.roleID");
+        while (rs.next()) {
+        roleName = rs.getString("roleName");
+        listRoleName.add("'"+roleName+"'");
+        //This serves for generating chart in home/index.jsp
+        //The form of list return must like this: ['ADMIN', 'MANAGER', 'SALE', 'GUARD']
+        //If written in the old way: [ADNUB,MANAGER,SALE,GUARD], the chart cannot function
+        }
+        con.close();
+        return listRoleName;
+    }
 }

@@ -47,18 +47,15 @@ public class CheckInController extends HttpServlet {
                 case "listOf":
                     listOf(request, response);
                     break;
-                case "create":
-                    create(request, response);
-                    break;
-                case "create_handler":
-                    create_handler(request, response);
-                    break;
+//                case "create":
+//                    create(request, response);
+//                    break;
+//                case "create_handler":
+//                    create_handler(request, response);
+//                    break;
+
                 case "readExcel": {
                     readExcel(request, response);
-                    break;
-                }
-                case "readExcel1": {
-                    readExcel1(request, response);
                     break;
                 }
                 case "delete":
@@ -83,52 +80,50 @@ public class CheckInController extends HttpServlet {
         }
     }
 
-    protected void create(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        try {
-            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            request.setAttribute("message", ex.getMessage());
-            request.setAttribute("controller", "error");
-            request.setAttribute("action", "error");
-            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-        }
-    }
-
-    protected void create_handler(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        CheckInRepository cir = new CheckInRepository();
-        String op = request.getParameter("op");
-        switch (op) {
-            case "create": {
-                try {
-
-//                  int checkInID = Integer.parseInt(request.getParameter("checkInID"));
-                    Date checkInTime = sdfDateTime.parse(request.getParameter("checkInTime"));
-                    int userID = Integer.parseInt(request.getParameter("userID"));
-                    CheckIn checkIn = new CheckIn(checkInTime, userID);
-                    cir.create(checkIn);
-//                  request.setAttribute("checkIn", checkIn);
-                    response.sendRedirect(request.getContextPath() + "/checkIn/listOf.do");
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    request.setAttribute("message", ex.getMessage());
-                    request.setAttribute("controller", "error");
-                    request.setAttribute("action", "error");
-                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
-                }
-                break;
-            }
-            case "cancel": {
-                response.sendRedirect(request.getContextPath() + "/checkIn/listOf.do");
-                break;
-            }
-        }
-
-    }
-
+//    protected void create(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//
+//        try {
+//            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            request.setAttribute("message", ex.getMessage());
+//            request.setAttribute("controller", "error");
+//            request.setAttribute("action", "error");
+//            request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//        }
+//    }
+//
+//    protected void create_handler(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        CheckInRepository cir = new CheckInRepository();
+//        String op = request.getParameter("op");
+//        switch (op) {
+//            case "create": {
+//                try {
+//
+////                  int checkInID = Integer.parseInt(request.getParameter("checkInID"));
+//                    Date checkInTime = sdfDateTime.parse(request.getParameter("checkInTime"));
+//                    int userID = Integer.parseInt(request.getParameter("userID"));
+//                    CheckIn checkIn = new CheckIn(checkInTime, userID);
+//                    cir.create(checkIn);
+////                  request.setAttribute("checkIn", checkIn);
+//                    response.sendRedirect(request.getContextPath() + "/checkIn/listOf.do");
+//                } catch (Exception ex) {
+//                    ex.printStackTrace();
+//                    request.setAttribute("message", ex.getMessage());
+//                    request.setAttribute("controller", "error");
+//                    request.setAttribute("action", "error");
+//                    request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
+//                }
+//                break;
+//            }
+//            case "cancel": {
+//                response.sendRedirect(request.getContextPath() + "/checkIn/listOf.do");
+//                break;
+//            }
+//        }
+//    }
     protected void delete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CheckInRepository cir = new CheckInRepository();
@@ -145,7 +140,7 @@ public class CheckInController extends HttpServlet {
         }
     }
 
-    protected void readExcel1(HttpServletRequest request, HttpServletResponse response)
+    protected void readExcel(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        CheckInRepository cir = new CheckInRepository();
         CheckInService cis = new CheckInService();
@@ -159,7 +154,7 @@ public class CheckInController extends HttpServlet {
                     if (!fileName.equals("")) {
                         File file = new File(request.getServletContext().getAttribute("FILES_DIR") + File.separator + fileName);
                         String EXCEL_FILE_PATH = file.getAbsolutePath();
-                        List<CheckIn> list = cis.readExcel1(EXCEL_FILE_PATH);
+                        List<CheckIn> list = cis.readExcel(EXCEL_FILE_PATH);
                         for (CheckIn c : list) {
                             CheckIn ci = new CheckIn(c.getCheckInTime(), c.getUserID());
                             System.out.println(c.getCheckInID() + "-" + c.getCheckInTime());
@@ -182,11 +177,6 @@ public class CheckInController extends HttpServlet {
             default:
                 break;
         }
-
-    }
-
-    protected void readExcel(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
 
     }
 

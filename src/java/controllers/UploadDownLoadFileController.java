@@ -126,16 +126,19 @@ public class UploadDownLoadFileController extends HttpServlet {
                     System.out.println("Absolute Path at server=" + file.getAbsolutePath());
                     fileItem.write(file);
 //                request.setAttribute("message", "Upload successfully");
-                    out.write("File " + fileItem.getName() + " uploaded successfully.");
+                    if (!fileItem.getName().equals(null)) {
+                        out.write("File " + fileItem.getName() + " uploaded successfully.");
 //                request.getRequestDispatcher("/checkIn/listOf.do").forward(request, response);
-                    out.write("<br>");
-                    out.write("<a href=\"index.do" + "\">Back" + "</a>");
+                        out.write("<br>");
+                        out.write("<a href=\"index.do" + "\">Back" + "</a>");
 //                out.write("<br>");
 //                out.write("<a href=\"downloadFile.do?fileName=" + fileItem.getName() + "\">Download " + fileItem.getName() + "</a>");
+                    }
+
                 }
             } else {
                 request.setAttribute("message", "Please choose your file!!!");
-                 request.getRequestDispatcher("/uploadDowloadFile/index.do").forward(request, response);
+                request.getRequestDispatcher("/uploadDowloadFile/index.do").forward(request, response);
             }
 
         } catch (FileUploadException e) {
@@ -144,9 +147,9 @@ public class UploadDownLoadFileController extends HttpServlet {
             out.write("<a href=\"index.do" + "\">Back" + "</a>");
             e.printStackTrace();
         } catch (Exception e) {
-            out.write("Exception in uploading file.");
-            out.write("<br>");
-            out.write("<a href=\"index.do" + "\">Back" + "</a>");
+//            out.write("Exception in uploading file.");
+//            out.write("<br>");
+//            out.write("<a href=\"index.do" + "\">Back" + "</a>");
             e.printStackTrace();
         }
         out.write("</body></html>");

@@ -47,8 +47,12 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Shift Name</label>
                                         <div class="col-md-12">
-                                            <input type="text" placeholder="Shift Name" name="shiftName" value="${shiftTime.shiftName}"
-                                                   class="form-control form-control-line" />
+<!--                                            <input type="text" placeholder="Shift Name" name="shiftName" value="${shiftTime.shiftName}"
+                                                   class="form-control form-control-line" />-->
+                                            <select name="shiftName" class="form-control form-control-line" value="${shiftTime.shiftName}" >
+                                                <option value="Day Shift">Day Shift</option>
+                                                <option value="Night Shift">Night Shift</option> 
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -99,18 +103,19 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Status</label>
                                         <div class="col-md-12">
-                                            <select name="status"class="form-control form-control-line">
-                                                <option value="0">Available</option>
-                                                <option value="2">Not Available</option>
+                                            <select name="status" class="form-control form-control-line">
+                                                <option value="0" ${shiftTime.status == 0 ? 'selected' : ''}>Available</option>
+                                                <option value="2" ${shiftTime.status == 2 ? 'selected' : ''}>Not Available</option>
                                             </select>
                                         </div>
                                     </div>
 
+
                                     <div class="form-group">
                                         <label class="col-md-12">Note</label>
+
                                         <div class="col-md-12">
-                                            <input type="text" placeholder="Note" name="note" value="${shiftTime.note}"
-                                                   class="form-control form-control-line" />
+                                            <textarea type="text" maxlength="300" class="form-control form-control-line" placeholder="Note(Maximum: 300 characters)"  id="note"  name="note"  style=" max-height: 226px; min-width: 100%; min-height: 50px;"value="${shiftTime.note}">${shiftTime.note}</textarea>
                                         </div>
                                     </div>
 

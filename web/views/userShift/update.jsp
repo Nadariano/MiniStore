@@ -52,11 +52,12 @@
 
                                     <div class="form-group">
                                         <label class="col-md-12">Shift</label>
-                                        <div class="col-md-12">
-                                            <input type="number" placeholder="Shift ID" name="shiftID" value="${oldShiftID}"
-                                                   class="form-control form-control-line" />
-                                            <input type="hidden" name="oldShiftID" value="${oldShiftID}">
-                                        </div>
+                                        <select name="shiftID" class="form-control">
+                                            <c:forEach var="shift" items="${shiftList}" varStatus="loop">
+                                                <option value="${shift.shiftID}" ${shift.shiftID==oldShiftID ? "selected" : ""}>${shift.shiftID}</option>
+                                            </c:forEach>
+                                        </select>
+                                        <input type="hidden" name="oldShiftID" value="${oldShiftID}">  
                                     </div>
 
                                     <div class="form-group">
@@ -78,10 +79,10 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-12">Note</label>
+                                        <label class="col-md-12">Note:</label>
+
                                         <div class="col-md-12">
-                                            <input type="text" placeholder="Note" name="note" value="${userShift.note}"
-                                                   class="form-control form-control-line" />
+                                            <textarea type="text" maxlength="300" class="form-control form-control-line" placeholder="Note(Maximum: 300 characters)"  id="note"  name="note"  style=" max-height: 226px; min-width: 100%; min-height: 50px;" value="${userShift.note}">${userShift.note}</textarea>
                                         </div>
                                     </div>
 
@@ -103,7 +104,7 @@
                                         </div>
                                     </div>
                                 </form>
-
+                                <h3 style="color: red">${message}</h3>
                             </div>
                         </div>
                         <div class="col-md-2 col-12"></div>
