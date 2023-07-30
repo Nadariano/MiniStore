@@ -80,7 +80,44 @@
                         </script>
                     </c:if>
                     <hr/>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    
+                    <c:if test="${Account.roleName.equals('SALE') || Account.roleName.equals('GUARD')}">
+                        <h3>Processing Reports</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Report Title</th>
+                                     <th>Create Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="report" items="${list1}" varStatus="loop">
+                                    <tr>
+                                        <td>${report.reportTitle}</td>
+                                        <td>${report.createDate}</td>
+                                        <td><span class="badge bg-warning text-dark fs-6 px-1 py-0">${report.statusText}</span></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+
+                        <style>
+                            .table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                margin-top: 10px;
+                            }
+
+                            .table th,
+                            .table td {
+                                padding: 8px;
+                                border-bottom: 1px solid #ddd;
+                            }
+                        </style>
+                    </c:if>
+
+<!--                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                         <div class="card card-stats">
                             <div class="card-header card-header-success card-header-icon">
                                 <div class="card-icon">
@@ -95,63 +132,64 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-<!--                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="card card-stats">
-                            <div class="card-header card-header-warning card-header-icon">
-                                <div class="card-icon">
-                                    <i class="bi bi-person"></i>
-                                </div>
-                                <p class="card-category">Customers</p>
-                                <h3 class="card-title">200</h3>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    <i class="bi bi-clock"></i> Updated 10 minutes ago
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="card card-stats">
-                            <div class="card-header card-header-info card-header-icon">
-                                <div class="card-icon">
-                                    <i class="bi bi-box"></i>
-                                </div>
-                                <p class="card-category">Products</p>
-                                <h3 class="card-title">100</h3>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    <i class="bi bi-clock"></i> Updated 15 minutes ago
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="card card-stats">
-                            <div class="card-header card-header-danger card-header-icon">
-                                <div class="card-icon">
-                                    <i class="bi bi-cash"></i>
-                                </div>
-                                <p class="card-category">Revenue</p>
-                                <h3 class="card-title">$5000</h3>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    <i class="bi bi-clock"></i> Updated 20 minutes ago
-                                </div>
-                            </div>
-                        </div>
-                    </div>        -->
+                    </div>-->
+
+                    <!--                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="card card-stats">
+                                                <div class="card-header card-header-warning card-header-icon">
+                                                    <div class="card-icon">
+                                                        <i class="bi bi-person"></i>
+                                                    </div>
+                                                    <p class="card-category">Customers</p>
+                                                    <h3 class="card-title">200</h3>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <i class="bi bi-clock"></i> Updated 10 minutes ago
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="card card-stats">
+                                                <div class="card-header card-header-info card-header-icon">
+                                                    <div class="card-icon">
+                                                        <i class="bi bi-box"></i>
+                                                    </div>
+                                                    <p class="card-category">Products</p>
+                                                    <h3 class="card-title">100</h3>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <i class="bi bi-clock"></i> Updated 15 minutes ago
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="card card-stats">
+                                                <div class="card-header card-header-danger card-header-icon">
+                                                    <div class="card-icon">
+                                                        <i class="bi bi-cash"></i>
+                                                    </div>
+                                                    <p class="card-category">Revenue</p>
+                                                    <h3 class="card-title">$5000</h3>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <i class="bi bi-clock"></i> Updated 20 minutes ago
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>        -->
 
 
 
 
-                </div>
+<!--                </div>
 
                 Add more rows and columns as needed 
-            </div>
+            </div>-->
         </div>
 
     </body>

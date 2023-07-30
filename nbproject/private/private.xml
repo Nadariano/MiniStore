@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(30-07)/MiniStore/src/java/repositories/RecordRepository.java</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(30-07)/MiniStore/src/java/controllers/RecordController.java</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(30-07)/MiniStore/web/views/report/listUserReport.jsp</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(30-07)/MiniStore/src/java/controllers/UsersController.java</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(30-07)/MiniStore/web/views/attendance/list.jsp</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(30-07)/MiniStore/web/views/home/index.jsp</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(30-07)/MiniStore/src/java/repositories/ReportRepository.java</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(30-07)/MiniStore/src/java/controllers/ReportController.java</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(30-07)/MiniStore/src/java/controllers/AccountController.java</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(30-07)/MiniStore/web/views/report/list.jsp</file>
+            <file>file:/D:/SUMMER%202023/SWP391/THE%20LATEST%20MINISTORE%20(30-07)/MiniStore/src/java/controllers/HomeController.java</file>
+        </group>
     </open-files>
 </project-private>

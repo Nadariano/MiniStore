@@ -59,6 +59,7 @@ public class ReportController extends HttpServlet {
                 break;
             case "listUserReport":
                 listUserReport(request, response);
+                break;
             case "update":
                 update(request, response);
                 break;

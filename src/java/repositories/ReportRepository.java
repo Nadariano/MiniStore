@@ -96,6 +96,28 @@ public class ReportRepository {
         con.close();
         return list;
     }
+    public List<Report> selectStatusProcessing(int userID) throws SQLException {
+        List<Report> list = null;
+        //Tạo connection để kết nối vào DBMS
+        Connection con = DBContext.getConnection();
+        //Tạo đối tượng statement
+        PreparedStatement stm = con.prepareStatement("select reportTitle, createDate, report.status\n"
+                + "from report join users on report.userID = users.userID \n"
+                + "where report.userID = ? and report.status = 1");
+        stm.setInt(1, userID);
+        //Thực thi lệnh sql
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Report report = new Report();
+            report.setReportTitle(rs.getString("reportTitle"));
+            report.setCreateDate(rs.getDate("createDate"));
+            report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
+            list.add(report);
+        }
+        con.close();
+        return list;
+    }
 
     public void create(String reportTitle, String description, String plannedDate, String requestSoonTime, String requestLateTime, int status, String note, int userID, int shiftID, int typeID) throws SQLException, ParseException {
         LocalDate curDate = LocalDate.now();
