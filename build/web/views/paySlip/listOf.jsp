@@ -40,7 +40,7 @@
                             <div class="white-box">
                                 <div class="table-responsive">
                                     <table class="table table-striped " id="example">
-
+                                        <h5><b>(Currency: VNĐ)</b></h5>
                                         <thead>
                                             <tr>
                                                 <th>Pay Slip ID</th>
@@ -94,11 +94,19 @@
                                                     <td>${paySlip.bonus}</td>
                                                     <td>${paySlip.minus}</td>
                                                     <td>${paySlip.statusText3}</td>
-                                                    <td>
-                                                        <a tabindex="0" class="btn btn-sm btn-circle btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${dayOff.note}" data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip"><div class="arrow"></div><div class="popover-body text-white p-3"><span class="d-block">${dayOff.note}</span></div></div>'>
-                                                            <i class="bi bi-eye"></i>
-                                                        </a>
-                                                    </td>
+                                                   <td>
+                                                            <button tabindex="0" class="${empty paySlip.note ? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${paySlip.note}" 
+                                                                    data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
+                                                                    <div class="arrow">
+                                                                    </div>
+                                                                    <div class="popover-body text-white p-3">
+                                                                    <span class="d-block">${paySlip.note}
+                                                                    </span>
+                                                                    </div>
+                                                                    </div>' ${empty paySlip.note ? 'disabled' : ''}>
+                                                            <!--        <i class="${empty paySlip.note ? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
+                                                            </button>
+                                                        </td>
                                                     <td>${paySlip.salary + paySlip.bonus - paySlip.minus}</td>
                                                     <c:if test="${paySlip.status!=2}">
                                                         <td>
@@ -118,12 +126,13 @@
 
                                         </tbody>
                                         <%--<c:if test="${paySlip.status != 2}">--%>
-                                        <a href="<c:url value="/paySlip/done.do"/>" onclick="return confirm('Do you want to finish ?');" class="btn btn-sm btn-dropbox btn-rounded">
-                                            <i class="bi bi-check-circle"></i> Done
-                                        </a>
+                                        
                                         <%--</c:if>--%>
 
                                     </table>
+                                        <a  style="float: right" href="<c:url value="/paySlip/done.do"/>" onclick="return confirm('Do you want to finish ?');" class="btn btn-sm btn-dropbox btn-rounded">
+                                             Done <i class="bi bi-check-circle"></i>
+                                        </a>
                                 </div>
                             </div>
                         </div>

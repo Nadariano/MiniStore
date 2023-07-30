@@ -86,9 +86,25 @@
                                                     <td>${userShift.shiftID}</td>
                                                     <td>${userShift.date}</td>
                                                     <td>${userShift.statusText2}</td>
-                                                    <td>${userShift.note}</td>
+                                                  
+                                                     <td>
+                                                            <button tabindex="0" class="${empty userShift.note ? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${userShift.note}" 
+                                                                    data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
+                                                                    <div class="arrow">
+                                                                    </div>
+                                                                    <div class="popover-body text-white p-3">
+                                                                    <span class="d-block">${userShift.note}
+                                                                    </span>
+                                                                    </div>
+                                                                    </div>' ${empty userShift.note ? 'disabled' : ''}>
+                                                            <!--        <i class="${empty userShift.note ? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
+                                                            </button>
+                                                        </td>
+                                                    
+                                                    
+                                                    
                                                     <td>${userShift.otText}</td>
-                                                    <c:if test="${Account.roleName.equals('MANAGER') && userShift.status != 2}">
+                                                    <c:if test="${Account.roleName.equals('MANAGER') && userShift.status != 2 && (userShift.date>nowDate)}">
                                                         <td>
                                                             <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&oldShiftID=${userShift.shiftID}&oldDate=${userShift.date}"/>" class="btn btn-sm btn-github btn-rounded" title="Update">
                                                                 <i class="bi bi-pencil-square"></i>
@@ -106,7 +122,9 @@
                                             </c:forEach>
                                         </tbody>
                                     </table>
-                                    <a href="<c:url value="/userShift/done.do"/>" onclick="return confirm('Do you really want to finish?');" class="btn btn-dropbox btn-rounded"><i class="bi bi-check-circle"></i> Done</a>
+                                    <c:if test="${Account.roleName.equals('MANAGER')}">
+                                          <a href="<c:url value="/userShift/done.do"/>" onclick="return confirm('Do you really want to finish?');" class="btn btn-dropbox btn-rounded"><i class="bi bi-check-circle"></i> Done</a>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -173,7 +191,7 @@
                                                                                     <i class="bi bi-person-dash-fill"></i>
                                                                                 </a>
                                                                             </c:if>
-                                                                            <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&oldShiftID=${userShift.shiftID}&oldDate=${userShift.date}"/>" ${((listLocalDates[i]<nowLocalDate) || !Account.roleName.equals('MANAGER')) ? "style='pointer-events: none'" : ""}>${userShift.fullName}</a>
+                                                                            <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&oldShiftID=${userShift.shiftID}&oldDate=${userShift.date}"/>" ${((listLocalDates[i]<=nowLocalDate) || !Account.roleName.equals('MANAGER')) ? "style='pointer-events: none'" : ""}>${userShift.fullName}</a>
                                                                             <span class="tooltiptext">
                                                                                 UserID: ${userShiftt.userID} -
                                                                                 Date: ${userShiftt.date} <br/>

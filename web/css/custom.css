@@ -61,9 +61,14 @@
 }
 .welcome-title{
     text-align: center;
-    font-family: fantasy;
-    font-size: 250%;
+    font-family: monospace;
 }
+.welcome-title{
+    text-align: center;
+    font-family: monospace;
+    
+}
+
 .profile-content{
     display: flex;
     justify-content: center;
@@ -205,7 +210,7 @@
     background-color: greenyellow;
     border-radius: 25px 25px;
 }
-.tooltipp .tooltiptext {
+.tooltiptext {
     visibility: hidden;
     width: 200px;
     background-color: #555;
@@ -218,7 +223,7 @@
     position: absolute;
     z-index: 1;
     top: -5px;
-    left: 105%;
+    right: 105%;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
@@ -246,13 +251,23 @@
     border: 1px solid #000;
 }
 .overflow {
-  overflow-y:hidden;
-  overflow-x:hidden;
+    overflow-y:hidden;
+    overflow-x:hidden;
 }
 .cus-table{
-   
+
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
     width: 100px;
+}
+
+.btn-disabled{
+    background-color: #C0C0C0;
+    color:#404040;
+    text-align: center;
+}
+.border-rounded{
+    border-radius:  15px;
+    
 }

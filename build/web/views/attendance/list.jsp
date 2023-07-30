@@ -117,9 +117,17 @@
                                                     <td>${attendance.duration}</td>
                                                     <td>${attendance.statusText}</td>
                                                     <td>
-                                                        <a tabindex="0" class="btn btn-sm btn-circle btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${attendance.note}" data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip"><div class="arrow"></div><div class="popover-body text-white p-3"><span class="d-block">${attendance.note}</span></div></div>'>
-                                                            <i class="bi bi-eye"></i>
-                                                        </a>
+                                                        <button tabindex="0" class="${empty attendance.note ? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${attendance.note}" 
+                                                                data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
+                                                                <div class="arrow">
+                                                                </div>
+                                                                <div class="popover-body text-white p-3">
+                                                                <span class="d-block">${attendance.note}
+                                                                </span>
+                                                                </div>
+                                                                </div>' ${empty attendance.note ? 'disabled' : ''}>
+                                                        <!--        <i class="${empty users.note ? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
+                                                        </button>
                                                     </td>
 
                                                     <c:choose>
@@ -151,7 +159,7 @@
                                         </tbody>
                                     </table>
                                     <%--<c:if test="${attendance.status == 2}">--%>
-                                    <a style="float: right" href="<c:url value="/attendance/done.do"/>"  onclick="return confirm('Do you really want to finish?');" class="btn btn-dropbox btn-rounded" title="Done" onclick="return confirm('Do you want to finish ?');">
+                                    <a style="float: right" href="<c:url value="/attendance/done.do"/>"  onclick="return confirm('Do you really want to finish?');" class="btn btn-dropbox btn-rounded">
                                         Done <i class="bi bi-check-circle"></i>
                                     </a>
                                     <%--</c:if>--%>

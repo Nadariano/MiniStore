@@ -59,25 +59,25 @@
                                             <form action="<c:url value="/paySlip/updateMyPaySlip.do"  />">
                                                 <tr>
                                                     <!--<td>${loop.count}</td>-->
-                                                    <td>
-                                                        <input disabled type="number" id="paySlipID" class="form-control" value="${paySlip.paySlipID}">
+                                                    <td>${paySlip.paySlipID}
+                                                        <!--<input disabled type="number" id="paySlipID" class="form-control" value="${paySlip.paySlipID}">-->
                                                         <input type="hidden" name="paySlipID" value="${paySlip.paySlipID}">
                                                     </td>   
-                                                    <td>
-                                                        <input disabled type="number" id="userID" class="form-control" value="${paySlip.userID}">
+                                                    <td>${paySlip.userID}
+                                                        <!--<input disabled type="number" id="userID" class="form-control" value="${paySlip.userID}">-->
                                                         <input type="hidden" name="userID" value="${paySlip.userID}">
                                                     </td>
-                                                    <td>
-                                                        <input type="text" id="fullName" name="fullName" class="form-control" value="${paySlip.fullName}"/>
+                                                    <td>${paySlip.fullName}
+                                                        <input type="hidden" id="fullName" name="fullName" class="form-control" value="${paySlip.fullName}"/>
                                                     </td>
-                                                    <td>
-                                                        <input type="number" id="salary" name="salary" class="form-control" value="${paySlip.salary}"/>
+                                                    <td>${paySlip.salary}
+                                                        <input type="hidden" id="salary" name="salary" class="form-control" value="${paySlip.salary}"/>
                                                     </td>
-                                                    <td>
-                                                        <input type="number" id="bonus" name="bonus" class="form-control" value="${paySlip.bonus}"/>
+                                                    <td>${paySlip.bonus}
+                                                        <input type="hidden" id="bonus" name="bonus" class="form-control" value="${paySlip.bonus}"/>
                                                     </td>
-                                                    <td>
-                                                        <input type="number" id="minus" name="minus" class="form-control" value="${paySlip.minus}"/>
+                                                    <td>${paySlip.minus}
+                                                        <input type="hidden" id="minus" name="minus" class="form-control" value="${paySlip.minus}"/>
                                                     </td>
                                                     <td>
                                                         <input type="hidden" name="status" value="${paySlip.status}">
@@ -95,32 +95,22 @@
                                                                 <label for= "confirm2">Disagree</label>
                                                             </div>
                                                         </c:if>
-
-                                                        <c:if test="${paySlip.status==1}">
-                                                            <div class= "form-check">
-                                                                <input type= "radio"id= "confirm1"name= "confirm"value= "Agree">
-                                                                <label for= "confirm1">Agree</label>
-                                                            </div>
-                                                            <div class= "form-check">
-                                                                <input type= "radio"id= "confirm2"name= "confirm"value= "Disagree">
-                                                                <label for= "confirm2">Disagree</label>
-                                                            </div> 
-                                                        </c:if> 
                                                     </td> 
-                                                    <td> 
-                                                        <input type= "text"id= "note"name= "note"class= "form-control"value= "${paySlip.note}"/> 
+                                                    <td><c:if test="${paySlip.status==1}">${paySlip.note}</c:if>
+                                                        <input type= "${paySlip.status==0 ? 'text' : 'hidden' }" id= "note"name= "note"class= "form-control"value= "${paySlip.note}"/> 
                                                     </td> 
-                                                    <td>
-                                                        <input  type ="text" class= "form-control" value ="${paySlip.salary + paySlip.bonus - paySlip.minus}">
+                                                    <td>${paySlip.salary + paySlip.bonus - paySlip.minus}
+                                                        <input  type ="hidden" class= "form-control" value ="${paySlip.salary + paySlip.bonus - paySlip.minus}">
                                                     </td>
 
                                                     <td>
                                                         <c:if test="${paySlip.status == 0}">
                                                             <button type="submit" class="btn btn-outline-success" name="op" value="updateMyPaySlip">Send<i class="bi bi-check-square"></i></button>
                                                             </c:if>
-                                                    </td>             
-                                                </tr>
-                                            </form>
+                                                            <c:if test="${paySlip.status == 1}">Sent</c:if>
+                                                        </td>             
+                                                    </tr>
+                                                </form>
                                         </c:forEach>
                                         </tbody>
                                     </table>
