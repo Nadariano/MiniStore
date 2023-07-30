@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.Account;
+import repositories.ReportRepository;
 import repositories.UsersRepository;
 
 /**
@@ -53,6 +54,7 @@ public class HomeController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         UsersRepository ur = new UsersRepository();
+        ReportRepository rp= new ReportRepository();
         Account acc = (Account) session.getAttribute("Account");
         String role = acc.getRoleName();
         switch (role) {
@@ -74,6 +76,21 @@ public class HomeController extends HttpServlet {
                     Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
+            }
+            break;
+            case "MANAGER": {
+            try {
+                int countAllReports = rp.countAll();
+                List<Integer> statusCount = rp.countBasedStatus();
+                List<String> typeNames = rp.listType();
+                List<Integer> typeCount = rp.countBasedType();
+                request.setAttribute("allReports", countAllReports);
+                request.setAttribute("statusCount", statusCount);
+                request.setAttribute("typeNames", typeNames);
+                request.setAttribute("typeCount", typeCount);
+            } catch (SQLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             }
             break;
         }

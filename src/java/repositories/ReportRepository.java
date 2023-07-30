@@ -490,4 +490,60 @@ public class ReportRepository {
         return list;
     }
 
+    public int countAll() throws SQLException {
+        int count = 0;
+        Connection con = DBContext.getConnection();
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("select count(reportID) as countAll from Report");
+        if (rs.next()) {
+        count = rs.getInt("countAll");
+        }
+        con.close();
+        return count;
+    }
+    
+    public List<Integer> countBasedType() throws SQLException{
+        List<Integer> typeCount = new ArrayList<Integer>();
+        int count = 0;
+        Connection con = DBContext.getConnection();
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("select typeID, count(reportID) as typeCount from Report group by typeID");
+        while (rs.next()) {
+        count = rs.getInt("typeCount");
+        typeCount.add(count);
+        }
+        con.close();
+        return typeCount;
+    }
+    
+    public List<String> listType() throws SQLException{
+        List<String> listTypeName = new ArrayList<String>();
+        String typeName = null;
+        Connection con = DBContext.getConnection();
+         Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("select* from reportType");
+        while (rs.next()) {
+        typeName = rs.getString("typeName");
+        listTypeName.add("'"+typeName+"'");
+        //This serves for generating chart in home/index.jsp
+        //The form of list return must like this: ['ADMIN', 'MANAGER', 'SALE', 'GUARD']
+        //If written in the old way: [ADNUB,MANAGER,SALE,GUARD], the chart cannot function
+        }
+        con.close();
+        return listTypeName;
+    }
+    
+    public List<Integer> countBasedStatus() throws SQLException{
+        List<Integer> statusCount = new ArrayList<Integer>();
+        int count = 0;
+        Connection con = DBContext.getConnection();
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("select status,count(status) as statusCount from Report group by status");
+        while (rs.next()) {
+        count = rs.getInt("statusCount");
+        statusCount.add(count);
+        }
+        con.close();
+        return statusCount;
+    }
 }
