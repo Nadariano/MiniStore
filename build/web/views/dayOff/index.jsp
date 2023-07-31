@@ -43,7 +43,7 @@
                                         <th>No.</th>
                                         <!--<th>Day-Off ID</th>-->
                                         <th style="text-align: center">Date</th>
-                                        <th  style="text-align: center">Coefficient</th>
+                                        <!--<th  style="text-align: center">Coefficient</th>-->
                                         <th>Description</th>
                                         <th>Status</th>
                                         <th>Note</th>
@@ -58,7 +58,7 @@
                                             <td>${loop.count}</td>
                                             <!--<td>${dayOff.dayOffID}</td>-->                                       
                                             <td  style="text-align: center">${dayOff.date}</td>
-                                            <td  style="text-align: center">${dayOff.coefficient}</td>
+                                            <!--<td  style="text-align: center">${dayOff.coefficient}</td>-->
                                             <td>${dayOff.description}</td>
                                             <td>${dayOff.statusText}</td>
                                             <td>

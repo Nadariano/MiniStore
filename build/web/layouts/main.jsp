@@ -156,11 +156,12 @@
                                                                                                             aria-hidden="true"></i><span class="hide-menu">Schedule </span></a>
                                 </li>
                             </c:if>
-
-                            <li>
-                                <a href="<c:url value="/dayOff/index.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
-                                                                                                    aria-hidden="true"></i><span class="hide-menu">Day Off</span></a>
-                            </li>
+                            <c:if test="${Account.roleName.equals('MANAGER')}">
+                                <li>
+                                    <a href="<c:url value="/dayOff/index.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
+                                                                                                        aria-hidden="true"></i><span class="hide-menu">Day Off</span></a>
+                                </li>
+                            </c:if>
 
                             <c:choose>
                                 <c:when test="${Account.roleName.equals('MANAGER')}">
@@ -213,11 +214,13 @@
                                                             <a href="<c:url value="/error/404.jsp"/>" class="waves-effect"><i class="fa fa-info-circle fa-fw"
                                                                                                                               aria-hidden="true"></i><span class="hide-menu">Error 404</span></a>
                                                         </li>-->
+                            <c:if test="${Account.roleName.equals('MANAGER')}">
+                                <li>
+                                    <a href="<c:url value="/uploadDownloadFile/index.do"/>"><i class="bi bi-file-earmark-plus"></i> <span class="hide-menu">Upload File 
+                                            (Check In or Check Out File)</span></a>
+                                </li>
+                            </c:if>
 
-                            <li>
-                                <a href="<c:url value="/uploadDownloadFile/index.do"/>"><i class="bi bi-file-earmark-plus"></i> <span class="hide-menu">Upload File 
-                                        (Check In or Check Out File)</span></a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -255,7 +258,7 @@
         <script src="<c:url value="/js/uploadFile.js"/>"></script>
         <script src="<c:url value="/js/changeSearchType.js"/>"></script>
         <script src="<c:url value="/js/revealPass.js"/>"></script>
-         <script src="<c:url value="/js/filterEmployeeList.js"/>"></script>
+        <script src="<c:url value="/js/filterEmployeeList.js"/>"></script>
     </body>
 
 </html>

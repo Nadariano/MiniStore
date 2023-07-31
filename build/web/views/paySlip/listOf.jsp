@@ -40,11 +40,12 @@
                             <div class="white-box">
                                 <div class="table-responsive">
                                     <table class="table table-striped " id="example">
-                                        <h5><b>(Currency: VNĐ)</b></h5>
+                                        <h5><b>(Currency: VND)</b></h5>
                                         <thead>
                                             <tr>
-                                                <th>Pay Slip ID</th>
-                                                <th>User ID</th>
+                                                <th> No.</th>
+                                                <!--<th>Pay Slip ID</th>-->
+                                                <th style="text-align: center">User ID</th>
                                                 <th style="text-align: center">Full Name</th>
                                                 <th style="text-align: center">Salary</th>
                                                 <th style="text-align: center" >Bonus Money</th>
@@ -87,8 +88,9 @@
                                                                                                             <input type="text" id="note" name="note" value="${paySlip.note}"/>
                                                                                                         </td>
                                                     -->
-                                                    <td>${paySlip.paySlipID}</td>
-                                                    <td>${paySlip.userID}</td>
+                                                    <td>${loop.count}</td>
+                                                    <!--<td>${paySlip.paySlipID}</td>-->
+                                                    <td style="text-align: center">${paySlip.userID}</td>
                                                     <td style="text-align: center">${paySlip.fullName}</td>
                                                     <td style="text-align: center" >${paySlip.salary}</td>
                                                     <td style="text-align: center" >${Math.round(paySlip.bonus)}</td>

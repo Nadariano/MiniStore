@@ -93,7 +93,7 @@ public class AccountController extends HttpServlet {
                         request.setAttribute("message", "Your account is currently unusable. Contact the manager for more detail.");
                     }
                 } else {
-                    request.setAttribute("message", "Incorrect userName or password, please check again.");
+                    request.setAttribute("message", "Incorrect the User Name or Password, please check again.");
                 }
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
                 break;

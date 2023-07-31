@@ -52,10 +52,10 @@
                                                 <th>Shift Name</th>
                                                 <th>Time Start</th>
                                                 <th>Time End</th>
-                                                <th  style="text-align: center">Coefficient Of Shift</th>
+<!--                                                <th  style="text-align: center">Coefficient Of Shift</th>
                                                 <th  style="text-align: center">Coefficient Of Overtime</th>
                                                 <th  style="text-align: center">Coefficient Of Day Off</th>
-                                                <th>Wage</th>
+                                                <th>Wage</th>-->
                                                 <th>Status</th>
                                                 <th>Note</th>
                                                     <c:if test="${Account.roleName.equals('MANAGER')}">
@@ -71,10 +71,10 @@
                                                     <td>${shiftTime.shiftName}</td>
                                                     <td>${shiftTime.timeStart}</td>
                                                     <td>${shiftTime.timeEnd}</td>
-                                                    <td style="text-align: center">${shiftTime.coeShift}</td>
+<!--                                                    <td style="text-align: center">${shiftTime.coeShift}</td>
                                                     <td style="text-align: center">${shiftTime.coeOT}</td>
                                                     <td style="text-align: center">${shiftTime.coeDayOff}</td>
-                                                    <td>${shiftTime.wage}</td>
+                                                    <td>${shiftTime.wage}</td>-->
                                                     <td>${shiftTime.statusText}</td>
                                                     <!--<td>
                                                       <a data-toggle="collapse" href="#note-${shiftTime.shiftID}" role="button" aria-expanded="false" aria-controls="note-${shiftTime.shiftID}" class="btn btn-sm btn-circle btn-info">
@@ -105,9 +105,9 @@
                                                             <a href="<c:url value="/shiftTime/update.do?shiftID=${shiftTime.shiftID}" />" class="btn btn-sm btn-github btn-rounded" title="Update">
                                                                 <i class="bi bi-pencil-square"></i>
                                                             </a>
-                                                            <a href="<c:url value="/shiftTime/delete.do?shiftID=${shiftTime.shiftID}" />" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-googleplus btn-rounded" title="Delete">
+<!--                                                            <a href="<c:url value="/shiftTime/delete.do?shiftID=${shiftTime.shiftID}" />" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-googleplus btn-rounded" title="Delete">
                                                                 <i class="bi bi-trash"></i>
-                                                            </a>
+                                                            </a>-->
                                                         </c:if>
                                                     </td>
 
