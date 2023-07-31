@@ -102,6 +102,7 @@
                                                 <th class="text-center ">OPERATION</th>
                                             </tr>
                                             <tr>
+
                                                 <td>
                                                     <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div>
                                                 </td>

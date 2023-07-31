@@ -42,15 +42,25 @@
                             <div class="white-box">
                                 <div class="table-responsive">
                                     <table class="table table-striped " id="example">
-                                        <h5><b>(Currency: VNĐ)</b></h5>
+                                        <h5><b>(Currency: VND)</b></h5>
                                         <thead>
                                             <tr>
+
                                                 <th>Pay Slip ID</th>
                                                 <th>User ID</th>
                                                 <th>Full Name</th>
                                                 <th>Salary(₫)</th>
                                                 <th>Bonus Money</th>
                                                 <th>Minus Money</th>
+
+<!--                                                 <th> No.</th>
+                                                <!--<th>Pay Slip ID</th>-->
+                                                <th style="text-align: center">User ID</th>
+                                                <th style="text-align: center">Full Name</th>
+                                                <th style="text-align: center">Salary</th>
+                                                <th style="text-align: center" >Bonus Money</th>
+                                                <th style="text-align: center" >Minus Money</th> --> -->
+
                                                 <th>Status</th>
                                                 <th>Note</th>
                                                 <th>Total</th>
@@ -119,6 +129,28 @@
     <fmt:formatNumber value="${paySlip.salary + paySlip.bonus - paySlip.minus}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
 </td>
 
+<!--                                                     <td>${loop.count}</td>
+                                                    <!--<td>${paySlip.paySlipID}</td>-->
+                                                    <td style="text-align: center">${paySlip.userID}</td>
+                                                    <td style="text-align: center">${paySlip.fullName}</td>
+                                                    <td style="text-align: center" >${paySlip.salary}</td>
+                                                    <td style="text-align: center" >${Math.round(paySlip.bonus)}</td>
+                                                    <td style="text-align: center" >${Math.round(paySlip.minus)}</td>
+                                                    <td>${paySlip.statusText3}</td>
+                                                   <td>
+                                                            <button tabindex="0" class="${empty paySlip.note ? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${paySlip.note}" 
+                                                                    data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
+                                                                    <div class="arrow">
+                                                                    </div>
+                                                                    <div class="popover-body text-white p-3">
+                                                                    <span class="d-block">${paySlip.note}
+                                                                    </span>
+                                                                    </div>
+                                                                    </div>' ${empty paySlip.note ? 'disabled' : ''}>
+                                                            <!--        <i class="${empty paySlip.note ? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
+                                                            </button>
+                                                        </td>
+                                                    <td>${ Math.round(paySlip.salary + paySlip.bonus - paySlip.minus)}</td> -->
                                                     <c:if test="${paySlip.status!=2}">
                                                         <td>
                                                             <a href="<c:url value="/paySlip/update.do?paySlipID=${paySlip.paySlipID}&userID=${paySlip.userID}"/>" class="btn btn-sm btn-github btn-rounded" title="Update">

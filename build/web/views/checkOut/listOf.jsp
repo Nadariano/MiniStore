@@ -55,7 +55,7 @@
                                 <th>Check Out ID</th>
                                 <th>Check Out Time</th>
                                 <th>Full Name</th>
-                                <th>Operations</th>
+                                <!--<th>Operations</th>-->
                             </tr>
                             <c:forEach var="checkOut" items="${list}" varStatus="loop">
                                 <tr>
@@ -63,11 +63,11 @@
                                     <td>${checkOut.checkOutID}</td>
                                     <td>${checkOut.checkOutTime}</td>
                                     <td>${checkOut.fullName}</td>
-                                    <td>
+<!--                                    <td>
                                         <a href="<c:url value="/checkOut/delete.do?checkOutID=${checkOut.checkOutID}" />" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-googleplus btn-rounded" title="Delete">
                                             <i class="bi bi-trash"></i>
                                         </a>
-                                    </td>
+                                    </td>-->
 
                                 </tr>
                             </c:forEach>

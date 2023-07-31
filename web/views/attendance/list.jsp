@@ -118,6 +118,22 @@
                                                 <td> <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
                                                 <td> <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
                                                  <td> <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
+
+<!--                                                 <th>No.</th>
+                                                <th style="text-align: center">Date</th>
+                                                <th>User ID</th>
+                                                <th style="text-align: center">Author</th>
+                                                <th>Shift ID</th>
+                                                <th>Check In</th>
+                                                <th>Check Out</th>
+                                                <th>Soon Time</th>
+                                                <th>Late Time</th>
+                                                <th>Duration</th>
+                                                <th>Status</th>
+                                                <th>Note</th>
+                                                <th>Confirmation</th>
+                                                <th>Operation</th> -->
+
                                             </tr>
                                         </thead>
                                         <tbody>
