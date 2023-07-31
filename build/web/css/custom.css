@@ -271,3 +271,10 @@
     border-radius:  15px;
     
 }
+.hover-disabled{
+    pointer-events: none;
+}
+.text-bold{
+    font-weight: bold;
+}
+.flexs{text-align: center}

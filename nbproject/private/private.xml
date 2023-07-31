@@ -3,13 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/web/views/users/listOf.jsp</file>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/src/java/repositories/ReportRepository.java</file>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/web/views/report/list.jsp</file>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/src/java/controllers/HomeController.java</file>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/web/views/report/listUserReport.jsp</file>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/src/java/repositories/UsersRepository.java</file>
-            <file>file:/C:/Users/acer/Desktop/GitHubDesktop_MiniStore/MiniStore/web/views/home/index.jsp</file>
+
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Latest/MiniStore/web/views/dayOff/index.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Latest/MiniStore/web/views/userShift/listOf.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Latest/MiniStore/web/views/checkOut/create.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Latest/MiniStore/web/views/paySlip/listOf.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Latest/MiniStore/web/views/checkIn/listOf.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Latest/MiniStore/src/java/controllers/AttendanceController.java</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Latest/MiniStore/src/java/controllers/ShiftTimeController.java</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Latest/MiniStore/src/java/repositories/AttendanceRepository.java</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Latest/MiniStore/web/views/paySlip/myPaySlip.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Latest/MiniStore/web/views/attendance/list.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Latest/MiniStore/src/java/controllers/AccountController.java</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Latest/MiniStore/web/views/checkOut/listOf.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Latest/MiniStore/web/views/shiftTime/listOf.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Latest/MiniStore/web/views/attendance/listOfUsers.jsp</file>
+            <file>file:/D:/SUMMER23/SWP391/Ministore_Latest/MiniStore/web/layouts/main.jsp</file>
         </group>
     </open-files>
 </project-private>

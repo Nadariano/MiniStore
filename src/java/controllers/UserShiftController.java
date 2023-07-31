@@ -185,7 +185,12 @@ public class UserShiftController extends HttpServlet {
                 try {
                     int userID = Integer.parseInt(request.getParameter("userID"));
                     int shiftID = Integer.parseInt(request.getParameter("shiftID"));
-                    Date date = sdfDate.parse(request.getParameter("date"));
+
+                    Date date = null;
+                    if (!request.getParameter("date").equals("")) {
+                        date = sdfDate.parse(request.getParameter("date"));
+                    }
+
                     int status = Integer.parseInt(request.getParameter("status"));
                     String note = request.getParameter("note");
                     boolean isOT = Boolean.parseBoolean(request.getParameter("isOT"));
@@ -196,7 +201,12 @@ public class UserShiftController extends HttpServlet {
                 } catch (Exception ex) {
                     try {
                         ex.printStackTrace();
-                        request.setAttribute("message", ex.getMessage());
+                        if (request.getParameter("date").equals("")) {
+                            request.setAttribute("msg", "Please enter the date !!!");
+                        } else {
+                            request.setAttribute("msg", "The user already has been in this shift!!!");
+                        }
+
                         List<Users> userList = UsersRepository.select();
                         request.setAttribute("usl", userList);
                         List<ShiftTime> shiftList = ShiftTimeRepository.select();
@@ -319,6 +329,7 @@ public class UserShiftController extends HttpServlet {
             request.getRequestDispatcher("/layouts/main.jsp").forward(request, response);
         }
     }
+
     protected void done(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserShiftRepository usr = new UserShiftRepository();
