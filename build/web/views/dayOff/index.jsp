@@ -17,7 +17,7 @@
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Day-off list</h4>
+                    <h4 class="page-title">Holiday list</h4>
                 </div>
 
 
@@ -34,7 +34,7 @@
             <!-- /row -->
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="white-box">
+                    <div class="white-box border-rounded">
                         <div class="table-responsive">
                             <table class="table table-striped " id="example">
 
@@ -52,7 +52,7 @@
                                             </c:if>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="helvetica">
                                     <c:forEach var="dayOff" items="${list}" varStatus="loop">
                                         <tr>
                                             <td>${loop.count}</td>

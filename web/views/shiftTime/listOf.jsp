@@ -42,7 +42,7 @@
                     <!-- /row -->
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="white-box">
+                            <div class="white-box border-rounded">
                                 <div class="table-responsive">
                                     <table class="table table-responsive table-striped " id="example">
                                         <thead>

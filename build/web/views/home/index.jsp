@@ -14,7 +14,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
     </head>
-    <body>
+    <body class="cursive">
         <div class="preloader">
             <div class="cssload-speeding-wheel"></div>
         </div>
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12 white-box">
+                <div class="col-sm-12 white-box  border-rounded">
                     <!--DASHBOARD FOR ADMIN-->
                     <c:if test="${Account.roleName.equals('ADMIN')}">
                         <h4>Accounts: (Total: ${allUser})</h4>
@@ -83,10 +83,10 @@
                     <c:if test="${Account.roleName.equals('MANAGER')}">
                         <h4>Total reports/applications: ${allReports}</h4>
                         <div class="row">
-                            <div class="progress progress-animated col-md-6" style="height: 30px;">
-                                <div class="progress-bar bg-success p-10" role="progressbar" style="width: ${(statusCount[0] / allReports) *100}%;  font-size: 250%" aria-valuenow="${statusCount[0]}" aria-valuemin="0" aria-valuemax="${allReports}">${statusCount[0]}</div>
-                                <div class="progress-bar progress-bar-striped bg-primary active p-10" role="progressbar" style="width: ${(statusCount[1] / allReports) *100}%; font-size: 250%" aria-valuenow="${statusCount[1]}" aria-valuemin="0" aria-valuemax="${allReports}">${statusCount[1]}</div>
-                                <div class="progress-bar bg-danger p-10" role="progressbar" style="width: ${(statusCount[2]/ allReports) *100}%; font-size: 250%" aria-valuenow="${statusCount[2]}" aria-valuemin="0" aria-valuemax="${allReports}">${statusCount[2]}</div>
+                            <div class="progress progress-animated col-md-6 " style="height: 30px;">
+                                <div class="progress-bar bg-success p-10" role="progressbar" style="width: ${(statusCount[0] / allReports) *100}%;  font-size: 150%" aria-valuenow="${statusCount[0]}" aria-valuemin="0" aria-valuemax="${allReports}">${statusCount[0]}</div>
+                                <div class="progress-bar progress-bar-striped bg-primary active p-10" role="progressbar" style="width: ${(statusCount[1] / allReports) *100}%; font-size: 150%" aria-valuenow="${statusCount[1]}" aria-valuemin="0" aria-valuemax="${allReports}">${statusCount[1]}</div>
+                                <div class="progress-bar bg-danger p-10" role="progressbar" style="width: ${(statusCount[2]/ allReports) *100}%; font-size: 150%" aria-valuenow="${statusCount[2]}" aria-valuemin="0" aria-valuemax="${allReports}">${statusCount[2]}</div>
 
                             </div> 
                             <div class="col-md-6">
