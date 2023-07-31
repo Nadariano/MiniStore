@@ -41,7 +41,6 @@
                                         <h5><b>(Currency: VND)</b></h5>
                                         <thead>
                                             <tr>
-
                                                 <!--<th>No.</th>-->
                                                 <th>Pay Slip ID</th>
                                                 <th>User ID</th>
@@ -50,7 +49,14 @@
                                                 <th>Bonus Money(₫)</th>
                                                 <th>Minus Money(₫)</th>
                                                 <th>Status</th>
-
+<!--                                                 <th>No.</th>
+                                                <!--<th>Pay Slip ID</th>-->
+                                                <th style="text-align: center">User ID</th>
+                                                <th style="text-align: center">Full Name</th>
+                                                <th style="text-align: center">Salary</th>
+                                                <th style="text-align: center">Bonus Money</th>
+                                                <th style="text-align: center">Minus Money</th>
+                                                <th style="text-align: center">Status</th> -->
                                                 <th>Confirmation</th>
                                                 <th style="text-align: center">Note</th>
                                                 <th style="text-align: center">Total</th>
@@ -84,7 +90,6 @@
                                                     </td>
                                                     <td>
                                                         <fmt:formatNumber value="${paySlip.minus}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
-
 <!--                                                     <td style="text-align: center">${Math.round(paySlip.salary)}
                                                         <input type="hidden" id="salary" name="salary" class="form-control" value="${paySlip.salary}"/>
                                                     </td>
