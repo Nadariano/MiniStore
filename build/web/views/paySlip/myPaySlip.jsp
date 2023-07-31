@@ -42,15 +42,19 @@
                                         <thead>
                                             <tr>
                                                 <!--<th>No.</th>-->
+
                                  
-<!--                                                 <th>No.</th>
+
+                                                 <th>No.</th>
                                                 <!--<th>Pay Slip ID</th>-->
                                                 <th style="text-align: center">User ID</th>
                                                 <th style="text-align: center">Full Name</th>
                                                 <th style="text-align: center">Salary</th>
                                                 <th style="text-align: center">Bonus Money</th>
                                                 <th style="text-align: center">Minus Money</th>
+
                                                 <th style="text-align: center">Status</th> 
+
                                                 <th>Confirmation</th>
                                                 <th style="text-align: center">Note</th>
                                                 <th style="text-align: center">Total</th>
@@ -73,8 +77,10 @@
                                                     <td style="text-align: center">${paySlip.fullName}
                                                         <input type="hidden" id="fullName" name="fullName" class="form-control" value="${paySlip.fullName}"/>
                                                     </td>
+
                                                    
                                                    <td style="text-align: center">${Math.round(paySlip.salary)}
+
                                                         <input type="hidden" id="salary" name="salary" class="form-control" value="${paySlip.salary}"/>
                                                     </td>
                                                     <td style="text-align: center">${Math.round(paySlip.bonus)}

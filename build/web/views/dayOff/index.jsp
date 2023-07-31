@@ -45,7 +45,7 @@
                                         <th style="text-align: center">Date</th>
                                         <!--<th  style="text-align: center">Coefficient</th>-->
                                         <th>Description</th>
-                                        <th>Status</th>
+                                        <!--<th>Status</th>-->
                                         <th>Note</th>
                                             <c:if test="${Account.roleName.equals('ADMIN')}">
                                             <th>Operation</th>
@@ -60,7 +60,7 @@
                                             <td  style="text-align: center">${dayOff.date}</td>
                                             <!--<td  style="text-align: center">${dayOff.coefficient}</td>-->
                                             <td>${dayOff.description}</td>
-                                            <td>${dayOff.statusText}</td>
+                                            <!--<td>${dayOff.statusText}</td>-->
                                             <td>
                                                 <button tabindex="0" class="${empty dayOff.note ||dayOff.note.equals("N/A")? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${dayOff.note}" 
                                                                     data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">

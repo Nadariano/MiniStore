@@ -96,7 +96,7 @@
 
                                             <td>${paySlip.statusText3}</td>
                                             <td>
-                                                <a tabindex="0" class="btn btn-sm btn-circle btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${dayOff.note}" data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip"><div class="arrow"></div><div class="popover-body text-white p-3"><span class="d-block">${dayOff.note}</span></div></div>'>
+                                                <a tabindex="0" class="btn btn-sm btn-circle btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${dayOff.note}" data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip"><div class="arrow"></div><div class="popover-body text-white p-3" style="padding: 5%"><span class="d-block">${dayOff.note}</span></div></div>'>
                                                     <i class="bi bi-eye"></i>
                                                 </a>
                                             </td>

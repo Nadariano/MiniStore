@@ -46,6 +46,7 @@
                                         <thead>
                                             <tr>
 
+
                                             
 
                                                <th> No.</th>
@@ -54,7 +55,9 @@
                                                 <th style="text-align: center">Full Name</th>
                                                 <th style="text-align: center">Salary</th>
                                                 <th style="text-align: center" >Bonus Money</th>
+
                                                 <th style="text-align: center" >Minus Money</th> 
+
 
                                                 <th>Status</th>
                                                 <th>Note</th>
@@ -94,9 +97,11 @@
                                                                                                             <input type="text" id="note" name="note" value="${paySlip.note}"/>
                                                                                                         </td>
                                                     -->
+
                                                    
 
                                                   <td>${loop.count}</td>
+
                                                     <!--<td>${paySlip.paySlipID}</td>-->
                                                     <td style="text-align: center">${paySlip.userID}</td>
                                                     <td style="text-align: center">${paySlip.fullName}</td>
@@ -117,7 +122,9 @@
                                                             <!--        <i class="${empty paySlip.note ? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
                                                             </button>
                                                         </td>
+
                                                     <td>${ Math.round(paySlip.salary + paySlip.bonus - paySlip.minus)}</td>
+
                                                     <c:if test="${paySlip.status!=2}">
                                                         <td>
                                                             <a href="<c:url value="/paySlip/update.do?paySlipID=${paySlip.paySlipID}&userID=${paySlip.userID}"/>" class="btn btn-sm btn-github btn-rounded" title="Update">
