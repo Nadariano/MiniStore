@@ -85,22 +85,28 @@
                                                     <td>${paySlip.paySlipID}</td>
                                                     <td>${paySlip.userID}</td>
                                                     <td>${paySlip.fullName}</td>
-                                                    <td>${paySlip.salary}</td>
-                                                    <td>${paySlip.bonus}</td>
-                                                    <td>${paySlip.minus}</td>
-                                                    <td>${paySlip.statusText3}</td>
-                                                    <td>
-                                                        <a tabindex="0" class="btn btn-sm btn-circle btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${dayOff.note}" data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip"><div class="arrow"></div><div class="popover-body text-white p-3"><span class="d-block">${dayOff.note}</span></div></div>'>
-                                                            <i class="bi bi-eye"></i>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="<c:url value="/paySlip/update.do?paySlipID=${paySlip.paySlipID}&userID=${paySlip.userID}"/>" class="btn btn-sm btn-primary" ><i class="bi bi-pencil-square"></i>Update</a>
-                                                        <p> </p>
-                                                        <a href="<c:url value="/paySlip/delete.do?paySlipID=${paySlip.paySlipID}"/>" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-warning"><i class="bi bi-trash3"></i>Delete</a>
-                                                    </td>       
-                                                </tr>
-                                            </c:forEach>
+                                                    <td><fmt:formatNumber value="${paySlip.salary}" type="currency" currencySymbol="₫" maxFractionDigits="0" /></td>
+
+                                            <td>
+                                            <fmt:formatNumber value="${paySlip.bonus}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
+                                            </td>
+                                            <td>
+                                            <fmt:formatNumber value="${paySlip.minus}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
+                                            </td>
+
+                                            <td>${paySlip.statusText3}</td>
+                                            <td>
+                                                <a tabindex="0" class="btn btn-sm btn-circle btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${dayOff.note}" data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip"><div class="arrow"></div><div class="popover-body text-white p-3"><span class="d-block">${dayOff.note}</span></div></div>'>
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="<c:url value="/paySlip/update.do?paySlipID=${paySlip.paySlipID}&userID=${paySlip.userID}"/>" class="btn btn-sm btn-primary" ><i class="bi bi-pencil-square"></i>Update</a>
+                                                <p> </p>
+                                                <a href="<c:url value="/paySlip/delete.do?paySlipID=${paySlip.paySlipID}"/>" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-warning"><i class="bi bi-trash3"></i>Delete</a>
+                                            </td>       
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

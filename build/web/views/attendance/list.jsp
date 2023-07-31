@@ -27,52 +27,52 @@
                         <!-- /.col-lg-12 -->
                     </div>
                     <form action="<c:url value='/attendance/search.do'/>" class=" form-inline ">
-                        <div class="" style="display: flex;align-items: center; justify-content: center;">
+                        <!--                        <div class="" style="display: flex;align-items: center; justify-content: center;">
+                        
+                                                    <div class="form-group badge bg-info text-uppercase text-white" >
+                                                        <label class="text-uppercase" for="searchType">Search By:</label>
+                                                        <select id="searchType" name="searchType" onchange="changeSearchType()" class="form-control btn-rounded " >
+                                                            <option value="date">Date</option>
+                                                            <option value="name">Name</option>
+                                                        </select>
+                                                    </div>
+                        
+                                                    <div id="dateInputs" class="form-group  badge bg-info text-uppercase text-white ">
+                                                        <label class="text-uppercase"for="day">Day:</label>
+                                                        <select name="day" class="form-control btn-rounded ">
+                                                            <option value="">Day</option>
+                        <% for (int i = 1; i <= 31; i++) {%>
+                        <option value="<%= i%>"><%= i%></option>
+                        <% } %>
+                    </select>
 
-                            <div class="form-group badge bg-info text-uppercase text-white" >
-                                <label class="text-uppercase" for="searchType">Search By:</label>
-                                <select id="searchType" name="searchType" onchange="changeSearchType()" class="form-control btn-rounded " >
-                                    <option value="date">Date</option>
-                                    <option value="name">Name</option>
-                                </select>
-                            </div>
+                    <label class="text-uppercase"for="month">Month:</label>
+                    <select name="month" class="form-control btn-rounded">
+                        <option value="">Month</option>
+                        <% for (int i = 1; i <= 12; i++) {%>
+                        <option value="<%= i%>"><%= i%></option>
+                        <% } %>
+                    </select>
 
-                            <div id="dateInputs" class="form-group  badge bg-info text-uppercase text-white ">
-                                <label class="text-uppercase"for="day">Day:</label>
-                                <select name="day" class="form-control btn-rounded ">
-                                    <option value="">Day</option>
-                                    <% for (int i = 1; i <= 31; i++) {%>
-                                    <option value="<%= i%>"><%= i%></option>
-                                    <% } %>
-                                </select>
+                    <label class="text-uppercase"for="year">Year:</label>
+                    <select name="year" class="form-control btn-rounded">
+                        <option value="">Year</option>
+                        <% for (int i = 1900; i <= 2023; i++) {%>
+                        <option value="<%= i%>"><%= i%></option>
+                        <% }%>
+                    </select>
+                </div>
 
-                                <label class="text-uppercase"for="month">Month:</label>
-                                <select name="month" class="form-control btn-rounded">
-                                    <option value="">Month</option>
-                                    <% for (int i = 1; i <= 12; i++) {%>
-                                    <option value="<%= i%>"><%= i%></option>
-                                    <% } %>
-                                </select>
-
-                                <label class="text-uppercase"for="year">Year:</label>
-                                <select name="year" class="form-control btn-rounded">
-                                    <option value="">Year</option>
-                                    <% for (int i = 1900; i <= 2023; i++) {%>
-                                    <option value="<%= i%>"><%= i%></option>
-                                    <% }%>
-                                </select>
-                            </div>
-
-                            <div id="nameInputs" style="display: none;" class="form-group badge bg-info text-uppercase text-white ">
-                                <label class="text-uppercase" for="fullName">Name:</label>
-                                <input type="text" id="fullName" name="fullName" class="form-control btn-rounded">
-                            </div>
-                            <div class="badge bg-info">
-                                <button type="submit" class="form-control btn btn-rounded " name="op" value="search" title="Search">
-                                    <i class="bi bi-search text-dark text-uppercase"></i>
-                                </button>
-                            </div>
-                        </div>
+                <div id="nameInputs" style="display: none;" class="form-group badge bg-info text-uppercase text-white ">
+                    <label class="text-uppercase" for="fullName">Name:</label>
+                    <input type="text" id="fullName" name="fullName" class="form-control btn-rounded">
+                </div>
+                <div class="badge bg-info">
+                    <button type="submit" class="form-control btn btn-rounded " name="op" value="search" title="Search">
+                        <i class="bi bi-search text-dark text-uppercase"></i>
+                    </button>
+                </div>
+            </div>-->
                     </form>
 
 
@@ -82,24 +82,43 @@
                         <div class="col-sm-12 ">
                             <div class="white-box badge center-block ">
                                 <div class="table-responsive">
-                                    <table class=" table table-striped  " id="example">
+                                    <table class=" table table-striped  " id="attendanceTable">
 
                                         <thead>
+                                            <tr >
+                                                <th class="text-center ">NO.</th>
+                                                <th class="text-center ">DATE</th>
+                                                <th class="text-center ">USER ID</th>
+                                                <th class="text-center ">AUTHOR</th>
+                                                <th class="text-center ">SHIFT ID</th>
+                                                <th class="text-center ">CHECK IN</th>
+                                                <th class="text-center ">CHECK OUT</th>
+                                                <th class="text-center ">SOON TIME</th>
+                                                <th class="text-center ">LATE TIME</th>
+                                                <th class="text-center ">DURATION</th>
+                                                <th class="text-center ">STATUS</th>
+                                                <th class="text-center ">NOTE</th>
+                                                <th class="text-center ">CONFIRMATION</th>
+                                                <th class="text-center ">OPERATION</th>
+                                            </tr>
                                             <tr>
-                                                <th>No.</th>
-                                                <th>Date</th>
-                                                <th>User ID</th>
-                                                <th>Author</th>
-                                                <th>Shift ID</th>
-                                                <th>Check In</th>
-                                                <th>Check Out</th>
-                                                <th>Soon Time</th>
-                                                <th>Late Time</th>
-                                                <th>Duration</th>
-                                                <th>Status</th>
-                                                <th>Note</th>
-                                                <th>Confirmation</th>
-                                                <th>Operation</th>
+
+                                                <td>
+                                                    <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div>
+                                                </td>
+                                                <td><input type="date" class="form-control form-control-sm btn-rounded input-sm " placeholder="DATE" id="search1"></td>
+                                                <td><input type="text" class="form-control form-control-sm btn-rounded input-sm " placeholder="USER ID"  id="search2"></td>
+                                                <td><input type="text" class="form-control form-control-sm btn-rounded input-sm" placeholder="AUTHOR" id="search3"></td>
+                                                <td><div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
+                                                <td><div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
+                                                <td> <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
+                                                <td> <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
+                                                <td> <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
+                                                <td> <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
+                                                <td><input type=“text” class="form-control form-control-sm btn-rounded input-sm" placeholder="STATUS" id="search10"></td> 
+                                                <td> <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
+                                                <td> <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
+                                                 <td> <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
                                             </tr>
                                         </thead>
                                         <tbody>

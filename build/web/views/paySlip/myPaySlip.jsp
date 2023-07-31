@@ -7,6 +7,7 @@
 <html lang="en">
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>Pay Slip</title>
@@ -37,20 +38,22 @@
                             <div class="white-box">
                                 <div class="table-responsive">
                                     <table class="table table-striped " id="example">
-
+                                        <h5><b>(Currency: VND)</b></h5>
                                         <thead>
                                             <tr>
+
                                                 <!--<th>No.</th>-->
                                                 <th>Pay Slip ID</th>
                                                 <th>User ID</th>
                                                 <th>Full Name</th>
-                                                <th>Salary</th>
-                                                <th>Bonus Money</th>
-                                                <th>Minus Money</th>
+                                                <th>Salary(₫)</th>
+                                                <th>Bonus Money(₫)</th>
+                                                <th>Minus Money(₫)</th>
                                                 <th>Status</th>
+
                                                 <th>Confirmation</th>
-                                                <th>Note</th>
-                                                <th>Total</th>
+                                                <th style="text-align: center">Note</th>
+                                                <th style="text-align: center">Total</th>
                                                 <th>Operations</th>
                                             </tr>
                                         </thead>
@@ -58,27 +61,40 @@
                                             <c:forEach var="paySlip" items="${list}" varStatus="loop">
                                             <form action="<c:url value="/paySlip/updateMyPaySlip.do"  />">
                                                 <tr>
-                                                    <!--<td>${loop.count}</td>-->
-                                                    <td>${paySlip.paySlipID}
-                                                        <!--<input disabled type="number" id="paySlipID" class="form-control" value="${paySlip.paySlipID}">-->
-                                                        <input type="hidden" name="paySlipID" value="${paySlip.paySlipID}">
-                                                    </td>   
-                                                    <td>${paySlip.userID}
+                                                    <td>${loop.count}</td>
+                                                    <!--                                                    <td>${paySlip.paySlipID}
+                                                                                                            <input disabled type="number" id="paySlipID" class="form-control" value="${paySlip.paySlipID}">
+                                                                                                            <input type="hidden" name="paySlipID" value="${paySlip.paySlipID}">
+                                                                                                        </td>   -->
+                                                    <td style="text-align: center">${paySlip.userID}
                                                         <!--<input disabled type="number" id="userID" class="form-control" value="${paySlip.userID}">-->
                                                         <input type="hidden" name="userID" value="${paySlip.userID}">
                                                     </td>
-                                                    <td>${paySlip.fullName}
+                                                    <td style="text-align: center">${paySlip.fullName}
                                                         <input type="hidden" id="fullName" name="fullName" class="form-control" value="${paySlip.fullName}"/>
                                                     </td>
-                                                    <td>${paySlip.salary}
+                                                    <td>
+                                                        <fmt:formatNumber value="${paySlip.salary}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
                                                         <input type="hidden" id="salary" name="salary" class="form-control" value="${paySlip.salary}"/>
                                                     </td>
-                                                    <td>${paySlip.bonus}
+
+                                                    <td>
+                                                        <fmt:formatNumber value="${paySlip.bonus}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
                                                         <input type="hidden" id="bonus" name="bonus" class="form-control" value="${paySlip.bonus}"/>
                                                     </td>
-                                                    <td>${paySlip.minus}
+                                                    <td>
+                                                        <fmt:formatNumber value="${paySlip.minus}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
+
+<!--                                                     <td style="text-align: center">${Math.round(paySlip.salary)}
+                                                        <input type="hidden" id="salary" name="salary" class="form-control" value="${paySlip.salary}"/>
+                                                    </td>
+                                                    <td style="text-align: center">${Math.round(paySlip.bonus)}
+                                                        <input type="hidden" id="bonus" name="bonus" class="form-control" value="${paySlip.bonus}"/>
+                                                    </td>
+                                                    <td style="text-align: center" >${Math.round(paySlip.minus)} -->
                                                         <input type="hidden" id="minus" name="minus" class="form-control" value="${paySlip.minus}"/>
                                                     </td>
+
                                                     <td>
                                                         <input type="hidden" name="status" value="${paySlip.status}">
                                                         <input disabled type="text" id="statusText" class="form-control" value="${paySlip.statusText3}">
@@ -99,13 +115,13 @@
                                                     <td><c:if test="${paySlip.status==1}">${paySlip.note}</c:if>
                                                         <input type= "${paySlip.status==0 ? 'text' : 'hidden' }" id= "note"name= "note"class= "form-control"value= "${paySlip.note}"/> 
                                                     </td> 
-                                                    <td>${paySlip.salary + paySlip.bonus - paySlip.minus}
+                                                    <td>${Math.round(paySlip.salary + paySlip.bonus - paySlip.minus)}
                                                         <input  type ="hidden" class= "form-control" value ="${paySlip.salary + paySlip.bonus - paySlip.minus}">
                                                     </td>
 
                                                     <td>
                                                         <c:if test="${paySlip.status == 0}">
-                                                            <button type="submit" class="btn btn-outline-success" name="op" value="updateMyPaySlip">Send<i class="bi bi-check-square"></i></button>
+                                                            <button type="submit" class="btn btn-info float-right" name="op" value="updateMyPaySlip">Send<i class="bi bi-check-square"></i></button>
                                                             </c:if>
                                                             <c:if test="${paySlip.status == 1}">Sent</c:if>
                                                         </td>             
