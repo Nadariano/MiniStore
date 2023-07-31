@@ -36,154 +36,186 @@
                     <!-- /row -->
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="white-box">
+                            <div class="white-box badge ">
                                 <div class="table-responsive">
-                                    <table class="table table-striped"  id="example">
+                                    <table class="table table-striped"  id="userTable">
                                         <thead>
                                             <tr>
-                                                <th>
-                                                    <div class="btn-group btn-block">
-                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="userIDDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            User ID
-                                                        </button>
-                                                    </div>
-                                                </th>
-                                                <th>
-                                                    <div class="btn-group btn-block">
-                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="userNameDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            User Name <i class="bi bi-caret-down-fill"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="userNameDropdown">
-                                                            <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Filter by User Name" id="searchUserName">
-
-
-                                                            <!-- Add sorting functionality here -->
-
-
-
-                                                        </div>
-                                                    </div>
-                                                </th>
-                                                <th>
-                                                    <div class="btn-group btn-block">
-                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="fullNameDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Full Name <i class="bi bi-caret-down-fill"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="fullNameDropdown">
-                                                            <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Filter by Full Name" id="searchFullName">
-
-
-                                                            <!-- Add sorting functionality here -->
-
-
-
-
-                                                        </div>
-                                                    </div>
-                                                </th>
-                                                <th>
-                                                    <div class="btn-group btn-block">
-                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="avatarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Avatar
-                                                        </button>
-                                                        <!--                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="avatarDropdown">
-                                                                                                                     Add sorting functionality here 
-                                                                                                                </div>-->
-                                                    </div>
-                                                </th>
-                                                <th>
-                                                    <div class="btn-group btn-block">
-                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="addressDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Address <i class="bi bi-caret-down-fill"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="addressDropdown">
-                                                            <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Filter by Address" id="searchAddress">
-
-
-                                                            <!-- Add sorting functionality here -->
-
-
-
-                                                        </div>
-                                                    </div>
-                                                </th>
-                                                <th>
-                                                    <div class="btn-group btn-block">
-                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="phoneDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Phone <i class="bi bi-caret-down-fill"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="phoneDropdown">
-                                                            <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Filter by Phone" id="searchPhone">
-
-                                                            <!-- Add sorting functionality here -->
-
-
-
-
-                                                        </div>
-                                                    </div>
-                                                </th>
-                                                <th>
-                                                    <div class="btn-group btn-block">
-                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="emailDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Email <i class="bi bi-caret-down-fill"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="emailDropdown">
-                                                            <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Filter by Email" id="searchEmail">
-
-
-
-                                                            <!-- Add sorting functionality here -->
-
-                                                        </div>
-                                                    </div>
-                                                </th>
-                                                <th>
-                                                    <div class="btn-group btn-block">
-
-                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="roleDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Role <i class="bi bi-caret-down-fill"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-left  p-2 btn-rounded " aria-labelledby="roleDropdown" >
-                                                            <input type="text" class="form-control form-control-sm btn-rounded " placeholder="Filter by Role" id="searchRole">
-
-                                                            <!-- Add sorting functionality here -->
-
-
-                                                        </div>
-                                                    </div>
-                                                </th>
-                                                <th>
-                                                    <div class="btn-group btn-block">
-                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="statusDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Status <i class="bi bi-caret-down-fill"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="statusDropdown">
-                                                            <input type="text" class="form-control form-control-sm btn-rounded " placeholder="Filter by Status" id="searchStatus">
-
-                                                            <!-- Add sorting functionality here -->
-
-
-
-                                                        </div>
-                                                    </div>
-                                                </th>
-
-                                                <th>
-                                                    <div class="btn-group btn-block">
-                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="noteDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Note
-                                                        </button>
-                                                    </div>
-                                                </th>
-                                                <th>
-                                                    <div class="btn-group btn-block">
-                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="operationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Operations
-                                                        </button>
-                                                    </div>
-                                                </th>
-
+                                                <!--                                                <th>
+                                                                                                    <div class="btn-group btn-block">
+                                                                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="userIDDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                            User ID
+                                                                                                        </button>
+                                                                                                    </div>
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    <div class="btn-group btn-block">
+                                                                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="userNameDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                            User Name <i class="bi bi-caret-down-fill"></i>
+                                                                                                        </button>
+                                                                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="userNameDropdown">
+                                                                                                            <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Filter by User Name" id="search1">
+                                                
+                                                
+                                                                                                             Add sorting functionality here 
+                                                
+                                                
+                                                
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    <div class="btn-group btn-block">
+                                                                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="fullNameDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                            Full Name <i class="bi bi-caret-down-fill"></i>
+                                                                                                        </button>
+                                                                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="fullNameDropdown">
+                                                                                                            <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Filter by Full Name" id="search2">
+                                                
+                                                
+                                                                                                             Add sorting functionality here 
+                                                
+                                                
+                                                
+                                                
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    <div class="btn-group btn-block">
+                                                                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="avatarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                            Avatar
+                                                                                                        </button>
+                                                                                                                                                                <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="avatarDropdown">
+                                                                                                                                                                     Add sorting functionality here 
+                                                                                                                                                                </div>
+                                                                                                    </div>
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    <div class="btn-group btn-block">
+                                                                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="addressDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                            Address <i class="bi bi-caret-down-fill"></i>
+                                                                                                        </button>
+                                                                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="addressDropdown">
+                                                                                                            <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Filter by Address" id="search4">
+                                                
+                                                
+                                                                                                             Add sorting functionality here 
+                                                
+                                                
+                                                
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    <div class="btn-group btn-block">
+                                                                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="phoneDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                            Phone <i class="bi bi-caret-down-fill"></i>
+                                                                                                        </button>
+                                                                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="phoneDropdown">
+                                                                                                            <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Filter by Phone" id="search5">
+                                                
+                                                                                                             Add sorting functionality here 
+                                                
+                                                
+                                                
+                                                
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    <div class="btn-group btn-block">
+                                                                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="emailDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                            Email <i class="bi bi-caret-down-fill"></i>
+                                                                                                        </button>
+                                                                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="emailDropdown">
+                                                                                                            <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Filter by Email" id="search6">
+                                                
+                                                
+                                                
+                                                                                                             Add sorting functionality here 
+                                                
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    <div class="btn-group btn-block">
+                                                
+                                                                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="roleDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                            Role <i class="bi bi-caret-down-fill"></i>
+                                                                                                        </button>
+                                                                                                        <div class="dropdown-menu dropdown-menu-left  p-2 btn-rounded " aria-labelledby="roleDropdown" >
+                                                                                                            <input type="text" class="form-control form-control-sm btn-rounded " placeholder="Filter by Role" id="search7">
+                                                
+                                                                                                             Add sorting functionality here 
+                                                
+                                                
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    <div class="btn-group btn-block">
+                                                                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="statusDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                            Status <i class="bi bi-caret-down-fill"></i>
+                                                                                                        </button>
+                                                                                                        <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="statusDropdown">
+                                                                                                            <input type="text" class="form-control form-control-sm btn-rounded " placeholder="Filter by Status" id="search8">
+                                                
+                                                                                                             Add sorting functionality here 
+                                                
+                                                
+                                                
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </th>
+                                                
+                                                                                                <th>
+                                                                                                    <div class="btn-group btn-block">
+                                                                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="noteDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                            Note
+                                                                                                        </button>
+                                                                                                    </div>
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    <div class="btn-group btn-block">
+                                                                                                        <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="operationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                            Operations
+                                                                                                        </button>
+                                                                                                    </div>
+                                                                                                </th>
+                                                
+                                                                                            </tr>-->
+                                            <tr>
+                                                <th>User ID</th>
+                                                <th>User Name</th>
+                                                <th>Full Name</th>
+                                                <th>Avatar</th>
+                                                <th>Address</th>
+                                                <th>Phone</th>
+                                                <th>Email</th>
+                                                <th>Role</th>
+                                                <th>Status</th>
+                                                <th>Note</th>
+                                                <th>Operations</th>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="form-control form-control-sm btn-rounded" placeholder="User ID" id="search0"></td>
+                                                <td><input type="text" class="form-control form-control-sm btn-rounded" placeholder="User Name" id="search1"></td>
+                                                <td><input type="text" class="form-control form-control-sm btn-rounded" placeholder="Full Name" id="search2"></td>
+                                                <td>
+                                                    <!--<input type="text" class="form-control form-control-sm btn-rounded" placeholder="Avatar" id="search4">-->
+                                                </td>
+                                                <td><input type="text" class="form-control form-control-sm btn-rounded" placeholder="Address" id="search4"></td>
+                                                <td><input type="text" class="form-control form-control-sm btn-rounded" placeholder="Phone" id="search5"></td>
+                                                <td><input type="text" class="form-control form-control-sm btn-rounded" placeholder="Email" id="search6"></td>
+                                                <td><input type="text" class="form-control form-control-sm btn-rounded" placeholder="Role" id="search7"></td>
+                                                <td>
+                                                    <!--<input type="text" class="form-control form-control-sm btn-rounded" placeholder="Status" id="search9">-->
+                                                </td>
+                                                <td>
+                                                    <!--<input type=“text” class="form-control form-control-sm btn-rounded" placeholder=“Note” id="search10">-->
+                                                </td> 
+                                                <td></td> 
                                             </tr>
                                         </thead>
                                         <tbody>
