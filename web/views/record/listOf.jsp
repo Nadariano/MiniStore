@@ -40,7 +40,7 @@
                     <!-- /row -->
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="white-box">
+                            <div class="white-box border-rounded">
                                 <div class="table-responsive">
                                     <table class="table table-striped" id="example">
 
@@ -56,7 +56,7 @@
                                                 <th>Shift ID</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="helvetica">
                                             <c:forEach var="rc" items="${list}" varStatus="loop">
                                                 <tr>
                                                     <!--<td>${loop.count}</td>-->

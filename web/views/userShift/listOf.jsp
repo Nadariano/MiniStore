@@ -45,15 +45,15 @@
             <!-- /row -->
             <div class=" row ">
                 <div id="myTab" class="pull-left badge bg-white">
-                    <a class="btn btn-rounded btn-flickr" href="#listView" data-toggle="tab">List View </a>
-                    <a class="btn btn-rounded btn-linkedin" href="#blockView" data-toggle="tab">Block View</a>
+                    <a class="btn btn-rounded btn-linkedin" href="#listView" data-toggle="tab"><i class="bi bi-card-list"></i></a>
+                    <a class="btn btn-rounded btn-linkedin" href="#blockView" data-toggle="tab"><i class="bi bi-table"></i></a>
                 </div>
             </div>
             <div class="tab-content">
                 <div class="tab-pane" id="listView">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="white-box">
+                            <div class="white-box border-rounded">
                                 <c:if test="${Account.roleName.equals('MANAGER')}">
                                     <a href="<c:url value="/userShift/create.do"/>" class="btn btn-lg btn-success btn-rounded" title="Add a new User Shift">
                                         <i class="bi bi-file-earmark-plus"></i> 
@@ -77,17 +77,17 @@
                                                     </c:if>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody >
                                             <c:forEach var="userShift" items="${list}" varStatus="loop">
                                                 <tr>
                                                     <!--<td>${loop.count}</td>-->
-                                                    <td>${userShift.userID}</td>
-                                                    <td style="text-align: center">${userShift.fullName}</td>
-                                                    <td style="text-align: center">${userShift.shiftID}</td>
-                                                    <td style="text-align: center">${userShift.date}</td>
-                                                    <td>${userShift.statusText2}</td>
+                                                    <td class="helvetica">${userShift.userID}</td>
+                                                    <td class="helvetica"style="text-align: center">${userShift.fullName}</td>
+                                                    <td class="helvetica"style="text-align: center">${userShift.shiftID}</td>
+                                                    <td class="helvetica"style="text-align: center">${userShift.date}</td>
+                                                    <td class="helvetica">${userShift.statusText2}</td>
                                                   
-                                                     <td>
+                                                     <td class="helvetica">
                                                             <button tabindex="0" class="${empty userShift.note ? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${userShift.note}" 
                                                                     data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
                                                                     <div class="arrow">
@@ -103,7 +103,7 @@
                                                     
                                                     
                                                     
-                                                    <td>${userShift.otText}</td>
+                                                    <td class="helvetica">${userShift.otText}</td>
                                                     <c:if test="${Account.roleName.equals('MANAGER') && userShift.status != 2 && (userShift.date>nowDate)}">
                                                         <td>
                                                             <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&oldShiftID=${userShift.shiftID}&oldDate=${userShift.date}"/>" class="btn btn-sm btn-github btn-rounded" title="Update">
@@ -133,18 +133,18 @@
 
 
                 <div class="tab-pane active" id="blockView">
-                    <div class="white-box ">
+                    <div class="white-box border-rounded ">
                         <div class="row ">
                             <div class="col-sm-12 ">
-                                <div class="table-responsive  center-block overlay-box overflow">
-                                    <table class="table-striped schedule  font-bold">
+                                <div class="table-responsive  center-block overlay-box overflow ">
+                                    <table class="table-striped schedule  font-bold  ">
 
                                         <tr>
                                             <th>
-                                                <div class="dropdown">
-                                                    <button class="btn btn-tumblr dropdown-toggle" name="subOp" type="button" data-toggle="dropdown">Select week:
+                                                <div class="dropdown ">
+                                                    <button class="btn btn-tumblr dropdown-toggle border-rounded" name="subOp" type="button" data-toggle="dropdown">Select week:
                                                         <span class="caret"></span></button>
-                                                    <ul class="dropdown-menu text-uppercase">
+                                                    <ul class="dropdown-menu text-uppercase border-rounded">
                                                         <c:forEach var="listItem" items="${weeks}" varStatus="loop" >
                                                             <li class="col-sm-12  ${listItem==weeks[5] ? 'currWeek':''}"><a href="<c:url value="/userShift/selectWeek.do?op=filter&week=${listItem}"/>" ${listItem==weeks[5] ? 'selected':''}>${listItem}</a></li>
                                                             </c:forEach>
@@ -206,9 +206,9 @@
                                                         </div>
                                                         <!--The day to add shift must be AFTER today-->
                                                         <c:if test="${Account.roleName.equals('MANAGER') && (count<3) && (listLocalDates[i]>nowLocalDate)}">
-                                                            <button class="btn btn-sm btn-success">
-                                                                <a href="<c:url value="/userShift/create.do?shiftID=${shift.shiftID}&date=${listLocalDates[i]}"/>">
-                                                                    <i class="bi bi-person-fill-add"></i>Add
+                                                            <button class="btn btn btn-rounded btn-twitter">
+                                                                <a class="text-white" href="<c:url value="/userShift/create.do?shiftID=${shift.shiftID}&date=${listLocalDates[i]}"/>">
+                                                                    <i class="bi bi-person-fill-add"></i>
                                                                 </a>
                                                             </button>
                                                         </c:if>

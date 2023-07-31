@@ -159,7 +159,7 @@
                             <c:if test="${Account.roleName.equals('MANAGER')}">
                                 <li>
                                     <a href="<c:url value="/dayOff/index.do"/>" class="waves-effect"><i class="fa fa-table fa-fw"
-                                                                                                        aria-hidden="true"></i><span class="hide-menu">Day Off</span></a>
+                                                                                                        aria-hidden="true"></i><span class="hide-menu">Holiday</span></a>
                                 </li>
                             </c:if>
 

@@ -103,7 +103,7 @@
                                             <tr>
                                                 <td><div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
                                                 <th>
-                                                    <input type="text" class="form-control form-control-sm btn-rounded input-sm " placeholder="Report Title" id="search1">
+                                                    <input type="text" class="form-control form-control-sm btn-rounded input-sm " placeholder="Title Name" id="search1">
                                                 </th>
                                                 <td><div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
 
@@ -111,13 +111,13 @@
                                                     <input type="date" class="form-control form-control-sm btn-rounded input-sm " placeholder="date" id="search2">
                                                 </th>
                                                 <th>
-                                                    <input type="text" class="form-control form-control-sm btn-rounded input-sm " placeholder="userid" id="search3">
+                                                    <input type="text" class="form-control form-control-sm btn-rounded input-sm " placeholder="ID" id="search3">
                                                 </th>
                                                 <th>
-                                                    <input type="text" class="form-control form-control-sm btn-rounded input-sm " placeholder="author" id="search4">
+                                                    <input type="text" class="form-control form-control-sm btn-rounded input-sm " placeholder="AUTHOR" id="search4">
                                                 </th>
                                                 <th>
-                                                    <input type="text" class="form-control form-control-sm btn-rounded input-sm " placeholder="desc" id="search5">
+                                                    <input type="text" class="form-control form-control-sm btn-rounded input-sm " placeholder="DESC" id="search5">
                                                 </th>
                                                 <th> 
                                                     <input type="date" class="form-control form-control-sm btn-rounded input-sm " placeholder="date" id="search6">
@@ -125,27 +125,29 @@
                                                 <td><div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
                                                 <td><div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td>  
                                                 <th>
-                                                    <input type=“text” class="form-control form-control-sm btn-rounded input-sm " placeholder="Shift ID" id="search9"> 
+                                                    <input  type=“text” class="form-control form-control-sm btn-rounded input-sm " placeholder="ID " id="search9"> 
                                                 </th> 
                                                 <th> 
-                                                    <input type=“text” class="form-control form-control-sm btn-rounded input-sm " placeholder="Status" id="search10"> 
+                                                    <input type=“text” class="form-control form-control-sm btn-rounded input-sm " placeholder="STATUS" id="search10"> 
                                                 </th> 
 
                                                 <td><div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
                                                 <td><div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody >
                                             <c:forEach var="report" items="${list}" varStatus="loop">
-                                                <tr>
-                                                    <td>${loop.count}</td>
-                                                    <td>${report.reportTitle}</td>
-                                                    <th>${report.typeName}</th>
-                                                    <td>${report.createDate}</td>
-                                                    <td>${report.userID}</td>
-                                                    <td>${report.fullName}</td>
-                                                    <td>${report.description}</td>
-                                                    <td>${report.plannedDate}</td>
+                                                <tr s>
+                                                    <td class="helvetica">${loop.count}</td>
+                                                    <td class="helvetica">${report.reportTitle}</td>
+                                                    <th class="helvetica" style="text-align: center">${report.typeName}</th>
+                                                    <td class="helvetica">${report.createDate}</td>
+                                                    <td class="helvetica">${report.userID}</td>
+                                                    <td class="helvetica">${report.fullName}</td>
+                                                    <td style="max-width:50px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis" class="helvetica">
+                                                        ${report.description}
+                                                    </td>
+                                                    <td class="helvetica">${report.plannedDate}</td>
                                                     <td>${report.requestSoonTime}</td>
                                                     <td>${report.requestLateTime}</td>
                                                     <td>${report.shiftID}</td>

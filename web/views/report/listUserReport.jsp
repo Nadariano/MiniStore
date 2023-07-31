@@ -30,7 +30,7 @@
             <!-- /row -->
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="white-box center-block">
+                    <div class="white-box center-block  border-rounded">
                         <div class="table-responsive">
                             <table class="table  table-striped " id="example">
 

@@ -35,22 +35,22 @@
                     <!-- /row -->
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="white-box">
+                            <div class="white-box  border-rounded">
                                 <div class="table-responsive">
                                     <table class="table table-striped " id="example">
-                                        <h5><b>(Currency: VND)</b></h5>
+                                        <h5><b>(Unit: 1.000 VND)</b></h5>
                                         <thead>
                                             <tr>
-
                                                 <!--<th>No.</th>-->
-                                                <th>Pay Slip ID</th>
-                                                <th>User ID</th>
-                                                <th>Full Name</th>
-                                                <th>Salary(₫)</th>
-                                                <th>Bonus Money(₫)</th>
-                                                <th>Minus Money(₫)</th>
-                                                <th>Status</th>
-
+                                 
+<!--                                                 <th>No.</th>
+                                                <!--<th>Pay Slip ID</th>-->
+                                                <th style="text-align: center">User ID</th>
+                                                <th style="text-align: center">Full Name</th>
+                                                <th style="text-align: center">Salary</th>
+                                                <th style="text-align: center">Bonus Money</th>
+                                                <th style="text-align: center">Minus Money</th>
+                                                <th style="text-align: center">Status</th> 
                                                 <th>Confirmation</th>
                                                 <th style="text-align: center">Note</th>
                                                 <th style="text-align: center">Total</th>
@@ -73,25 +73,14 @@
                                                     <td style="text-align: center">${paySlip.fullName}
                                                         <input type="hidden" id="fullName" name="fullName" class="form-control" value="${paySlip.fullName}"/>
                                                     </td>
-                                                    <td>
-                                                        <fmt:formatNumber value="${paySlip.salary}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
-                                                        <input type="hidden" id="salary" name="salary" class="form-control" value="${paySlip.salary}"/>
-                                                    </td>
-
-                                                    <td>
-                                                        <fmt:formatNumber value="${paySlip.bonus}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
-                                                        <input type="hidden" id="bonus" name="bonus" class="form-control" value="${paySlip.bonus}"/>
-                                                    </td>
-                                                    <td>
-                                                        <fmt:formatNumber value="${paySlip.minus}" type="currency" currencySymbol="₫" maxFractionDigits="0" />
-
-<!--                                                     <td style="text-align: center">${Math.round(paySlip.salary)}
+                                                   
+                                                   <td style="text-align: center">${Math.round(paySlip.salary)}
                                                         <input type="hidden" id="salary" name="salary" class="form-control" value="${paySlip.salary}"/>
                                                     </td>
                                                     <td style="text-align: center">${Math.round(paySlip.bonus)}
                                                         <input type="hidden" id="bonus" name="bonus" class="form-control" value="${paySlip.bonus}"/>
                                                     </td>
-                                                    <td style="text-align: center" >${Math.round(paySlip.minus)} -->
+                                                    <td style="text-align: center" >${Math.round(paySlip.minus)} 
                                                         <input type="hidden" id="minus" name="minus" class="form-control" value="${paySlip.minus}"/>
                                                     </td>
 

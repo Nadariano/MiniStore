@@ -55,7 +55,7 @@
                             
                     </div>
                             
-                    <div class="white-box">
+                    <div class="white-box border-rounded">
                         <table class="table table-bordered table-striped">
                             <tr>
                                 <!--<th>No.</th>-->
@@ -65,7 +65,7 @@
                                 <!--<th>Operations</th>-->
                             </tr>
                             <c:forEach var="checkIn" items="${list}" varStatus="loop">
-                                <tr>
+                                <tr class="helvetica">
                                     <!--<td>${loop.count}</td>-->
                                     <td>${checkIn.checkInID}</td>
                                     <td>${checkIn.checkInTime}</td>

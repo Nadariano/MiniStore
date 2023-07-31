@@ -64,7 +64,7 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </th>
-                                                                                                <th>
+<th>
                                                                                                     <div class="btn-group btn-block">
                                                                                                         <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="fullNameDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                                             Full Name <i class="bi bi-caret-down-fill"></i>
@@ -87,7 +87,7 @@
                                                                                                             Avatar
                                                                                                         </button>
                                                                                                                                                                 <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="avatarDropdown">
-                                                                                                                                                                     Add sorting functionality here 
+Add sorting functionality here 
                                                                                                                                                                 </div>
                                                                                                     </div>
                                                                                                 </th>
@@ -111,7 +111,7 @@
                                                                                                     <div class="btn-group btn-block">
                                                                                                         <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="phoneDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                                             Phone <i class="bi bi-caret-down-fill"></i>
-                                                                                                        </button>
+</button>
                                                                                                         <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="phoneDropdown">
                                                                                                             <input type="text" class="form-control form-control-sm btn-rounded" placeholder="Filter by Phone" id="search5">
                                                 
@@ -138,7 +138,7 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </th>
-                                                                                                <th>
+<th>
                                                                                                     <div class="btn-group btn-block">
                                                 
                                                                                                         <button class="btn btn-instagram dropdown-toggle btn-block" type="button" id="roleDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -160,8 +160,7 @@
                                                                                                         </button>
                                                                                                         <div class="dropdown-menu dropdown-menu-left p-2 btn-rounded" aria-labelledby="statusDropdown">
                                                                                                             <input type="text" class="form-control form-control-sm btn-rounded " placeholder="Filter by Status" id="search8">
-                                                
-                                                                                                             Add sorting functionality here 
+Add sorting functionality here 
                                                 
                                                 
                                                 
@@ -186,39 +185,33 @@
                                                 
                                                                                             </tr>-->
                                             <tr>
-                                                <th>User ID</th>
-                                                <th>User Name</th>
-                                                <th>Full Name</th>
-                                                <th>Avatar</th>
-                                                <th>Address</th>
-                                                <th>Phone</th>
-                                                <th>Email</th>
-                                                <th>Role</th>
-                                                <th>Status</th>
-                                                <th>Note</th>
-                                                <th>Operations</th>
+                                                <th class="text-center ">User ID</th>
+                                                <th class="text-center ">User Name</th>
+                                                <th class="text-center ">Full Name</th>
+                                                <th class="text-center ">Avatar</th>
+                                                <th class="text-center ">Address</th>
+                                                <th class="text-center ">Phone</th>
+                                                <th class="text-center ">Email</th>
+                                                <th class="text-center ">Role</th>
+                                                <th class="text-center ">Status</th>
+                                                <th class="text-center ">Note</th>
+                                                <th class="text-center ">Operations</th>
                                             </tr>
                                             <tr>
                                                 <td><input type="text" class="form-control form-control-sm btn-rounded" placeholder="User ID" id="search0"></td>
                                                 <td><input type="text" class="form-control form-control-sm btn-rounded" placeholder="User Name" id="search1"></td>
                                                 <td><input type="text" class="form-control form-control-sm btn-rounded" placeholder="Full Name" id="search2"></td>
-                                                <td>
-                                                    <!--<input type="text" class="form-control form-control-sm btn-rounded" placeholder="Avatar" id="search4">-->
-                                                </td>
+                                                 <td><div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
                                                 <td><input type="text" class="form-control form-control-sm btn-rounded" placeholder="Address" id="search4"></td>
                                                 <td><input type="text" class="form-control form-control-sm btn-rounded" placeholder="Phone" id="search5"></td>
                                                 <td><input type="text" class="form-control form-control-sm btn-rounded" placeholder="Email" id="search6"></td>
                                                 <td><input type="text" class="form-control form-control-sm btn-rounded" placeholder="Role" id="search7"></td>
-                                                <td>
-                                                    <!--<input type="text" class="form-control form-control-sm btn-rounded" placeholder="Status" id="search9">-->
-                                                </td>
-                                                <td>
-                                                    <!--<input type=“text” class="form-control form-control-sm btn-rounded" placeholder=“Note” id="search10">-->
-                                                </td> 
-                                                <td></td> 
+                                                  <td><div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
+                                                    <td><div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
+                                                  <td><div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td>  
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="helvetica">
                                             <c:forEach var="users" items="${list}" varStatus="loop">
                                                 <tr >
                                                     <!--<td>${loop.count}</td>-->

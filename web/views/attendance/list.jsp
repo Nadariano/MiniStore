@@ -89,7 +89,7 @@
                                                 <th class="text-center ">NO.</th>
                                                 <th class="text-center ">DATE</th>
                                                 <th class="text-center ">USER ID</th>
-                                                <th class="text-center ">AUTHOR</th>
+                                                <th class="text-center ">Employee's Name</th>
                                                 <th class="text-center ">SHIFT ID</th>
                                                 <th class="text-center ">CHECK IN</th>
                                                 <th class="text-center ">CHECK OUT</th>
@@ -107,7 +107,7 @@
                                                 </td>
                                                 <td><input type="date" class="form-control form-control-sm btn-rounded input-sm " placeholder="DATE" id="search1"></td>
                                                 <td><input type="text" class="form-control form-control-sm btn-rounded input-sm " placeholder="USER ID"  id="search2"></td>
-                                                <td><input type="text" class="form-control form-control-sm btn-rounded input-sm" placeholder="AUTHOR" id="search3"></td>
+                                                <td><input type="text" class="form-control form-control-sm btn-rounded input-sm" placeholder="EMPLOYEE'S NAME" id="search3"></td>
                                                 <td><div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
                                                 <td><div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
                                                 <td> <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
@@ -136,21 +136,21 @@
 
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody >
                                             <c:forEach var="attendance" items="${list}" varStatus="loop">
                                                 <tr>
-                                                    <td>${loop.count}</td>
-                                                    <td>${attendance.date}</td>
-                                                    <td>${attendance.userID}</td>
-                                                    <td>${attendance.fullName}</td>
-                                                    <td>${attendance.shiftID}</td>
-                                                    <td>${attendance.checkIn}</td>
-                                                    <td>${attendance.checkOut}</td>
-                                                    <td>${attendance.soonTime}</td>
-                                                    <td>${attendance.lateTime}</td>
-                                                    <td>${attendance.duration}</td>
-                                                    <td>${attendance.statusText}</td>
-                                                    <td>
+                                                    <td class="helvetica">${loop.count}</td>
+                                                    <td class="helvetica">${attendance.date}</td>
+                                                    <td class="helvetica">${attendance.userID}</td>
+                                                    <td class="helvetica">${attendance.fullName}</td>
+                                                    <td class="helvetica">${attendance.shiftID}</td>
+                                                    <td class="helvetica">${attendance.checkIn}</td>
+                                                    <td class="helvetica">${attendance.checkOut}</td>
+                                                    <td class="helvetica">${attendance.soonTime}</td>
+                                                    <td class="helvetica">${attendance.lateTime}</td>
+                                                    <td class="helvetica">${attendance.duration}</td>
+                                                    <td class="helvetica">${attendance.statusText}</td>
+                                                    <td class="helvetica">
                                                         <button tabindex="0" class="${empty attendance.note ? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${attendance.note}" 
                                                                 data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
                                                                 <div class="arrow">
