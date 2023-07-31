@@ -102,7 +102,6 @@
                                                 <th class="text-center ">OPERATION</th>
                                             </tr>
                                             <tr>
-
                                                 <td>
                                                     <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div>
                                                 </td>
@@ -119,6 +118,22 @@
                                                 <td> <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
                                                 <td> <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
                                                  <td> <div type="text" disabled="true" class="form-control form-control-sm btn-rounded input-sm hover-disabled"><i class="bi bi-dash-circle"></i></div></td> 
+
+<!--                                                 <th>No.</th>
+                                                <th style="text-align: center">Date</th>
+                                                <th>User ID</th>
+                                                <th style="text-align: center">Author</th>
+                                                <th>Shift ID</th>
+                                                <th>Check In</th>
+                                                <th>Check Out</th>
+                                                <th>Soon Time</th>
+                                                <th>Late Time</th>
+                                                <th>Duration</th>
+                                                <th>Status</th>
+                                                <th>Note</th>
+                                                <th>Confirmation</th>
+                                                <th>Operation</th> -->
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -140,7 +155,7 @@
                                                                 data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
                                                                 <div class="arrow">
                                                                 </div>
-                                                                <div class="popover-body text-white p-3">
+                                                                <div class="popover-body text-white p-3" style="padding: 5%">
                                                                 <span class="d-block">${attendance.note}
                                                                 </span>
                                                                 </div>

@@ -167,7 +167,7 @@
                                                                 data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
                                                                 <div class="arrow">
                                                                 </div>
-                                                                <div class="popover-body text-white p-3">
+                                                                <div class="popover-body text-white p-3" style="padding: 5%">
                                                                 <span class="d-block">${report.note}
                                                                 </span>
                                                                 </div>

@@ -236,7 +236,6 @@
 
                 </div>
 
-                Add more rows and columns as needed 
             </div>
         </div>
 
