@@ -36,7 +36,9 @@
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
                                         <input required type="password" id="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter your password"/>
+                                        <div style="display:flex; justify-content: center; align-items: center">
                                         <i class="bi bi-eye-slash" id="togglePassword"></i>
+                                        </div>
                                     </div>
                                 </div>
                                 <h5 style="color:red">${message}</h5>
