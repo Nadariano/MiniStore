@@ -28,7 +28,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col-md-2"></div>
+                <div class="col-md-8 white-box">
                     <form action="<c:url value="/account/updateProfile_handler.do"/>">
                         <!--                        <div class="mb-3">
                                                     <label for="userName" class="form-label">UserName:</label>
@@ -64,6 +65,7 @@
                     </form>
                     <i style="color: red">${error}</i>
                 </div>
+                <div class="col-md-2"></div>
             </div>
         </div>
     </body>

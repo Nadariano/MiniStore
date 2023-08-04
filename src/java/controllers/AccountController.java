@@ -89,9 +89,11 @@ public class AccountController extends HttpServlet {
                     if (ar.isActive(acc.getStatus())) {
                         HttpSession session = request.getSession();
                         session.setAttribute("Account", acc);
-                    } else request.setAttribute("message", "Your account is currently unusable. Contact the manager for more detail.");
+                    } else {
+                        request.setAttribute("message", "Your account is currently unusable. Contact the manager for more detail.");
+                    }
                 } else {
-                    request.setAttribute("message", "Incorrect userName or password, please check again.");
+                    request.setAttribute("message", "Incorrect the User Name or Password, please check again.");
                 }
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
                 break;
@@ -158,17 +160,21 @@ public class AccountController extends HttpServlet {
                     String successMessage = null, failMessage = null;
                     String newPass1 = request.getParameter("newPass1");
                     String newPass2 = request.getParameter("newPass2");
-                    if (isFound == true && !oldPass.isEmpty()) {
-                        if (newPass1.isEmpty() || newPass2.isEmpty()) {
-                            failMessage = "New password must not be blank";
-                        } else if (newPass2.equals(newPass1) && !newPass2.isEmpty()) {
-                            ar.updatePass(userID, newPass2);
-                            successMessage = "Your password has been change";
-                        } else {
-                            failMessage = "You have re-enter the wrong password, please try again.";
-                        }
+                    if (oldPass.isEmpty() || newPass1.isEmpty() || newPass2.isEmpty()) {
+                        failMessage = "Please fill out all fields!";
                     } else {
-                        failMessage = "The current Password is incorrect, please try again.";
+                        if (isFound == true && !oldPass.isEmpty()) {
+                            if (newPass1.isEmpty() || newPass2.isEmpty()) {
+                                failMessage = "New password must not be blank";
+                            } else if (newPass2.equals(newPass1) && !newPass2.isEmpty()) {
+                                ar.updatePass(userID, newPass2);
+                                successMessage = "Your password has been changed";
+                            } else {
+                                failMessage = "You have re-enter the wrong password, please try again.";
+                            }
+                        } else {
+                            failMessage = "The current Password is incorrect, please try again.";
+                        }
                     }
                     request.setAttribute("successMsg", successMessage);
                     request.setAttribute("failMsg", failMessage);

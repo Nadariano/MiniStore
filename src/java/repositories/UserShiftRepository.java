@@ -145,6 +145,17 @@ public class UserShiftRepository {
         int count = stm.executeUpdate();
         con.close();
     }
+    
+    public void done(int status, int lastMonth) throws SQLException {
+        Connection con = DBContext.getConnection();
+        PreparedStatement stm = con.prepareStatement("update UserShift set status=?\n"
+                + "from UserShift as us join Users as u on us.userID = u.userID\n"
+                + "join ShiftTime as st on us.shiftID = st.shiftID where MONTH(us.date) = ?");
+        stm.setInt(1,status);
+        stm.setInt(2,lastMonth);
+        int count = stm.executeUpdate();
+        con.close();
+    }
 
     public void delete(int userID, int shiftID, Date date) throws SQLException {
         Connection con = DBContext.getConnection();

@@ -87,13 +87,20 @@ public class CheckOutService {
         Date endTime = Utilities.sdfDateTime.parse(strDate + " " + strEndTime);
 
         long requestSoon = 0;
-        if (report != null) {
-            requestSoon = report.getRequestSoonTime().getTime() - Utilities.correctTime().getTime();
-        }
 
+        if (report != null) {
+            System.out.println("report" + report.toString());
+            if (report.getRequestSoonTime() != null) {
+                System.out.println("SoonTime" + report.getRequestSoonTime().getTime());
+                requestSoon = report.getRequestSoonTime().getTime() - Utilities.correctTime().getTime();
+            }
+            System.out.println("45678");
+        }
+        System.out.println("Min is so cute");
         long limit = endTime.getTime() - requestSoon - Utilities.limit1h();
+        System.out.println("Limit1" + limit);
         Date limitTime = new Date(limit);
-        System.out.println(limitTime);
+        System.out.println("LimitTime1" + limitTime);
         return limitTime;
     }
 
@@ -117,11 +124,11 @@ public class CheckOutService {
         return maxTime;
     }
 
-    public static Report requestTime(Date date, int userID) throws SQLException {
+    public static Report requestTime(Date date, int userID, int shiftID) throws SQLException {
         ReportRepository rr = new ReportRepository();
         Report report = null;
-        if (rr.readDate(date, userID) != null) {
-            report = rr.readDate(date, userID);
+        if (rr.readDate(date, userID, shiftID) != null) {
+            report = rr.readDate(date, userID, shiftID);
         }
         return report;
     }
@@ -131,8 +138,9 @@ public class CheckOutService {
         ShiftTimeRepository str = new ShiftTimeRepository();
         CheckOutRepository cor = new CheckOutRepository();
         ShiftTime st = str.read(shiftID);
-        Report report = requestTime(date, userID);
-
+        System.out.println("ui");
+        Report report = requestTime(date, userID, shiftID);
+        System.out.println("ux");
         Date minOutTime = minOutTime(st, report, date);
         Date maxOutTime = null;
 

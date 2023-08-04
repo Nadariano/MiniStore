@@ -43,19 +43,21 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /row -->
-            <div class=" row bg-white">
-                <div id="myTab" class="pull-left ">
-                    <a href="#listView" data-toggle="tab">List View |</a>
-                    <a href="#blockView" data-toggle="tab">Block View</a>
+            <div class=" row ">
+                <div id="myTab" class="pull-left badge bg-white">
+                    <a class="btn btn-rounded btn-linkedin" href="#listView" data-toggle="tab"><i class="bi bi-card-list"></i></a>
+                    <a class="btn btn-rounded btn-linkedin" href="#blockView" data-toggle="tab"><i class="bi bi-table"></i></a>
                 </div>
             </div>
             <div class="tab-content">
                 <div class="tab-pane" id="listView">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="white-box">
+                            <div class="white-box border-rounded">
                                 <c:if test="${Account.roleName.equals('MANAGER')}">
-                                    <a href="<c:url value="/userShift/create.do"/>" class="btn btn-sm btn-success"><i class="bi bi-file-earmark-plus"></i>Add a new User Shift</a>
+                                    <a href="<c:url value="/userShift/create.do"/>" class="btn btn-lg btn-success btn-rounded" title="Add a new User Shift">
+                                        <i class="bi bi-file-earmark-plus"></i> 
+                                    </a>
                                 </c:if>
                                 <div class="table-responsive">
                                     <table class="table" id="example">
@@ -64,9 +66,9 @@
                                             <tr>
                                                 <!--<th>No.</th>-->
                                                 <th>User ID</th>
-                                                <th>Full Name</th>
-                                                <th>Shift</th>
-                                                <th>Date</th>
+                                                <th style="text-align: center">Full Name</th>
+                                                <th style="text-align: center">Shift</th>
+                                                <th style="text-align: center">Date</th>
                                                 <th>Status</th>
                                                 <th>Note</th>
                                                 <th>Over Time</th>
@@ -75,131 +77,161 @@
                                                     </c:if>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody >
                                             <c:forEach var="userShift" items="${list}" varStatus="loop">
                                                 <tr>
                                                     <!--<td>${loop.count}</td>-->
-                                                    <td>${userShift.userID}</td>
-                                                    <td>${userShift.fullName}</td>
-                                                    <td>${userShift.shiftID}</td>
-                                                    <td>${userShift.date}</td>
-                                                    <td>${userShift.statusText2}</td>
-                                                    <td>${userShift.note}</td>
-                                                    <td>${userShift.otText}</td>
-                                                    <c:if test="${Account.roleName.equals('MANAGER') && (userShift.date>nowDate)}">
-                                                        <td>
-                                                            <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&oldShiftID=${userShift.shiftID}&oldDate=${userShift.date}"/>" class="btn btn-sm btn-primary" ><i class="bi bi-pencil-square"></i>Update</a>
-                                                            <a href="<c:url value="/userShift/delete.do?userID=${userShift.userID}&shiftID=${userShift.shiftID}&date=${userShift.date} "/>" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-warning"><i class="bi bi-trash3"></i>Delete</a>
+                                                    <td class="helvetica">${userShift.userID}</td>
+                                                    <td class="helvetica"style="text-align: center">${userShift.fullName}</td>
+                                                    <td class="helvetica"style="text-align: center">${userShift.shiftID}</td>
+                                                    <td class="helvetica"style="text-align: center">${userShift.date}</td>
+                                                    <td class="helvetica">${userShift.statusText2}</td>
+                                                  
+                                                     <td class="helvetica">
+                                                            <button tabindex="0" class="${empty userShift.note ? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${userShift.note}" 
+                                                                    data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
+                                                                    <div class="arrow">
+                                                                    </div>
+                                                                    <div class="popover-body text-white p-3">
+                                                                    <span class="d-block">${userShift.note}
+                                                                    </span>
+                                                                    </div>
+                                                                    </div>' ${empty userShift.note ? 'disabled' : ''}>
+                                                            <!--        <i class="${empty userShift.note ? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
+                                                            </button>
                                                         </td>
+                                                    
+                                                    
+                                                    
+                                                    <td class="helvetica">${userShift.otText}</td>
+                                                    <c:if test="${Account.roleName.equals('MANAGER') && userShift.status != 2 && (userShift.date>nowDate)}">
+                                                        <td>
+                                                            <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&oldShiftID=${userShift.shiftID}&oldDate=${userShift.date}"/>" class="btn btn-sm btn-github btn-rounded" title="Update">
+                                                                <i class="bi bi-pencil-square"></i>
+                                                            </a>
+                                                            <a href="<c:url value="/userShift/delete.do?userID=${userShift.userID}&shiftID=${userShift.shiftID}&date=${userShift.date} "/>" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-googleplus btn-rounded" title="Delete">
+                                                                <i class="bi bi-trash"></i>
+                                                            </a>
+                                                        </td>
+
                                                     </c:if>
+                                                    <c:if test="${userShift.status == 2}">
+                                                        <td class="badge badge-info">Finished <i class="bi bi-cloud-check"></i></td>
+                                                        </c:if>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
+                                    <c:if test="${Account.roleName.equals('MANAGER')}">
+                                          <a href="<c:url value="/userShift/done.do"/>" onclick="return confirm('Do you really want to finish?');" class="btn btn-dropbox btn-rounded"><i class="bi bi-check-circle"></i> Done</a>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+
                 <div class="tab-pane active" id="blockView">
-                    <div class="white-box">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="table-responsive">
-                                <table class="table-striped schedule">
+                    <div class="white-box border-rounded ">
+                        <div class="row ">
+                            <div class="col-sm-12 ">
+                                <div class="table-responsive  center-block overlay-box overflow ">
+                                    <table class="table-striped schedule  font-bold  ">
 
-                                    <tr>
-                                        <th>
-                                            <div class="dropdown">
-                                                <button class="btn btn-primary dropdown-toggle" name="subOp" type="button" data-toggle="dropdown">Select week:
-                                                    <span class="caret"></span></button>
-                                                <ul class="dropdown-menu">
-                                                    <c:forEach var="listItem" items="${weeks}" varStatus="loop">
-                                                        <li class="col-sm-12"><a href="<c:url value="/userShift/selectWeek.do?op=filter&week=${listItem}"/>" ${listItem==weeks[2] ? 'selected':''}>${listItem}</a></li>
-                                                        </c:forEach>
-                                                </ul>
-                                            </div>     
+                                        <tr>
+                                            <th>
+                                                <div class="dropdown ">
+                                                    <button class="btn btn-tumblr dropdown-toggle border-rounded" name="subOp" type="button" data-toggle="dropdown">Select week:
+                                                        <span class="caret"></span></button>
+                                                    <ul class="dropdown-menu text-uppercase border-rounded">
+                                                        <c:forEach var="listItem" items="${weeks}" varStatus="loop" >
+                                                            <li class="col-sm-12  ${listItem==weeks[5] ? 'currWeek':''}"><a href="<c:url value="/userShift/selectWeek.do?op=filter&week=${listItem}"/>" ${listItem==weeks[5] ? 'selected':''}>${listItem}</a></li>
+                                                            </c:forEach>
+                                                    </ul>
+                                                </div>     
 
-                                            <p>${startEndDates[0]} - ${startEndDates[1]}</p>
-                                        </th>
-                                        <c:forEach var="i" begin="0" end="${fn:length(listDays) - 1}" step="1" >
-                                            <th class="<c:if test='${listLocalDates[i]==nowLocalDate}'>today</c:if>">
-                                                <h2>${listDays[i]}</h2>
-                                                <p>${listLocalDates[i]}</p>  
+                                                <p>${startEndDates[0]} - ${startEndDates[1]}</p>
                                             </th>
-                                        </c:forEach>
-                                    </tr>
-
-                                    <c:forEach var="shift" items="${shifts}" varStatus="loop">
-                                        <tr class="shift">
-                                            <td>
-                                                <h3>
-                                                    Shift ${shift.shiftID}
-                                                </h3>
-                                                <p>
-                                                    (${shift.timeStart} - ${shift.timeEnd})
-                                                </p>
-                                            </td>
                                             <c:forEach var="i" begin="0" end="${fn:length(listDays) - 1}" step="1" >
-                                                <%
-                                                    int count = 0;
-                                                %>
-                                                <td> 
-                                                    <div>
-                                                        <c:forEach var="userShift" items="${list}" varStatus="loop">
+                                                <th class="<c:if test='${listLocalDates[i]==nowLocalDate}'>today</c:if>">
+                                                    <h2>${listDays[i]}</h2>
+                                                    <p>${listLocalDates[i]}</p>  
+                                                </th>
+                                            </c:forEach>
+                                        </tr>
 
-                                                            <c:if test="${userShift.shiftID == shift.shiftID}">
+                                        <c:forEach var="shift" items="${shifts}" varStatus="loop">
+                                            <tr class="shift">
+                                                <td>
+                                                    <h3>
+                                                        Shift ${shift.shiftID}
+                                                    </h3>
+                                                    <p>
+                                                        (${shift.timeStart} - ${shift.timeEnd})
+                                                    </p>
+                                                </td>
+                                                <c:forEach var="i" begin="0" end="${fn:length(listDays) - 1}" step="1" >
+                                                    <%
+                                                        int count = 0;
+                                                    %>
+                                                    <td> 
+                                                        <div>
+                                                            <c:forEach var="userShift" items="${list}" varStatus="loop">
 
-                                                                <c:set var="userShiftt" value="${userShift}"/>
-                                                                <c:set var="date" value="${listDates[i]}"/>
-                                                                <c:if test="${userShiftt.date == date}">
-                                                                    <!--<p>Emp ${userShiftt.userID} - ${userShiftt.date} - ${userShiftt.shiftID}<p>-->
-                                                                    <div class="tooltipp">
-                                                                        <c:if test="${Account.roleName.equals('MANAGER') && (listLocalDates[i]>nowLocalDate)}">
-                                                                            <a href="<c:url value="/userShift/delete.do?userID=${userShift.userID}&shiftID=${userShift.shiftID}&date=${userShift.date} "/>" onclick="return confirm('Do you really want to remove this employee from the current shift?');" class="btn btn-circle btn-sm btn-warning">
-                                                                                <i class="bi bi-person-dash-fill"></i>
-                                                                            </a>
-                                                                        </c:if>
-                                                                        <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&oldShiftID=${userShift.shiftID}&oldDate=${userShift.date}"/>" ${(listLocalDates[i]<nowLocalDate) ? "style='pointer-events: none'" : ""}>${userShift.fullName}</a>
-                                                                        <span class="tooltiptext">
-                                                                            UserID: ${userShiftt.userID} -
-                                                                            Date: ${userShiftt.date} <br/>
-                                                                            ShiftID:${userShiftt.shiftID} -
-                                                                            Is overTime? ${userShift.isOT}</span>
-                                                                    </div><br/>
-                                                                    <% count = count + 1;%>
+                                                                <c:if test="${userShift.shiftID == shift.shiftID}">
+
+                                                                    <c:set var="userShiftt" value="${userShift}"/>
+                                                                    <c:set var="date" value="${listDates[i]}"/>
+                                                                    <c:if test="${userShiftt.date == date}">
+                                                                        <!--<p>Emp ${userShiftt.userID} - ${userShiftt.date} - ${userShiftt.shiftID}<p>-->
+                                                                        <div class="tooltipp">
+                                                                            <c:if test="${Account.roleName.equals('MANAGER') && (listLocalDates[i]>nowLocalDate)}">
+                                                                                <a href="<c:url value="/userShift/delete.do?userID=${userShift.userID}&shiftID=${userShift.shiftID}&date=${userShift.date} "/>" onclick="return confirm('Do you really want to remove this employee from the current shift?');" class="btn btn-circle btn-sm btn-warning">
+                                                                                    <i class="bi bi-person-dash-fill"></i>
+                                                                                </a>
+                                                                            </c:if>
+                                                                            <a href="<c:url value="/userShift/update.do?userID=${userShift.userID}&oldShiftID=${userShift.shiftID}&oldDate=${userShift.date}"/>" ${((listLocalDates[i]<=nowLocalDate) || !Account.roleName.equals('MANAGER')) ? "style='pointer-events: none'" : ""}>${userShift.fullName}</a>
+                                                                            <span class="tooltiptext">
+                                                                                UserID: ${userShiftt.userID} -
+                                                                                Date: ${userShiftt.date} <br/>
+                                                                                ShiftID:${userShiftt.shiftID} -
+                                                                                Is overTime? ${userShift.isOT}</span>
+                                                                        </div><br/>
+                                                                        <% count = count + 1;%>
+                                                                    </c:if>
                                                                 </c:if>
-                                                            </c:if>
-                                                        </c:forEach> 
-                                                        <c:set var = "count" value="<%=count%>"/>
-                                                    </div>
-                                                    <!--The day to add shift must be AFTER today-->
-                                                    <c:if test="${Account.roleName.equals('MANAGER') && (count<3) && (listLocalDates[i]>nowLocalDate)}">
-                                                        <button class="btn btn-sm btn-success">
-                                                            <a href="<c:url value="/userShift/create.do?shiftID=${shift.shiftID}&date=${listLocalDates[i]}"/>">
-                                                                <i class="bi bi-person-fill-add"></i>Add
-                                                            </a>
-                                                        </button>
-                                                    </c:if>
+                                                            </c:forEach> 
+                                                            <c:set var = "count" value="<%=count%>"/>
+                                                        </div>
+                                                        <!--The day to add shift must be AFTER today-->
+                                                        <c:if test="${Account.roleName.equals('MANAGER') && (count<3) && (listLocalDates[i]>nowLocalDate)}">
+                                                            <button class="btn btn btn-rounded btn-twitter">
+                                                                <a class="text-white" href="<c:url value="/userShift/create.do?shiftID=${shift.shiftID}&date=${listLocalDates[i]}"/>">
+                                                                    <i class="bi bi-person-fill-add"></i>
+                                                                </a>
+                                                            </button>
+                                                        </c:if>
 
-                                    </td>    
-                                </c:forEach>
-                            </tr>
-                        </c:forEach>
+                                                    </td>    
+                                                </c:forEach>
+                                            </tr>
+                                        </c:forEach>
 
-                    </table>
+                                    </table>
+                                </div>
                             </div>
+                        </div>  
+                    </div>
                 </div>
-            </div>  
-        </div>
-        <%--
-                    </c:when>
-                    <c:otherwise>
-                        <jsp:forward page="/error/error.do" />
-                    </c:otherwise>
-                </c:choose>
-        --%>
+            </div>
+            <%--
+                        </c:when>
+                        <c:otherwise>
+                            <jsp:forward page="/error/error.do" />
+                        </c:otherwise>
+                    </c:choose>
+            --%>
     </body>
 
 </html>

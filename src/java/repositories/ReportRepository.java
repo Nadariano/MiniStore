@@ -96,6 +96,29 @@ public class ReportRepository {
         con.close();
         return list;
     }
+    
+    public List<Report> selectStatusProcessing(int userID) throws SQLException {
+        List<Report> list = null;
+        //Tạo connection để kết nối vào DBMS
+        Connection con = DBContext.getConnection();
+        //Tạo đối tượng statement
+        PreparedStatement stm = con.prepareStatement("select reportTitle, createDate, report.status\n"
+                + "from report join users on report.userID = users.userID \n"
+                + "where report.userID = ? and report.status = 1");
+        stm.setInt(1, userID);
+        //Thực thi lệnh sql
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Report report = new Report();
+            report.setReportTitle(rs.getString("reportTitle"));
+            report.setCreateDate(rs.getDate("createDate"));
+            report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
+            list.add(report);
+        }
+        con.close();
+        return list;
+    }
 
     public void create(String reportTitle, String description, String plannedDate, String requestSoonTime, String requestLateTime, int status, String note, int userID, int shiftID, int typeID) throws SQLException, ParseException {
         LocalDate curDate = LocalDate.now();
@@ -108,25 +131,25 @@ public class ReportRepository {
         stm.setString(2, date);
         stm.setString(3, description);
         SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm");
-        
-        if (plannedDate.equals("")){
-        stm.setString(4, null);
-        }else {
-        stm.setString(4, sdfDate.format(sdfDate.parse(plannedDate)));
-        }
-        
-        if (requestSoonTime.equals("")) {
-        stm.setString(5, null);
-        }else {
-        stm.setString(5, sdf1.format(sdf1.parse(requestSoonTime)));
-        }
-        
-        if (requestLateTime.equals("")) {
-        stm.setString(6, null);
+
+        if (plannedDate.equals("")) {
+            stm.setString(4, null);
         } else {
-         stm.setString(6, sdf1.format(sdf1.parse(requestLateTime)));
+            stm.setString(4, sdfDate.format(sdfDate.parse(plannedDate)));
         }
-       
+
+        if (requestSoonTime.equals("")) {
+            stm.setString(5, null);
+        } else {
+            stm.setString(5, sdf1.format(sdf1.parse(requestSoonTime)));
+        }
+
+        if (requestLateTime.equals("")) {
+            stm.setString(6, null);
+        } else {
+            stm.setString(6, sdf1.format(sdf1.parse(requestLateTime)));
+        }
+
         stm.setInt(7, status);
         stm.setString(8, note);
         stm.setInt(9, userID);
@@ -172,17 +195,23 @@ public class ReportRepository {
         return report;
     }
 
-    public Report readDate(Date date, int userID) throws SQLException {
+    public Report readDate(Date date, int userID, int shiftID) throws SQLException {
         Report report = null;
         //Tạo connection để kết nối vào DBMS
         Connection con = DBContext.getConnection();
         //Tạo đối tượng PreparedStatement
-        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, report.status, "
-                + "report.note, report.userID, users.fullName, report.shiftID "
-                + "from report join users on report.userID = users.userID "
-                + "where plannedDate = ? and report.status = 0 and report.userID = ?");
-        stm.setString(1, Utilities.sdfDateTime.format(date));
+//        PreparedStatement stm = con.prepareStatement("select reportID, reportTitle, createDate, description, plannedDate,requestSoonTime, requestLateTime, report.status, report.note, report.userID, users.fullName, reportType.typeName, report.shiftID "
+//               
+//                + "from report join users on report.userID = users.userID "
+//                + "where plannedDate = ? and report.status = 0 and report.userID = ? and report.shiftID = ? ");
+        PreparedStatement stm = con.prepareStatement("select r.reportID, r.reportTitle, r.createDate, r.description, r.plannedDate, r.requestSoonTime, r.requestLateTime, r.status, r.note, r.userID, u.fullName, r.shiftID, r.typeID, rt.typeName\n"
+                + "from Report as r join Users as u on r.userID = u.userID\n"
+                + "join ShiftTime as st on r.shiftID = st.shiftID \n"
+                + "join ReportType as rt on r.typeID = rt.typeID\n"
+                + "where r.plannedDate = ? and r.userID= ? and r.shiftID = ?");
+        stm.setString(1, Utilities.sdfDate.format(date));
         stm.setInt(2, userID);
+        stm.setInt(3, shiftID);
         //Thực thi lệnh sql
         ResultSet rs = stm.executeQuery();
         //Load dữ liệu vào đối tượng toy nếu có
@@ -192,10 +221,14 @@ public class ReportRepository {
             report.setReportTitle(rs.getString("reportTitle"));
             report.setCreateDate(rs.getDate("createDate"));
             report.setDescription(rs.getString("description"));
+            report.setPlannedDate(rs.getDate("plannedDate"));
+            report.setRequestSoonTime(rs.getTime("requestSoonTime"));
+            report.setRequestLateTime(rs.getTime("requestLateTime"));
             report.setStatusText(Utilities.getStatusTextOfReport(rs.getInt("status")));
             report.setNote(rs.getString("note"));
             report.setUserID(rs.getInt("userID"));
             report.setFullName(rs.getString("fullName"));
+            report.setTypeName(rs.getString("typeName"));
             report.setShiftID(rs.getInt("shiftID"));
         }
         //Đóng kết nối
@@ -480,4 +513,60 @@ public class ReportRepository {
         return list;
     }
 
+    public int countAll() throws SQLException {
+        int count = 0;
+        Connection con = DBContext.getConnection();
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("select count(reportID) as countAll from Report");
+        if (rs.next()) {
+        count = rs.getInt("countAll");
+        }
+        con.close();
+        return count;
+    }
+    
+    public List<Integer> countBasedType() throws SQLException{
+        List<Integer> typeCount = new ArrayList<Integer>();
+        int count = 0;
+        Connection con = DBContext.getConnection();
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("select typeID, count(reportID) as typeCount from Report group by typeID");
+        while (rs.next()) {
+        count = rs.getInt("typeCount");
+        typeCount.add(count);
+        }
+        con.close();
+        return typeCount;
+    }
+    
+    public List<String> listType() throws SQLException{
+        List<String> listTypeName = new ArrayList<String>();
+        String typeName = null;
+        Connection con = DBContext.getConnection();
+         Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("select* from reportType");
+        while (rs.next()) {
+        typeName = rs.getString("typeName");
+        listTypeName.add("'"+typeName+"'");
+        //This serves for generating chart in home/index.jsp
+        //The form of list return must like this: ['ADMIN', 'MANAGER', 'SALE', 'GUARD']
+        //If written in the old way: [ADNUB,MANAGER,SALE,GUARD], the chart cannot function
+        }
+        con.close();
+        return listTypeName;
+    }
+    
+    public List<Integer> countBasedStatus() throws SQLException{
+        List<Integer> statusCount = new ArrayList<Integer>();
+        int count = 0;
+        Connection con = DBContext.getConnection();
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("select status,count(status) as statusCount from Report group by status");
+        while (rs.next()) {
+        count = rs.getInt("statusCount");
+        statusCount.add(count);
+        }
+        con.close();
+        return statusCount;
+    }
 }

@@ -14,7 +14,7 @@
     </head>
 
     <body>
-        <a href="<c:url value="/record/create.do"/>">Create</a>
+        <!--<a href="<c:url value="/record/create.do"/>">Create</a>-->
 
         <c:choose>
             <c:when test="${Account.roleName.equals('MANAGER')}">
@@ -30,16 +30,19 @@
                             <h4 class="page-title">Record</h4>
                         </div>
                         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-                            <a href="<c:url value="/shiftTime/create.do"/>" class="btn btn-sm btn-success">Create a new shift</a>
+                            <a href="<c:url value="/record/create.do"/>" class="btn btn-lg btn-success btn-rounded" title="Create a new record">
+                                <i class="bi bi-card-text"></i> 
+                            </a>
+
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
                     <!-- /row -->
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="white-box">
+                            <div class="white-box border-rounded">
                                 <div class="table-responsive">
-                                    <table class="table" id="example">
+                                    <table class="table table-striped" id="example">
 
                                         <thead>
                                             <tr >
@@ -53,7 +56,7 @@
                                                 <th>Shift ID</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="helvetica">
                                             <c:forEach var="rc" items="${list}" varStatus="loop">
                                                 <tr>
                                                     <!--<td>${loop.count}</td>-->
@@ -65,15 +68,16 @@
                                                     <td>${rc.outTime}</td>
                                                     <td>${rc.shiftID}</td>
                                                     <td style="text-align: center">
-                                                        <c:if test="${!role.roleName.equals('MANAGER')}">
-                                                            <a href="<c:url value="/shiftTime/update.do?shiftID=${shiftTime.shiftID}" />" class="btn btn-sm btn-primary" ><i class="bi bi-pencil-square"></i>Update</a>
-                                                            <a href="<c:url value="/shiftTime/delete.do?shiftID=${shiftTime.shiftID}" />" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-warning" ><i class="bi bi-trash3"></i>Delete</a>
-                                                        </c:if>
+                                                        <%--<c:if test="${!role.roleName.equals('MANAGER')}">--%>
+                                                            <!--<a href="<c:url value="/shiftTime/update.do?shiftID=${shiftTime.shiftID}" />" class="btn btn-sm btn-primary" ><i class="bi bi-pencil-square"></i>Update</a>-->
+                                                            <!--<a href="<c:url value="/shiftTime/delete.do?shiftID=${shiftTime.shiftID}" />" onclick="return confirm('Do you really want to remove it?');" class="btn btn-sm btn-warning" ><i class="bi bi-trash3"></i>Delete</a>-->
+                                                        <%--</c:if>--%>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
+                                    <i style="color: red">${message}</i>
                                 </div>
                             </div>
                         </div>

@@ -30,25 +30,25 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="info-section">
-                            <h2>${Account.fullName}</h2>
-                            <h3>${Account.roleName}</h3>
+                        <div class="info-section ">
+                            <h2 class="helvetica">${Account.fullName}</h2>
+                            <h3 class="helvetica">${Account.roleName}</h3>
                             <hr>
                             <label for="address">User Name:</label>
-                            <h3>${Account.userName}</h3>
+                            <h3 class="helvetica">${Account.userName}</h3>
 
                             <label for="address">Address:</label>
-                            <h3>${Account.address}</h3>
+                            <h3 class="helvetica">${Account.address}</h3>
 
                             <label for="address">Phone:</label>
-                            <h3>${Account.phone}</h3>
+                            <h3 class="helvetica">${Account.phone}</h3>
 
                             <label for="address">Email:</label>
-                            <h3>${Account.email}</h3>
+                            <h3 class="helvetica">${Account.email}</h3>
                             <hr>
-                            <div class="">
+                            <div class="helvetica">
                                 <a href="<c:url value="/account/updateProfile.do"/>" class="btn btn-sm btn-success">Edit Information</a>
-                                <a href="<c:url value="/account/changePassword.do"/>" class="btn btn-sm btn-primary">Change Password</a>
+                                <a href="<c:url value="/account/changePassword.do"/>" class="btn btn-sm btn-linkedin">Change Password</a>
                             </div>
                         </div>
                     </div>

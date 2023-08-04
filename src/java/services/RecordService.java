@@ -32,16 +32,17 @@ public class RecordService {
         CheckOutService cos = new CheckOutService();
         ShiftTimeRepository str = new ShiftTimeRepository();
         ShiftTime st = str.read(shiftID);
-
+        System.out.println("checkIn");
         CheckIn ci = cis.inTime(userID, shiftID, date);
+        System.out.println("906090");
         CheckOut co = cos.outTime(userID, shiftID, date);
-
+        System.out.println("checkOut");
         if (ci.getCheckInTime() == null || co.getCheckOutTime() == null) {
             return new Record(userID, date, ci.getCheckInTime(), co.getCheckOutTime(), shiftID);
         } else {
             long check = co.getCheckOutTime().getTime() - ci.getCheckInTime().getTime();
             if (check > 0) {
-                
+
                 return new Record(userID, date, ci.getCheckInTime(), co.getCheckOutTime(), shiftID);
             } else {
                 return new Record(userID, date, null, null, shiftID);
@@ -131,5 +132,4 @@ public class RecordService {
 //
 //        return r;
 //    }
-
 }

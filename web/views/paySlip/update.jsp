@@ -57,8 +57,9 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Salary</label>
                                         <div class="col-md-12">
-                                            <input   type="number" step="0.1" placeholder="Salary" name="salary" value="${paySlip.salary}"
-                                                     class="form-control form-control-line" />
+                                            <input  disabled type="number" step="0.1" placeholder="Salary" value="${paySlip.salary}"
+class="form-control form-control-line" />
+                                             <input type="hidden" name="salary" value="${paySlip.salary}">
                                         </div>
                                     </div>       
 
@@ -73,8 +74,9 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Minus</label>
                                         <div class="col-md-12">
-                                            <input  type="number" step="0.1" placeholder="Minus" name="minus" value="${paySlip.minus}"
+                                            <input  disabled type="number" step="0.1" placeholder="Minus" value="${paySlip.minus}"
                                                     class="form-control form-control-line" />
+                                            <input type="hidden" name="minus" value="${paySlip.minus}">
                                         </div>
                                     </div>           
 
@@ -100,7 +102,7 @@
                                         <div class="col-sm-12">
                                             <button type="submit" class="btn btn-success" name="op" value="update">Update <i class="bi bi-check-square"></i></button>
                                             <button type="submit" class="btn btn-outline-danger" name="op" value="cancel">Cancel<i class="bi bi-x-square"></i></button>
-                                        </div>
+</div>
                                     </div>
                                 </form>
 

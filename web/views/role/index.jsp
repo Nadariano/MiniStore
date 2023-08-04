@@ -22,7 +22,7 @@
                             <h4 class="page-title">Roles</h4>
                         </div>
                         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-                            <a href="<c:url value="/role/create.do"/>" class="btn btn-sm btn-success">Add a new role</a>
+                            <a href="<c:url value="/role/create.do"/>" class="btn btn-sm btn-success btn-rounded">Add a new role</a>
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
@@ -50,11 +50,27 @@
                                                     <td>${role.roleID}</td>
                                                     <td>${role.roleName}</td>
                                                     <td>${role.statusText}</td>
-                                                    <td>${role.description}</td>
+                                                      <td>
+                                                            <button tabindex="0" class="${empty role.description||role.description.equals("N/A")? 'btn btn-sm btn-circle btn-disabled  bi-info-circle-fill'  : 'btn btn-sm btn-circle btn-info bi-info-circle-fill'}" role="button" data-toggle="popover" data-trigger="focus" title="Note" data-content="${role.description}" 
+                                                                    data-template='<div class="popover bg-info shadow-lg border-0" role="tooltip">
+                                                                    <div class="arrow">
+                                                                    </div>
+                                                                    <div class="popover-body text-white p-3">
+                                                                    <span class="d-block">${role.description}
+                                                                    </span>
+                                                                    </div>
+                                                                    </div>' ${empty role.description||role.description.equals("N/A") ? 'disabled' : ''}>
+                                                            <!--        <i class="${empty role.description||role.description.equals("N/A")? 'bi bi-info-lg font-bold' : 'bi bi-info-lg font-bold'}"></i>-->
+                                                            </button>
+                                                        </td>
+                                                   
                                                     <td>
                                                         <c:if test="${!role.roleName.equals('ADMIN')}">
-                                                        <a href="<c:url value="/role/edit.do?roleID=${role.roleID}" />" class="btn btn-sm btn-primary">Edit</a>
+                                                            <a href="<c:url value="/role/edit.do?roleID=${role.roleID}" />" class="btn btn-sm btn-github btn-rounded" title="Edit">
+                                                                <i class="bi bi-pencil-square"></i>
+                                                            </a>
                                                         </c:if>
+
                                                     </td>
                                                 </tr>
                                             </c:forEach>
